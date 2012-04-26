@@ -10,7 +10,6 @@ It provides variables that contain the minimum and maximum representable values,
 
 Finally the module provides procedures to convert a string to number and vice versa, a function to check the _endianism_ of the running calculator and a procedure to print all the aboves values.
 
--------
 Introduction
 ----------
 
