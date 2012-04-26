@@ -19,7 +19,12 @@ With the possibility to specify a kind parameter for variables, the standard For
 
 Using these two functions the programmer can accurately control the precision of its own variables in a portable manner. Note that specifying the kind precision without using these two functions is not portable: real(8) means different precisions on different architectures. Parametrizing the kind of all numerical variables using these two functions makes the code portable.
 
+Copyrights
+----------
 
 The IR\_Precision module is an open source project, it is distributed under the [GPL v3](http://www.gnu.org/licenses/gpl-3.0.html). Anyone is interest to use, to develop or to contribute to IR\_Precision is welcome.
+
+Documentation
+----------
 
 Detailed documentation can be found on the [GitHub pages](http://szaghi.github.com/IR_Precision/index.html) of the project.
