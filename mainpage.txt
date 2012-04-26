@@ -17,7 +17,11 @@ With the possibility to specify a kind parameter for variables, the standard For
 
 Using these two functions the programmer can accurately control the precision of its own variables in a portable manner. Note that specifying the kind precision without using these two functions is not portable: \em real(8) means different precisions on different architectures. Parametrizing the kind of all numerical variables using these two functions makes the code portable.
 
+@section Copyrights
+
 IR_Precision is an open source project, it is distributed under the GPL v3. Anyone is interest to use, to develop or to contribute to IR_Precision is welcome.
 
-It can be found at: https://github.com/szaghi/IR_Precision
+@section Source-Code
+
+IR_Precision module can be found at: https://github.com/szaghi/IR_Precision
 */
