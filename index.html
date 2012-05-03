@@ -7,9 +7,14 @@
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
-
-<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
   $(document).ready(function() { searchBox.OnSelectItem(0); });
@@ -44,6 +49,7 @@
 <script type="text/javascript">
 var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </script>
+<script type="text/javascript" src="dynsections.js"></script>
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li class="current"><a href="index.html"><span>Main&#160;Page</span></a></li>
@@ -69,25 +75,38 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     </ul>
   </div>
 </div>
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+  initNavTree('index.html','');
+</script>
+<div id="doc-content">
 <div class="header">
   <div class="headertitle">
-<div class="title"><a class="el" href="classIR__Precision.html" title="The module IR_Precision makes available some portable kind-parameters and some useful procedures to d...">IR_Precision</a> </div>  </div>
+<div class="title"><a class="el" href="d7/dc8/classIR__Precision.html" title="Module IR_Precision makes available some portable kind-parameters and some useful procedures to deal ...">IR_Precision</a> </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>The <a class="el" href="classIR__Precision.html" title="The module IR_Precision makes available some portable kind-parameters and some useful procedures to d...">IR_Precision</a> is a Fortran (standard 2003) module useful to achieve portable codes.The module makes available portable kind-parameters and some useful procedures to deal with them.</p>
+<div class="textblock"><p>The <a class="el" href="d7/dc8/classIR__Precision.html" title="Module IR_Precision makes available some portable kind-parameters and some useful procedures to deal ...">IR_Precision</a> is a Fortran (standard 2003) module useful to achieve portable codes.The module makes available portable kind-parameters and some useful procedures to deal with them.</p>
 <p>It provides variables that contain the minimum and maximum representable values, smallest real values and smallest representable differences by the running calculator.</p>
 <p>Finally the module provides procedures to convert a string to number and vice versa, a function to check the <em>endianism</em> of the running calculator and a procedure to print all the aboves values.</p>
 <h2><a class="anchor" id="Introduction"></a>
 Introduction</h2>
 <p>Fortran is the most popular programming language for scientific computing. With Fortran it is quite simple obtain fast code and manage large multidimensional array. Because Fortran permits the achievement of high performance it is also used on great range of different computer-architectures, and often on the fastest supercomputer in the world. Therefore Fortran programs must be <em>portable:</em> portability means that the code will give the same results on every different computer-architectures. One of the most important goal of the numeric code is to control the numeric error due to finite precision of numerical operations. Fortran uses the <b>IEEE</b> representations. Integers and reals (floating point) are represented with a finite precision. So when the code computes an operation it has a truncation error due to the truncation of the numerical finite representations. For numerical and more in general scientific applications this source of errors must be controlled. The programmer must know which is the precision associated to the code variables. Before the standard Fortran 90/95 there are not any way to select the precision of the numerical variables in a portable fashion.</p>
-<p>With the possibility to specify a kind parameter for variables, the standard Fortran 90/95 makes available two useful functions to select the kind precision of integers and reals <em>selected_int_kind(p)</em> and <em>selected_real_kind(p,r)</em>. The result, <em>kind_id</em>, is a scalar of type default integer. For selected_real_kind(p,r) the result has a value equal to a value of the kind parameter of a real data type with decimal precision, as returned by the function <b>precision</b>, of at least <em>p</em> digits and a decimal exponent range, as returned by the function <b>range</b>, of at least r. For selected_int_kind(p) the result has a value equal to the value of the kind parameter of the integer data type that represents all values n in the range of about values n with <img class="formulaInl" alt="$-10^p < n < 10^p$" src="form_7.png"/>.</p>
+<p>With the possibility to specify a kind parameter for variables, the standard Fortran 90/95 makes available two useful functions to select the kind precision of integers and reals <em>selected_int_kind(p)</em> and <em>selected_real_kind(p,r)</em>. The result, <em>kind_id</em>, is a scalar of type default integer. For selected_real_kind(p,r) the result has a value equal to a value of the kind parameter of a real data type with decimal precision, as returned by the function <b>precision</b>, of at least <em>p</em> digits and a decimal exponent range, as returned by the function <b>range</b>, of at least r. For selected_int_kind(p) the result has a value equal to the value of the kind parameter of the integer data type that represents all values n in the range of about values n with <img class="formulaInl" alt="$-10^p < n < 10^p$" src="form_6.png"/>.</p>
 <p>Using these two functions the programmer can accurately control the precision of its own variables in a portable manner. Note that specifying the kind precision without using these two functions is not portable: <em>real(8)</em> means different precisions on different architectures. Parametrizing the kind of all numerical variables using these two functions makes the code portable.</p>
 <h2><a class="anchor" id="Copyrights"></a>
 Copyrights</h2>
-<p><a class="el" href="classIR__Precision.html" title="The module IR_Precision makes available some portable kind-parameters and some useful procedures to d...">IR_Precision</a> is an open source project, it is distributed under the GPL v3. Anyone is interest to use, to develop or to contribute to <a class="el" href="classIR__Precision.html" title="The module IR_Precision makes available some portable kind-parameters and some useful procedures to d...">IR_Precision</a> is welcome.</p>
+<p><a class="el" href="d7/dc8/classIR__Precision.html" title="Module IR_Precision makes available some portable kind-parameters and some useful procedures to deal ...">IR_Precision</a> is an open source project, it is distributed under the GPL v3. Anyone is interest to use, to develop or to contribute to <a class="el" href="d7/dc8/classIR__Precision.html" title="Module IR_Precision makes available some portable kind-parameters and some useful procedures to deal ...">IR_Precision</a> is welcome.</p>
 <h2><a class="anchor" id="Source-Code"></a>
 Source-Code</h2>
-<p><a class="el" href="classIR__Precision.html" title="The module IR_Precision makes available some portable kind-parameters and some useful procedures to d...">IR_Precision</a> module can be found at: <a href="https://github.com/szaghi/IR_Precision">https://github.com/szaghi/IR_Precision</a> </p>
+<p><a class="el" href="d7/dc8/classIR__Precision.html" title="Module IR_Precision makes available some portable kind-parameters and some useful procedures to deal ...">IR_Precision</a> module can be found at: <a href="https://github.com/szaghi/IR_Precision">https://github.com/szaghi/IR_Precision</a> </p>
 </div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -103,13 +122,16 @@ Source-Code</h2>
 </iframe>
 </div>
 
+</div>
+  <div id="nav-path" class="navpath">
+    <ul>
 
+    <li class="footer">Generated on Thu May 3 2012 19:05:47 for Lib_VTK_IO by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1 </li>
+   </ul>
+ </div>
 
-<hr class="footer"/><address class="footer"><small>
-Generated on Thu Apr 26 2012 17:00:48 for Lib_VTK_IO by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.7.6.1
-</small></address>
 
 </body>
 </html>
