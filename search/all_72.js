@@ -1,6 +1,9 @@
 var searchData=
 [
-  ['r4p',['R4P',['../dc/d7d/group__IR__PrecisionGlobalVarPar.html#ga965eff68254bf464834a45deb38fbfad',1,'IR_Precision']]],
-  ['r8p',['R8P',['../dc/d7d/group__IR__PrecisionGlobalVarPar.html#ga078795e06f5023f9c493c0734bc228f3',1,'IR_Precision']]],
-  ['r_5fp',['R_P',['../dc/d7d/group__IR__PrecisionGlobalVarPar.html#ga87e2ca7523c07284606e4469be93ea70',1,'IR_Precision']]]
+  ['r16p',['r16p',['../dc/d7d/group__IR__PrecisionGlobalVarPar.html#ga66dea5db803d3530215bc07a63c60dc3',1,'ir_precision']]],
+  ['r4p',['r4p',['../dc/d7d/group__IR__PrecisionGlobalVarPar.html#ga0e9a51f5f1d4baa09a08363aeb098d45',1,'ir_precision']]],
+  ['r8p',['r8p',['../dc/d7d/group__IR__PrecisionGlobalVarPar.html#ga17d8dcfbaf5638d44dbce469c3bed49c',1,'ir_precision']]],
+  ['r_5fp',['r_p',['../dc/d7d/group__IR__PrecisionGlobalVarPar.html#gaa3116edbc41720c76f667ac929d5ce6d',1,'ir_precision']]],
+  ['ril',['ril',['../dc/d7d/group__IR__PrecisionGlobalVarPar.html#gae4cebc3ade33db0310d597e738ddfa21',1,'ir_precision']]],
+  ['rpl',['rpl',['../dc/d7d/group__IR__PrecisionGlobalVarPar.html#ga615325657b4a5e0fc8a1625f72af41c5',1,'ir_precision']]]
 ];

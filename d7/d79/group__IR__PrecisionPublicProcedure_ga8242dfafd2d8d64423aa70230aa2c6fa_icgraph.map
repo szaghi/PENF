@@ -1,0 +1,5 @@
+<map id="ir_precision::is_little_endian" name="ir_precision::is_little_endian">
+<area shape="rect" id="node3" href="$d7/d79/group__IR__PrecisionPublicProcedure.html#gaf78144df1ed4b537f9608a7d16804684" title="Subroutine for checking the type of bit ordering (big or little endian) of the running architecture; ..." alt="" coords="192,5,323,51"/>
+<area shape="rect" id="node5" href="$d7/d79/group__IR__PrecisionPublicProcedure.html#gafa5b943c855757625cdb5d9530ec1844" title="Subroutine for initilizing module&#39;s variables that are not initialized into the definition specificat..." alt="" coords="372,13,497,43"/>
+<area shape="rect" id="node7" href="$d7/d79/group__IR__PrecisionPublicProcedure.html#gaa53aa2c401d3c359a8664ad9ffb3d6b7" title="Subroutine for printing to the standard output the kind definition of reals and integers and the util..." alt="" coords="548,13,681,43"/>
+</map>
