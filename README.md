@@ -22,7 +22,7 @@ Using these two functions the programmer can accurately control the precision of
 Copyrights
 ----------
 
-The IR\_Precision module is an open source project, it is distributed under the [GPL v3](http://www.gnu.org/licenses/gpl-3.0.html). Anyone is interest to use, to develop or to contribute to IR\_Precision is welcome.
+The IR\_Precision module is an open source project, it is distributed under the [GPL v3](http://www.gnu.org/licenses/gpl-3.0.html). Anyone is interest to use, to develop or to contribute to IR\_Precision is welcome. Take a look at the [contributing guidelines](CONTRIBUTING.md) for starting to contribute to the project.
 
 Documentation
 ----------
