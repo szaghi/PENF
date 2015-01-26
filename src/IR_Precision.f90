@@ -224,6 +224,7 @@ interface bcton
                    bctoi_I1P
 endinterface
 interface digit
+  !< Procedure for computing the number of digits in decimal base of the input integer.
   module procedure digit_I8,digit_I4,digit_I2,digit_I1
 endinterface
 !-----------------------------------------------------------------------------------------------------------------------------------
