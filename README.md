@@ -6,9 +6,7 @@
 
 A KISS library for exploiting codes portability for modern (2003+) Fortran projects.
 
-Go to [Top](#top)
-
-## <a name="what"></a>What is IR_Precision?
+## What is IR_Precision?
 
 Fortran is the most popular programming language for scientific computing. With Fortran it is quite simple obtain fast code and manage large multidimensional array. Because Fortran permits the achievement of high performance it is also used on great range of different computer-architectures, and often on the fastest supercomputer in the world. Therefore Fortran programs must be _portable_: portability means that the code will give the same results on every different computer-architectures. One of the most important goal of the numeric code is to control the numeric error due to finite precision of numerical operations. Fortran uses the __IEEE__ representations. Integers and reals (floating point) are represented with a finite precision. So when the code computes an operation it has a truncation error due to the truncation of the numerical finite representations. For numerical and more in general scientific applications this source of errors must be controlled. The programmer must know which is the precision associated to the code variables. Before the standard Fortran 90/95 there are not any way to select the precision of the numerical variables in a portable fashion.
 
@@ -18,7 +16,7 @@ IR_Precision module provides an effective KISS library to achieve portability an
 
 Go to [Top](#top)
 
-## <a name="main-features"></a>Main features
+## Main features
 
 The library provides portable kind-parameters and many useful procedures to deal with them:
 
@@ -32,13 +30,13 @@ Any feature request is welcome.
 
 Go to [Top](#top)
 
-## <a name="Copyrights"></a>Copyrights
+## Copyrights
 
 IR_Precision is an open source project, it is distributed under the [GPL v3](http://www.gnu.org/licenses/gpl-3.0.html). Anyone is interest to use, to develop or to contribute to IR_Precision is welcome.
 
-Go to [Top](#top) or [Toc](#toc)
+Go to [Top](#top)
 
-## <a name="doc"></a>Documentation
+## Documentation
 
 Besides this README file the IR_Precision documentation is contained into its own [wiki](https://github.com/szaghi/IR_Precision/wiki). Detailed documentation of the API is contained into the [GitHub Pages](http://szaghi.github.io/IR_Precision/index.html) that can also be created locally by means of [ford tool](https://github.com/cmacmackin/ford).
 
@@ -48,11 +46,15 @@ To be written.
 
 Go to [Top](#top)
 
-## <a name="versions"></a>Version History
+## Version History
 
 In the following the changelog of most important releases is reported.
+### v1.0.1
+##### Download [ZIP](https://github.com/szaghi/IR_Precision/archive/v1.0.1.zip) ball or [TAR](https://github.com/szaghi/IR_Precision/archive/v1.0.1.tar.gz) one
+Stable release. Fully backward compatible. Introduce `digit` function.
+
 ### v1.0.0
 ##### Download [ZIP](https://github.com/szaghi/IR_Precision/archive/v1.0.0.zip) ball or [TAR](https://github.com/szaghi/IR_Precision/archive/v1.0.0.tar.gz) one
 First Stable Release.
 
-Go to [Top](#top) or [Toc](#toc)
+Go to [Top](#top)
