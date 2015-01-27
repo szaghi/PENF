@@ -6,7 +6,7 @@ summary: IR_Precision is a Fortran (standard 2003+) module useful to achieve por
 author: Stefano Zaghi
 github: https://github.com/szaghi
 email: stefano.zaghi@gmail.com
-md_extension: markdown_checklist.extension
+md_extensions: markdown_checklist.extension
 docmark: <
 display: public
          protected
