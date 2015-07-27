@@ -1,10 +1,12 @@
 <a name="top"></a>
+
 # IR_Precision [![GitHub tag](https://img.shields.io/github/tag/szaghi/IR_Precision.svg)]()
 
 [![License](https://img.shields.io/badge/license-GNU%20GeneraL%20Public%20License%20v3%20,%20GPLv3-blue.svg)]()
 
 [![Status](https://img.shields.io/badge/status-stable-brightgreen.svg)]()
 [![Build Status](https://travis-ci.org/szaghi/IR_Precision.svg?branch=master)](https://travis-ci.org/szaghi/IR_Precision)
+[![Coverage Status](https://img.shields.io/codecov/c/github/szaghi/FLAP.svg)](http://codecov.io/github/szaghi/FLAP?branch=master)
 
 ### IR_Precision, Fortran (standard 2003+) module for achieving portable codes
 A KISS library for exploiting codes portability for modern (2003+) Fortran projects.
@@ -14,24 +16,30 @@ A KISS library for exploiting codes portability for modern (2003+) Fortran proje
 + IR_Precision is Fortran 2003+ standard compliant;
 + IR_Precision is a Free, Open Source Project.
 
+#### Table of Contents
+
+- [What is IR_Precision?](#what-is-ir_precision?)
+- [Main features](#main-features)
+- [Copyrights](#copyrights)
+- [Documentation](#documentation)
+	- [A Taste of IR_Precision](#a-taste-of-ir_precision)
+
 #### Issues
+
 [![GitHub issues](https://img.shields.io/github/issues/szaghi/IR_Precision.svg)]()
 [![Ready in backlog](https://badge.waffle.io/szaghi/IR_Precision.png?label=ready&title=Ready)](https://waffle.io/szaghi/IR_Precision)
 [![In Progress](https://badge.waffle.io/szaghi/IR_Precision.png?label=in%20progress&title=In%20Progress)](https://waffle.io/szaghi/IR_Precision)
 [![Open bugs](https://badge.waffle.io/szaghi/IR_Precision.png?label=bug&title=Open%20Bugs)](https://waffle.io/szaghi/IR_Precision)
 
 #### Compiler Support
+
+[![Compiler](https://img.shields.io/badge/GNU-v4.9.2+-brightgreen.svg)]()
+[![Compiler](https://img.shields.io/badge/Intel-v12.x+-brightgreen.svg)]()
+[![Compiler](https://img.shields.io/badge/IBM%20XL-not%20tested-yellow.svg)]()
+[![Compiler](https://img.shields.io/badge/g95-not%20tested-yellow.svg)]()
+[![Compiler](https://img.shields.io/badge/NAG-not%20tested-yellow.svg)]()
+[![Compiler](https://img.shields.io/badge/PGI-not%20tested-yellow.svg)]()
 [![Compiler](https://img.shields.io/badge/GNU%20Gfortran%20Compiler-build%20pass%20with%20v4.9.2-brightgreen.svg)]()
-
-[![Compiler](https://img.shields.io/badge/Intel%20Fortran%20Compiler-build%20pass%20with%20v12.x+-brightgreen.svg)]()
-
-[![Compiler](https://img.shields.io/badge/IBM%20XL%20Fortran%20Compiler-not%20tested-yellow.svg)]()
-
-[![Compiler](https://img.shields.io/badge/g95%20Fortran%20Compiler-not%20tested-yellow.svg)]()
-
-[![Compiler](https://img.shields.io/badge/NAG%20Fortran%20Compiler-not%20tested-yellow.svg)]()
-
-[![Compiler](https://img.shields.io/badge/PGI%20Fortran%20Compiler-not%20tested-yellow.svg)]()
 
 ## What is IR_Precision?
 

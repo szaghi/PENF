@@ -198,6 +198,13 @@ rule_1 = rm -rf doc/html/*
 rule_2 = ford doc/main_page.md
 rule_3 = cp -r doc/html/publish/* doc/html/
 
+[rule-makecoverage]
+help   = Rule for performing coverage analysis
+rule_1 = FoBiS.py clean -mode test-driver-gnu
+rule_2 = FoBiS.py build -mode test-driver-gnu -coverage
+rule_3 = ./Test_Driver/Test_Driver
+rule_4 = gcov -o Test_Driver/obj/ src/IR_Precision.F90
+
 [rule-deldoc]
 help = Rule for deleting documentation
 rule = rm -rf doc/html/*
