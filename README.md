@@ -66,7 +66,18 @@ Go to [Top](#top)
 
 ## Copyrights
 
-IR_Precision is an open source project, it is distributed under the [GPL v3](http://www.gnu.org/licenses/gpl-3.0.html). Anyone is interest to use, to develop or to contribute to IR_Precision is welcome.
+IR_Precision is an open source project, it is distributed under a multi-licensing system:
+
++ for FOSS projects:
+  - [GPL v3](http://www.gnu.org/licenses/gpl-3.0.html);
++ for closed source/commercial projects:
+  - [BSD 2-Clause](http://opensource.org/licenses/BSD-2-Clause);
+  - [BSD 3-Clause](http://opensource.org/licenses/BSD-3-Clause);
+  - [MIT](http://opensource.org/licenses/MIT).
+
+Anyone is interest to use, to develop or to contribute to IR_Precision is welcome, feel free to select the license that best matches your soul!
+
+More details can be found on [wiki](https://github.com/szaghi/IR_Precision/wiki/Copyrights).
 
 Go to [Top](#top)
 
