@@ -6,7 +6,7 @@
 
 [![Status](https://img.shields.io/badge/status-stable-brightgreen.svg)]()
 [![Build Status](https://travis-ci.org/szaghi/IR_Precision.svg?branch=master)](https://travis-ci.org/szaghi/IR_Precision)
-[![Coverage Status](https://img.shields.io/codecov/c/github/szaghi/FLAP.svg)](http://codecov.io/github/szaghi/FLAP?branch=master)
+[![Coverage Status](https://img.shields.io/codecov/c/github/szaghi/IR_Precision.svg)](http://codecov.io/github/szaghi/IR_Precision?branch=master)
 
 ### IR_Precision, Fortran (standard 2003+) module for achieving portable codes
 A KISS library for exploiting codes portability for modern (2003+) Fortran projects.
@@ -39,7 +39,6 @@ A KISS library for exploiting codes portability for modern (2003+) Fortran proje
 [![Compiler](https://img.shields.io/badge/g95-not%20tested-yellow.svg)]()
 [![Compiler](https://img.shields.io/badge/NAG-not%20tested-yellow.svg)]()
 [![Compiler](https://img.shields.io/badge/PGI-not%20tested-yellow.svg)]()
-[![Compiler](https://img.shields.io/badge/GNU%20Gfortran%20Compiler-build%20pass%20with%20v4.9.2-brightgreen.svg)]()
 
 ## What is IR_Precision?
 
