@@ -13,6 +13,3 @@ display: public
          private
 
 {!README-IR_Precision.md!}
-
-### ChangeLog
-{!ChangeLog-IR_Precision.md!}
