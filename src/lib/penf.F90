@@ -1389,7 +1389,11 @@ module penf
 !<{!README-PENF.md!}
 !-----------------------------------------------------------------------------------------------------------------------------------
 use penf_global_parameters_variables
-use penf_b_size,  only : bit_size, byte_size
+#ifdef __GFORTRAN__
+use penf_b_size, only : bit_size, byte_size
+#else
+use penf_b_size
+#endif
 use penf_stringify, only : str, strz, cton, bstr, bcton
 !-----------------------------------------------------------------------------------------------------------------------------------
 
