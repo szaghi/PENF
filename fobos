@@ -31,7 +31,7 @@ mklib     = static
 
 [tests-gnu]
 template  = template-static-gnu
-build_dir = ./tests/
+build_dir = ./exe/
 
 [shared-gnu-debug]
 template  = template-shared-gnu-debug
@@ -49,7 +49,7 @@ mklib     = static
 
 [tests-gnu-debug]
 template  = template-static-gnu-debug
-build_dir = ./tests/
+build_dir = ./exe/
 
 [shared-intel]
 template  = template-shared-intel
@@ -67,7 +67,7 @@ mklib     = static
 
 [tests-intel]
 template  = template-static-intel
-build_dir = ./tests/
+build_dir = ./exe/
 
 [shared-intel-debug]
 template  = template-shared-intel-debug
@@ -85,7 +85,7 @@ mklib     = static
 
 [tests-intel-debug]
 template  = template-static-intel-debug
-build_dir = ./tests/
+build_dir = ./exe/
 
 #templates
 [template-shared-gnu]
@@ -202,8 +202,9 @@ rule_3 = cp -r doc/html/publish/* doc/html/
 help   = Rule for performing coverage analysis
 rule_1 = FoBiS.py clean -mode tests-gnu
 rule_2 = FoBiS.py build -mode tests-gnu -coverage
-rule_3 = ./tests/test_all
-rule_4 = gcov -o tests/obj/ src/lib/penf.F90 src/tests/test_all.f90
+rule_3 = ./exe/test_all
+rule_4 = ./exe/compact_real
+rule_5 = gcov -o exe/obj/ src/lib/penf.F90 src/tests/*
 
 [rule-deldoc]
 help = Rule for deleting documentation

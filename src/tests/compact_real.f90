@@ -1,12 +1,7 @@
 !< PENF's testing program.
-program test_all
+program compact_real
 !-----------------------------------------------------------------------------------------------------------------------------------
 !< PENF's testing program.
-!<
-!<### Usage
-!<```bash
-!< ./test_all
-!<```
 !-----------------------------------------------------------------------------------------------------------------------------------
 use penf
 use, intrinsic :: ISO_FORTRAN_ENV, only : stdout=>OUTPUT_UNIT
@@ -14,27 +9,24 @@ use, intrinsic :: ISO_FORTRAN_ENV, only : stdout=>OUTPUT_UNIT
 
 !-----------------------------------------------------------------------------------------------------------------------------------
 implicit none
+logical :: test_passed(3) !< List of passed tests.
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
 call penf_init
-call penf_print(unit=stdout)
-print "(A)", ''
-print "(A)", 'Testing IR_Precision tools'
-print "(A)", 'Casting real-to-string: '//str(n=1._R8P)
-print "(A)", 'Casting integer-to-string: '//str(n=11_I8P)
-print "(A,"//FR8P//")", 'Casting string-to-real: ',cton(str='2.2d0', knd=1._R8P)
-print "(A,"//FI4P//")", 'Casting integer-to-string: ',cton(str='43', knd=1_I4P)
-print "(A)", 'Casting integer-to-string with zero padding: '//trim(strz(nz_pad=3, n=34_I8P))
-#ifndef __GFORTRAN__
-print "(A)", 'Casting real-to-bit_string: '//bstr(n=1._R4P)
-#endif
-print "(A)", 'Casting integer-to-bit_string: '//bstr(n=1_I4P)
-#ifndef __GFORTRAN__
-print "(A,"//FR4P//")", 'Casting bit_string-to-real: ', bcton(bstr='00111111100000000000000000000000', knd=1._R4P)
-#endif
-print "(A,"//FI4P//")", 'Casting bit_string-to-integer: ',bcton(bstr='00000000000000000000000000000001', knd=1_I4P)
-print "(A)", 'Number of digit of 1023: '//str(n=digit(1023_I4P))
+
+test_passed = .false.
+
+test_passed(1) = trim(str(n=1._R8P, compact=.true.))=='+0.1E+1'
+print "(A,L1)", 'Compact 1.0: '//trim(str(n=1._R8P, compact=.true.))//', is correct? ', test_passed(1)
+
+test_passed(2) = trim(str(n=1._R4P/3._R4P, compact=.true.))=='+0.333333E+0'
+print "(A,L1)", 'Compact 1.0/3.0: '//trim(str(n=1._R4P/3._R4P, compact=.true.))//', is correct? ', test_passed(2)
+
+test_passed(3) = trim(str(n=1._R16P/4._R16P, compact=.true.))=='+0.25E+0'
+print "(A,L1)", 'Compact 1.0/4.0: '//trim(str(n=1._R16P/4._R16P, compact=.true.))//', is correct? ', test_passed(3)
+
+write(stdout, "(A,L1)") new_line('a')//'Are all tests passed? ', all(test_passed)
 stop
 !-----------------------------------------------------------------------------------------------------------------------------------
-endprogram test_all
+endprogram compact_real
