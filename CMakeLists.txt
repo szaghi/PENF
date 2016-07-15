@@ -104,8 +104,10 @@ message (STATUS "CMAKE_Fortran_FLAGS_DEBUG: " ${CMAKE_Fortran_FLAGS_DEBUG})
 #################################################################
 
 SET(BUILDNAME ${CMAKE_Fortran_COMPILER_ID}_${CMAKE_BUILD_TYPE}_MKL=${${PROJECT_NAME}_ENABLE_MKL} CACHE STRING "" )
-ENABLE_TESTING()
-INCLUDE(CTest)
+IF(${PROJECT_NAME}_ENABLE_TESTS)
+    ENABLE_TESTING()
+    INCLUDE(CTest)
+ENDIF()
 
 #################################################################
 # STATIC LIBRARIES
