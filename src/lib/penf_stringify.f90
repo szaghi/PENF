@@ -350,24 +350,28 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction str_bol
 
-  pure function str_a_R16P(n, no_sign, delimiters, compact) result(str)
+  pure function str_a_R16P(n, no_sign, separator, delimiters, compact) result(str)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Converting real array to string.
   !---------------------------------------------------------------------------------------------------------------------------------
   real(R16P),   intent(in)           :: n(:)            !< Real array to be converted.
   logical,      intent(in), optional :: no_sign         !< Flag for leaving out the sign.
+  character(1), intent(in), optional :: separator(1)    !< Eventual separator of array values.
   character(*), intent(in), optional :: delimiters(1:2) !< Eventual delimiters of array values.
   logical,      intent(in), optional :: compact         !< Flag for *compacting* string encoding.
   character(len=:), allocatable      :: str             !< Returned string containing input number.
   character(DR16P)                   :: strn            !< String containing of element of input array number.
+  character(len=1), allocatable      :: sep             !< Array values separator
   integer                            :: i               !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
   str = ''
+  sep = ','
+  if(present(separator)) sep = separator(1)
   do i=1,size(n)
     strn = str_R16P(no_sign=no_sign, compact=compact, n=n(i))
-    str = str//','//trim(strn)
+    str = str//sep//trim(strn)
   enddo
   str = trim(str(2:))
   if (present(delimiters)) str = delimiters(1)//str//delimiters(2)
@@ -375,24 +379,28 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction str_a_R16P
 
-  pure function str_a_R8P(n, no_sign, delimiters, compact) result(str)
+  pure function str_a_R8P(n, no_sign, separator, delimiters, compact) result(str)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Convert real array to string.
   !---------------------------------------------------------------------------------------------------------------------------------
   real(R8P),    intent(in)           :: n(:)            !< Real array to be converted.
   logical,      intent(in), optional :: no_sign         !< Flag for leaving out the sign.
+  character(1), intent(in), optional :: separator       !< Eventual separator of array values.
   character(*), intent(in), optional :: delimiters(1:2) !< Eventual delimiters of array values.
   logical,      intent(in), optional :: compact         !< Flag for *compacting* string encoding.
   character(len=:), allocatable      :: str             !< Returned string containing input number.
   character(DR8P)                    :: strn            !< String containing of element of input array number.
+  character(len=1), allocatable      :: sep             !< Array values separator
   integer                            :: i               !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
   str = ''
+  sep = ','
+  if(present(separator)) sep = separator
   do i=1,size(n)
     strn = str_R8P(no_sign=no_sign, compact=compact, n=n(i))
-    str = str//','//trim(strn)
+    str = str//sep//trim(strn)
   enddo
   str = trim(str(2:))
   if (present(delimiters)) str = delimiters(1)//str//delimiters(2)
@@ -400,24 +408,28 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction str_a_R8P
 
-  pure function str_a_R4P(n, no_sign, delimiters, compact) result(str)
+  pure function str_a_R4P(n, no_sign, separator, delimiters, compact) result(str)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Convert real array to string.
   !---------------------------------------------------------------------------------------------------------------------------------
   real(R4P),    intent(in)           :: n(:)            !< Real array to be converted.
   logical,      intent(in), optional :: no_sign         !< Flag for leaving out the sign.
+  character(1), intent(in), optional :: separator       !< Eventual separator of array values.
   character(*), intent(in), optional :: delimiters(1:2) !< Eventual delimiters of array values.
   logical,      intent(in), optional :: compact         !< Flag for *compacting* string encoding.
   character(len=:), allocatable      :: str             !< Returned string containing input number.
   character(DR4P)                    :: strn            !< String containing of element of input array number.
+  character(len=1), allocatable      :: sep             !< Array values separator
   integer                            :: i               !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
   str = ''
+  sep = ','
+  if(present(separator)) sep = separator
   do i=1,size(n)
     strn = str_R4P(no_sign=no_sign, compact=compact, n=n(i))
-    str = str//','//trim(strn)
+    str = str//sep//trim(strn)
   enddo
   str = trim(str(2:))
   if (present(delimiters)) str = delimiters(1)//str//delimiters(2)
@@ -425,30 +437,33 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction str_a_R4P
 
-  pure function str_a_I8P(n, no_sign, delimiters) result(str)
+  pure function str_a_I8P(n, no_sign, separator, delimiters) result(str)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Convert integer array to string.
   !---------------------------------------------------------------------------------------------------------------------------------
   integer(I8P), intent(in)           :: n(:)            !< Integer array to be converted.
   logical,      intent(in), optional :: no_sign         !< Flag for leaving out the sign.
+  character(1), intent(in), optional :: separator       !< Eventual separator of array values.
   character(*), intent(in), optional :: delimiters(1:2) !< Eventual delimiters of array values.
   character(len=:), allocatable      :: str             !< Returned string containing input number.
   character(DI8P)                    :: strn            !< String containing of element of input array number.
+  character(len=1), allocatable      :: sep             !< Array values separator
   integer                            :: i               !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
+  str = ''
+  sep = ','
+  if(present(separator)) sep = separator
   if (present(no_sign)) then
-    str = ''
     do i=1,size(n)
       strn = str_I8P(no_sign=no_sign, n=n(i))
-      str = str//','//trim(strn)
+      str = str//sep//trim(strn)
     enddo
   else
-    str = ''
     do i=1,size(n)
       strn = str_I8P(n=n(i))
-      str = str//','//trim(strn)
+      str = str//sep//trim(strn)
     enddo
   endif
   str = trim(str(2:))
@@ -457,30 +472,33 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction str_a_I8P
 
-  pure function str_a_I4P(n, no_sign, delimiters) result(str)
+  pure function str_a_I4P(n, no_sign, separator, delimiters) result(str)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Convert integer array to string.
   !---------------------------------------------------------------------------------------------------------------------------------
   integer(I4P), intent(in)           :: n(:)            !< Integer array to be converted.
   logical,      intent(in), optional :: no_sign         !< Flag for leaving out the sign.
+  character(1), intent(in), optional :: separator       !< Eventual separator of array values.
   character(*), intent(in), optional :: delimiters(1:2) !< Eventual delimiters of array values.
   character(len=:), allocatable      :: str             !< Returned string containing input number.
   character(DI4P)                    :: strn            !< String containing of element of input array number.
+  character(len=1), allocatable      :: sep             !< Array values separator
   integer                            :: i               !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
+  str = ''
+  sep = ','
+  if(present(separator)) sep = separator
   if (present(no_sign)) then
-    str = ''
     do i=1,size(n)
       strn = str_I4P(no_sign=no_sign, n=n(i))
-      str = str//','//trim(strn)
+      str = str//sep//trim(strn)
     enddo
   else
-    str = ''
     do i=1,size(n)
       strn = str_I4P(n=n(i))
-      str = str//','//trim(strn)
+      str = str//sep//trim(strn)
     enddo
   endif
   str = trim(str(2:))
@@ -489,30 +507,33 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction str_a_I4P
 
-  pure function str_a_I2P(n, no_sign, delimiters) result(str)
+  pure function str_a_I2P(n, no_sign, separator, delimiters) result(str)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Convert integer array to string.
   !---------------------------------------------------------------------------------------------------------------------------------
   integer(I2P), intent(in)           :: n(:)            !< Integer array to be converted.
   logical,      intent(in), optional :: no_sign         !< Flag for leaving out the sign.
+  character(1), intent(in), optional :: separator       !< Eventual separator of array values.
   character(*), intent(in), optional :: delimiters(1:2) !< Eventual delimiters of array values.
   character(len=:), allocatable      :: str             !< Returned string containing input number.
   character(DI2P)                    :: strn            !< String containing of element of input array number.
+  character(len=1), allocatable      :: sep             !< Array values separator
   integer                            :: i               !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
+  str = ''
+  sep = ','
+  if(present(separator)) sep = separator
   if (present(no_sign)) then
-    str = ''
     do i=1,size(n)
       strn = str_I2P(no_sign=no_sign, n=n(i))
-      str = str//','//trim(strn)
+      str = str//sep//trim(strn)
     enddo
   else
-    str = ''
     do i=1,size(n)
       strn = str_I2P(n=n(i))
-      str = str//','//trim(strn)
+      str = str//sep//trim(strn)
     enddo
   endif
   str = trim(str(2:))
@@ -521,30 +542,33 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction str_a_I2P
 
-  pure function str_a_I1P(n, no_sign, delimiters) result(str)
+  pure function str_a_I1P(n, no_sign, separator, delimiters) result(str)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Convert integer array to string.
   !---------------------------------------------------------------------------------------------------------------------------------
   integer(I1P), intent(in)           :: n(:)            !< Integer array to be converted.
   logical,      intent(in), optional :: no_sign         !< Flag for leaving out the sign.
+  character(1), intent(in), optional :: separator       !< Eventual separator of array values.
   character(*), intent(in), optional :: delimiters(1:2) !< Eventual delimiters of array values.
   character(len=:), allocatable      :: str             !< Returned string containing input number.
   character(DI1P)                    :: strn            !< String containing of element of input array number.
+  character(len=1), allocatable      :: sep             !< Array values separator
   integer                            :: i               !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
+  str = ''
+  sep = ','
+  if(present(separator)) sep = separator
   if (present(no_sign)) then
-    str = ''
     do i=1,size(n)
       strn = str_I1P(no_sign=no_sign, n=n(i))
-      str = str//','//trim(strn)
+      str = str//sep//trim(strn)
     enddo
   else
-    str = ''
     do i=1,size(n)
       strn = str_I1P(n=n(i))
-      str = str//','//trim(strn)
+      str = str//sep//trim(strn)
     enddo
   endif
   str = trim(str(2:))
