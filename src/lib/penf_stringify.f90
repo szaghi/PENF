@@ -361,7 +361,7 @@ contains
   logical,      intent(in), optional :: compact         !< Flag for *compacting* string encoding.
   character(len=:), allocatable      :: str             !< Returned string containing input number.
   character(DR16P)                   :: strn            !< String containing of element of input array number.
-  character(len=1), allocatable      :: sep             !< Array values separator
+  character(len=1)                   :: sep             !< Array values separator
   integer                            :: i               !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
@@ -390,7 +390,7 @@ contains
   logical,      intent(in), optional :: compact         !< Flag for *compacting* string encoding.
   character(len=:), allocatable      :: str             !< Returned string containing input number.
   character(DR8P)                    :: strn            !< String containing of element of input array number.
-  character(len=1), allocatable      :: sep             !< Array values separator
+  character(len=1)                   :: sep             !< Array values separator
   integer                            :: i               !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
@@ -419,7 +419,7 @@ contains
   logical,      intent(in), optional :: compact         !< Flag for *compacting* string encoding.
   character(len=:), allocatable      :: str             !< Returned string containing input number.
   character(DR4P)                    :: strn            !< String containing of element of input array number.
-  character(len=1), allocatable      :: sep             !< Array values separator
+  character(len=1)                   :: sep             !< Array values separator
   integer                            :: i               !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
@@ -447,7 +447,7 @@ contains
   character(*), intent(in), optional :: delimiters(1:2) !< Eventual delimiters of array values.
   character(len=:), allocatable      :: str             !< Returned string containing input number.
   character(DI8P)                    :: strn            !< String containing of element of input array number.
-  character(len=1), allocatable      :: sep             !< Array values separator
+  character(len=1)                   :: sep             !< Array values separator
   integer                            :: i               !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
@@ -482,7 +482,7 @@ contains
   character(*), intent(in), optional :: delimiters(1:2) !< Eventual delimiters of array values.
   character(len=:), allocatable      :: str             !< Returned string containing input number.
   character(DI4P)                    :: strn            !< String containing of element of input array number.
-  character(len=1), allocatable      :: sep             !< Array values separator
+  character(len=1)                   :: sep             !< Array values separator
   integer                            :: i               !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
@@ -517,7 +517,7 @@ contains
   character(*), intent(in), optional :: delimiters(1:2) !< Eventual delimiters of array values.
   character(len=:), allocatable      :: str             !< Returned string containing input number.
   character(DI2P)                    :: strn            !< String containing of element of input array number.
-  character(len=1), allocatable      :: sep             !< Array values separator
+  character(len=1)                   :: sep             !< Array values separator
   integer                            :: i               !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
@@ -552,7 +552,7 @@ contains
   character(*), intent(in), optional :: delimiters(1:2) !< Eventual delimiters of array values.
   character(len=:), allocatable      :: str             !< Returned string containing input number.
   character(DI1P)                    :: strn            !< String containing of element of input array number.
-  character(len=1), allocatable      :: sep             !< Array values separator
+  character(len=1)                   :: sep             !< Array values separator
   integer                            :: i               !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
