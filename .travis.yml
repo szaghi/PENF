@@ -22,7 +22,9 @@ addons:
 env:
   global:
     - MAKECOVERAGE="FoBiS.py rule -ex makecoverage"
-    - MAKEDOC="./makedoc.sh szaghi/PENF"
+    - MAKEDOC="./scripts/makedoc.sh szaghi/PENF"
+    - CLEAN="FoBiS.py rule -ex clean"
+    - MAKETAR="FoBiS.py rule -ex maketar"
 
 before_install:
   - git submodule update --init --recursive
@@ -50,3 +52,20 @@ after_success:
   - find . -name '*.gcno' -print
   - bash <(curl -s https://codecov.io/bash)
   - $MAKEDOC
+
+before_deploy:
+  - $CLEAN
+  - $MAKETAR
+  - mv PENF.tar.gz PENF-$TRAVIS_TAG.tar.gz
+
+deploy:
+  provider: releases
+  api_key:
+    secure: XTY3kve/IprjjfLBG1e5/qwBXePovf6eNClUhWXQq/+QIkTlGXkZ+T3DKhCPnQ9HBsLH6F/Pdx52r+u3irAzkDK5Voc6uf0p+XQp8KEB3NKkBdvzMusuZLhECqqWyTSr1tdmo1tSwIEuuGsNcA7YuyiX6+po2sZG7gLDDBB4Im0=
+  file: 
+    - PENF-$TRAVIS_TAG.tar.gz
+    - ./scripts/install.sh
+  skip_cleanup: true
+  overwrite: true
+  on:
+    tags: true
