@@ -93,3 +93,13 @@ Besides this README file the PENF documentation is contained into its own [wiki]
 To be written.
 
 Go to [Top](#top)
+
+### Project history
+
+> a graphical overview of the history and evolution of PENF project
+
+![stack](stack_plot.png)
+
+![survival](survival_plot.png)
+
+Go to [Top](#top)
