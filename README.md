@@ -98,8 +98,8 @@ Go to [Top](#top)
 
 > a graphical overview of the history and evolution of PENF project
 
-![stack](stack_plot.png)
+![stack](doc/stack_plot.png)
 
-![survival](survival_plot.png)
+![survival](doc/survival_plot.png)
 
 Go to [Top](#top)
