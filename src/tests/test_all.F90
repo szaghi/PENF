@@ -20,7 +20,7 @@ implicit none
 call penf_init
 call penf_print(unit=stdout)
 print "(A)", ''
-print "(A)", 'Testing IR_Precision tools'
+print "(A)", 'Testing PENF tools'
 print "(A)", 'Casting real-to-string: '//str(n=1._R8P)
 print "(A)", 'Casting integer-to-string: '//str(n=11_I8P)
 print "(A,"//FR8P//")", 'Casting string-to-real: ',cton(str='2.2d0', knd=1._R8P)
