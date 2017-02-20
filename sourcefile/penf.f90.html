@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	 
+	 <meta name="description" content="PENF, Portability Environment for Fortran poor people">
+    
+    <meta name="author" content="Stefano Zaghi" >
+    <link rel="icon" href="../favicon.png">
+
+    <title>penf.F90 &ndash; PENF</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/pygments.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/local.css" rel="stylesheet">
+    
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <script src="../js/jquery-2.1.3.min.js"></script>
+    <script src="../js/svg-pan-zoom.min.js"></script>
+
+    
+    <script src="../tipuesearch/tipuesearch_content.js"></script>
+    <link  href="../tipuesearch/tipuesearch.css" rel="stylesheet">
+    <script src="../tipuesearch/tipuesearch_set.js"></script>
+    <script src="../tipuesearch/tipuesearch.js"></script>
+    
+
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../index.html">PENF </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+				
+            <li class="dropdown hidden-xs visible-sm visible-md hidden-lg">
+              <a href="#" class="dropdown-toggle"
+              data-toggle="dropdown" role="button"
+              aria-haspopup="true"
+		 aria-expanded="false">Contents <span class="caret"></span></a>
+	      <ul class="dropdown-menu">
+              
+            <li><a href="../lists/files.html">Source Files</a></li>
+				
+				
+            <li><a href="../lists/modules.html">Modules</a></li>
+				
+            
+                                
+            <li><a href="../lists/procedures.html">Procedures</a></li>
+				
+								
+				
+            <li><a href="../lists/programs.html">Programs</a></li>
+				
+            </ul>
+            </li>
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/files.html">Source Files</a></li>
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/modules.html">Modules</a></li>
+
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/procedures.html">Procedures</a></li>
+
+                             
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/programs.html">Programs</a></li>
+
+          </ul>
+        
+        <form action="../search.html" class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search" name="q" id="tipue_search_input" autocomplete="off" required>
+        </div>
+<!--
+        <button type="submit" class="btn btn-default">Submit</button>
+-->
+        </form>
+        
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+    
+  
+  <div class="row">
+    <h1>penf.F90
+    <small>Source File</small>
+    
+    </h1>
+    
+<div class="row">
+  <div class="col-lg-12">
+<div class="well well-sm">
+  <ul class="list-inline" style="margin-bottom:0px;display:inline">
+     
+     
+     
+     
+    
+    
+     <li><i class="fa fa-list-ol"></i>
+       <a data-toggle="tooltip"
+	  data-placement="bottom" data-html="true"
+	  title="14.7% of total for source files.">145 statements</a>
+     </li> 
+     
+     
+    <li><i class="fa fa-code"></i><a href="../src/penf.F90"> Source File</a></li>
+     
+  </ul>
+  <ol class="breadcrumb in-well text-right">
+  
+     <li class="active">penf.F90</li>
+  </ol>
+</div>
+</div>
+</div>
+<script>
+  $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+  })
+</script>
+
+  </div>
+  <div class="row">
+    <div class="col-md-3 hidden-xs hidden-sm visible-md visible-lg">
+    
+<div id="sidebar">
+  
+
+
+
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#mods-0">Modules</a></h3></div>
+  <div id="mods-0" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../module/penf.html">penf</a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title">Source Code</h3></div>
+  <div class="list-group">
+    <a class="list-group-item" href="../sourcefile/penf.f90.html#src">penf.F90</a>
+  </div>
+</div>
+
+
+  <hr>
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#allfiles-0">All Source Files</a></h3></div>
+  <div id="allfiles-0" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../sourcefile/compact_real.f90.html">compact_real.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/penf.f90.html">penf.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/penf_b_size.f90.html">penf_b_size.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/penf_global_parameters_variables.f90.html">penf_global_parameters_variables.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/penf_stringify.f90.html">penf_stringify.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/test_all.f90.html">test_all.F90</a>
+      
+    </div>
+  </div>
+</div>
+
+
+</div>  
+
+    </div>
+    <div class="col-md-9" id='text'>
+    <p>Portability Environment for Fortran poor people.</p>
+    
+    <h3>This File Depends On</h3>
+    
+                <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.26.3 (20100126.1600)
+ -->
+<!-- Title: sourcefile~~penf.f90~~EfferentGraph Pages: 1 -->
+<svg id="sourcefilepenff90EfferentGraph" width="562pt" height="74pt"
+ viewBox="0.00 0.00 562.00 74.29" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="sourcefile~~penf.f90~~EfferentGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 70.2871)">
+<title>sourcefile~~penf.f90~~EfferentGraph</title>
+<polygon fill="white" stroke="white" points="-4,5 -4,-70.2871 559,-70.2871 559,5 -4,5"/>
+<!-- sourcefile~penf.f90 -->
+<g id="node1" class="node"><title>sourcefile~penf.f90</title>
+<polygon fill="none" stroke="black" points="553,-57.9707 499,-57.9707 499,-31.9707 553,-31.9707 553,-57.9707"/>
+<text text-anchor="middle" x="526" y="-42.5207" font-family="Helvetica,sans-Serif" font-size="10.50">penf.F90</text>
+</g>
+<!-- sourcefile~penf_b_size.f90 -->
+<g id="node2" class="node"><title>sourcefile~penf_b_size.f90</title>
+<a xlink:href="../sourcefile/penf_b_size.f90.html" xlink:title="penf_b_size.F90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="328,-37.9707 236,-37.9707 236,-11.9707 328,-11.9707 328,-37.9707"/>
+<text text-anchor="middle" x="282" y="-22.5207" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">penf_b_size.F90</text>
+</a>
+</g>
+<!-- sourcefile~penf_b_size.f90&#45;&gt;sourcefile~penf.f90 -->
+<g id="edge8" class="edge"><title>sourcefile~penf_b_size.f90&#45;&gt;sourcefile~penf.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M307.365,-38.1727C333.234,-50.3628 374.874,-66.5143 413,-65.9707"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M413,-65.9707C438.492,-65.6072 466.685,-60.3758 488.534,-55.2259"/>
+<polygon fill="#000000" stroke="#000000" points="489.523,-58.5871 498.401,-52.805 487.855,-51.7887 489.523,-58.5871"/>
+</g>
+<!-- sourcefile~penf_stringify.f90 -->
+<g id="node4" class="node"><title>sourcefile~penf_stringify.f90</title>
+<a xlink:href="../sourcefile/penf_stringify.f90.html" xlink:title="penf_stringify.F90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="462,-37.9707 364,-37.9707 364,-11.9707 462,-11.9707 462,-37.9707"/>
+<text text-anchor="middle" x="413" y="-22.5207" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">penf_stringify.F90</text>
+</a>
+</g>
+<!-- sourcefile~penf_b_size.f90&#45;&gt;sourcefile~penf_stringify.f90 -->
+<g id="edge4" class="edge"><title>sourcefile~penf_b_size.f90&#45;&gt;sourcefile~penf_stringify.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M328.186,-24.9707C336.355,-24.9707 344.965,-24.9707 353.442,-24.9707"/>
+<polygon fill="#000000" stroke="#000000" points="353.676,-28.4708 363.676,-24.9707 353.676,-21.4708 353.676,-28.4708"/>
+</g>
+<!-- sourcefile~penf_global_parameters_variables.f90 -->
+<g id="node3" class="node"><title>sourcefile~penf_global_parameters_variables.f90</title>
+<a xlink:href="../sourcefile/penf_global_parameters_variables.f90.html" xlink:title="penf_global_parameters_variables.F90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="199,-37.9707 1,-37.9707 1,-11.9707 199,-11.9707 199,-37.9707"/>
+<text text-anchor="middle" x="100" y="-22.5207" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">penf_global_parameters_variables.F90</text>
+</a>
+</g>
+<!-- sourcefile~penf_global_parameters_variables.f90&#45;&gt;sourcefile~penf.f90 -->
+<g id="edge10" class="edge"><title>sourcefile~penf_global_parameters_variables.f90&#45;&gt;sourcefile~penf.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M159.704,-38.0068C222.465,-50.4817 324.226,-67.2365 413,-65.9707"/>
+</g>
+<!-- sourcefile~penf_global_parameters_variables.f90&#45;&gt;sourcefile~penf_b_size.f90 -->
+<g id="edge2" class="edge"><title>sourcefile~penf_global_parameters_variables.f90&#45;&gt;sourcefile~penf_b_size.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M199.52,-24.9707C208.389,-24.9707 217.15,-24.9707 225.46,-24.9707"/>
+<polygon fill="#000000" stroke="#000000" points="225.721,-28.4708 235.721,-24.9707 225.721,-21.4708 225.721,-28.4708"/>
+</g>
+<!-- sourcefile~penf_global_parameters_variables.f90&#45;&gt;sourcefile~penf_stringify.f90 -->
+<g id="edge6" class="edge"><title>sourcefile~penf_global_parameters_variables.f90&#45;&gt;sourcefile~penf_stringify.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M159.638,-11.9557C205.702,-3.65823 270.997,4.28664 328,-2.9707 338.883,-4.3562 350.364,-6.70142 361.248,-9.35725"/>
+<polygon fill="#000000" stroke="#000000" points="360.485,-12.7748 371.041,-11.865 362.221,-5.99357 360.485,-12.7748"/>
+</g>
+<!-- sourcefile~penf_stringify.f90&#45;&gt;sourcefile~penf.f90 -->
+<g id="edge12" class="edge"><title>sourcefile~penf_stringify.f90&#45;&gt;sourcefile~penf.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M462.235,-33.6848C471.03,-35.2414 480.063,-36.8403 488.464,-38.3272"/>
+<polygon fill="#000000" stroke="#000000" points="487.882,-41.7785 498.339,-40.075 489.102,-34.8856 487.882,-41.7785"/>
+</g>
+</g>
+</svg>
+</div>
+                <div><a type="button" class="graph-help" data-toggle="modal" href="#graph-help-text">Help</a></div>
+                <div class="modal fade" id="graph-help-text" tabindex="-1" role="dialog">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                      </div>
+                      <div class="modal-body">
+                        
+    <p>Nodes of different colours represent the following: </p>
+    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.26.3 (20100126.1600)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="188pt" height="34pt"
+ viewBox="0.00 0.00 188.00 34.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph1" class="graph" transform="scale(1 1) rotate(0) translate(4 30)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="white" points="-4,5 -4,-30 185,-30 185,5 -4,5"/>
+<!-- Source File -->
+<g id="node1" class="node"><title>Source File</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="66,-26 2.84217e-14,-26 0,-1.24345e-14 66,-3.55271e-15 66,-26"/>
+<text text-anchor="middle" x="33" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Source File</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node2" class="node"><title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="180,-26 84,-26 84,-1.24345e-14 180,-3.55271e-15 180,-26"/>
+<text text-anchor="middle" x="132" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+    
+    <p>Solid arrows point from a file to a file which depends upon it. A file 
+    is dependent upon another if the latter must be compiled before the former
+    can be.
+    </p>
+    
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+    
+      
+      <h3>Files Dependent On This One</h3>
+      
+                <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.26.3 (20100126.1600)
+ -->
+<!-- Title: sourcefile~~penf.f90~~AfferentGraph Pages: 1 -->
+<svg id="sourcefilepenff90AfferentGraph" width="196pt" height="78pt"
+ viewBox="0.00 0.00 196.00 78.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="sourcefile~~penf.f90~~AfferentGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 74)">
+<title>sourcefile~~penf.f90~~AfferentGraph</title>
+<polygon fill="white" stroke="white" points="-4,5 -4,-74 193,-74 193,5 -4,5"/>
+<!-- sourcefile~penf.f90 -->
+<g id="node1" class="node"><title>sourcefile~penf.f90</title>
+<polygon fill="none" stroke="black" points="55,-48 1,-48 1,-22 55,-22 55,-48"/>
+<text text-anchor="middle" x="28" y="-32.55" font-family="Helvetica,sans-Serif" font-size="10.50">penf.F90</text>
+</g>
+<!-- sourcefile~test_all.f90 -->
+<g id="node2" class="node"><title>sourcefile~test_all.f90</title>
+<a xlink:href="../sourcefile/test_all.f90.html" xlink:title="test_all.F90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="174,-70 106,-70 106,-44 174,-44 174,-70"/>
+<text text-anchor="middle" x="140" y="-54.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">test_all.F90</text>
+</a>
+</g>
+<!-- sourcefile~penf.f90&#45;&gt;sourcefile~test_all.f90 -->
+<g id="edge2" class="edge"><title>sourcefile~penf.f90&#45;&gt;sourcefile~test_all.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M55.6854,-40.4382C67.7645,-42.8109 82.2287,-45.6521 95.7385,-48.3058"/>
+<polygon fill="#000000" stroke="#000000" points="95.3411,-51.7945 105.828,-50.2877 96.6904,-44.9258 95.3411,-51.7945"/>
+</g>
+<!-- sourcefile~compact_real.f90 -->
+<g id="node3" class="node"><title>sourcefile~compact_real.f90</title>
+<a xlink:href="../sourcefile/compact_real.f90.html" xlink:title="compact_real.f90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="187,-26 93,-26 93,-1.24345e-14 187,-3.55271e-15 187,-26"/>
+<text text-anchor="middle" x="140" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">compact_real.f90</text>
+</a>
+</g>
+<!-- sourcefile~penf.f90&#45;&gt;sourcefile~compact_real.f90 -->
+<g id="edge4" class="edge"><title>sourcefile~penf.f90&#45;&gt;sourcefile~compact_real.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M55.6854,-29.5618C63.7725,-27.9732 72.9288,-26.1747 82.152,-24.363"/>
+<polygon fill="#000000" stroke="#000000" points="83.0011,-27.7632 92.139,-22.4013 81.6518,-20.8944 83.0011,-27.7632"/>
+</g>
+</g>
+</svg>
+</div>
+                <div><a type="button" class="graph-help" data-toggle="modal" href="#graph-help-text">Help</a></div>
+                <div class="modal fade" id="graph-help-text" tabindex="-1" role="dialog">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                      </div>
+                      <div class="modal-body">
+                        
+    <p>Nodes of different colours represent the following: </p>
+    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.26.3 (20100126.1600)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="188pt" height="34pt"
+ viewBox="0.00 0.00 188.00 34.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph1" class="graph" transform="scale(1 1) rotate(0) translate(4 30)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="white" points="-4,5 -4,-30 185,-30 185,5 -4,5"/>
+<!-- Source File -->
+<g id="node1" class="node"><title>Source File</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="66,-26 2.84217e-14,-26 0,-1.24345e-14 66,-3.55271e-15 66,-26"/>
+<text text-anchor="middle" x="33" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Source File</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node2" class="node"><title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="180,-26 84,-26 84,-1.24345e-14 180,-3.55271e-15 180,-26"/>
+<text text-anchor="middle" x="132" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+    
+    <p>Solid arrows point from a file to a file which depends upon it. A file 
+    is dependent upon another if the latter must be compiled before the former
+    can be.
+    </p>
+    
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+      
+      <br>
+
+    <section class="visible-xs visible-sm hidden-md">
+      
+
+
+
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#mods-1">Modules</a></h3></div>
+  <div id="mods-1" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../module/penf.html">penf</a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title">Source Code</h3></div>
+  <div class="list-group">
+    <a class="list-group-item" href="../sourcefile/penf.f90.html#src">penf.F90</a>
+  </div>
+</div>
+
+
+    </section>
+    <br class="visible-xs visible-sm hidden-md">
+
+    <section>
+      <h2><span class="anchor" id="src"></span>Source Code</h2>
+    <div class="hl"><pre><span></span><a name="ln-1"></a><span class="c">!&lt; Portability Environment for Fortran poor people.</span>
+<a name="ln-2"></a><span class="k">module </span><span class="n">penf</span>
+<a name="ln-3"></a><span class="c">!-----------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-4"></a><span class="c">!&lt; Portability Environment for Fortran poor people.</span>
+<a name="ln-5"></a><span class="c">!-----------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-6"></a><span class="k">use </span><span class="n">penf_global_parameters_variables</span>
+<a name="ln-7"></a><span class="cp">#ifdef __GFORTRAN__</span>
+<a name="ln-8"></a><span class="k">use </span><span class="n">penf_b_size</span><span class="p">,</span> <span class="n">only</span> <span class="p">:</span> <span class="nb">bit_size</span><span class="p">,</span> <span class="n">byte_size</span>
+<a name="ln-9"></a><span class="cp">#else</span>
+<a name="ln-10"></a><span class="k">use </span><span class="n">penf_b_size</span>
+<a name="ln-11"></a><span class="cp">#endif</span>
+<a name="ln-12"></a><span class="k">use </span><span class="n">penf_stringify</span><span class="p">,</span> <span class="n">only</span> <span class="p">:</span> <span class="n">str</span><span class="p">,</span> <span class="n">strz</span><span class="p">,</span> <span class="n">cton</span><span class="p">,</span> <span class="n">bstr</span><span class="p">,</span> <span class="n">bcton</span>
+<a name="ln-13"></a><span class="c">!-----------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-14"></a>
+<a name="ln-15"></a><span class="c">!-----------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-16"></a><span class="k">implicit none</span>
+<a name="ln-17"></a><span class="k">private</span>
+<a name="ln-18"></a><span class="k">save</span>
+<a name="ln-19"></a><span class="c">! Global parameters and variables</span>
+<a name="ln-20"></a><span class="k">public</span> <span class="kd">::</span> <span class="n">endianL</span><span class="p">,</span> <span class="n">endianB</span><span class="p">,</span> <span class="n">endian</span><span class="p">,</span> <span class="n">is_initialized</span>
+<a name="ln-21"></a><span class="k">public</span> <span class="kd">::</span> <span class="n">R16P</span><span class="p">,</span> <span class="n">FR16P</span><span class="p">,</span> <span class="n">DR16P</span><span class="p">,</span> <span class="n">MinR16P</span><span class="p">,</span> <span class="n">MaxR16P</span><span class="p">,</span> <span class="n">BIR16P</span><span class="p">,</span> <span class="n">BYR16P</span><span class="p">,</span> <span class="n">smallR16P</span><span class="p">,</span> <span class="n">ZeroR16</span>
+<a name="ln-22"></a><span class="k">public</span> <span class="kd">::</span> <span class="n">R8P</span><span class="p">,</span>  <span class="n">FR8P</span><span class="p">,</span>  <span class="n">DR8P</span><span class="p">,</span>  <span class="n">MinR8P</span><span class="p">,</span>  <span class="n">MaxR8P</span><span class="p">,</span>  <span class="n">BIR8P</span><span class="p">,</span>  <span class="n">BYR8P</span><span class="p">,</span>  <span class="n">smallR8P</span><span class="p">,</span>  <span class="n">ZeroR8</span>
+<a name="ln-23"></a><span class="k">public</span> <span class="kd">::</span> <span class="n">R4P</span><span class="p">,</span>  <span class="n">FR4P</span><span class="p">,</span>  <span class="n">DR4P</span><span class="p">,</span>  <span class="n">MinR4P</span><span class="p">,</span>  <span class="n">MaxR4P</span><span class="p">,</span>  <span class="n">BIR4P</span><span class="p">,</span>  <span class="n">BYR4P</span><span class="p">,</span>  <span class="n">smallR4P</span><span class="p">,</span>  <span class="n">ZeroR4</span>
+<a name="ln-24"></a><span class="k">public</span> <span class="kd">::</span> <span class="n">R_P</span><span class="p">,</span>  <span class="n">FR_P</span><span class="p">,</span>  <span class="n">DR_P</span><span class="p">,</span>  <span class="n">MinR_P</span><span class="p">,</span>  <span class="n">MaxR_P</span><span class="p">,</span>  <span class="n">BIR_P</span><span class="p">,</span>  <span class="n">BYR_P</span><span class="p">,</span>  <span class="n">smallR_P</span><span class="p">,</span>  <span class="n">Zero</span>
+<a name="ln-25"></a><span class="k">public</span> <span class="kd">::</span> <span class="n">I8P</span><span class="p">,</span>  <span class="n">FI8P</span><span class="p">,</span>  <span class="n">DI8P</span><span class="p">,</span>  <span class="n">MinI8P</span><span class="p">,</span>  <span class="n">MaxI8P</span><span class="p">,</span>  <span class="n">BII8P</span><span class="p">,</span>  <span class="n">BYI8P</span>
+<a name="ln-26"></a><span class="k">public</span> <span class="kd">::</span> <span class="n">I4P</span><span class="p">,</span>  <span class="n">FI4P</span><span class="p">,</span>  <span class="n">DI4P</span><span class="p">,</span>  <span class="n">MinI4P</span><span class="p">,</span>  <span class="n">MaxI4P</span><span class="p">,</span>  <span class="n">BII4P</span><span class="p">,</span>  <span class="n">BYI4P</span>
+<a name="ln-27"></a><span class="k">public</span> <span class="kd">::</span> <span class="n">I2P</span><span class="p">,</span>  <span class="n">FI2P</span><span class="p">,</span>  <span class="n">DI2P</span><span class="p">,</span>  <span class="n">MinI2P</span><span class="p">,</span>  <span class="n">MaxI2P</span><span class="p">,</span>  <span class="n">BII2P</span><span class="p">,</span>  <span class="n">BYI2P</span>
+<a name="ln-28"></a><span class="k">public</span> <span class="kd">::</span> <span class="n">I1P</span><span class="p">,</span>  <span class="n">FI1P</span><span class="p">,</span>  <span class="n">DI1P</span><span class="p">,</span>  <span class="n">MinI1P</span><span class="p">,</span>  <span class="n">MaxI1P</span><span class="p">,</span>  <span class="n">BII1P</span><span class="p">,</span>  <span class="n">BYI1P</span>
+<a name="ln-29"></a><span class="k">public</span> <span class="kd">::</span> <span class="n">I_P</span><span class="p">,</span>  <span class="n">FI_P</span><span class="p">,</span>  <span class="n">DI_P</span><span class="p">,</span>  <span class="n">MinI_P</span><span class="p">,</span>  <span class="n">MaxI_P</span><span class="p">,</span>  <span class="n">BII_P</span><span class="p">,</span>  <span class="n">BYI_P</span>
+<a name="ln-30"></a><span class="k">public</span> <span class="kd">::</span> <span class="n">REAL_KINDS_LIST</span><span class="p">,</span> <span class="n">REAL_FORMATS_LIST</span>
+<a name="ln-31"></a><span class="k">public</span> <span class="kd">::</span> <span class="n">INTEGER_KINDS_LIST</span><span class="p">,</span> <span class="n">INTEGER_FORMATS_LIST</span>
+<a name="ln-32"></a><span class="c">! Bit/byte size functions</span>
+<a name="ln-33"></a><span class="k">public</span> <span class="kd">::</span> <span class="nb">bit_size</span><span class="p">,</span> <span class="n">byte_size</span>
+<a name="ln-34"></a><span class="c">! Stringify facility</span>
+<a name="ln-35"></a><span class="k">public</span> <span class="kd">::</span> <span class="n">str</span><span class="p">,</span> <span class="n">strz</span><span class="p">,</span> <span class="n">cton</span>
+<a name="ln-36"></a><span class="k">public</span> <span class="kd">::</span> <span class="n">bstr</span><span class="p">,</span> <span class="n">bcton</span>
+<a name="ln-37"></a><span class="c">! Miscellanea facility</span>
+<a name="ln-38"></a><span class="k">public</span> <span class="kd">::</span> <span class="n">check_endian</span>
+<a name="ln-39"></a><span class="k">public</span> <span class="kd">::</span> <span class="n">digit</span>
+<a name="ln-40"></a><span class="k">public</span> <span class="kd">::</span> <span class="n">penf_Init</span>
+<a name="ln-41"></a><span class="k">public</span> <span class="kd">::</span> <span class="n">penf_print</span>
+<a name="ln-42"></a><span class="c">!-----------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-43"></a>
+<a name="ln-44"></a><span class="c">!-----------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-45"></a><span class="cp">#ifdef __GFORTRAN__</span>
+<a name="ln-46"></a><span class="c">! work-around for strange gfortran bug...</span>
+<a name="ln-47"></a><span class="k">interface </span><span class="nb">bit_size</span>
+<a name="ln-48"></a>  <span class="c">!&lt; Overloading of the intrinsic *bit_size* function for computing the number of bits of (also) real and character variables.</span>
+<a name="ln-49"></a><span class="n">endinterface</span>
+<a name="ln-50"></a><span class="cp">#endif</span>
+<a name="ln-51"></a><span class="c">!-----------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-52"></a>
+<a name="ln-53"></a><span class="k">interface </span><span class="n">digit</span>
+<a name="ln-54"></a>  <span class="c">!&lt; Compute the number of digits in decimal base of the input integer.</span>
+<a name="ln-55"></a>  <span class="k">module procedure </span><span class="n">digit_I8</span><span class="p">,</span> <span class="n">digit_I4</span><span class="p">,</span> <span class="n">digit_I2</span><span class="p">,</span> <span class="n">digit_I1</span>
+<a name="ln-56"></a><span class="n">endinterface</span>
+<a name="ln-57"></a><span class="c">!-----------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-58"></a><span class="k">contains</span>
+<a name="ln-59"></a><span class="k">  subroutine </span><span class="n">check_endian</span><span class="p">()</span>
+<a name="ln-60"></a>  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-61"></a>  <span class="c">!&lt; Check the type of bit ordering (big or little endian) of the running architecture.</span>
+<a name="ln-62"></a>  <span class="c">!&lt;</span>
+<a name="ln-63"></a>  <span class="c">!&gt; @note The result is stored into the *endian* global variable.</span>
+<a name="ln-64"></a>  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-65"></a>
+<a name="ln-66"></a>  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-67"></a>  <span class="k">if</span> <span class="p">(</span><span class="n">is_little_endian</span><span class="p">())</span> <span class="k">then</span>
+<a name="ln-68"></a><span class="k">    </span><span class="n">endian</span> <span class="o">=</span> <span class="n">endianL</span>
+<a name="ln-69"></a>  <span class="k">else</span>
+<a name="ln-70"></a><span class="k">    </span><span class="n">endian</span> <span class="o">=</span> <span class="n">endianB</span>
+<a name="ln-71"></a>  <span class="n">endif</span>
+<a name="ln-72"></a>  <span class="k">return</span>
+<a name="ln-73"></a>  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-74"></a>  <span class="k">contains</span>
+<a name="ln-75"></a><span class="k">    pure function </span><span class="n">is_little_endian</span><span class="p">()</span> <span class="k">result</span><span class="p">(</span><span class="n">is_little</span><span class="p">)</span>
+<a name="ln-76"></a>    <span class="c">!-------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-77"></a>    <span class="c">!&lt; Check if the type of the bit ordering of the running architecture is little endian.</span>
+<a name="ln-78"></a>    <span class="c">!-------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-79"></a>    <span class="kt">logical</span>      <span class="kd">::</span> <span class="n">is_little</span> <span class="c">!&lt; Logical output: true is the running architecture uses little endian ordering, false otherwise.</span>
+<a name="ln-80"></a>    <span class="kt">integer</span><span class="p">(</span><span class="n">I1P</span><span class="p">)</span> <span class="kd">::</span> <span class="n">int1</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">)</span> <span class="c">!&lt; One byte integer array for casting 4 bytes integer.</span>
+<a name="ln-81"></a>    <span class="c">!-------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-82"></a>
+<a name="ln-83"></a>    <span class="c">!-------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-84"></a>    <span class="n">int1</span> <span class="o">=</span> <span class="nb">transfer</span><span class="p">(</span><span class="mi">1_I4P</span><span class="p">,</span> <span class="n">int1</span><span class="p">)</span>
+<a name="ln-85"></a>    <span class="n">is_little</span> <span class="o">=</span> <span class="p">(</span><span class="n">int1</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">==</span><span class="mi">1_I1P</span><span class="p">)</span>
+<a name="ln-86"></a>    <span class="k">return</span>
+<a name="ln-87"></a>    <span class="c">!-------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-88"></a>    <span class="n">endfunction</span> <span class="n">is_little_endian</span>
+<a name="ln-89"></a>  <span class="n">endsubroutine</span> <span class="n">check_endian</span>
+<a name="ln-90"></a>
+<a name="ln-91"></a>  <span class="k">elemental function </span><span class="n">digit_I8</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">digit</span><span class="p">)</span>
+<a name="ln-92"></a>  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-93"></a>  <span class="c">!&lt; Compute the number of digits in decimal base of the input integer.</span>
+<a name="ln-94"></a>  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-95"></a>  <span class="kt">integer</span><span class="p">(</span><span class="n">I8P</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">n</span>     <span class="c">!&lt; Input integer.</span>
+<a name="ln-96"></a>  <span class="kt">character</span><span class="p">(</span><span class="n">DI8P</span><span class="p">)</span>          <span class="kd">::</span> <span class="n">str</span>   <span class="c">!&lt; Returned string containing input number plus padding zeros.</span>
+<a name="ln-97"></a>  <span class="kt">integer</span><span class="p">(</span><span class="n">I4P</span><span class="p">)</span>             <span class="kd">::</span> <span class="n">digit</span> <span class="c">!&lt; Number of digits.</span>
+<a name="ln-98"></a>  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-99"></a>
+<a name="ln-100"></a>  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-101"></a>  <span class="k">write</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="n">FI8P</span><span class="p">)</span> <span class="nb">abs</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>        <span class="c">! Casting of n to string.</span>
+<a name="ln-102"></a>  <span class="n">digit</span> <span class="o">=</span> <span class="nb">len_trim</span><span class="p">(</span><span class="nb">adjustl</span><span class="p">(</span><span class="n">str</span><span class="p">))</span> <span class="c">! Calculating the digits number of n.</span>
+<a name="ln-103"></a>  <span class="k">return</span>
+<a name="ln-104"></a>  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-105"></a>  <span class="n">endfunction</span> <span class="n">digit_I8</span>
+<a name="ln-106"></a>
+<a name="ln-107"></a>  <span class="k">elemental function </span><span class="n">digit_I4</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">digit</span><span class="p">)</span>
+<a name="ln-108"></a>  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-109"></a>  <span class="c">!&lt; Compute the number of digits in decimal base of the input integer.</span>
+<a name="ln-110"></a>  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-111"></a>  <span class="kt">integer</span><span class="p">(</span><span class="n">I4P</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">n</span>     <span class="c">!&lt; Input integer.</span>
+<a name="ln-112"></a>  <span class="kt">character</span><span class="p">(</span><span class="n">DI4P</span><span class="p">)</span>          <span class="kd">::</span> <span class="n">str</span>   <span class="c">!&lt; Returned string containing input number plus padding zeros.</span>
+<a name="ln-113"></a>  <span class="kt">integer</span><span class="p">(</span><span class="n">I4P</span><span class="p">)</span>             <span class="kd">::</span> <span class="n">digit</span> <span class="c">!&lt; Number of digits.</span>
+<a name="ln-114"></a>  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-115"></a>
+<a name="ln-116"></a>  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-117"></a>  <span class="k">write</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="n">FI4P</span><span class="p">)</span> <span class="nb">abs</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>        <span class="c">! Casting of n to string.</span>
+<a name="ln-118"></a>  <span class="n">digit</span> <span class="o">=</span> <span class="nb">len_trim</span><span class="p">(</span><span class="nb">adjustl</span><span class="p">(</span><span class="n">str</span><span class="p">))</span> <span class="c">! Calculating the digits number of n.</span>
+<a name="ln-119"></a>  <span class="k">return</span>
+<a name="ln-120"></a>  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-121"></a>  <span class="n">endfunction</span> <span class="n">digit_I4</span>
+<a name="ln-122"></a>
+<a name="ln-123"></a>  <span class="k">elemental function </span><span class="n">digit_I2</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">digit</span><span class="p">)</span>
+<a name="ln-124"></a>  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-125"></a>  <span class="c">!&lt; Compute the number of digits in decimal base of the input integer.</span>
+<a name="ln-126"></a>  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-127"></a>  <span class="kt">integer</span><span class="p">(</span><span class="n">I2P</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">n</span>     <span class="c">!&lt; Input integer.</span>
+<a name="ln-128"></a>  <span class="kt">character</span><span class="p">(</span><span class="n">DI2P</span><span class="p">)</span>          <span class="kd">::</span> <span class="n">str</span>   <span class="c">!&lt; Returned string containing input number plus padding zeros.</span>
+<a name="ln-129"></a>  <span class="kt">integer</span><span class="p">(</span><span class="n">I4P</span><span class="p">)</span>             <span class="kd">::</span> <span class="n">digit</span> <span class="c">!&lt; Number of digits.</span>
+<a name="ln-130"></a>  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-131"></a>
+<a name="ln-132"></a>  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-133"></a>  <span class="k">write</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="n">FI2P</span><span class="p">)</span> <span class="nb">abs</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>        <span class="c">! Casting of n to string.</span>
+<a name="ln-134"></a>  <span class="n">digit</span> <span class="o">=</span> <span class="nb">len_trim</span><span class="p">(</span><span class="nb">adjustl</span><span class="p">(</span><span class="n">str</span><span class="p">))</span> <span class="c">! Calculating the digits number of n.</span>
+<a name="ln-135"></a>  <span class="k">return</span>
+<a name="ln-136"></a>  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-137"></a>  <span class="n">endfunction</span> <span class="n">digit_I2</span>
+<a name="ln-138"></a>
+<a name="ln-139"></a>  <span class="k">elemental function </span><span class="n">digit_I1</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">digit</span><span class="p">)</span>
+<a name="ln-140"></a>  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-141"></a>  <span class="c">!&lt; Compute the number of digits in decimal base of the input integer.</span>
+<a name="ln-142"></a>  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-143"></a>  <span class="kt">integer</span><span class="p">(</span><span class="n">I1P</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">n</span>     <span class="c">!&lt; Input integer.</span>
+<a name="ln-144"></a>  <span class="kt">character</span><span class="p">(</span><span class="n">DI1P</span><span class="p">)</span>          <span class="kd">::</span> <span class="n">str</span>   <span class="c">!&lt; Returned string containing input number plus padding zeros.</span>
+<a name="ln-145"></a>  <span class="kt">integer</span><span class="p">(</span><span class="n">I4P</span><span class="p">)</span>             <span class="kd">::</span> <span class="n">digit</span> <span class="c">!&lt; Number of digits.</span>
+<a name="ln-146"></a>  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-147"></a>
+<a name="ln-148"></a>  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-149"></a>  <span class="k">write</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="n">FI1P</span><span class="p">)</span> <span class="nb">abs</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>        <span class="c">! Casting of n to string.</span>
+<a name="ln-150"></a>  <span class="n">digit</span> <span class="o">=</span> <span class="nb">len_trim</span><span class="p">(</span><span class="nb">adjustl</span><span class="p">(</span><span class="n">str</span><span class="p">))</span> <span class="c">! Calculating the digits number of n.</span>
+<a name="ln-151"></a>  <span class="k">return</span>
+<a name="ln-152"></a>  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-153"></a>  <span class="n">endfunction</span> <span class="n">digit_I1</span>
+<a name="ln-154"></a>
+<a name="ln-155"></a>  <span class="k">subroutine </span><span class="n">penf_init</span><span class="p">()</span>
+<a name="ln-156"></a>  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-157"></a>  <span class="c">!&lt; Initialize PENF&#39;s variables that are not initialized into the definition specification.</span>
+<a name="ln-158"></a>  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-159"></a>
+<a name="ln-160"></a>  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-161"></a>  <span class="k">call </span><span class="n">check_endian</span>
+<a name="ln-162"></a>  <span class="n">BIR8P</span>  <span class="o">=</span> <span class="nb">bit_size</span><span class="p">(</span><span class="n">MaxR8P</span><span class="p">)</span>     <span class="p">;</span> <span class="n">BYR8P</span>  <span class="o">=</span> <span class="n">BIR8P</span><span class="o">/</span><span class="mi">8_I1P</span>
+<a name="ln-163"></a>  <span class="n">BIR4P</span>  <span class="o">=</span> <span class="nb">bit_size</span><span class="p">(</span><span class="n">MaxR4P</span><span class="p">)</span>     <span class="p">;</span> <span class="n">BYR4P</span>  <span class="o">=</span> <span class="n">BIR4P</span><span class="o">/</span><span class="mi">8_I1P</span>
+<a name="ln-164"></a>  <span class="n">BIR_P</span>  <span class="o">=</span> <span class="nb">bit_size</span><span class="p">(</span><span class="n">MaxR_P</span><span class="p">)</span>     <span class="p">;</span> <span class="n">BYR_P</span>  <span class="o">=</span> <span class="n">BIR_P</span><span class="o">/</span><span class="mi">8_I1P</span>
+<a name="ln-165"></a><span class="cp">#ifdef r16p</span>
+<a name="ln-166"></a>  <span class="n">BIR16P</span> <span class="o">=</span> <span class="nb">bit_size</span><span class="p">(</span><span class="n">MaxR16P</span><span class="p">)</span>    <span class="p">;</span> <span class="n">BYR16P</span> <span class="o">=</span> <span class="n">BIR16P</span><span class="o">/</span><span class="mi">8_I2P</span>
+<a name="ln-167"></a><span class="cp">#else</span>
+<a name="ln-168"></a>  <span class="n">BIR16P</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">BIR8P</span><span class="p">,</span> <span class="nb">kind</span><span class="o">=</span><span class="n">I2P</span><span class="p">)</span> <span class="p">;</span> <span class="n">BYR16P</span> <span class="o">=</span> <span class="n">BIR16P</span><span class="o">/</span><span class="mi">8_I2P</span>
+<a name="ln-169"></a><span class="cp">#endif</span>
+<a name="ln-170"></a>  <span class="n">is_initialized</span> <span class="o">=</span> <span class="p">.</span><span class="n">true</span><span class="p">.</span>
+<a name="ln-171"></a>  <span class="k">return</span>
+<a name="ln-172"></a>  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-173"></a>  <span class="n">endsubroutine</span> <span class="n">penf_init</span>
+<a name="ln-174"></a>
+<a name="ln-175"></a>  <span class="k">subroutine </span><span class="n">penf_print</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="n">pref</span><span class="p">,</span> <span class="n">iostat</span><span class="p">,</span> <span class="n">iomsg</span><span class="p">)</span>
+<a name="ln-176"></a>  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-177"></a>  <span class="c">!&lt; Print to the specified unit the PENF&#39;s environment data.</span>
+<a name="ln-178"></a>  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-179"></a>  <span class="kt">integer</span><span class="p">(</span><span class="n">I4P</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span>            <span class="kd">::</span> <span class="n">unit</span>    <span class="c">!&lt; Logic unit.</span>
+<a name="ln-180"></a>  <span class="kt">character</span><span class="p">(</span><span class="o">*</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span>  <span class="k">optional</span> <span class="kd">::</span> <span class="n">pref</span>    <span class="c">!&lt; Prefixing string.</span>
+<a name="ln-181"></a>  <span class="kt">integer</span><span class="p">(</span><span class="n">I4P</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">),</span> <span class="k">optional</span> <span class="kd">::</span> <span class="n">iostat</span>  <span class="c">!&lt; IO error.</span>
+<a name="ln-182"></a>  <span class="kt">character</span><span class="p">(</span><span class="o">*</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">),</span> <span class="k">optional</span> <span class="kd">::</span> <span class="n">iomsg</span>   <span class="c">!&lt; IO error message.</span>
+<a name="ln-183"></a>  <span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="p">:),</span> <span class="k">allocatable</span>       <span class="kd">::</span> <span class="n">prefd</span>   <span class="c">!&lt; Prefixing string.</span>
+<a name="ln-184"></a>  <span class="kt">integer</span><span class="p">(</span><span class="n">I4P</span><span class="p">)</span>                        <span class="kd">::</span> <span class="n">iostatd</span> <span class="c">!&lt; IO error.</span>
+<a name="ln-185"></a>  <span class="kt">character</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>                      <span class="kd">::</span> <span class="n">iomsgd</span>  <span class="c">!&lt; Temporary variable for IO error message.</span>
+<a name="ln-186"></a>  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-187"></a>
+<a name="ln-188"></a>  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-189"></a>  <span class="k">if</span> <span class="p">(.</span><span class="nb">not</span><span class="p">.</span><span class="n">is_initialized</span><span class="p">)</span> <span class="k">call </span><span class="n">penf_init</span>
+<a name="ln-190"></a>  <span class="n">prefd</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span> <span class="p">;</span> <span class="k">if</span> <span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">pref</span><span class="p">))</span> <span class="n">prefd</span> <span class="o">=</span> <span class="n">pref</span>
+<a name="ln-191"></a>  <span class="k">if</span> <span class="p">(</span><span class="n">endian</span><span class="o">==</span><span class="n">endianL</span><span class="p">)</span> <span class="k">then</span>
+<a name="ln-192"></a><span class="k">    write</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;(A)&#39;</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">iostatd</span><span class="p">,</span><span class="n">iomsg</span><span class="o">=</span><span class="n">iomsgd</span><span class="p">)</span><span class="n">prefd</span><span class="o">//</span><span class="s1">&#39; This architecture has LITTLE Endian bit ordering&#39;</span>
+<a name="ln-193"></a>  <span class="k">else</span>
+<a name="ln-194"></a><span class="k">    write</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;(A)&#39;</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">iostatd</span><span class="p">,</span><span class="n">iomsg</span><span class="o">=</span><span class="n">iomsgd</span><span class="p">)</span><span class="n">prefd</span><span class="o">//</span><span class="s1">&#39; This architecture has BIG Endian bit ordering&#39;</span>
+<a name="ln-195"></a>  <span class="n">endif</span>
+<a name="ln-196"></a>  <span class="k">write</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;(A)&#39;</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">iostatd</span><span class="p">,</span><span class="n">iomsg</span><span class="o">=</span><span class="n">iomsgd</span><span class="p">)</span>  <span class="n">prefd</span><span class="o">//</span><span class="s1">&#39; Reals kind, format and characters number:&#39;</span>
+<a name="ln-197"></a>  <span class="k">write</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;(A)&#39;</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">iostatd</span><span class="p">,</span><span class="n">iomsg</span><span class="o">=</span><span class="n">iomsgd</span><span class="p">)</span>  <span class="n">prefd</span><span class="o">//</span><span class="s1">&#39;   R16P: &#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">R16P</span><span class="p">)</span><span class="o">//</span><span class="s1">&#39;,&#39;</span><span class="o">//</span><span class="n">FR16P</span><span class="o">//</span><span class="s1">&#39;,&#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">DR16P</span><span class="p">)</span>
+<a name="ln-198"></a>  <span class="k">write</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;(A)&#39;</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">iostatd</span><span class="p">,</span><span class="n">iomsg</span><span class="o">=</span><span class="n">iomsgd</span><span class="p">)</span>  <span class="n">prefd</span><span class="o">//</span><span class="s1">&#39;   R8P:  &#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">R8P</span> <span class="p">)</span><span class="o">//</span><span class="s1">&#39;,&#39;</span><span class="o">//</span><span class="n">FR8P</span> <span class="o">//</span><span class="s1">&#39;,&#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">DR8P</span> <span class="p">)</span>
+<a name="ln-199"></a>  <span class="k">write</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;(A)&#39;</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">iostatd</span><span class="p">,</span><span class="n">iomsg</span><span class="o">=</span><span class="n">iomsgd</span><span class="p">)</span>  <span class="n">prefd</span><span class="o">//</span><span class="s1">&#39;   R4P:  &#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">R4P</span> <span class="p">)</span><span class="o">//</span><span class="s1">&#39;,&#39;</span><span class="o">//</span><span class="n">FR4P</span> <span class="o">//</span><span class="s1">&#39;,&#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">DR4P</span> <span class="p">)</span>
+<a name="ln-200"></a>  <span class="k">write</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;(A)&#39;</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">iostatd</span><span class="p">,</span><span class="n">iomsg</span><span class="o">=</span><span class="n">iomsgd</span><span class="p">)</span>  <span class="n">prefd</span><span class="o">//</span><span class="s1">&#39; Integers kind, format and characters number:&#39;</span>
+<a name="ln-201"></a>  <span class="k">write</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;(A)&#39;</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">iostatd</span><span class="p">,</span><span class="n">iomsg</span><span class="o">=</span><span class="n">iomsgd</span><span class="p">)</span>  <span class="n">prefd</span><span class="o">//</span><span class="s1">&#39;   I8P:  &#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">I8P</span> <span class="p">)</span><span class="o">//</span><span class="s1">&#39;,&#39;</span><span class="o">//</span><span class="n">FI8P</span> <span class="o">//</span><span class="s1">&#39;,&#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">DI8P</span> <span class="p">)</span>
+<a name="ln-202"></a>  <span class="k">write</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;(A)&#39;</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">iostatd</span><span class="p">,</span><span class="n">iomsg</span><span class="o">=</span><span class="n">iomsgd</span><span class="p">)</span>  <span class="n">prefd</span><span class="o">//</span><span class="s1">&#39;   I4P:  &#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">I4P</span> <span class="p">)</span><span class="o">//</span><span class="s1">&#39;,&#39;</span><span class="o">//</span><span class="n">FI4P</span> <span class="o">//</span><span class="s1">&#39;,&#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">DI4P</span> <span class="p">)</span>
+<a name="ln-203"></a>  <span class="k">write</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;(A)&#39;</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">iostatd</span><span class="p">,</span><span class="n">iomsg</span><span class="o">=</span><span class="n">iomsgd</span><span class="p">)</span>  <span class="n">prefd</span><span class="o">//</span><span class="s1">&#39;   I2P:  &#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">I2P</span> <span class="p">)</span><span class="o">//</span><span class="s1">&#39;,&#39;</span><span class="o">//</span><span class="n">FI2P</span> <span class="o">//</span><span class="s1">&#39;,&#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">DI2P</span> <span class="p">)</span>
+<a name="ln-204"></a>  <span class="k">write</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;(A)&#39;</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">iostatd</span><span class="p">,</span><span class="n">iomsg</span><span class="o">=</span><span class="n">iomsgd</span><span class="p">)</span>  <span class="n">prefd</span><span class="o">//</span><span class="s1">&#39;   I1P:  &#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">I1P</span> <span class="p">)</span><span class="o">//</span><span class="s1">&#39;,&#39;</span><span class="o">//</span><span class="n">FI1P</span> <span class="o">//</span><span class="s1">&#39;,&#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">DI1P</span> <span class="p">)</span>
+<a name="ln-205"></a>  <span class="k">write</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;(A)&#39;</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">iostatd</span><span class="p">,</span><span class="n">iomsg</span><span class="o">=</span><span class="n">iomsgd</span><span class="p">)</span>  <span class="n">prefd</span><span class="o">//</span><span class="s1">&#39; Reals minimum and maximum values:&#39;</span>
+<a name="ln-206"></a>  <span class="k">write</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;(A)&#39;</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">iostatd</span><span class="p">,</span><span class="n">iomsg</span><span class="o">=</span><span class="n">iomsgd</span><span class="p">)</span>  <span class="n">prefd</span><span class="o">//</span><span class="s1">&#39;   R16P: &#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">MinR16P</span><span class="p">)</span><span class="o">//</span><span class="s1">&#39;,&#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">MaxR16P</span><span class="p">)</span>
+<a name="ln-207"></a>  <span class="k">write</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;(A)&#39;</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">iostatd</span><span class="p">,</span><span class="n">iomsg</span><span class="o">=</span><span class="n">iomsgd</span><span class="p">)</span>  <span class="n">prefd</span><span class="o">//</span><span class="s1">&#39;   R8P:  &#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">MinR8P</span> <span class="p">)</span><span class="o">//</span><span class="s1">&#39;,&#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">MaxR8P</span> <span class="p">)</span>
+<a name="ln-208"></a>  <span class="k">write</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;(A)&#39;</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">iostatd</span><span class="p">,</span><span class="n">iomsg</span><span class="o">=</span><span class="n">iomsgd</span><span class="p">)</span>  <span class="n">prefd</span><span class="o">//</span><span class="s1">&#39;   R4P:  &#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">MinR4P</span> <span class="p">)</span><span class="o">//</span><span class="s1">&#39;,&#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">MaxR4P</span> <span class="p">)</span>
+<a name="ln-209"></a>  <span class="k">write</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;(A)&#39;</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">iostatd</span><span class="p">,</span><span class="n">iomsg</span><span class="o">=</span><span class="n">iomsgd</span><span class="p">)</span>  <span class="n">prefd</span><span class="o">//</span><span class="s1">&#39; Integergs minimum and maximum values:&#39;</span>
+<a name="ln-210"></a>  <span class="k">write</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;(A)&#39;</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">iostatd</span><span class="p">,</span><span class="n">iomsg</span><span class="o">=</span><span class="n">iomsgd</span><span class="p">)</span>  <span class="n">prefd</span><span class="o">//</span><span class="s1">&#39;   I8P:  &#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">MinI8P</span> <span class="p">)</span><span class="o">//</span><span class="s1">&#39;,&#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">MaxI8P</span> <span class="p">)</span>
+<a name="ln-211"></a>  <span class="k">write</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;(A)&#39;</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">iostatd</span><span class="p">,</span><span class="n">iomsg</span><span class="o">=</span><span class="n">iomsgd</span><span class="p">)</span>  <span class="n">prefd</span><span class="o">//</span><span class="s1">&#39;   I4P:  &#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">MinI4P</span> <span class="p">)</span><span class="o">//</span><span class="s1">&#39;,&#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">MaxI4P</span> <span class="p">)</span>
+<a name="ln-212"></a>  <span class="k">write</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;(A)&#39;</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">iostatd</span><span class="p">,</span><span class="n">iomsg</span><span class="o">=</span><span class="n">iomsgd</span><span class="p">)</span>  <span class="n">prefd</span><span class="o">//</span><span class="s1">&#39;   I2P:  &#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">MinI2P</span> <span class="p">)</span><span class="o">//</span><span class="s1">&#39;,&#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">MaxI2P</span> <span class="p">)</span>
+<a name="ln-213"></a>  <span class="k">write</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;(A)&#39;</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">iostatd</span><span class="p">,</span><span class="n">iomsg</span><span class="o">=</span><span class="n">iomsgd</span><span class="p">)</span>  <span class="n">prefd</span><span class="o">//</span><span class="s1">&#39;   I1P:  &#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">MinI1P</span> <span class="p">)</span><span class="o">//</span><span class="s1">&#39;,&#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">MaxI1P</span> <span class="p">)</span>
+<a name="ln-214"></a>  <span class="k">write</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;(A)&#39;</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">iostatd</span><span class="p">,</span><span class="n">iomsg</span><span class="o">=</span><span class="n">iomsgd</span><span class="p">)</span>  <span class="n">prefd</span><span class="o">//</span><span class="s1">&#39; Reals bits/bytes sizes:&#39;</span>
+<a name="ln-215"></a>  <span class="k">write</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;(A)&#39;</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">iostatd</span><span class="p">,</span><span class="n">iomsg</span><span class="o">=</span><span class="n">iomsgd</span><span class="p">)</span>  <span class="n">prefd</span><span class="o">//</span><span class="s1">&#39;   R16P: &#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">BIR16P</span><span class="p">)</span><span class="o">//</span><span class="s1">&#39;/&#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">BYR16P</span><span class="p">)</span>
+<a name="ln-216"></a>  <span class="k">write</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;(A)&#39;</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">iostatd</span><span class="p">,</span><span class="n">iomsg</span><span class="o">=</span><span class="n">iomsgd</span><span class="p">)</span>  <span class="n">prefd</span><span class="o">//</span><span class="s1">&#39;   R8P:  &#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">BIR8P</span> <span class="p">)</span><span class="o">//</span><span class="s1">&#39;/&#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">BYR8P</span> <span class="p">)</span>
+<a name="ln-217"></a>  <span class="k">write</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;(A)&#39;</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">iostatd</span><span class="p">,</span><span class="n">iomsg</span><span class="o">=</span><span class="n">iomsgd</span><span class="p">)</span>  <span class="n">prefd</span><span class="o">//</span><span class="s1">&#39;   R4P:  &#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">BIR4P</span> <span class="p">)</span><span class="o">//</span><span class="s1">&#39;/&#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">BYR4P</span> <span class="p">)</span>
+<a name="ln-218"></a>  <span class="k">write</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;(A)&#39;</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">iostatd</span><span class="p">,</span><span class="n">iomsg</span><span class="o">=</span><span class="n">iomsgd</span><span class="p">)</span>  <span class="n">prefd</span><span class="o">//</span><span class="s1">&#39; Integers bits/bytes sizes:&#39;</span>
+<a name="ln-219"></a>  <span class="k">write</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;(A)&#39;</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">iostatd</span><span class="p">,</span><span class="n">iomsg</span><span class="o">=</span><span class="n">iomsgd</span><span class="p">)</span>  <span class="n">prefd</span><span class="o">//</span><span class="s1">&#39;   I8P:  &#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">BII8P</span> <span class="p">)</span><span class="o">//</span><span class="s1">&#39;/&#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">BYI8P</span> <span class="p">)</span>
+<a name="ln-220"></a>  <span class="k">write</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;(A)&#39;</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">iostatd</span><span class="p">,</span><span class="n">iomsg</span><span class="o">=</span><span class="n">iomsgd</span><span class="p">)</span>  <span class="n">prefd</span><span class="o">//</span><span class="s1">&#39;   I4P:  &#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">BII4P</span> <span class="p">)</span><span class="o">//</span><span class="s1">&#39;/&#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">BYI4P</span> <span class="p">)</span>
+<a name="ln-221"></a>  <span class="k">write</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;(A)&#39;</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">iostatd</span><span class="p">,</span><span class="n">iomsg</span><span class="o">=</span><span class="n">iomsgd</span><span class="p">)</span>  <span class="n">prefd</span><span class="o">//</span><span class="s1">&#39;   I2P:  &#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">BII2P</span> <span class="p">)</span><span class="o">//</span><span class="s1">&#39;/&#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">BYI2P</span> <span class="p">)</span>
+<a name="ln-222"></a>  <span class="k">write</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;(A)&#39;</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">iostatd</span><span class="p">,</span><span class="n">iomsg</span><span class="o">=</span><span class="n">iomsgd</span><span class="p">)</span>  <span class="n">prefd</span><span class="o">//</span><span class="s1">&#39;   I1P:  &#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">BII1P</span> <span class="p">)</span><span class="o">//</span><span class="s1">&#39;/&#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">BYI1P</span> <span class="p">)</span>
+<a name="ln-223"></a>  <span class="k">write</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;(A)&#39;</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">iostatd</span><span class="p">,</span><span class="n">iomsg</span><span class="o">=</span><span class="n">iomsgd</span><span class="p">)</span>  <span class="n">prefd</span><span class="o">//</span><span class="s1">&#39; Machine precisions&#39;</span>
+<a name="ln-224"></a>  <span class="k">write</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;(A)&#39;</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">iostatd</span><span class="p">,</span><span class="n">iomsg</span><span class="o">=</span><span class="n">iomsgd</span><span class="p">)</span>  <span class="n">prefd</span><span class="o">//</span><span class="s1">&#39;   ZeroR16: &#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">ZeroR16</span><span class="p">,.</span><span class="n">true</span><span class="p">.)</span>
+<a name="ln-225"></a>  <span class="k">write</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;(A)&#39;</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">iostatd</span><span class="p">,</span><span class="n">iomsg</span><span class="o">=</span><span class="n">iomsgd</span><span class="p">)</span>  <span class="n">prefd</span><span class="o">//</span><span class="s1">&#39;   ZeroR8:  &#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">ZeroR8</span> <span class="p">,.</span><span class="n">true</span><span class="p">.)</span>
+<a name="ln-226"></a>  <span class="k">write</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;(A)&#39;</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">iostatd</span><span class="p">,</span><span class="n">iomsg</span><span class="o">=</span><span class="n">iomsgd</span><span class="p">)</span>  <span class="n">prefd</span><span class="o">//</span><span class="s1">&#39;   ZeroR4:  &#39;</span><span class="o">//</span><span class="n">str</span><span class="p">(</span><span class="n">ZeroR4</span> <span class="p">,.</span><span class="n">true</span><span class="p">.)</span>
+<a name="ln-227"></a>  <span class="k">if</span> <span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">iostat</span><span class="p">))</span> <span class="n">iostat</span> <span class="o">=</span> <span class="n">iostatd</span>
+<a name="ln-228"></a>  <span class="k">if</span> <span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">iomsg</span><span class="p">))</span>  <span class="n">iomsg</span>  <span class="o">=</span> <span class="n">iomsgd</span>
+<a name="ln-229"></a>  <span class="k">return</span>
+<a name="ln-230"></a>  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-231"></a>  <span class="n">endsubroutine</span> <span class="n">penf_print</span>
+<a name="ln-232"></a><span class="n">endmodule</span> <span class="n">penf</span>
+</pre></div>
+
+    </section>
+    </div>
+  </div>
+
+  <section class="visible-xs visible-sm hidden-md">
+    <hr>
+    
+
+<div class="panel panel-default">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#allfiles-1">All Source Files</a></h3></div>
+  <div id="allfiles-1" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../sourcefile/compact_real.f90.html">compact_real.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/penf.f90.html">penf.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/penf_b_size.f90.html">penf_b_size.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/penf_global_parameters_variables.f90.html">penf_global_parameters_variables.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/penf_stringify.f90.html">penf_stringify.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/test_all.f90.html">test_all.F90</a>
+      
+    </div>
+  </div>
+</div>
+
+
+  </section>
+  
+    <hr>    
+    </div> <!-- /container -->
+    <footer>
+      <div class="container">
+      <div class="row">
+        <div class="col-xs-6 col-md-4"><p>&copy; 2017 </p></div>
+        <div class="col-xs-6 col-md-4 col-md-push-4">
+          <p class="text-right">
+            Documentation generated by 
+            <a href="https://github.com/cmacmackin/ford">FORD</a>
+            
+          </p>
+        </div>
+        <div class="col-xs-12 col-md-4 col-md-pull-4"><p class="text-center"> PENF was developed by Stefano Zaghi</p></div>
+      </div>
+      <br>
+      </div> <!-- /container -->    
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+<!--
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+-->
+    <script src="../js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../js/ie10-viewport-bug-workaround.js"></script>
+
+    <!-- MathJax JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } },
+        jax: ['input/TeX','input/MathML','output/HTML-CSS'],
+        extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js'],
+        'HTML-CSS': { 
+           styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: '#000000 ! important'} }
+        }
+      });
+    </script>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  </body>
+</html>

@@ -5,12 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	 
-	 <meta name="description" content="<p>IR_Precision is a Fortran (standard 2003+) module useful to achieve portable codes.</p>">
+	 <meta name="description" content="PENF, Portability Environment for Fortran poor people">
     
-    <meta name="author" content="Chris MacMackin" >
+    <meta name="author" content="Stefano Zaghi" >
     <link rel="icon" href="./favicon.png">
 
-    <title> IR_Precision </title>
+    <title> PENF </title>
 
     <link href="./css/bootstrap.min.css" rel="stylesheet">
     <link href="./css/pygments.css" rel="stylesheet">
@@ -25,17 +25,21 @@
     <![endif]-->
     
     <script src="./js/jquery-2.1.3.min.js"></script>
+    <script src="./js/svg-pan-zoom.min.js"></script>
+
+    
     <script src="./tipuesearch/tipuesearch_content.js"></script>
     <link  href="./tipuesearch/tipuesearch.css" rel="stylesheet">
     <script src="./tipuesearch/tipuesearch_set.js"></script>
     <script src="./tipuesearch/tipuesearch.js"></script>
+    
 
   </head>
 
   <body>
 
     <!-- Fixed navbar -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -44,24 +48,49 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="./index.html">IR_Precision </a>
+          <a class="navbar-brand" href="./index.html">PENF </a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            
+				
+            <li class="dropdown hidden-xs visible-sm visible-md hidden-lg">
+              <a href="#" class="dropdown-toggle"
+              data-toggle="dropdown" role="button"
+              aria-haspopup="true"
+		 aria-expanded="false">Contents <span class="caret"></span></a>
+	      <ul class="dropdown-menu">
+              
             <li><a href="./lists/files.html">Source Files</a></li>
 				
 				
             <li><a href="./lists/modules.html">Modules</a></li>
 				
-				
+            
+                                
             <li><a href="./lists/procedures.html">Procedures</a></li>
 				
-				
-				
-            <li><a href="./program/test_driver.html">Program</a></li>
 								
+				
+            <li><a href="./lists/programs.html">Programs</a></li>
+				
+            </ul>
+            </li>
+
+<li class="visible-xs hidden-sm visible-lg"><a href="./lists/files.html">Source Files</a></li>
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="./lists/modules.html">Modules</a></li>
+
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="./lists/procedures.html">Procedures</a></li>
+
+                             
+
+<li class="visible-xs hidden-sm visible-lg"><a href="./lists/programs.html">Programs</a></li>
+
           </ul>
+        
         <form action="./search.html" class="navbar-form navbar-right" role="search">
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Search" name="q" id="tipue_search_input" autocomplete="off" required>
@@ -70,6 +99,7 @@
         <button type="submit" class="btn btn-default">Submit</button>
 -->
         </form>
+        
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -78,12 +108,12 @@
     
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-        <p>IR_Precision is a Fortran (standard 2003+) module useful to achieve portable codes.</p>
+        <p>PENF, Portability Environment for Fortran poor people</p>
         	 
 	<p> Find us on&hellip;</p>
         <p>
         	 
-          <a class="btn btn-lg btn-primary" href="https://github.com/szaghi/IR_Precision" role="button">GitHub</a>
+          <a class="btn btn-lg btn-primary" href="https://github.com/szaghi/PENF" role="button">GitHub</a>
 			 
 			 
 			 
@@ -95,20 +125,54 @@
 
       <div class="row" id='text'>
 		  
-        <div class="col-lg-8">
+        <div class="col-md-8">
 		  
-          <h1>IR_Precision</h1>
-          <h3><a name="top"></a>IR_Precision, Fortran (standard 2003+) module for achieving portable codes</h3>
-<p><a href="https://waffle.io/szaghi/IR_Precision"><img alt="Ready in backlog" src="https://badge.waffle.io/szaghi/IR_Precision.png?label=ready&amp;title=Ready"></a>
-<a href="https://waffle.io/szaghi/IR_Precision"><img alt="In Progress" src="https://badge.waffle.io/szaghi/IR_Precision.png?label=in%20progress&amp;title=In%20Progress"></a>
-<a href="https://waffle.io/szaghi/IR_Precision"><img alt="Open bugs" src="https://badge.waffle.io/szaghi/IR_Precision.png?label=bug&amp;title=Open%20Bugs"></a></p>
+          <h1>PENF</h1>
+          <p><a name="top"></a></p>
+<h1 id="penf"><a class="toclink" href="#penf">PENF <a href=""><img alt="GitHub tag" src="https://img.shields.io/github/tag/szaghi/PENF.svg"></a></a></h1>
+<p><a href=""><img alt="License" src="https://img.shields.io/badge/license-GNU%20GeneraL%20Public%20License%20v3%20,%20GPLv3-blue.svg"></a>
+<a href=""><img alt="License" src="https://img.shields.io/badge/license-BSD2-red.svg"></a>
+<a href=""><img alt="License" src="https://img.shields.io/badge/license-BSD3-red.svg"></a>
+<a href=""><img alt="License" src="https://img.shields.io/badge/license-MIT-red.svg"></a></p>
+<p><a href=""><img alt="Status" src="https://img.shields.io/badge/status-stable-brightgreen.svg"></a>
+<a href="https://travis-ci.org/szaghi/PENF"><img alt="Build Status" src="https://travis-ci.org/szaghi/PENF.svg?branch=master"></a>
+<a href="http://codecov.io/github/szaghi/PENF?branch=master"><img alt="Coverage Status" src="https://img.shields.io/codecov/c/github/szaghi/PENF.svg"></a></p>
+<h3 id="penf-portability-environment-for-fortran-poor-people"><a class="toclink" href="#penf-portability-environment-for-fortran-poor-people">PENF, Portability Environment for Fortran poor people</a></h3>
 <p>A KISS library for exploiting codes portability for modern (2003+) Fortran projects.</p>
-<h2>What is IR_Precision?</h2>
+<ul>
+<li>PENF is a pure Fortran (KISS) library for achieving portable codes for modern Fortran projects;</li>
+<li>PENF provides many number-to-string and <code>viceversa</code> facilities;</li>
+<li>PENF is Fortran 2003+ standard compliant;</li>
+<li>PENF is a Free, Open Source Project.</li>
+</ul>
+<h4 id="table-of-contents"><a class="toclink" href="#table-of-contents">Table of Contents</a></h4>
+<ul>
+<li><a href="#what-is-penf?">What is PENF?</a></li>
+<li><a href="#main-features">Main features</a></li>
+<li><a href="#copyrights">Copyrights</a></li>
+<li><a href="#documentation">Documentation</a><ul>
+<li><a href="#a-taste-of-penf">A Taste of PENF</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="issues"><a class="toclink" href="#issues">Issues</a></h4>
+<p><a href=""><img alt="GitHub issues" src="https://img.shields.io/github/issues/szaghi/PENF.svg"></a>
+<a href="https://waffle.io/szaghi/PENF"><img alt="Ready in backlog" src="https://badge.waffle.io/szaghi/PENF.png?label=ready&amp;title=Ready"></a>
+<a href="https://waffle.io/szaghi/PENF"><img alt="In Progress" src="https://badge.waffle.io/szaghi/PENF.png?label=in%20progress&amp;title=In%20Progress"></a>
+<a href="https://waffle.io/szaghi/PENF"><img alt="Open bugs" src="https://badge.waffle.io/szaghi/PENF.png?label=bug&amp;title=Open%20Bugs"></a></p>
+<h4 id="compiler-support"><a class="toclink" href="#compiler-support">Compiler Support</a></h4>
+<p><a href=""><img alt="Compiler" src="https://img.shields.io/badge/GNU-v4.9.2+-brightgreen.svg"></a>
+<a href=""><img alt="Compiler" src="https://img.shields.io/badge/Intel-v12.x+-brightgreen.svg"></a>
+<a href=""><img alt="Compiler" src="https://img.shields.io/badge/IBM%20XL-not%20tested-yellow.svg"></a>
+<a href=""><img alt="Compiler" src="https://img.shields.io/badge/g95-not%20tested-yellow.svg"></a>
+<a href=""><img alt="Compiler" src="https://img.shields.io/badge/NAG-not%20tested-yellow.svg"></a>
+<a href=""><img alt="Compiler" src="https://img.shields.io/badge/PGI-not%20tested-yellow.svg"></a></p>
+<h2 id="what-is-penf"><a class="toclink" href="#what-is-penf">What is PENF?</a></h2>
 <p>Fortran is the most popular programming language for scientific computing. With Fortran it is quite simple obtain fast code and manage large multidimensional array. Because Fortran permits the achievement of high performance it is also used on great range of different computer-architectures, and often on the fastest supercomputer in the world. Therefore Fortran programs must be <em>portable</em>: portability means that the code will give the same results on every different computer-architectures. One of the most important goal of the numeric code is to control the numeric error due to finite precision of numerical operations. Fortran uses the <strong>IEEE</strong> representations. Integers and reals (floating point) are represented with a finite precision. So when the code computes an operation it has a truncation error due to the truncation of the numerical finite representations. For numerical and more in general scientific applications this source of errors must be controlled. The programmer must know which is the precision associated to the code variables. Before the standard Fortran 90/95 there are not any way to select the precision of the numerical variables in a portable fashion.</p>
 <p>Modern Fortran standards (2003+) have introduced better support for codes portability. With the possibility to specify a kind parameter for variables, the standard Fortran 90+ makes available useful functions to select the kind precision in a portable parametric way. Using these functions the programmer can accurately control the precision of its own variables in a portable manner.</p>
-<p>IR_Precision module provides an effective KISS library to achieve portability and concurrently it provides many tools to handles parametrized numbers.</p>
+<p>PENF module provides an effective KISS library to achieve portability and concurrently it provides many tools to handles parametrized numbers.</p>
 <p>Go to <a href="#top">Top</a></p>
-<h2>Main features</h2>
+<h2 id="main-features"><a class="toclink" href="#main-features">Main features</a></h2>
 <p>The library provides portable kind-parameters and many useful procedures to deal with them:</p>
 <ul class="checklist">
 <li><input type="checkbox" disabled checked> integer and reals parameters for 1,2,4,8,16 bytes-like representations;</li>
@@ -119,31 +183,34 @@
 </ul>
 <p>Any feature request is welcome.</p>
 <p>Go to <a href="#top">Top</a></p>
-<h2>Copyrights</h2>
-<p>IR_Precision is an open source project, it is distributed under the <a href="http://www.gnu.org/licenses/gpl-3.0.html">GPL v3</a>. Anyone is interest to use, to develop or to contribute to IR_Precision is welcome.</p>
+<h2 id="copyrights"><a class="toclink" href="#copyrights">Copyrights</a></h2>
+<p>PENF is an open source project, it is distributed under a multi-licensing system:</p>
+<ul>
+<li>for FOSS projects:</li>
+<li><a href="http://www.gnu.org/licenses/gpl-3.0.html">GPL v3</a>;</li>
+<li>for closed source/commercial projects:</li>
+<li><a href="http://opensource.org/licenses/BSD-2-Clause">BSD 2-Clause</a>;</li>
+<li><a href="http://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a>;</li>
+<li><a href="http://opensource.org/licenses/MIT">MIT</a>.</li>
+</ul>
+<p>Anyone is interest to use, to develop or to contribute to PENF is welcome, feel free to select the license that best matches your soul!</p>
+<p>More details can be found on <a href="https://github.com/szaghi/PENF/wiki/Copyrights">wiki</a>.</p>
 <p>Go to <a href="#top">Top</a></p>
-<h2>Documentation</h2>
-<p>Besides this README file the IR_Precision documentation is contained into its own <a href="https://github.com/szaghi/IR_Precision/wiki">wiki</a>. Detailed documentation of the API is contained into the <a href="http://szaghi.github.io/IR_Precision/index.html">GitHub Pages</a> that can also be created locally by means of <a href="https://github.com/cmacmackin/ford">ford tool</a>.</p>
-<h3>A Taste of IR_Precision</h3>
+<h2 id="documentation"><a class="toclink" href="#documentation">Documentation</a></h2>
+<p>Besides this README file the PENF documentation is contained into its own <a href="https://github.com/szaghi/PENF/wiki">wiki</a>. Detailed documentation of the API is contained into the <a href="http://szaghi.github.io/PENF/index.html">GitHub Pages</a> that can also be created locally by means of <a href="https://github.com/cmacmackin/ford">ford tool</a>.</p>
+<h3 id="a-taste-of-penf"><a class="toclink" href="#a-taste-of-penf">A Taste of PENF</a></h3>
 <p>To be written.</p>
 <p>Go to <a href="#top">Top</a></p>
-<h2>Version History</h2>
-<p>In the following the changelog of most important releases is reported.</p>
-<h3>v1.0.1</h3>
-<h5>Download <a href="https://github.com/szaghi/IR_Precision/archive/v1.0.1.zip">ZIP</a> ball or <a href="https://github.com/szaghi/IR_Precision/archive/v1.0.1.tar.gz">TAR</a> one</h5>
-<p>Stable release. Fully backward compatible. Introduce <code>digit</code> function.</p>
-<h3>v1.0.0</h3>
-<h5>Download <a href="https://github.com/szaghi/IR_Precision/archive/v1.0.0.zip">ZIP</a> ball or <a href="https://github.com/szaghi/IR_Precision/archive/v1.0.0.tar.gz">TAR</a> one</h5>
-<p>First Stable Release.</p>
+<h3 id="project-history"><a class="toclink" href="#project-history">Project history</a></h3>
+<blockquote>
+<p>a graphical overview of the history and evolution of PENF project</p>
+</blockquote>
+<p><img alt="stack" src="doc/stack_plot.png"></p>
+<p><img alt="survival" src="doc/survival_plot.png"></p>
 <p>Go to <a href="#top">Top</a></p>
-<h3>ChangeLog</h3>
-<h3>Version v1.0.1</h3>
-<p>Stable release. Fully backward compatible. Introduce <code>digit</code> function.</p>
-<h3>Version v1.0.0</h3>
-<p>First stable release.</p>
         </div>
 		  
-        <div class="col-lg-4">
+        <div class="col-md-4">
 	  <div class="well">
           <h2>Developer Info</h2>
           <h4>Stefano Zaghi</h4>
@@ -175,34 +242,62 @@
       
 		
       <div class="row">
-          <div class="col-lg-4">
+        <div class="col-xs-6 col-sm-4">
               <h3>Source Files</h3>
               <ul>
                 
                   
-                    <li><a href='./sourcefile/ir_precision.f90.html'>IR_Precision.f90</a></li>
+                    <li><a href='./sourcefile/compact_real.f90.html'>compact_real.f90</a></li>
                   
                 
                   
-                    <li><a href='./sourcefile/test_driver.f90.html'>Test_Driver.f90</a></li>
+                    <li><a href='./sourcefile/penf.f90.html'>penf.F90</a></li>
+                  
+                
+                  
+                    <li><a href='./sourcefile/penf_b_size.f90.html'>penf_b_size.F90</a></li>
+                  
+                
+                  
+                    <li><a href='./sourcefile/penf_global_parameters_variables.f90.html'>penf_global_parameters_variables.F90</a></li>
+                  
+                
+                  
+                    <li><a href='./sourcefile/penf_stringify.f90.html'>penf_stringify.F90</a></li>
+                  
+                
+                  
+                    <li><a href='./sourcefile/test_all.f90.html'>test_all.F90</a></li>
                   
                 
               </ul>
           </div>
           
-          <div class="col-lg-4">
+		  <div class="col-xs-6 col-sm-4">
               <h3>Modules</h3>
               <ul>
                 
                   
-                    <li><a href='./module/ir_precision.html'>IR_Precision</a></li>
+                    <li><a href='./module/penf.html'>penf</a></li>
+                  
+                
+                  
+                    <li><a href='./module/penf_b_size.html'>penf_b_size</a></li>
+                  
+                
+                  
+                    <li><a href='./module/penf_global_parameters_variables.html'>penf_global_parameters_variables</a></li>
+                  
+                
+                  
+                    <li><a href='./module/penf_stringify.html'>penf_stringify</a></li>
                   
                 
               </ul>
           </div>
           
           
-          <div class="col-lg-4">
+		  <div class="col-xs-6 col-sm-4">
               <h3>Procedures</h3>
               <ul>
                 
@@ -227,6 +322,10 @@
                   
                 
                   
+                    <li><a href='./proc/bctor_r16p.html'>bctor_R16P</a></li>
+                  
+                
+                  
                     <li><a href='./proc/bctor_r4p.html'>bctor_R4P</a></li>
                   
                 
@@ -239,11 +338,7 @@
                   
                 
                   
-                    <li><a href='./proc/bit_size_chr.html'>bit_size_chr</a></li>
-                  
-                
-                  
-                    <li><a href='./proc/bit_size_r16p.html'>bit_size_R16P</a></li>
+                    <li><a href='./interface/bit_size%7E2.html'>bit_size</a></li>
                   
                 
                   
@@ -360,22 +455,50 @@
                 
                   
                 
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
               </ul>
           </div>
           
           
       </div>
 
-    <hr>
-    <footer>
-        <div class="row">
-        <div class="col-md-6">&copy; 2015 IR_Precision was written by Stefano Zaghi. </div>
-        <div class="col-md-6"><span class="pull-right">Documentation generated by <a href="https://github.com/cmacmackin/ford">FORD</a>.</span></div>
-        </div>
-        <br>
-    </footer>
+    <hr>    
     </div> <!-- /container -->
-
+    <footer>
+      <div class="container">
+      <div class="row">
+        <div class="col-xs-6 col-md-4"><p>&copy; 2017 </p></div>
+        <div class="col-xs-6 col-md-4 col-md-push-4">
+          <p class="text-right">
+            Documentation generated by 
+            <a href="https://github.com/cmacmackin/ford">FORD</a>
+            
+          </p>
+        </div>
+        <div class="col-xs-12 col-md-4 col-md-pull-4"><p class="text-center"> PENF was developed by Stefano Zaghi</p></div>
+      </div>
+      <br>
+      </div> <!-- /container -->    
+    </footer>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -400,6 +523,6 @@
         }
       });
     </script>
-    <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   </body>
 </html>

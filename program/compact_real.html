@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	 
+	 <meta name="description" content="PENF, Portability Environment for Fortran poor people">
+    
+    <meta name="author" content="Stefano Zaghi" >
+    <link rel="icon" href="../favicon.png">
+
+    <title>compact_real &ndash; PENF</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/pygments.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/local.css" rel="stylesheet">
+    
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <script src="../js/jquery-2.1.3.min.js"></script>
+    <script src="../js/svg-pan-zoom.min.js"></script>
+
+    
+    <script src="../tipuesearch/tipuesearch_content.js"></script>
+    <link  href="../tipuesearch/tipuesearch.css" rel="stylesheet">
+    <script src="../tipuesearch/tipuesearch_set.js"></script>
+    <script src="../tipuesearch/tipuesearch.js"></script>
+    
+
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../index.html">PENF </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+				
+            <li class="dropdown hidden-xs visible-sm visible-md hidden-lg">
+              <a href="#" class="dropdown-toggle"
+              data-toggle="dropdown" role="button"
+              aria-haspopup="true"
+		 aria-expanded="false">Contents <span class="caret"></span></a>
+	      <ul class="dropdown-menu">
+              
+            <li><a href="../lists/files.html">Source Files</a></li>
+				
+				
+            <li><a href="../lists/modules.html">Modules</a></li>
+				
+            
+                                
+            <li><a href="../lists/procedures.html">Procedures</a></li>
+				
+								
+				
+            <li><a href="../lists/programs.html">Programs</a></li>
+				
+            </ul>
+            </li>
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/files.html">Source Files</a></li>
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/modules.html">Modules</a></li>
+
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/procedures.html">Procedures</a></li>
+
+                             
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/programs.html">Programs</a></li>
+
+          </ul>
+        
+        <form action="../search.html" class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search" name="q" id="tipue_search_input" autocomplete="off" required>
+        </div>
+<!--
+        <button type="submit" class="btn btn-default">Submit</button>
+-->
+        </form>
+        
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+    
+  
+  <div class="row">
+    <h1>compact_real
+    <small>Program</small>
+    
+    </h1>
+    
+<div class="row">
+  <div class="col-lg-12">
+<div class="well well-sm">
+  <ul class="list-inline" style="margin-bottom:0px;display:inline">
+     
+     
+     
+     
+    
+    
+     <li><i class="fa fa-list-ol"></i>
+       <a data-toggle="tooltip"
+	  data-placement="bottom" data-html="true"
+	  title="47.1% of total for programs.">16 statements</a>
+     </li> 
+     
+     
+    <li><i class="fa fa-code"></i><a href="../src/compact_real.f90"> Source File</a></li>
+     
+  </ul>
+  <ol class="breadcrumb in-well text-right">
+  
+     <li><a href='../sourcefile/compact_real.f90.html'>compact_real.f90</a></li>
+  
+     <li class="active">compact_real</li>
+  </ol>
+</div>
+</div>
+</div>
+<script>
+  $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+  })
+</script>
+
+  </div>
+  
+  <div class="row">
+    <div class="col-md-3 hidden-xs hidden-sm visible-md visible-lg">
+    
+<div id="sidebar">
+  
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#vars-0">Variables</a></h3></div>
+  <div id="vars-0" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../program/compact_real.html#variable-test_passed">test_passed</a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title">Source Code</h3></div>
+  <div class="list-group">
+    <a class="list-group-item" href="../program/compact_real.html#src">compact_real</a>
+  </div>
+</div>
+
+
+  <hr>
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#allprogs-0">All Programs</a></h3></div>
+  <div id="allprogs-0" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../program/compact_real.html">compact_real</a>
+      
+      <a class="list-group-item" href="../program/test_all.html">test_all</a>
+      
+    </div>
+  </div>
+</div>
+
+
+</div>  
+
+    </div>
+    
+    <div class="col-md-9" id='text'>
+    
+  
+    <ul class="list-inline">
+      <li><h4>Uses:</h4></li>
+      
+      <li><a href='../module/penf.html'>penf</a></li>
+      
+      <li><a href="https://gcc.gnu.org/onlinedocs/gfortran/ISO_005fFORTRAN_005fENV.html">iso_fortran_env</a></li>
+      
+    </ul>
+    
+                <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.26.3 (20100126.1600)
+ -->
+<!-- Title: program~~compact_real~~UsesGraph Pages: 1 -->
+<svg id="programcompact_realUsesGraph" width="626pt" height="152pt"
+ viewBox="0.00 0.00 626.00 152.30" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="program~~compact_real~~UsesGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 148.298)">
+<title>program~~compact_real~~UsesGraph</title>
+<polygon fill="white" stroke="white" points="-4,5 -4,-148.298 623,-148.298 623,5 -4,5"/>
+<!-- program~compact_real -->
+<g id="node1" class="node"><title>program~compact_real</title>
+<polygon fill="none" stroke="black" points="617,-46 541,-46 541,-20 617,-20 617,-46"/>
+<text text-anchor="middle" x="579" y="-30.55" font-family="Helvetica,sans-Serif" font-size="10.50">compact_real</text>
+</g>
+<!-- module~penf -->
+<g id="node2" class="node"><title>module~penf</title>
+<a xlink:href="../module/penf.html" xlink:title="penf">
+<polygon fill="#337ab7" stroke="#337ab7" points="504,-67 450,-67 450,-41 504,-41 504,-67"/>
+<text text-anchor="middle" x="477" y="-51.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">penf</text>
+</a>
+</g>
+<!-- module~penf&#45;&gt;program~compact_real -->
+<g id="edge16" class="edge"><title>module~penf&#45;&gt;program~compact_real</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M504.066,-48.4275C512.128,-46.7678 521.222,-44.8956 530.223,-43.0424"/>
+<polygon fill="#000000" stroke="#000000" points="531.197,-46.4153 540.286,-40.9705 529.786,-39.5591 531.197,-46.4153"/>
+</g>
+<!-- iso_fortran_env -->
+<g id="node3" class="node"><title>iso_fortran_env</title>
+<a xlink:href="https://gcc.gnu.org/onlinedocs/gfortran/ISO_005fFORTRAN_005fENV.html" xlink:title="iso_fortran_env">
+<polygon fill="#337ab7" stroke="#337ab7" points="301,-26 215,-26 215,-1.24345e-14 301,-3.55271e-15 301,-26"/>
+<text text-anchor="middle" x="258" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">iso_fortran_env</text>
+</a>
+</g>
+<!-- iso_fortran_env&#45;&gt;program~compact_real -->
+<g id="edge18" class="edge"><title>iso_fortran_env&#45;&gt;program~compact_real</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M301.626,-15.7181C361.258,-19.4336 467.905,-26.0782 530.15,-29.9564"/>
+<polygon fill="#000000" stroke="#000000" points="530.291,-33.4719 540.489,-30.6006 530.726,-26.4854 530.291,-33.4719"/>
+</g>
+<!-- module~penf_stringify -->
+<g id="node6" class="node"><title>module~penf_stringify</title>
+<a xlink:href="../module/penf_stringify.html" xlink:title="penf_stringify">
+<polygon fill="#337ab7" stroke="#337ab7" points="414,-67 338,-67 338,-41 414,-41 414,-67"/>
+<text text-anchor="middle" x="376" y="-51.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">penf_stringify</text>
+</a>
+</g>
+<!-- iso_fortran_env&#45;&gt;module~penf_stringify -->
+<g id="edge4" class="edge"><title>iso_fortran_env&#45;&gt;module~penf_stringify</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M295.66,-26.0854C306.198,-29.7468 317.785,-33.7729 328.801,-37.6002"/>
+<polygon fill="#000000" stroke="#000000" points="327.698,-40.9223 338.293,-40.8983 329.995,-34.31 327.698,-40.9223"/>
+</g>
+<!-- module~penf_global_parameters_variables -->
+<g id="node4" class="node"><title>module~penf_global_parameters_variables</title>
+<a xlink:href="../module/penf_global_parameters_variables.html" xlink:title="penf_global_parameters_variables">
+<polygon fill="#337ab7" stroke="#337ab7" points="178,-108 8.52651e-14,-108 0,-82 178,-82 178,-108"/>
+<text text-anchor="middle" x="89" y="-92.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">penf_global_parameters_variables</text>
+</a>
+</g>
+<!-- module~penf_global_parameters_variables&#45;&gt;module~penf -->
+<g id="edge10" class="edge"><title>module~penf_global_parameters_variables&#45;&gt;module~penf</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M122.19,-108.131C176.14,-127.615 285.896,-159.485 376,-136"/>
+</g>
+<!-- module~penf_b_size -->
+<g id="node5" class="node"><title>module~penf_b_size</title>
+<a xlink:href="../module/penf_b_size.html" xlink:title="penf_b_size">
+<polygon fill="#337ab7" stroke="#337ab7" points="293,-108 223,-108 223,-82 293,-82 293,-108"/>
+<text text-anchor="middle" x="258" y="-92.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">penf_b_size</text>
+</a>
+</g>
+<!-- module~penf_global_parameters_variables&#45;&gt;module~penf_b_size -->
+<g id="edge2" class="edge"><title>module~penf_global_parameters_variables&#45;&gt;module~penf_b_size</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M178.449,-95C190.206,-95 201.835,-95 212.422,-95"/>
+<polygon fill="#000000" stroke="#000000" points="212.627,-98.5001 222.627,-95 212.627,-91.5001 212.627,-98.5001"/>
+</g>
+<!-- module~penf_global_parameters_variables&#45;&gt;module~penf_stringify -->
+<g id="edge8" class="edge"><title>module~penf_global_parameters_variables&#45;&gt;module~penf_stringify</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M158.964,-81.9559C176.872,-78.818 196.122,-75.6194 214,-73 252.176,-67.4064 295.606,-62.3848 327.883,-58.9108"/>
+<polygon fill="#000000" stroke="#000000" points="328.376,-62.3781 337.949,-57.8385 327.635,-55.4175 328.376,-62.3781"/>
+</g>
+<!-- module~penf_b_size&#45;&gt;module~penf -->
+<g id="edge12" class="edge"><title>module~penf_b_size&#45;&gt;module~penf</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M284.516,-108.077C313.6,-121.728 358.476,-140.567 376,-136"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M376,-136C411.502,-126.747 442.615,-96.2216 460.615,-75.1451"/>
+<polygon fill="#000000" stroke="#000000" points="463.404,-77.2638 467.069,-67.3231 458.005,-72.8086 463.404,-77.2638"/>
+</g>
+<!-- module~penf_b_size&#45;&gt;module~penf_stringify -->
+<g id="edge6" class="edge"><title>module~penf_b_size&#45;&gt;module~penf_stringify</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M293.084,-82.8097C304.23,-78.937 316.747,-74.5881 328.611,-70.4657"/>
+<polygon fill="#000000" stroke="#000000" points="330.082,-73.66 338.379,-67.0717 327.784,-67.0478 330.082,-73.66"/>
+</g>
+<!-- module~penf_stringify&#45;&gt;module~penf -->
+<g id="edge14" class="edge"><title>module~penf_stringify&#45;&gt;module~penf</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M414.184,-54C422.511,-54 431.313,-54 439.609,-54"/>
+<polygon fill="#000000" stroke="#000000" points="439.772,-57.5001 449.772,-54 439.772,-50.5001 439.772,-57.5001"/>
+</g>
+</g>
+</svg>
+</div>
+                <div><a type="button" class="graph-help" data-toggle="modal" href="#graph-help-text">Help</a></div>
+                <div class="modal fade" id="graph-help-text" tabindex="-1" role="dialog">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                      </div>
+                      <div class="modal-body">
+                        
+    <p>Nodes of different colours represent the following: </p>
+    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.26.3 (20100126.1600)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="486pt" height="34pt"
+ viewBox="0.00 0.00 486.00 34.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph1" class="graph" transform="scale(1 1) rotate(0) translate(4 30)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="white" points="-4,5 -4,-30 483,-30 483,5 -4,5"/>
+<!-- Module -->
+<g id="node1" class="node"><title>Module</title>
+<polygon fill="#337ab7" stroke="#337ab7" points="54,-26 2.13163e-14,-26 0,-1.24345e-14 54,-3.55271e-15 54,-26"/>
+<text text-anchor="middle" x="27" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Module</text>
+</g>
+<!-- Submodule -->
+<g id="node2" class="node"><title>Submodule</title>
+<polygon fill="#5bc0de" stroke="#5bc0de" points="138,-26 72,-26 72,-1.24345e-14 138,-3.55271e-15 138,-26"/>
+<text text-anchor="middle" x="105" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Submodule</text>
+</g>
+<!-- Subroutine -->
+<g id="node3" class="node"><title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="220,-26 156,-26 156,-1.24345e-14 220,-3.55271e-15 220,-26"/>
+<text text-anchor="middle" x="188" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node4" class="node"><title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="292,-26 238,-26 238,-1.24345e-14 292,-3.55271e-15 292,-26"/>
+<text text-anchor="middle" x="265" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Program -->
+<g id="node5" class="node"><title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="364,-26 310,-26 310,-1.24345e-14 364,-3.55271e-15 364,-26"/>
+<text text-anchor="middle" x="337" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node6" class="node"><title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="478,-26 382,-26 382,-1.24345e-14 478,-3.55271e-15 478,-26"/>
+<text text-anchor="middle" x="430" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+    
+    <p>Solid arrows point from a parent (sub)module to the submodule which is
+    descended from it. Dashed arrows point from a module being used to the
+    module or program unit using it.
+    </p>
+    
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+    
+
+    <br><br>
+    <p>PENF's testing program.</p>
+    
+     <h3>Calls</h3>
+     
+                <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.26.3 (20100126.1600)
+ -->
+<!-- Title: program~~compact_real~~CallsGraph Pages: 1 -->
+<svg id="programcompact_realCallsGraph" width="528pt" height="824pt"
+ viewBox="0.00 0.00 528.00 823.57" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="program~~compact_real~~CallsGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 819.573)">
+<title>program~~compact_real~~CallsGraph</title>
+<polygon fill="white" stroke="white" points="-4,5 -4,-819.573 525,-819.573 525,5 -4,5"/>
+<!-- program~compact_real -->
+<g id="node1" class="node"><title>program~compact_real</title>
+<polygon fill="none" stroke="black" points="77,-529.573 1,-529.573 1,-503.573 77,-503.573 77,-529.573"/>
+<text text-anchor="middle" x="39" y="-514.123" font-family="Helvetica,sans-Serif" font-size="10.50">compact_real</text>
+</g>
+<!-- proc~penf_init -->
+<g id="node2" class="node"><title>proc~penf_init</title>
+<a xlink:href="../proc/penf_init.html" xlink:title="penf_init">
+<polygon fill="#d9534f" stroke="#d9534f" points="168,-646.573 114,-646.573 114,-620.573 168,-620.573 168,-646.573"/>
+<text text-anchor="middle" x="141" y="-631.123" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">penf_init</text>
+</a>
+</g>
+<!-- program~compact_real&#45;&gt;proc~penf_init -->
+<g id="edge58" class="edge"><title>program~compact_real&#45;&gt;proc~penf_init</title>
+<path fill="none" stroke="#000000" d="M50.7007,-529.995C68.301,-550.183 101.746,-588.546 122.622,-612.493"/>
+<polygon fill="#000000" stroke="#000000" points="120.226,-615.071 129.436,-620.308 125.503,-610.471 120.226,-615.071"/>
+</g>
+<!-- interface~str -->
+<g id="node3" class="node"><title>interface~str</title>
+<a xlink:href="../interface/str.html" xlink:title="str">
+<polygon fill="#a7506f" stroke="#a7506f" points="168,-413.573 114,-413.573 114,-387.573 168,-387.573 168,-413.573"/>
+<text text-anchor="middle" x="141" y="-398.123" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">str</text>
+</a>
+</g>
+<!-- program~compact_real&#45;&gt;interface~str -->
+<g id="edge60" class="edge"><title>program~compact_real&#45;&gt;interface~str</title>
+<path fill="none" stroke="#000000" d="M50.7007,-503.267C68.301,-483.251 101.746,-445.216 122.622,-421.474"/>
+<polygon fill="#000000" stroke="#000000" points="125.461,-423.546 129.436,-413.725 120.204,-418.923 125.461,-423.546"/>
+</g>
+<!-- proc~check_endian -->
+<g id="node4" class="node"><title>proc~check_endian</title>
+<a xlink:href="../proc/check_endian.html" xlink:title="check_endian">
+<polygon fill="#d9534f" stroke="#d9534f" points="283,-815.573 205,-815.573 205,-789.573 283,-789.573 283,-815.573"/>
+<text text-anchor="middle" x="244" y="-800.123" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">check_endian</text>
+</a>
+</g>
+<!-- proc~penf_init&#45;&gt;proc~check_endian -->
+<g id="edge2" class="edge"><title>proc~penf_init&#45;&gt;proc~check_endian</title>
+<path fill="none" stroke="#000000" d="M143.642,-646.941C149.759,-674.844 167.262,-740.048 204,-780.573 204.868,-781.531 205.788,-782.456 206.75,-783.349"/>
+<polygon fill="#000000" stroke="#000000" points="204.721,-786.204 214.77,-789.561 209.008,-780.67 204.721,-786.204"/>
+</g>
+<!-- proc~strf_i4p -->
+<g id="node6" class="node"><title>proc~strf_i4p</title>
+<a xlink:href="../proc/strf_i4p.html" xlink:title="strf_I4P">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="271,-727.573 217,-727.573 217,-701.573 271,-701.573 271,-727.573"/>
+<text text-anchor="middle" x="244" y="-712.123" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">strf_I4P</text>
+</a>
+</g>
+<!-- interface~str&#45;&gt;proc~strf_i4p -->
+<g id="edge20" class="edge"><title>interface~str&#45;&gt;proc~strf_i4p</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M142.559,-413.588C148.715,-463.372 172.547,-641.257 204,-687.573 205.721,-690.108 207.766,-692.469 210.008,-694.654"/>
+<polygon fill="#000000" stroke="#000000" points="208.259,-697.748 218.202,-701.407 212.711,-692.346 208.259,-697.748"/>
+</g>
+<!-- proc~str_a_r8p -->
+<g id="node7" class="node"><title>proc~str_a_r8p</title>
+<a xlink:href="../proc/str_a_r8p.html" xlink:title="str_a_R8P">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="275,-771.573 213,-771.573 213,-745.573 275,-745.573 275,-771.573"/>
+<text text-anchor="middle" x="244" y="-756.123" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">str_a_R8P</text>
+</a>
+</g>
+<!-- interface~str&#45;&gt;proc~str_a_r8p -->
+<g id="edge22" class="edge"><title>interface~str&#45;&gt;proc~str_a_r8p</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M142.793,-413.749C150.893,-472.593 184.509,-709.652 204,-736.573 204.549,-737.332 205.133,-738.067 205.746,-738.779"/>
+<polygon fill="#000000" stroke="#000000" points="203.507,-741.473 213.276,-745.572 208.195,-736.275 203.507,-741.473"/>
+</g>
+<!-- proc~strf_i1p -->
+<g id="node8" class="node"><title>proc~strf_i1p</title>
+<a xlink:href="../proc/strf_i1p.html" xlink:title="strf_I1P">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="271,-645.573 217,-645.573 217,-619.573 271,-619.573 271,-645.573"/>
+<text text-anchor="middle" x="244" y="-630.123" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">strf_I1P</text>
+</a>
+</g>
+<!-- interface~str&#45;&gt;proc~strf_i1p -->
+<g id="edge24" class="edge"><title>interface~str&#45;&gt;proc~strf_i1p</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M141.581,-413.715C143.799,-449.33 154.355,-549.144 204,-610.573 205.417,-612.326 207.012,-613.961 208.729,-615.483"/>
+<polygon fill="#000000" stroke="#000000" points="206.725,-618.353 216.859,-621.442 210.863,-612.707 206.725,-618.353"/>
+</g>
+<!-- proc~str_r8p -->
+<g id="node9" class="node"><title>proc~str_r8p</title>
+<a xlink:href="../proc/str_r8p.html" xlink:title="str_R8P">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="374,-686.573 320,-686.573 320,-660.573 374,-660.573 374,-686.573"/>
+<text text-anchor="middle" x="347" y="-671.123" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">str_R8P</text>
+</a>
+</g>
+<!-- interface~str&#45;&gt;proc~str_r8p -->
+<g id="edge26" class="edge"><title>interface~str&#45;&gt;proc~str_r8p</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M142.348,-413.844C147.449,-461.318 167.178,-621.628 204,-654.573 232.423,-680.004 277.633,-681.902 309.6,-679.267"/>
+<polygon fill="#000000" stroke="#000000" points="310.293,-682.715 319.89,-678.226 309.588,-675.75 310.293,-682.715"/>
+</g>
+<!-- proc~str_a_i1p -->
+<g id="node10" class="node"><title>proc~str_a_i1p</title>
+<a xlink:href="../proc/str_a_i1p.html" xlink:title="str_a_I1P">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="273,-601.573 215,-601.573 215,-575.573 273,-575.573 273,-601.573"/>
+<text text-anchor="middle" x="244" y="-586.123" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">str_a_I1P</text>
+</a>
+</g>
+<!-- interface~str&#45;&gt;proc~str_a_i1p -->
+<g id="edge28" class="edge"><title>interface~str&#45;&gt;proc~str_a_i1p</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M143.34,-413.587C149.136,-442.803 166.486,-514.708 204,-561.573 206.214,-564.339 208.787,-566.928 211.542,-569.322"/>
+<polygon fill="#000000" stroke="#000000" points="209.572,-572.223 219.633,-575.543 213.838,-566.673 209.572,-572.223"/>
+</g>
+<!-- proc~str_bol -->
+<g id="node11" class="node"><title>proc~str_bol</title>
+<a xlink:href="../proc/str_bol.html" xlink:title="str_bol">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="271,-519.573 217,-519.573 217,-493.573 271,-493.573 271,-519.573"/>
+<text text-anchor="middle" x="244" y="-504.123" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">str_bol</text>
+</a>
+</g>
+<!-- interface~str&#45;&gt;proc~str_bol -->
+<g id="edge30" class="edge"><title>interface~str&#45;&gt;proc~str_bol</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M148.336,-413.59C158.847,-431.361 179.638,-463.418 204,-484.573 205.317,-485.717 206.702,-486.826 208.135,-487.898"/>
+<polygon fill="#000000" stroke="#000000" points="206.452,-490.983 216.713,-493.623 210.338,-485.161 206.452,-490.983"/>
+</g>
+<!-- proc~str_r4p -->
+<g id="node12" class="node"><title>proc~str_r4p</title>
+<a xlink:href="../proc/str_r4p.html" xlink:title="str_R4P">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="374,-393.573 320,-393.573 320,-367.573 374,-367.573 374,-393.573"/>
+<text text-anchor="middle" x="347" y="-378.123" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">str_R4P</text>
+</a>
+</g>
+<!-- interface~str&#45;&gt;proc~str_r4p -->
+<g id="edge32" class="edge"><title>interface~str&#45;&gt;proc~str_r4p</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M146.078,-387.319C154.579,-367.255 173.792,-329.891 204,-314.573 235.712,-298.494 251.311,-300.586 284,-314.573 304.939,-323.533 322.231,-343.248 333.367,-358.81"/>
+<polygon fill="#000000" stroke="#000000" points="330.676,-361.079 339.193,-367.381 336.465,-357.143 330.676,-361.079"/>
+</g>
+<!-- proc~str_a_i8p -->
+<g id="node13" class="node"><title>proc~str_a_i8p</title>
+<a xlink:href="../proc/str_a_i8p.html" xlink:title="str_a_I8P">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="273,-223.573 215,-223.573 215,-197.573 273,-197.573 273,-223.573"/>
+<text text-anchor="middle" x="244" y="-208.123" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">str_a_I8P</text>
+</a>
+</g>
+<!-- interface~str&#45;&gt;proc~str_a_i8p -->
+<g id="edge34" class="edge"><title>interface~str&#45;&gt;proc~str_a_i8p</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M142.801,-387.198C147.557,-356.484 163.028,-279.918 204,-232.573 204.846,-231.596 205.747,-230.653 206.691,-229.746"/>
+<polygon fill="#000000" stroke="#000000" points="208.962,-232.412 214.628,-223.459 204.616,-226.925 208.962,-232.412"/>
+</g>
+<!-- proc~str_i1p -->
+<g id="node14" class="node"><title>proc~str_i1p</title>
+<a xlink:href="../proc/str_i1p.html" xlink:title="str_I1P">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="374,-580.573 320,-580.573 320,-554.573 374,-554.573 374,-580.573"/>
+<text text-anchor="middle" x="347" y="-565.123" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">str_I1P</text>
+</a>
+</g>
+<!-- interface~str&#45;&gt;proc~str_i1p -->
+<g id="edge36" class="edge"><title>interface~str&#45;&gt;proc~str_i1p</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M143.681,-413.677C149.692,-439.658 166.746,-497.836 204,-528.573 233.96,-553.292 278.302,-562.42 309.652,-565.749"/>
+<polygon fill="#000000" stroke="#000000" points="309.469,-569.247 319.746,-566.67 310.105,-562.276 309.469,-569.247"/>
+</g>
+<!-- proc~strf_r4p -->
+<g id="node15" class="node"><title>proc~strf_r4p</title>
+<a xlink:href="../proc/strf_r4p.html" xlink:title="strf_R4P">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="271,-349.573 217,-349.573 217,-323.573 271,-323.573 271,-349.573"/>
+<text text-anchor="middle" x="244" y="-334.123" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">strf_R4P</text>
+</a>
+</g>
+<!-- interface~str&#45;&gt;proc~strf_r4p -->
+<g id="edge38" class="edge"><title>interface~str&#45;&gt;proc~strf_r4p</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M159.751,-387.464C172.139,-378.956 188.829,-367.78 204,-358.573 205.982,-357.371 208.033,-356.156 210.112,-354.947"/>
+<polygon fill="#000000" stroke="#000000" points="212.306,-357.726 219.273,-349.744 208.849,-351.639 212.306,-357.726"/>
+</g>
+<!-- proc~str_i2p -->
+<g id="node16" class="node"><title>proc~str_i2p</title>
+<a xlink:href="../proc/str_i2p.html" xlink:title="str_I2P">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="374,-31.5733 320,-31.5733 320,-5.57331 374,-5.57331 374,-31.5733"/>
+<text text-anchor="middle" x="347" y="-16.1233" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">str_I2P</text>
+</a>
+</g>
+<!-- interface~str&#45;&gt;proc~str_i2p -->
+<g id="edge40" class="edge"><title>interface~str&#45;&gt;proc~str_i2p</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M142.161,-387.506C147.995,-323.282 174.98,-43.1994 204,-18.5733 232.867,5.9225 278.085,1.23459 309.931,-6.56045"/>
+<polygon fill="#000000" stroke="#000000" points="309.2,-9.98749 319.763,-9.16743 310.994,-3.2213 309.2,-9.98749"/>
+</g>
+<!-- proc~strf_r8p -->
+<g id="node17" class="node"><title>proc~strf_r8p</title>
+<a xlink:href="../proc/strf_r8p.html" xlink:title="strf_R8P">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="271,-267.573 217,-267.573 217,-241.573 271,-241.573 271,-267.573"/>
+<text text-anchor="middle" x="244" y="-252.123" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">strf_R8P</text>
+</a>
+</g>
+<!-- interface~str&#45;&gt;proc~strf_r8p -->
+<g id="edge42" class="edge"><title>interface~str&#45;&gt;proc~strf_r8p</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M145.484,-387.511C153.991,-364.159 174.316,-314.612 204,-281.573 206.499,-278.792 209.342,-276.16 212.333,-273.71"/>
+<polygon fill="#000000" stroke="#000000" points="214.523,-276.443 220.464,-267.67 210.349,-270.824 214.523,-276.443"/>
+</g>
+<!-- proc~str_a_r4p -->
+<g id="node18" class="node"><title>proc~str_a_r4p</title>
+<a xlink:href="../proc/str_a_r4p.html" xlink:title="str_a_R4P">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="275,-393.573 213,-393.573 213,-367.573 275,-367.573 275,-393.573"/>
+<text text-anchor="middle" x="244" y="-378.123" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">str_a_R4P</text>
+</a>
+</g>
+<!-- interface~str&#45;&gt;proc~str_a_r4p -->
+<g id="edge44" class="edge"><title>interface~str&#45;&gt;proc~str_a_r4p</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M168.062,-395.319C178.573,-393.278 190.852,-390.893 202.433,-388.644"/>
+<polygon fill="#000000" stroke="#000000" points="203.221,-392.057 212.37,-386.715 201.886,-385.185 203.221,-392.057"/>
+</g>
+<!-- proc~strf_i2p -->
+<g id="node19" class="node"><title>proc~strf_i2p</title>
+<a xlink:href="../proc/strf_i2p.html" xlink:title="strf_I2P">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="271,-179.573 217,-179.573 217,-153.573 271,-153.573 271,-179.573"/>
+<text text-anchor="middle" x="244" y="-164.123" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">strf_I2P</text>
+</a>
+</g>
+<!-- interface~str&#45;&gt;proc~strf_i2p -->
+<g id="edge46" class="edge"><title>interface~str&#45;&gt;proc~strf_i2p</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M141.528,-387.567C143.616,-351.844 153.881,-250.754 204,-188.573 205.414,-186.819 207.008,-185.182 208.724,-183.66"/>
+<polygon fill="#000000" stroke="#000000" points="210.858,-186.435 216.85,-177.698 206.717,-180.791 210.858,-186.435"/>
+</g>
+<!-- proc~strf_i8p -->
+<g id="node20" class="node"><title>proc~strf_i8p</title>
+<a xlink:href="../proc/strf_i8p.html" xlink:title="strf_I8P">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="271,-135.573 217,-135.573 217,-109.573 271,-109.573 271,-135.573"/>
+<text text-anchor="middle" x="244" y="-120.123" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">strf_I8P</text>
+</a>
+</g>
+<!-- interface~str&#45;&gt;proc~strf_i8p -->
+<g id="edge48" class="edge"><title>interface~str&#45;&gt;proc~strf_i8p</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M142.836,-387.302C149.52,-340.518 173.763,-183.968 204,-144.573 205.372,-142.785 206.933,-141.123 208.624,-139.581"/>
+<polygon fill="#000000" stroke="#000000" points="210.762,-142.353 216.686,-133.568 206.577,-136.741 210.762,-142.353"/>
+</g>
+<!-- proc~str_a_i2p -->
+<g id="node21" class="node"><title>proc~str_a_i2p</title>
+<a xlink:href="../proc/str_a_i2p.html" xlink:title="str_a_I2P">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="273,-53.5733 215,-53.5733 215,-27.5733 273,-27.5733 273,-53.5733"/>
+<text text-anchor="middle" x="244" y="-38.1233" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">str_a_I2P</text>
+</a>
+</g>
+<!-- interface~str&#45;&gt;proc~str_a_i2p -->
+<g id="edge50" class="edge"><title>interface~str&#45;&gt;proc~str_a_i2p</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M142.139,-387.399C147.087,-332.486 168.099,-122.131 204,-67.5733 205.684,-65.0143 207.703,-62.6355 209.927,-60.4377"/>
+<polygon fill="#000000" stroke="#000000" points="212.629,-62.7434 218.088,-53.6632 208.158,-57.3573 212.629,-62.7434"/>
+</g>
+<!-- proc~str_i4p -->
+<g id="node22" class="node"><title>proc~str_i4p</title>
+<a xlink:href="../proc/str_i4p.html" xlink:title="str_I4P">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="374,-456.573 320,-456.573 320,-430.573 374,-430.573 374,-456.573"/>
+<text text-anchor="middle" x="347" y="-441.123" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">str_I4P</text>
+</a>
+</g>
+<!-- interface~str&#45;&gt;proc~str_i4p -->
+<g id="edge52" class="edge"><title>interface~str&#45;&gt;proc~str_i4p</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M168.355,-406.283C204.778,-413.886 269.328,-427.36 310.051,-435.861"/>
+<polygon fill="#000000" stroke="#000000" points="309.356,-439.291 319.86,-437.908 310.786,-432.439 309.356,-439.291"/>
+</g>
+<!-- proc~str_a_i4p -->
+<g id="node23" class="node"><title>proc~str_a_i4p</title>
+<a xlink:href="../proc/str_a_i4p.html" xlink:title="str_a_I4P">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="273,-475.573 215,-475.573 215,-449.573 273,-449.573 273,-475.573"/>
+<text text-anchor="middle" x="244" y="-460.123" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">str_a_I4P</text>
+</a>
+</g>
+<!-- interface~str&#45;&gt;proc~str_a_i4p -->
+<g id="edge54" class="edge"><title>interface~str&#45;&gt;proc~str_a_i4p</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M162.844,-413.722C177.592,-422.6 197.263,-434.44 213.544,-444.241"/>
+<polygon fill="#000000" stroke="#000000" points="211.815,-447.285 222.188,-449.444 215.425,-441.288 211.815,-447.285"/>
+</g>
+<!-- proc~str_i8p -->
+<g id="node24" class="node"><title>proc~str_i8p</title>
+<a xlink:href="../proc/str_i8p.html" xlink:title="str_I8P">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="374,-158.573 320,-158.573 320,-132.573 374,-132.573 374,-158.573"/>
+<text text-anchor="middle" x="347" y="-143.123" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">str_I8P</text>
+</a>
+</g>
+<!-- interface~str&#45;&gt;proc~str_i8p -->
+<g id="edge56" class="edge"><title>interface~str&#45;&gt;proc~str_i8p</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M141.651,-387.362C144.565,-334.285 158.343,-137.638 204,-100.573 231.604,-78.1637 250.141,-89.7226 284,-100.573 299.656,-105.59 314.733,-116.086 326.21,-125.679"/>
+<polygon fill="#000000" stroke="#000000" points="324.063,-128.451 333.889,-132.414 328.679,-123.189 324.063,-128.451"/>
+</g>
+<!-- proc~str_a_r8p&#45;&gt;proc~str_r8p -->
+<g id="edge4" class="edge"><title>proc~str_a_r8p&#45;&gt;proc~str_r8p</title>
+<path fill="none" stroke="#000000" d="M270.483,-745.397C275.133,-742.698 279.817,-739.714 284,-736.573 300.593,-724.112 317.097,-707.41 329.047,-694.334"/>
+<polygon fill="#000000" stroke="#000000" points="331.793,-696.515 335.86,-686.731 326.58,-691.843 331.793,-696.515"/>
+</g>
+<!-- proc~compact_real_string -->
+<g id="node26" class="node"><title>proc~compact_real_string</title>
+<a xlink:href="../proc/compact_real_string.html" xlink:title="compact_real_string">
+<polygon fill="#d9534f" stroke="#d9534f" points="519,-539.573 411,-539.573 411,-513.573 519,-513.573 519,-539.573"/>
+<text text-anchor="middle" x="465" y="-524.123" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">compact_real_string</text>
+</a>
+</g>
+<!-- proc~str_r8p&#45;&gt;proc~compact_real_string -->
+<g id="edge6" class="edge"><title>proc~str_r8p&#45;&gt;proc~compact_real_string</title>
+<path fill="none" stroke="#000000" d="M357.472,-660.528C377.888,-635.094 423.18,-578.671 447.971,-547.787"/>
+<polygon fill="#000000" stroke="#000000" points="450.852,-549.79 454.382,-539.801 445.393,-545.408 450.852,-549.79"/>
+</g>
+<!-- proc~str_a_i1p&#45;&gt;proc~str_i1p -->
+<g id="edge8" class="edge"><title>proc~str_a_i1p&#45;&gt;proc~str_i1p</title>
+<path fill="none" stroke="#000000" d="M273.24,-582.612C284.671,-580.281 297.913,-577.581 309.996,-575.118"/>
+<polygon fill="#000000" stroke="#000000" points="310.708,-578.545 319.807,-573.117 309.31,-571.686 310.708,-578.545"/>
+</g>
+<!-- proc~str_r4p&#45;&gt;proc~compact_real_string -->
+<g id="edge10" class="edge"><title>proc~str_r4p&#45;&gt;proc~compact_real_string</title>
+<path fill="none" stroke="#000000" d="M357.68,-393.787C378.215,-419.195 423.354,-475.045 448.045,-505.595"/>
+<polygon fill="#000000" stroke="#000000" points="445.421,-507.917 454.429,-513.494 450.866,-503.517 445.421,-507.917"/>
+</g>
+<!-- proc~str_a_i8p&#45;&gt;proc~str_i8p -->
+<g id="edge12" class="edge"><title>proc~str_a_i8p&#45;&gt;proc~str_i8p</title>
+<path fill="none" stroke="#000000" d="M268.752,-197.444C273.847,-194.607 279.138,-191.56 284,-188.573 296.197,-181.08 309.327,-172.248 320.427,-164.544"/>
+<polygon fill="#000000" stroke="#000000" points="322.654,-167.257 328.837,-158.654 318.639,-161.523 322.654,-167.257"/>
+</g>
+<!-- proc~str_a_r4p&#45;&gt;proc~str_r4p -->
+<g id="edge14" class="edge"><title>proc~str_a_r4p&#45;&gt;proc~str_r4p</title>
+<path fill="none" stroke="#000000" d="M275.744,-380.573C286.405,-380.573 298.397,-380.573 309.46,-380.573"/>
+<polygon fill="#000000" stroke="#000000" points="309.707,-384.073 319.707,-380.573 309.707,-377.073 309.707,-384.073"/>
+</g>
+<!-- proc~str_a_i2p&#45;&gt;proc~str_i2p -->
+<g id="edge16" class="edge"><title>proc~str_a_i2p&#45;&gt;proc~str_i2p</title>
+<path fill="none" stroke="#000000" d="M273.24,-34.3278C284.671,-31.8864 297.913,-29.058 309.996,-26.4772"/>
+<polygon fill="#000000" stroke="#000000" points="310.759,-29.8931 319.807,-24.3814 309.297,-23.0475 310.759,-29.8931"/>
+</g>
+<!-- proc~str_a_i4p&#45;&gt;proc~str_i4p -->
+<g id="edge18" class="edge"><title>proc~str_a_i4p&#45;&gt;proc~str_i4p</title>
+<path fill="none" stroke="#000000" d="M273.24,-457.179C284.556,-455.092 297.648,-452.677 309.633,-450.466"/>
+<polygon fill="#000000" stroke="#000000" points="310.608,-453.845 319.807,-448.589 309.338,-446.962 310.608,-453.845"/>
+</g>
+</g>
+</svg>
+</div>
+                <div><a type="button" class="graph-help" data-toggle="modal" href="#graph-help-text">Help</a></div>
+                <div class="modal fade" id="graph-help-text" tabindex="-1" role="dialog">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                      </div>
+                      <div class="modal-body">
+                        
+    <p>Nodes of different colours represent the following: </p>
+    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.26.3 (20100126.1600)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="556pt" height="34pt"
+ viewBox="0.00 0.00 556.00 34.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph1" class="graph" transform="scale(1 1) rotate(0) translate(4 30)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="white" points="-4,5 -4,-30 553,-30 553,5 -4,5"/>
+<!-- Subroutine -->
+<g id="node1" class="node"><title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="64,-26 3.19744e-14,-26 0,-1.24345e-14 64,-3.55271e-15 64,-26"/>
+<text text-anchor="middle" x="32" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node2" class="node"><title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="136,-26 82,-26 82,-1.24345e-14 136,-3.55271e-15 136,-26"/>
+<text text-anchor="middle" x="109" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Interface -->
+<g id="node3" class="node"><title>Interface</title>
+<polygon fill="#a7506f" stroke="#a7506f" points="208,-26 154,-26 154,-1.24345e-14 208,-3.55271e-15 208,-26"/>
+<text text-anchor="middle" x="181" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Interface</text>
+</g>
+<!-- Unknown Procedure Type -->
+<g id="node4" class="node"><title>Unknown Procedure Type</title>
+<polygon fill="#777777" stroke="#777777" points="362,-26 226,-26 226,-1.24345e-14 362,-3.55271e-15 362,-26"/>
+<text text-anchor="middle" x="294" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Unknown Procedure Type</text>
+</g>
+<!-- Program -->
+<g id="node5" class="node"><title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="434,-26 380,-26 380,-1.24345e-14 434,-3.55271e-15 434,-26"/>
+<text text-anchor="middle" x="407" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node6" class="node"><title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="548,-26 452,-26 452,-1.24345e-14 548,-3.55271e-15 548,-26"/>
+<text text-anchor="middle" x="500" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+    
+    <p>Solid arrows point from a procedure to one which it calls. Dashed 
+    arrows point from an interface to procedures which implement that interface.
+    This could include the module procedures in a generic interface or the
+    implementation in a submodule of an interface in a parent module.
+    </p>
+    
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+     
+    <br>
+
+     <section class="visible-xs visible-sm hidden-md">
+       
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#vars-1">Variables</a></h3></div>
+  <div id="vars-1" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../program/compact_real.html#variable-test_passed">test_passed</a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title">Source Code</h3></div>
+  <div class="list-group">
+    <a class="list-group-item" href="../program/compact_real.html#src">compact_real</a>
+  </div>
+</div>
+
+
+     </section>
+     <br class="visible-xs visible-sm hidden-md">
+
+     
+
+    
+    <section>
+    <h2>Variables</h2>
+    
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+
+<th>Attributes</th><th></th><th>Name</th><th></th><th>Initial</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-test_passed"></span>logical</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>test_passed</strong>(3)</td><td></td><td></td><td><p>List of passed tests.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+    </section>
+    <br>
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+
+
+    
+    
+    
+    <section>
+    <h2 id="src">Source Code</h2>
+    <div class="highlight"><pre><span></span><span class="k">program </span><span class="n">compact_real</span>
+<span class="c">!-----------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="c">!&lt; PENF&#39;s testing program.</span>
+<span class="c">!-----------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="k">use </span><span class="n">penf</span>
+<span class="k">use</span><span class="p">,</span> <span class="k">intrinsic</span> <span class="kd">::</span> <span class="n">ISO_FORTRAN_ENV</span><span class="p">,</span> <span class="n">only</span> <span class="p">:</span> <span class="n">stdout</span><span class="o">=&gt;</span><span class="n">OUTPUT_UNIT</span>
+<span class="c">!-----------------------------------------------------------------------------------------------------------------------------------</span>
+
+<span class="c">!-----------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="k">implicit none</span>
+<span class="kt">logical</span> <span class="kd">::</span> <span class="n">test_passed</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c">!&lt; List of passed tests.</span>
+<span class="c">!-----------------------------------------------------------------------------------------------------------------------------------</span>
+
+<span class="c">!-----------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="k">call </span><span class="n">penf_init</span>
+
+<span class="n">test_passed</span> <span class="o">=</span> <span class="p">.</span><span class="n">false</span><span class="p">.</span>
+
+<span class="n">test_passed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="nb">trim</span><span class="p">(</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mf">1._R8P</span><span class="p">,</span> <span class="n">compact</span><span class="o">=</span><span class="p">.</span><span class="n">true</span><span class="p">.))</span><span class="o">==</span><span class="s1">&#39;+0.1E+1&#39;</span>
+<span class="k">print</span> <span class="s2">&quot;(A,L1)&quot;</span><span class="p">,</span> <span class="s1">&#39;Compact 1.0: &#39;</span><span class="o">//</span><span class="nb">trim</span><span class="p">(</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mf">1._R8P</span><span class="p">,</span> <span class="n">compact</span><span class="o">=</span><span class="p">.</span><span class="n">true</span><span class="p">.))</span><span class="o">//</span><span class="s1">&#39;, is correct? &#39;</span><span class="p">,</span> <span class="n">test_passed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">test_passed</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="nb">trim</span><span class="p">(</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mf">1._R4P</span><span class="o">/</span><span class="mf">3._R4P</span><span class="p">,</span> <span class="n">compact</span><span class="o">=</span><span class="p">.</span><span class="n">true</span><span class="p">.))</span><span class="o">==</span><span class="s1">&#39;+0.333333E+0&#39;</span>
+<span class="k">print</span> <span class="s2">&quot;(A,L1)&quot;</span><span class="p">,</span> <span class="s1">&#39;Compact 1.0/3.0: &#39;</span><span class="o">//</span><span class="nb">trim</span><span class="p">(</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mf">1._R4P</span><span class="o">/</span><span class="mf">3._R4P</span><span class="p">,</span> <span class="n">compact</span><span class="o">=</span><span class="p">.</span><span class="n">true</span><span class="p">.))</span><span class="o">//</span><span class="s1">&#39;, is correct? &#39;</span><span class="p">,</span> <span class="n">test_passed</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">test_passed</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="nb">trim</span><span class="p">(</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mf">1._R16P</span><span class="o">/</span><span class="mf">4._R16P</span><span class="p">,</span> <span class="n">compact</span><span class="o">=</span><span class="p">.</span><span class="n">true</span><span class="p">.))</span><span class="o">==</span><span class="s1">&#39;+0.25E+0&#39;</span>
+<span class="k">print</span> <span class="s2">&quot;(A,L1)&quot;</span><span class="p">,</span> <span class="s1">&#39;Compact 1.0/4.0: &#39;</span><span class="o">//</span><span class="nb">trim</span><span class="p">(</span><span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mf">1._R16P</span><span class="o">/</span><span class="mf">4._R16P</span><span class="p">,</span> <span class="n">compact</span><span class="o">=</span><span class="p">.</span><span class="n">true</span><span class="p">.))</span><span class="o">//</span><span class="s1">&#39;, is correct? &#39;</span><span class="p">,</span> <span class="n">test_passed</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="k">write</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span> <span class="s2">&quot;(A,L1)&quot;</span><span class="p">)</span> <span class="nb">new_line</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span><span class="o">//</span><span class="s1">&#39;Are all tests passed? &#39;</span><span class="p">,</span> <span class="k">all</span><span class="p">(</span><span class="n">test_passed</span><span class="p">)</span>
+<span class="k">stop</span>
+<span class="c">!-----------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="n">endprogram</span> <span class="n">compact_real</span>
+</pre></div>
+
+    </section>
+    
+    
+    </div>
+  </div>
+
+  <section class="visible-xs visible-sm hidden-md">
+    <hr>
+    
+
+<div class="panel panel-default">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#allprogs-1">All Programs</a></h3></div>
+  <div id="allprogs-1" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../program/compact_real.html">compact_real</a>
+      
+      <a class="list-group-item" href="../program/test_all.html">test_all</a>
+      
+    </div>
+  </div>
+</div>
+
+
+  </section>
+  
+    <hr>    
+    </div> <!-- /container -->
+    <footer>
+      <div class="container">
+      <div class="row">
+        <div class="col-xs-6 col-md-4"><p>&copy; 2017 </p></div>
+        <div class="col-xs-6 col-md-4 col-md-push-4">
+          <p class="text-right">
+            Documentation generated by 
+            <a href="https://github.com/cmacmackin/ford">FORD</a>
+            
+          </p>
+        </div>
+        <div class="col-xs-12 col-md-4 col-md-pull-4"><p class="text-center"> PENF was developed by Stefano Zaghi</p></div>
+      </div>
+      <br>
+      </div> <!-- /container -->    
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+<!--
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+-->
+    <script src="../js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../js/ie10-viewport-bug-workaround.js"></script>
+
+    <!-- MathJax JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } },
+        jax: ['input/TeX','input/MathML','output/HTML-CSS'],
+        extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js'],
+        'HTML-CSS': { 
+           styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: '#000000 ! important'} }
+        }
+      });
+    </script>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  </body>
+</html>

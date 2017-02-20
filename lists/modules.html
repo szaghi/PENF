@@ -5,13 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	 
-	 <meta name="description" content="<p>IR_Precision is a Fortran (standard 2003+) module useful to achieve portable codes.</p>">
+	 <meta name="description" content="PENF, Portability Environment for Fortran poor people">
     
-    <meta name="author" content="Chris MacMackin" >
+    <meta name="author" content="Stefano Zaghi" >
     <link rel="icon" href="../favicon.png">
 
     <title>
-All Modules &ndash; IR_Precision
+All Modules &ndash; PENF
 </title>
 
     <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -27,17 +27,21 @@ All Modules &ndash; IR_Precision
     <![endif]-->
     
     <script src="../js/jquery-2.1.3.min.js"></script>
+    <script src="../js/svg-pan-zoom.min.js"></script>
+
+    
     <script src="../tipuesearch/tipuesearch_content.js"></script>
     <link  href="../tipuesearch/tipuesearch.css" rel="stylesheet">
     <script src="../tipuesearch/tipuesearch_set.js"></script>
     <script src="../tipuesearch/tipuesearch.js"></script>
+    
 
   </head>
 
   <body>
 
     <!-- Fixed navbar -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -46,24 +50,49 @@ All Modules &ndash; IR_Precision
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="../index.html">IR_Precision </a>
+          <a class="navbar-brand" href="../index.html">PENF </a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            
+				
+            <li class="dropdown hidden-xs visible-sm visible-md hidden-lg">
+              <a href="#" class="dropdown-toggle"
+              data-toggle="dropdown" role="button"
+              aria-haspopup="true"
+		 aria-expanded="false">Contents <span class="caret"></span></a>
+	      <ul class="dropdown-menu">
+              
             <li><a href="../lists/files.html">Source Files</a></li>
 				
 				
             <li><a href="../lists/modules.html">Modules</a></li>
 				
-				
+            
+                                
             <li><a href="../lists/procedures.html">Procedures</a></li>
 				
-				
-				
-            <li><a href="../program/test_driver.html">Program</a></li>
 								
+				
+            <li><a href="../lists/programs.html">Programs</a></li>
+				
+            </ul>
+            </li>
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/files.html">Source Files</a></li>
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/modules.html">Modules</a></li>
+
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/procedures.html">Procedures</a></li>
+
+                             
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/programs.html">Programs</a></li>
+
           </ul>
+        
         <form action="../search.html" class="navbar-form navbar-right" role="search">
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Search" name="q" id="tipue_search_input" autocomplete="off" required>
@@ -72,35 +101,246 @@ All Modules &ndash; IR_Precision
         <button type="submit" class="btn btn-default">Submit</button>
 -->
         </form>
+        
         </div><!--/.nav-collapse -->
       </div>
     </nav>
 
     <div class="container">
     
+
       <div class="row">
         <div class="col-lg-12" id='text'>
 			 <h1>Modules</h1>
-			 <table class="table table-striped">
+			 <table class="table">
 			 <thead><tr><th>Module</th><th>Source File</th><th>Description</th></tr></thead>
 			 <tbody>
+             
 			 
-			   <tr><td><a href='../module/ir_precision.html'>IR_Precision</a></td><td><a href='../sourcefile/ir_precision.f90.html'>IR_Precision.f90</a></td><td><p>Pure Fortran (2003+) library for ensuring codes portability</p></td></tr>
+			   <tr class="active"><td><a href='../module/penf.html'>penf</a></td><td><a href='../sourcefile/penf.f90.html'>penf.F90</a></td><td><p>Portability Environment for Fortran poor people.</p></td></tr>
+               
+               <!--active-->
+			 
+			   <tr class=""><td><a href='../module/penf_b_size.html'>penf_b_size</a></td><td><a href='../sourcefile/penf_b_size.f90.html'>penf_b_size.F90</a></td><td><p>PENF bit/byte size functions.</p></td></tr>
+               
+               <!---->
+			 
+			   <tr class="active"><td><a href='../module/penf_global_parameters_variables.html'>penf_global_parameters_variables</a></td><td><a href='../sourcefile/penf_global_parameters_variables.f90.html'>penf_global_parameters_variables.F90</a></td><td><p>PENF global (exposed) parameters and variables.</p></td></tr>
+               
+               <!--active-->
+			 
+			   <tr class=""><td><a href='../module/penf_stringify.html'>penf_stringify</a></td><td><a href='../sourcefile/penf_stringify.f90.html'>penf_stringify.F90</a></td><td><p>PENF string-to-number (and viceversa) facility.</p></td></tr>
+               
+               <!---->
 			 
 			 </tbody></table>
+             
+                <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.26.3 (20100126.1600)
+ -->
+<!-- Title: module~~graph~~ModuleGraph Pages: 1 -->
+<svg id="modulegraphModuleGraph" width="626pt" height="196pt"
+ viewBox="0.00 0.00 626.00 196.30" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="module~~graph~~ModuleGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 192.298)">
+<title>module~~graph~~ModuleGraph</title>
+<polygon fill="white" stroke="white" points="-4,5 -4,-192.298 623,-192.298 623,5 -4,5"/>
+<!-- module~penf -->
+<g id="node1" class="node"><title>module~penf</title>
+<a xlink:href="../module/penf.html" xlink:title="penf">
+<polygon fill="#337ab7" stroke="#337ab7" points="504,-111 450,-111 450,-85 504,-85 504,-111"/>
+<text text-anchor="middle" x="477" y="-95.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">penf</text>
+</a>
+</g>
+<!-- program~test_all -->
+<g id="node5" class="node"><title>program~test_all</title>
+<a xlink:href="../program/test_all.html" xlink:title="test_all">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="606,-26 552,-26 552,-1.24345e-14 606,-3.55271e-15 606,-26"/>
+<text text-anchor="middle" x="579" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">test_all</text>
+</a>
+</g>
+<!-- module~penf&#45;&gt;program~test_all -->
+<g id="edge16" class="edge"><title>module~penf&#45;&gt;program~test_all</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M490.009,-84.9804C508.405,-66.5708 539.826,-35.1323 540,-35 541.405,-33.9333 542.866,-32.883 544.365,-31.8543"/>
+<polygon fill="#000000" stroke="#000000" points="546.633,-34.5595 553.192,-26.2393 542.876,-28.6531 546.633,-34.5595"/>
+</g>
+<!-- program~compact_real -->
+<g id="node6" class="node"><title>program~compact_real</title>
+<a xlink:href="../program/compact_real.html" xlink:title="compact_real">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="617,-70 541,-70 541,-44 617,-44 617,-70"/>
+<text text-anchor="middle" x="579" y="-54.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">compact_real</text>
+</a>
+</g>
+<!-- module~penf&#45;&gt;program~compact_real -->
+<g id="edge20" class="edge"><title>module~penf&#45;&gt;program~compact_real</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M504.066,-87.1204C514.109,-83.0837 525.753,-78.4033 536.824,-73.953"/>
+<polygon fill="#000000" stroke="#000000" points="538.379,-77.1004 546.352,-70.1233 535.768,-70.6055 538.379,-77.1004"/>
+</g>
+<!-- module~penf_stringify -->
+<g id="node2" class="node"><title>module~penf_stringify</title>
+<a xlink:href="../module/penf_stringify.html" xlink:title="penf_stringify">
+<polygon fill="#337ab7" stroke="#337ab7" points="414,-111 338,-111 338,-85 414,-85 414,-111"/>
+<text text-anchor="middle" x="376" y="-95.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">penf_stringify</text>
+</a>
+</g>
+<!-- module~penf_stringify&#45;&gt;module~penf -->
+<g id="edge6" class="edge"><title>module~penf_stringify&#45;&gt;module~penf</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M414.184,-98C422.511,-98 431.313,-98 439.609,-98"/>
+<polygon fill="#000000" stroke="#000000" points="439.772,-101.5 449.772,-98 439.772,-94.5001 439.772,-101.5"/>
+</g>
+<!-- module~penf_global_parameters_variables -->
+<g id="node3" class="node"><title>module~penf_global_parameters_variables</title>
+<a xlink:href="../module/penf_global_parameters_variables.html" xlink:title="penf_global_parameters_variables">
+<polygon fill="#337ab7" stroke="#337ab7" points="178,-152 8.52651e-14,-152 0,-126 178,-126 178,-152"/>
+<text text-anchor="middle" x="89" y="-136.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">penf_global_parameters_variables</text>
+</a>
+</g>
+<!-- module~penf_global_parameters_variables&#45;&gt;module~penf -->
+<g id="edge2" class="edge"><title>module~penf_global_parameters_variables&#45;&gt;module~penf</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M122.19,-152.131C176.14,-171.615 285.896,-203.485 376,-180"/>
+</g>
+<!-- module~penf_global_parameters_variables&#45;&gt;module~penf_stringify -->
+<g id="edge12" class="edge"><title>module~penf_global_parameters_variables&#45;&gt;module~penf_stringify</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M158.964,-125.956C176.872,-122.818 196.122,-119.619 214,-117 252.176,-111.406 295.606,-106.385 327.883,-102.911"/>
+<polygon fill="#000000" stroke="#000000" points="328.376,-106.378 337.949,-101.839 327.635,-99.4175 328.376,-106.378"/>
+</g>
+<!-- module~penf_b_size -->
+<g id="node4" class="node"><title>module~penf_b_size</title>
+<a xlink:href="../module/penf_b_size.html" xlink:title="penf_b_size">
+<polygon fill="#337ab7" stroke="#337ab7" points="293,-152 223,-152 223,-126 293,-126 293,-152"/>
+<text text-anchor="middle" x="258" y="-136.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">penf_b_size</text>
+</a>
+</g>
+<!-- module~penf_global_parameters_variables&#45;&gt;module~penf_b_size -->
+<g id="edge14" class="edge"><title>module~penf_global_parameters_variables&#45;&gt;module~penf_b_size</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M178.449,-139C190.206,-139 201.835,-139 212.422,-139"/>
+<polygon fill="#000000" stroke="#000000" points="212.627,-142.5 222.627,-139 212.627,-135.5 212.627,-142.5"/>
+</g>
+<!-- module~penf_b_size&#45;&gt;module~penf -->
+<g id="edge4" class="edge"><title>module~penf_b_size&#45;&gt;module~penf</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M284.516,-152.077C313.6,-165.728 358.476,-184.567 376,-180"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M376,-180C411.502,-170.747 442.615,-140.222 460.615,-119.145"/>
+<polygon fill="#000000" stroke="#000000" points="463.404,-121.264 467.069,-111.323 458.005,-116.809 463.404,-121.264"/>
+</g>
+<!-- module~penf_b_size&#45;&gt;module~penf_stringify -->
+<g id="edge10" class="edge"><title>module~penf_b_size&#45;&gt;module~penf_stringify</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M293.084,-126.81C304.23,-122.937 316.747,-118.588 328.611,-114.466"/>
+<polygon fill="#000000" stroke="#000000" points="330.082,-117.66 338.379,-111.072 327.784,-111.048 330.082,-117.66"/>
+</g>
+<!-- iso_fortran_env -->
+<g id="node10" class="node"><title>iso_fortran_env</title>
+<a xlink:href="https://gcc.gnu.org/onlinedocs/gfortran/ISO_005fFORTRAN_005fENV.html" xlink:title="iso_fortran_env">
+<polygon fill="#337ab7" stroke="#337ab7" points="301,-70 215,-70 215,-44 301,-44 301,-70"/>
+<text text-anchor="middle" x="258" y="-54.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">iso_fortran_env</text>
+</a>
+</g>
+<!-- iso_fortran_env&#45;&gt;module~penf_stringify -->
+<g id="edge8" class="edge"><title>iso_fortran_env&#45;&gt;module~penf_stringify</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M295.66,-70.0854C306.198,-73.7468 317.785,-77.7729 328.801,-81.6002"/>
+<polygon fill="#000000" stroke="#000000" points="327.698,-84.9223 338.293,-84.8983 329.995,-78.31 327.698,-84.9223"/>
+</g>
+<!-- iso_fortran_env&#45;&gt;program~test_all -->
+<g id="edge18" class="edge"><title>iso_fortran_env&#45;&gt;program~test_all</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M301.774,-59.7208C346.085,-61.837 416.51,-63.4493 477,-57"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M477,-57C490.504,-55.2215 520.159,-42.0104 544.03,-30.5242"/>
+<polygon fill="#000000" stroke="#000000" points="545.719,-33.5948 553.18,-26.072 542.656,-27.3004 545.719,-33.5948"/>
+</g>
+<!-- iso_fortran_env&#45;&gt;program~compact_real -->
+<g id="edge22" class="edge"><title>iso_fortran_env&#45;&gt;program~compact_real</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M477,-57C494.207,-55.1655 513.139,-54.7315 529.973,-54.8961"/>
+<polygon fill="#000000" stroke="#000000" points="530.091,-58.3985 540.149,-55.0688 530.21,-51.3995 530.091,-58.3985"/>
+</g>
+</g>
+</svg>
+</div>
+                <div><a type="button" class="graph-help" data-toggle="modal" href="#graph-help-text">Help</a></div>
+                <div class="modal fade" id="graph-help-text" tabindex="-1" role="dialog">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                      </div>
+                      <div class="modal-body">
+                        
+    <p>Nodes of different colours represent the following: </p>
+    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.26.3 (20100126.1600)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="486pt" height="34pt"
+ viewBox="0.00 0.00 486.00 34.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph1" class="graph" transform="scale(1 1) rotate(0) translate(4 30)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="white" points="-4,5 -4,-30 483,-30 483,5 -4,5"/>
+<!-- Module -->
+<g id="node1" class="node"><title>Module</title>
+<polygon fill="#337ab7" stroke="#337ab7" points="54,-26 2.13163e-14,-26 0,-1.24345e-14 54,-3.55271e-15 54,-26"/>
+<text text-anchor="middle" x="27" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Module</text>
+</g>
+<!-- Submodule -->
+<g id="node2" class="node"><title>Submodule</title>
+<polygon fill="#5bc0de" stroke="#5bc0de" points="138,-26 72,-26 72,-1.24345e-14 138,-3.55271e-15 138,-26"/>
+<text text-anchor="middle" x="105" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Submodule</text>
+</g>
+<!-- Subroutine -->
+<g id="node3" class="node"><title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="220,-26 156,-26 156,-1.24345e-14 220,-3.55271e-15 220,-26"/>
+<text text-anchor="middle" x="188" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node4" class="node"><title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="292,-26 238,-26 238,-1.24345e-14 292,-3.55271e-15 292,-26"/>
+<text text-anchor="middle" x="265" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Program -->
+<g id="node5" class="node"><title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="364,-26 310,-26 310,-1.24345e-14 364,-3.55271e-15 364,-26"/>
+<text text-anchor="middle" x="337" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node6" class="node"><title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="478,-26 382,-26 382,-1.24345e-14 478,-3.55271e-15 478,-26"/>
+<text text-anchor="middle" x="430" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+    
+    <p>Solid arrows point from a parent (sub)module to the submodule which is
+    descended from it. Dashed arrows point from a module being used to the
+    module or program unit using it.
+    </p>
+    
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
         </div>
       </div>
 
-    <hr>
-    <footer>
-        <div class="row">
-        <div class="col-md-6">&copy; 2015 IR_Precision was written by Stefano Zaghi. </div>
-        <div class="col-md-6"><span class="pull-right">Documentation generated by <a href="https://github.com/cmacmackin/ford">FORD</a>.</span></div>
-        </div>
-        <br>
-    </footer>
+    <hr>    
     </div> <!-- /container -->
-
+    <footer>
+      <div class="container">
+      <div class="row">
+        <div class="col-xs-6 col-md-4"><p>&copy; 2017 </p></div>
+        <div class="col-xs-6 col-md-4 col-md-push-4">
+          <p class="text-right">
+            Documentation generated by 
+            <a href="https://github.com/cmacmackin/ford">FORD</a>
+            
+          </p>
+        </div>
+        <div class="col-xs-12 col-md-4 col-md-pull-4"><p class="text-center"> PENF was developed by Stefano Zaghi</p></div>
+      </div>
+      <br>
+      </div> <!-- /container -->    
+    </footer>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -125,6 +365,6 @@ All Modules &ndash; IR_Precision
         }
       });
     </script>
-    <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   </body>
 </html>
