@@ -17,6 +17,8 @@ logical            :: is_initialized = .false. !< Check the initialization of so
 integer, parameter :: endianL        = 1       !< Little endian parameter.
 integer, parameter :: endianB        = 0       !< Big endian parameter.
 integer            :: endian         = endianL !< Bit ordering: Little endian (endianL), or Big endian (endianB).
+!$OMP THREADPRIVATE(is_initialized,endian)
+
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
