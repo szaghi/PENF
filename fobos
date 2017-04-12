@@ -10,7 +10,7 @@ $CSHARED_INT = -cpp -c -fpic -assume realloc_lhs
 $LSHARED     = -shared
 $CSTATIC_GNU = -c -frealloc-lhs
 $CSTATIC_INT = -c -assume realloc_lhs
-$DEBUG_GNU   = -O0 -g3 -Warray-bounds -Wcharacter-truncation -Wline-truncation -Wimplicit-interface -Wimplicit-procedure -Wunderflow -Wuninitialized -fcheck=all -fmodule-private -ffree-line-length-132 -fimplicit-none -fbacktrace -fdump-core -finit-real=nan -std=f2003 -fall-intrinsics
+$DEBUG_GNU   = -Og -g3 -Warray-bounds -Wcharacter-truncation -Wline-truncation -Wimplicit-interface -Wimplicit-procedure -Wunderflow -Wuninitialized -fcheck=all -fmodule-private -ffree-line-length-132 -fimplicit-none -fbacktrace -fdump-core -finit-real=nan -std=f2003 -fall-intrinsics
 $DEBUG_INT   = -O0 -debug all -check all -warn all -extend-source 132 -traceback -gen-interfaces#-fpe-all=0 -fp-stack-check -fstack-protector-all -ftrapuv -no-ftz -std03
 $OPTIMIZE    = -O2
 
@@ -98,7 +98,7 @@ src             = ./src/
 colors          = True
 quiet           = False
 log             = True
-jobs            = 2
+jobs            = 4
 cflags_heritage = True
 
 [template-static-gnu]
@@ -111,7 +111,7 @@ src             = ./src/
 colors          = True
 quiet           = False
 log             = True
-jobs            = 2
+jobs            = 4
 cflags_heritage = True
 
 [template-shared-gnu-debug]
@@ -124,7 +124,7 @@ src             = ./src/
 colors          = True
 quiet           = False
 log             = True
-jobs            = 2
+jobs            = 4
 cflags_heritage = True
 
 [template-static-gnu-debug]
@@ -137,7 +137,7 @@ src             = ./src/
 colors          = True
 quiet           = False
 log             = True
-jobs            = 2
+jobs            = 4
 cflags_heritage = True
 
 [template-shared-intel]
@@ -150,7 +150,7 @@ src             = ./src/
 colors          = True
 quiet           = False
 log             = True
-jobs            = 2
+jobs            = 4
 cflags_heritage = True
 
 [template-static-intel]
@@ -163,7 +163,7 @@ src             = ./src/
 colors          = True
 quiet           = False
 log             = True
-jobs            = 2
+jobs            = 4
 cflags_heritage = True
 
 [template-shared-intel-debug]
@@ -176,7 +176,7 @@ src             = ./src/
 colors          = True
 quiet           = False
 log             = True
-jobs            = 2
+jobs            = 4
 cflags_heritage = True
 
 [template-static-intel-debug]
@@ -189,7 +189,7 @@ src             = ./src/
 colors          = True
 quiet           = False
 log             = True
-jobs            = 2
+jobs            = 4
 cflags_heritage = True
 
 [rule-makedoc]
@@ -217,19 +217,19 @@ rule_3 = rm -f *.gcov
 help = Make tar archive of the project
 rule = tar --xform="s%^%PENF/%" -czf PENF.tar.gz *
 
-
 [rule-makecoverage]
 help   = Perform coverage analysis
-rule_1 = FoBiS.py clean -mode tests-gnu
-rule_2 = FoBiS.py build -mode tests-gnu -coverage
+rule_1 = FoBiS.py clean -mode tests-gnu-debug
+rule_2 = FoBiS.py build -mode tests-gnu-debug -coverage --preproc ' -Dr16p'
 rule_3 = ./scripts/run_tests.sh
 rule_4 = gcov -o exe/obj/ src/lib/*
 rule_5 = rm -f *.gcov
 
 [rule-makecoverage-analysis]
 help   = Perform coverage analysis and saving reports in markdown
-rule_1 = FoBiS.py clean -mode tests-gnu
-rule_2 = FoBiS.py build -mode tests-gnu -coverage
+rule_1 = FoBiS.py clean -mode tests-gnu-debug
+rule_2 = FoBiS.py build -mode tests-gnu-debug -coverage --preproc ' -Dr16p'
 rule_3 = ./scripts/run_tests.sh
-rule_4 = FoBiS.py rule -gcov_analyzer wiki/ Coverage-Analysis
-rule_5 = rm -f *.gcov
+rule_4 = gcov -o exe/obj/ src/lib/*
+rule_5 = FoBiS.py rule -gcov_analyzer wiki/ Coverage-Analysis -verbose
+rule_6 = rm -f *.gcov
