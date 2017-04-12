@@ -126,7 +126,7 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
 	  data-placement="bottom" data-html="true"
-	  title=" 1.1% of total for procedures.">9 statements</a>
+	  title=" 1.1% of total for procedures.">8 statements</a>
      </li> 
      
      
@@ -596,20 +596,14 @@ private elemental function strz_I2P(n, nz_pad) result(str)
     <section>
     <h2><span class="anchor" id="src"></span>Source Code</h2>
     <div class="highlight"><pre><span></span>  <span class="k">elemental function </span><span class="n">strz_I2P</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">nz_pad</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">str</span><span class="p">)</span>
-  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
   <span class="c">!&lt; Convert integer to string, prefixing with the right number of zeros.</span>
-  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
   <span class="kt">integer</span><span class="p">(</span><span class="n">I2P</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span>           <span class="kd">::</span> <span class="n">n</span>      <span class="c">!&lt; Integer to be converted.</span>
   <span class="kt">integer</span><span class="p">(</span><span class="n">I4P</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span> <span class="k">optional</span> <span class="kd">::</span> <span class="n">nz_pad</span> <span class="c">!&lt; Number of zeros padding.</span>
   <span class="kt">character</span><span class="p">(</span><span class="n">DI2P</span><span class="p">)</span>                    <span class="kd">::</span> <span class="n">str</span>    <span class="c">!&lt; Returned string containing input number plus padding zeros.</span>
-  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
 
-  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
   <span class="k">write</span><span class="p">(</span><span class="n">str</span><span class="p">,</span><span class="n">FI2PZP</span><span class="p">)</span> <span class="n">n</span>                              <span class="c">! Casting of n to string.</span>
   <span class="n">str</span><span class="o">=</span><span class="n">str</span><span class="p">(</span><span class="mi">2</span><span class="p">:)</span>                                      <span class="c">! Leaving out the sign.</span>
   <span class="k">if</span> <span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">nz_pad</span><span class="p">))</span> <span class="n">str</span><span class="o">=</span><span class="n">str</span><span class="p">(</span><span class="n">DI2P</span><span class="o">-</span><span class="n">nz_pad</span><span class="p">:</span><span class="n">DI2P</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="c">! Leaving out the extra zeros padding</span>
-  <span class="k">return</span>
-  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
   <span class="n">endfunction</span> <span class="n">strz_I2P</span>
 </pre></div>
 

@@ -126,7 +126,7 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
 	  data-placement="bottom" data-html="true"
-	  title=" 0.9% of total for procedures.">7 statements</a>
+	  title=" 0.8% of total for procedures.">6 statements</a>
      </li> 
      
      
@@ -483,18 +483,12 @@ private elemental function strf_R16P(fm, n) result(str)
     <section>
     <h2><span class="anchor" id="src"></span>Source Code</h2>
     <div class="highlight"><pre><span></span>  <span class="k">elemental function </span><span class="n">strf_R16P</span><span class="p">(</span><span class="n">fm</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">str</span><span class="p">)</span>
-  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
   <span class="c">!&lt; Convert real to string.</span>
-  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
   <span class="kt">character</span><span class="p">(</span><span class="o">*</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">fm</span>  <span class="c">!&lt; Format different from the standard for the kind.</span>
   <span class="kt">real</span><span class="p">(</span><span class="n">R16P</span><span class="p">),</span>   <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">n</span>   <span class="c">!&lt; Real to be converted.</span>
   <span class="kt">character</span><span class="p">(</span><span class="n">DR16P</span><span class="p">)</span>         <span class="kd">::</span> <span class="n">str</span> <span class="c">!&lt; Returned string containing input number.</span>
-  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
 
-  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
   <span class="k">write</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="nb">trim</span><span class="p">(</span><span class="n">fm</span><span class="p">))</span> <span class="n">n</span>
-  <span class="k">return</span>
-  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
   <span class="n">endfunction</span> <span class="n">strf_R16P</span>
 </pre></div>
 

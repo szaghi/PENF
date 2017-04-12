@@ -126,7 +126,7 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
 	  data-placement="bottom" data-html="true"
-	  title=" 2.1% of total for procedures.">17 statements</a>
+	  title=" 2.1% of total for procedures.">16 statements</a>
      </li> 
      
      
@@ -626,9 +626,7 @@ private function ctor_R8P(str, knd, pref, error) result(n)
     <section>
     <h2><span class="anchor" id="src"></span>Source Code</h2>
     <div class="highlight"><pre><span></span>  <span class="k">function </span><span class="n">ctor_R8P</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="n">knd</span><span class="p">,</span> <span class="n">pref</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
   <span class="c">!&lt; Convert string to real.</span>
-  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
   <span class="kt">character</span><span class="p">(</span><span class="o">*</span><span class="p">),</span>           <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span>  <span class="kd">::</span> <span class="n">str</span>   <span class="c">!&lt; String containing input number.</span>
   <span class="kt">real</span><span class="p">(</span><span class="n">R8P</span><span class="p">),</span>              <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span>  <span class="kd">::</span> <span class="n">knd</span>   <span class="c">!&lt; Number kind.</span>
   <span class="kt">character</span><span class="p">(</span><span class="o">*</span><span class="p">),</span> <span class="k">optional</span><span class="p">,</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span>  <span class="kd">::</span> <span class="n">pref</span>  <span class="c">!&lt; Prefixing string.</span>
@@ -636,17 +634,13 @@ private function ctor_R8P(str, knd, pref, error) result(n)
   <span class="kt">real</span><span class="p">(</span><span class="n">R8P</span><span class="p">)</span>                           <span class="kd">::</span> <span class="n">n</span>     <span class="c">!&lt; Number returned.</span>
   <span class="kt">integer</span><span class="p">(</span><span class="n">I4P</span><span class="p">)</span>                        <span class="kd">::</span> <span class="n">err</span>   <span class="c">!&lt; Error trapping flag: 0 no errors, &gt;0 error occurs.</span>
   <span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="p">:),</span> <span class="k">allocatable</span>       <span class="kd">::</span> <span class="n">prefd</span> <span class="c">!&lt; Prefixing string.</span>
-  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
 
-  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
   <span class="k">read</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">iostat</span><span class="o">=</span><span class="n">err</span><span class="p">)</span> <span class="n">n</span> <span class="c">! Casting of str to n.</span>
   <span class="k">if</span> <span class="p">(</span><span class="n">err</span><span class="o">/=</span><span class="mi">0</span><span class="p">)</span> <span class="k">then</span>
 <span class="k">    </span><span class="n">prefd</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span> <span class="p">;</span> <span class="k">if</span> <span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">pref</span><span class="p">))</span> <span class="n">prefd</span> <span class="o">=</span> <span class="n">pref</span>
     <span class="k">write</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s1">&#39;(A,I1,A)&#39;</span><span class="p">)</span> <span class="n">prefd</span><span class="o">//</span><span class="s1">&#39; Error: conversion of string &quot;&#39;</span><span class="o">//</span><span class="n">str</span><span class="o">//</span><span class="s1">&#39;&quot; to real failed! real(&#39;</span><span class="p">,</span> <span class="nb">kind</span><span class="p">(</span><span class="n">knd</span><span class="p">),</span> <span class="s1">&#39;)&#39;</span>
   <span class="n">endif</span>
   <span class="k">if</span> <span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">error</span><span class="p">))</span> <span class="n">error</span> <span class="o">=</span> <span class="n">err</span>
-  <span class="k">return</span>
-  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
   <span class="n">endfunction</span> <span class="n">ctor_R8P</span>
 </pre></div>
 

@@ -126,7 +126,7 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
 	  data-placement="bottom" data-html="true"
-	  title=" 2.6% of total for procedures.">21 statements</a>
+	  title=" 2.6% of total for procedures.">20 statements</a>
      </li> 
      
      
@@ -641,9 +641,7 @@ private pure function str_a_R16P(n, no_sign, separator, delimiters, compact) res
     <section>
     <h2><span class="anchor" id="src"></span>Source Code</h2>
     <div class="highlight"><pre><span></span>  <span class="k">pure function </span><span class="n">str_a_R16P</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">no_sign</span><span class="p">,</span> <span class="n">separator</span><span class="p">,</span> <span class="n">delimiters</span><span class="p">,</span> <span class="n">compact</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">str</span><span class="p">)</span>
-  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
   <span class="c">!&lt; Converting real array to string.</span>
-  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
   <span class="kt">real</span><span class="p">(</span><span class="n">R16P</span><span class="p">),</span>   <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span>           <span class="kd">::</span> <span class="n">n</span><span class="p">(:)</span>            <span class="c">!&lt; Real array to be converted.</span>
   <span class="kt">logical</span><span class="p">,</span>      <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span> <span class="k">optional</span> <span class="kd">::</span> <span class="n">no_sign</span>         <span class="c">!&lt; Flag for leaving out the sign.</span>
   <span class="kt">character</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span> <span class="k">optional</span> <span class="kd">::</span> <span class="n">separator</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>    <span class="c">!&lt; Eventual separator of array values.</span>
@@ -653,9 +651,7 @@ private pure function str_a_R16P(n, no_sign, separator, delimiters, compact) res
   <span class="kt">character</span><span class="p">(</span><span class="n">DR16P</span><span class="p">)</span>                   <span class="kd">::</span> <span class="n">strn</span>            <span class="c">!&lt; String containing of element of input array number.</span>
   <span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>                   <span class="kd">::</span> <span class="n">sep</span>             <span class="c">!&lt; Array values separator</span>
   <span class="kt">integer</span>                            <span class="kd">::</span> <span class="n">i</span>               <span class="c">!&lt; Counter.</span>
-  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
 
-  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
   <span class="n">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
   <span class="n">sep</span> <span class="o">=</span> <span class="s1">&#39;,&#39;</span>
   <span class="k">if</span><span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">separator</span><span class="p">))</span> <span class="n">sep</span> <span class="o">=</span> <span class="n">separator</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -665,8 +661,6 @@ private pure function str_a_R16P(n, no_sign, separator, delimiters, compact) res
   <span class="n">enddo</span>
   <span class="n">str</span> <span class="o">=</span> <span class="nb">trim</span><span class="p">(</span><span class="n">str</span><span class="p">(</span><span class="mi">2</span><span class="p">:))</span>
   <span class="k">if</span> <span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">delimiters</span><span class="p">))</span> <span class="n">str</span> <span class="o">=</span> <span class="n">delimiters</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">//</span><span class="n">str</span><span class="o">//</span><span class="n">delimiters</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-  <span class="k">return</span>
-  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
   <span class="n">endfunction</span> <span class="n">str_a_R16P</span>
 </pre></div>
 

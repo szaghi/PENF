@@ -126,7 +126,7 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
 	  data-placement="bottom" data-html="true"
-	  title=" 2.0% of total for procedures.">16 statements</a>
+	  title=" 1.9% of total for procedures.">14 statements</a>
      </li> 
      
      
@@ -558,34 +558,22 @@ public subroutine check_endian()
     <section>
     <h2><span class="anchor" id="src"></span>Source Code</h2>
     <div class="highlight"><pre><span></span>  <span class="k">subroutine </span><span class="n">check_endian</span><span class="p">()</span>
-  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
   <span class="c">!&lt; Check the type of bit ordering (big or little endian) of the running architecture.</span>
   <span class="c">!&lt;</span>
   <span class="c">!&gt; @note The result is stored into the *endian* global variable.</span>
-  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
-
-  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
   <span class="k">if</span> <span class="p">(</span><span class="n">is_little_endian</span><span class="p">())</span> <span class="k">then</span>
 <span class="k">    </span><span class="n">endian</span> <span class="o">=</span> <span class="n">endianL</span>
   <span class="k">else</span>
 <span class="k">    </span><span class="n">endian</span> <span class="o">=</span> <span class="n">endianB</span>
   <span class="n">endif</span>
-  <span class="k">return</span>
-  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
   <span class="k">contains</span>
 <span class="k">    pure function </span><span class="n">is_little_endian</span><span class="p">()</span> <span class="k">result</span><span class="p">(</span><span class="n">is_little</span><span class="p">)</span>
-    <span class="c">!-------------------------------------------------------------------------------------------------------------------------------</span>
     <span class="c">!&lt; Check if the type of the bit ordering of the running architecture is little endian.</span>
-    <span class="c">!-------------------------------------------------------------------------------------------------------------------------------</span>
     <span class="kt">logical</span>      <span class="kd">::</span> <span class="n">is_little</span> <span class="c">!&lt; Logical output: true is the running architecture uses little endian ordering, false otherwise.</span>
     <span class="kt">integer</span><span class="p">(</span><span class="n">I1P</span><span class="p">)</span> <span class="kd">::</span> <span class="n">int1</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">)</span> <span class="c">!&lt; One byte integer array for casting 4 bytes integer.</span>
-    <span class="c">!-------------------------------------------------------------------------------------------------------------------------------</span>
 
-    <span class="c">!-------------------------------------------------------------------------------------------------------------------------------</span>
     <span class="n">int1</span> <span class="o">=</span> <span class="nb">transfer</span><span class="p">(</span><span class="mi">1_I4P</span><span class="p">,</span> <span class="n">int1</span><span class="p">)</span>
     <span class="n">is_little</span> <span class="o">=</span> <span class="p">(</span><span class="n">int1</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">==</span><span class="mi">1_I1P</span><span class="p">)</span>
-    <span class="k">return</span>
-    <span class="c">!-------------------------------------------------------------------------------------------------------------------------------</span>
     <span class="n">endfunction</span> <span class="n">is_little_endian</span>
   <span class="n">endsubroutine</span> <span class="n">check_endian</span>
 </pre></div>

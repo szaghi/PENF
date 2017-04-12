@@ -126,7 +126,7 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
 	  data-placement="bottom" data-html="true"
-	  title=" 1.6% of total for procedures.">13 statements</a>
+	  title=" 1.6% of total for procedures.">12 statements</a>
      </li> 
      
      
@@ -646,23 +646,18 @@ public subroutine penf_init()
     <section>
     <h2><span class="anchor" id="src"></span>Source Code</h2>
     <div class="highlight"><pre><span></span>  <span class="k">subroutine </span><span class="n">penf_init</span><span class="p">()</span>
-  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
   <span class="c">!&lt; Initialize PENF&#39;s variables that are not initialized into the definition specification.</span>
-  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
 
-  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
   <span class="k">call </span><span class="n">check_endian</span>
   <span class="n">BIR8P</span>  <span class="o">=</span> <span class="nb">bit_size</span><span class="p">(</span><span class="n">MaxR8P</span><span class="p">)</span>     <span class="p">;</span> <span class="n">BYR8P</span>  <span class="o">=</span> <span class="n">BIR8P</span><span class="o">/</span><span class="mi">8_I1P</span>
   <span class="n">BIR4P</span>  <span class="o">=</span> <span class="nb">bit_size</span><span class="p">(</span><span class="n">MaxR4P</span><span class="p">)</span>     <span class="p">;</span> <span class="n">BYR4P</span>  <span class="o">=</span> <span class="n">BIR4P</span><span class="o">/</span><span class="mi">8_I1P</span>
   <span class="n">BIR_P</span>  <span class="o">=</span> <span class="nb">bit_size</span><span class="p">(</span><span class="n">MaxR_P</span><span class="p">)</span>     <span class="p">;</span> <span class="n">BYR_P</span>  <span class="o">=</span> <span class="n">BIR_P</span><span class="o">/</span><span class="mi">8_I1P</span>
-<span class="cp">#ifdef r16p</span>
+<span class="c">! #ifdef r16p</span>
   <span class="n">BIR16P</span> <span class="o">=</span> <span class="nb">bit_size</span><span class="p">(</span><span class="n">MaxR16P</span><span class="p">)</span>    <span class="p">;</span> <span class="n">BYR16P</span> <span class="o">=</span> <span class="n">BIR16P</span><span class="o">/</span><span class="mi">8_I2P</span>
-<span class="cp">#else</span>
-  <span class="n">BIR16P</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">BIR8P</span><span class="p">,</span> <span class="nb">kind</span><span class="o">=</span><span class="n">I2P</span><span class="p">)</span> <span class="p">;</span> <span class="n">BYR16P</span> <span class="o">=</span> <span class="n">BIR16P</span><span class="o">/</span><span class="mi">8_I2P</span>
-<span class="cp">#endif</span>
+<span class="c">! #else</span>
+  <span class="c">! BIR16P = int(BIR8P, kind=I2P) ; BYR16P = BIR16P/8_I2P</span>
+<span class="c">! #endif</span>
   <span class="n">is_initialized</span> <span class="o">=</span> <span class="p">.</span><span class="n">true</span><span class="p">.</span>
-  <span class="k">return</span>
-  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
   <span class="n">endsubroutine</span> <span class="n">penf_init</span>
 </pre></div>
 

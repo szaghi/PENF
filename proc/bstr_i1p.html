@@ -126,7 +126,7 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
 	  data-placement="bottom" data-html="true"
-	  title=" 0.7% of total for procedures.">6 statements</a>
+	  title=" 0.7% of total for procedures.">5 statements</a>
      </li> 
      
      
@@ -582,19 +582,13 @@ private elemental function bstr_I1P(n) result(bstr)
     <section>
     <h2><span class="anchor" id="src"></span>Source Code</h2>
     <div class="highlight"><pre><span></span>  <span class="k">elemental function </span><span class="n">bstr_I1P</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">bstr</span><span class="p">)</span>
-  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
   <span class="c">!&lt; Convert integer to string of bits.</span>
   <span class="c">!&lt;</span>
   <span class="c">!&lt; @note It is assumed that I1P is represented by means of 8 bits, but this is not ensured in all architectures.</span>
-  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
   <span class="kt">integer</span><span class="p">(</span><span class="n">I1P</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">n</span>    <span class="c">!&lt; Real to be converted.</span>
   <span class="kt">character</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>             <span class="kd">::</span> <span class="n">bstr</span> <span class="c">!&lt; Returned bit-string containing input number.</span>
-  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
 
-  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
   <span class="k">write</span><span class="p">(</span><span class="n">bstr</span><span class="p">,</span> <span class="s1">&#39;(B8.8)&#39;</span><span class="p">)</span> <span class="n">n</span>
-  <span class="k">return</span>
-  <span class="c">!---------------------------------------------------------------------------------------------------------------------------------</span>
   <span class="n">endfunction</span> <span class="n">bstr_I1P</span>
 </pre></div>
 
