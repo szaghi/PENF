@@ -8,13 +8,14 @@ use penf_b_size, only : bit_size, byte_size
 #else
 use penf_b_size
 #endif
-use penf_stringify, only : str, strz, cton, bstr, bcton
+use penf_stringify, only : str_ascii, str_ucs4, str, strz, cton, bstr, bcton
 
 implicit none
 private
 save
 ! global parameters and variables
 public :: endianL, endianB, endian, is_initialized
+public :: ASCII, UCS4
 public :: R16P, FR16P, DR16P, MinR16P, MaxR16P, BIR16P, BYR16P, smallR16P, ZeroR16
 public :: R8P,  FR8P,  DR8P,  MinR8P,  MaxR8P,  BIR8P,  BYR8P,  smallR8P,  ZeroR8
 public :: R4P,  FR4P,  DR4P,  MinR4P,  MaxR4P,  BIR4P,  BYR4P,  smallR4P,  ZeroR4
@@ -29,6 +30,7 @@ public :: INTEGER_KINDS_LIST, INTEGER_FORMATS_LIST
 ! bit/byte size functions
 public :: bit_size, byte_size
 ! stringify facility
+public :: str_ascii, str_ucs4
 public :: str, strz, cton
 public :: bstr, bcton
 ! miscellanea facility
@@ -114,14 +116,10 @@ contains
   !< Initialize PENF's variables that are not initialized into the definition specification.
 
   call check_endian
-  BIR8P  = bit_size(MaxR8P)     ; BYR8P  = BIR8P/8_I1P
-  BIR4P  = bit_size(MaxR4P)     ; BYR4P  = BIR4P/8_I1P
-  BIR_P  = bit_size(MaxR_P)     ; BYR_P  = BIR_P/8_I1P
-! #ifdef r16p
-  BIR16P = bit_size(MaxR16P)    ; BYR16P = BIR16P/8_I2P
-! #else
-  ! BIR16P = int(BIR8P, kind=I2P) ; BYR16P = BIR16P/8_I2P
-! #endif
+  BIR8P  = bit_size(MaxR8P)  ; BYR8P  = BIR8P/8_I1P
+  BIR4P  = bit_size(MaxR4P)  ; BYR4P  = BIR4P/8_I1P
+  BIR_P  = bit_size(MaxR_P)  ; BYR_P  = BIR_P/8_I1P
+  BIR16P = bit_size(MaxR16P) ; BYR16P = BIR16P/8_I2P
   is_initialized = .true.
   endsubroutine penf_init
 
