@@ -9,13 +9,36 @@ use penf_global_parameters_variables
 implicit none
 private
 save
+public :: str_ascii, str_ucs4
 public :: str, strz, cton
 public :: bstr, bcton
+
+interface str_ascii
+   !< Convert string of any kind to ASCII string.
+   module procedure str_ascii_default
+#if defined _ASCII_SUPPORTED && defined _ASCII_NEQ_DEFAULT
+   module procedure str_ascii_ascii
+#endif
+#ifdef _UCS4_SUPPORTED
+   module procedure str_ascii_ucs4
+#endif
+endinterface
+
+interface str_ucs4
+   !< Convert string of any kind to UCS4 string.
+   module procedure str_ucs4_default
+#if defined _ASCII_SUPPORTED && defined _ASCII_NEQ_DEFAULT
+   module procedure str_ucs4_ascii
+#endif
+#ifdef _UCS4_SUPPORTED
+   module procedure str_ucs4_ucs4
+#endif
+endinterface
 
 interface str
   !< Convert number (real and integer) to string (number to string type casting).
   module procedure                       &
-#ifdef r16p
+#ifdef _R16P_SUPPORTED
                    strf_R16P,str_R16P,   &
 #endif
                    strf_R8P ,str_R8P,    &
@@ -25,7 +48,7 @@ interface str
                    strf_I2P ,str_I2P,    &
                    strf_I1P ,str_I1P,    &
                              str_bol,    &
-#ifdef r16p
+#ifdef _R16P_SUPPORTED
                              str_a_R16P, &
 #endif
                              str_a_R8P,  &
@@ -44,7 +67,7 @@ endinterface
 interface cton
   !< Convert string to number (real and integer, string to number type casting).
   module procedure            &
-#ifdef r16p
+#ifdef _R16P_SUPPORTED
                    ctor_R16P, &
 #endif
                    ctor_R8P,  &
@@ -58,7 +81,7 @@ endinterface
 interface bstr
   !< Convert number (real and integer) to bit-string (number to bit-string type casting).
   module procedure            &
-#ifdef r16p
+#ifdef _R16P_SUPPORTED
                    bstr_R16P, &
 #endif
                    bstr_R8P,  &
@@ -72,7 +95,7 @@ endinterface
 interface bcton
   !< Convert bit-string to number (real and integer, bit-string to number type casting).
   module procedure             &
-#ifdef r16p
+#ifdef _R16P_SUPPORTED
                    bctor_R16P, &
 #endif
                    bctor_R8P,  &
@@ -84,6 +107,54 @@ interface bcton
 endinterface
 
 contains
+   pure function str_ascii_default(input) result(output)
+   !< Convert string of default kind to ASCII string.
+   character(len=*), intent(in)              :: input  !< Input string of default kind.
+   character(len=:, kind=ASCII), allocatable :: output !< Output string of ASCII kind.
+
+   output = input
+   endfunction str_ascii_default
+
+   pure function str_ascii_ascii(input) result(output)
+   !< Convert string of ASCII kind to ASCII string, just for convenience in sanitize strings.
+   character(len=*, kind=ASCII), intent(in)  :: input  !< Input string of ASCII kind.
+   character(len=:, kind=ASCII), allocatable :: output !< Output string of ASCII kind.
+
+   output = input
+   endfunction str_ascii_ascii
+
+   pure function str_ascii_ucs4(input) result(output)
+   !< Convert string of UCS4 kind to ASCII string.
+   character(len=*, kind=UCS4), intent(in)   :: input  !< Input string of UCS4 kind.
+   character(len=:, kind=ASCII), allocatable :: output !< Output string of ASCII kind.
+
+   output = input
+   endfunction str_ascii_ucs4
+
+   pure function str_ucs4_default(input) result(output)
+   !< Convert string of default kind to UCS4 string.
+   character(len=*), intent(in)             :: input  !< Input string of default kind.
+   character(len=:, kind=UCS4), allocatable :: output !< Output string of UCS4 kind.
+
+   output = input
+   endfunction str_ucs4_default
+
+   pure function str_ucs4_ascii(input) result(output)
+   !< Convert string of ASCII kind to UCS4 string.
+   character(len=*, kind=ASCII), intent(in) :: input  !< Input string of ASCII kind.
+   character(len=:, kind=UCS4), allocatable :: output !< Output string of UCS4 kind.
+
+   output = input
+   endfunction str_ucs4_ascii
+
+   pure function str_ucs4_ucs4(input) result(output)
+   !< Convert string of UCS4 kind to UCS4 string, just for convenience in sanitize strings.
+   character(len=*, kind=UCS4), intent(in)  :: input  !< Input string of UCS4 kind.
+   character(len=:, kind=UCS4), allocatable :: output !< Output string of UCS4 kind.
+
+   output = input
+   endfunction str_ucs4_ucs4
+
   elemental function strf_R16P(fm, n) result(str)
   !< Convert real to string.
   character(*), intent(in) :: fm  !< Format different from the standard for the kind.
