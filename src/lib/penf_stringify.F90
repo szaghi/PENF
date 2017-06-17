@@ -9,13 +9,14 @@ use penf_global_parameters_variables
 implicit none
 private
 save
+public :: str_ascii, str_ucs4
 public :: str, strz, cton
 public :: bstr, bcton
 
 interface str
   !< Convert number (real and integer) to string (number to string type casting).
   module procedure                       &
-#ifdef r16p
+#ifdef _R16P
                    strf_R16P,str_R16P,   &
 #endif
                    strf_R8P ,str_R8P,    &
@@ -25,7 +26,7 @@ interface str
                    strf_I2P ,str_I2P,    &
                    strf_I1P ,str_I1P,    &
                              str_bol,    &
-#ifdef r16p
+#ifdef _R16P
                              str_a_R16P, &
 #endif
                              str_a_R8P,  &
@@ -44,7 +45,7 @@ endinterface
 interface cton
   !< Convert string to number (real and integer, string to number type casting).
   module procedure            &
-#ifdef r16p
+#ifdef _R16P
                    ctor_R16P, &
 #endif
                    ctor_R8P,  &
@@ -58,7 +59,7 @@ endinterface
 interface bstr
   !< Convert number (real and integer) to bit-string (number to bit-string type casting).
   module procedure            &
-#ifdef r16p
+#ifdef _R16P
                    bstr_R16P, &
 #endif
                    bstr_R8P,  &
@@ -72,7 +73,7 @@ endinterface
 interface bcton
   !< Convert bit-string to number (real and integer, bit-string to number type casting).
   module procedure             &
-#ifdef r16p
+#ifdef _R16P
                    bctor_R16P, &
 #endif
                    bctor_R8P,  &
@@ -84,6 +85,44 @@ interface bcton
 endinterface
 
 contains
+   pure function str_ascii(input) result(output)
+   !< Convert string of any kind to UCS4 string.
+   class(*), intent(in)                      :: input  !< Input string of any kind.
+   character(len=:, kind=ASCII), allocatable :: output !< Output string of ASCII kind.
+
+   select type(input)
+#if defined _ASCII_SUPPORTED && defined _ASCII_NEQ_DEFAULT
+   type is(character(len=*, kind=ASCII))
+      output = input
+#endif
+#ifdef _UCS4_SUPPORTED
+   type is(character(len=*, kind=UCS4))
+      output = input
+#endif
+   type is(character(len=*))
+      output = input
+   endselect
+   endfunction str_ascii
+
+   pure function str_ucs4(input) result(output)
+   !< Convert string of any kind to UCS4 string.
+   class(*), intent(in)                     :: input  !< Input string of any kind.
+   character(len=:, kind=UCS4), allocatable :: output !< Output string of UCS4 kind.
+
+   select type(input)
+#if defined _ASCII_SUPPORTED && defined _ASCII_NEQ_DEFAULT
+   type is(character(len=*, kind=ASCII))
+      output = input
+#endif
+#ifdef _UCS4_SUPPORTED
+   type is(character(len=*, kind=UCS4))
+      output = input
+#endif
+   type is(character(len=*))
+      output = input
+   endselect
+   endfunction str_ucs4
+
   elemental function strf_R16P(fm, n) result(str)
   !< Convert real to string.
   character(*), intent(in) :: fm  !< Format different from the standard for the kind.
