@@ -32,11 +32,7 @@ integer, parameter :: R16P = selected_real_kind(15,307)       !< Defined as R8P;
 #endif
 integer, parameter :: R8P  = selected_real_kind(15,307)       !< 15 digits, range \([10^{-307} , 10^{+307}  - 1]\); 64 bits.
 integer, parameter :: R4P  = selected_real_kind(6,37)         !< 6  digits, range \([10^{-37}  , 10^{+37}   - 1]\); 32 bits.
-#ifdef _R16P_SUPPORTED
-integer, parameter :: R_P  = R16P                             !< Default real precision.
-#else
 integer, parameter :: R_P  = R8P                              !< Default real precision.
-#endif
 integer, parameter :: I8P  = selected_int_kind(18)            !< Range \([-2^{63},+2^{63} - 1]\), 19 digits plus sign; 64 bits.
 integer, parameter :: I4P  = selected_int_kind(9)             !< Range \([-2^{31},+2^{31} - 1]\), 10 digits plus sign; 32 bits.
 integer, parameter :: I2P  = selected_int_kind(4)             !< Range \([-2^{15},+2^{15} - 1]\), 5  digits plus sign; 16 bits.
