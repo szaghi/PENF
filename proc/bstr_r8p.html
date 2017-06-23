@@ -126,7 +126,7 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
 	  data-placement="bottom" data-html="true"
-	  title=" 0.6% of total for procedures.">5 statements</a>
+	  title=" 1.0% of total for procedures.">8 statements</a>
      </li> 
      
      
@@ -384,6 +384,9 @@ private elemental function bstr_R8P(n) result(bstr)
     
     <p>Convert real to string of bits.</p>
 <p></p><div class="alert alert-info" role="alert"><h4>Note</h4><p>It is assumed that R8P is represented by means of 64 bits, but this is not ensured in all architectures.</p></div>
+<div class="codehilite"><pre><span></span> <span class="k">use </span><span class="n">penf</span>
+ <span class="k">print</span> <span class="s2">&quot;(A)&quot;</span><span class="p">,</span> <span class="n">bstr</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mf">1._R8P</span><span class="p">)</span>
+</pre></div>
     
 
     <h3>Arguments</h3>
@@ -597,15 +600,24 @@ private elemental function bstr_R8P(n) result(bstr)
     
     <section>
     <h2><span class="anchor" id="src"></span>Source Code</h2>
-    <div class="highlight"><pre><span></span>  <span class="k">elemental function </span><span class="n">bstr_R8P</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">bstr</span><span class="p">)</span>
-  <span class="c">!&lt; Convert real to string of bits.</span>
-  <span class="c">!&lt;</span>
-  <span class="c">!&lt; @note It is assumed that R8P is represented by means of 64 bits, but this is not ensured in all architectures.</span>
-  <span class="kt">real</span><span class="p">(</span><span class="n">R8P</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">n</span>    <span class="c">!&lt; Real to be converted.</span>
-  <span class="kt">character</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span>         <span class="kd">::</span> <span class="n">bstr</span> <span class="c">!&lt; Returned bit-string containing input number.</span>
+    <div class="highlight"><pre><span></span>   <span class="k">elemental function </span><span class="n">bstr_R8P</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">bstr</span><span class="p">)</span>
+   <span class="c">!&lt; Convert real to string of bits.</span>
+   <span class="c">!&lt;</span>
+   <span class="c">!&lt; @note It is assumed that R8P is represented by means of 64 bits, but this is not ensured in all architectures.</span>
+   <span class="c">!&lt;</span>
+   <span class="c">!&lt;```fortran</span>
+   <span class="c">!&lt; use penf</span>
+   <span class="c">!&lt; print &quot;(A)&quot;, bstr(n=1._R8P)</span>
+   <span class="c">!&lt;```</span>
+   <span class="c">!=&gt; 0000000000000000000000000000000000000000000000001111000000111111 &lt;&lt;&lt;</span>
+   <span class="kt">real</span><span class="p">(</span><span class="n">R8P</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span>     <span class="kd">::</span> <span class="n">n</span>         <span class="c">!&lt; Real to be converted.</span>
+   <span class="kt">character</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span>             <span class="kd">::</span> <span class="n">bstr</span>      <span class="c">!&lt; Returned bit-string containing input number.</span>
+   <span class="kt">integer</span><span class="p">(</span><span class="n">I1P</span><span class="p">),</span> <span class="k">allocatable</span> <span class="kd">::</span> <span class="n">buffer</span><span class="p">(:)</span> <span class="c">!&lt; Transfer buffer.</span>
 
-  <span class="k">write</span><span class="p">(</span><span class="n">bstr</span><span class="p">,</span> <span class="s1">&#39;(B64.64)&#39;</span><span class="p">)</span> <span class="n">n</span>
-  <span class="n">endfunction</span> <span class="n">bstr_R8P</span>
+   <span class="k">allocate</span><span class="p">(</span><span class="n">buffer</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span>
+   <span class="n">buffer</span> <span class="o">=</span> <span class="nb">transfer</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">buffer</span><span class="p">)</span>
+   <span class="k">write</span><span class="p">(</span><span class="n">bstr</span><span class="p">,</span> <span class="s1">&#39;(8B8.8)&#39;</span><span class="p">)</span> <span class="n">buffer</span>
+   <span class="n">endfunction</span> <span class="n">bstr_R8P</span>
 </pre></div>
 
     </section>

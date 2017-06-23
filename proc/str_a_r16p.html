@@ -383,6 +383,29 @@ private pure function str_a_R16P(n, no_sign, separator, delimiters, compact) res
 
     
     <p>Converting real array to string.</p>
+<div class="codehilite"><pre><span></span> <span class="k">use </span><span class="n">penf</span>
+ <span class="k">print</span> <span class="s2">&quot;(A)&quot;</span><span class="p">,</span> <span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="p">[</span><span class="mf">1._R16P</span><span class="p">,</span> <span class="o">-</span><span class="mf">2._R16P</span><span class="p">])</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span> <span class="k">use </span><span class="n">penf</span>
+ <span class="k">print</span> <span class="s2">&quot;(A)&quot;</span><span class="p">,</span> <span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="p">[</span><span class="mf">1._R16P</span><span class="p">,</span> <span class="mf">2._R16P</span><span class="p">],</span> <span class="n">no_sign</span><span class="o">=</span><span class="p">.</span><span class="n">true</span><span class="p">.)</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span> <span class="k">use </span><span class="n">penf</span>
+ <span class="k">print</span> <span class="s2">&quot;(A)&quot;</span><span class="p">,</span> <span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="p">[</span><span class="mf">1._R16P</span><span class="p">,</span> <span class="o">-</span><span class="mf">2._R16P</span><span class="p">],</span> <span class="n">separator</span><span class="o">=</span><span class="s1">&#39;|&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span> <span class="k">use </span><span class="n">penf</span>
+ <span class="k">print</span> <span class="s2">&quot;(A)&quot;</span><span class="p">,</span> <span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="p">[</span><span class="mf">1._R16P</span><span class="p">,</span> <span class="o">-</span><span class="mf">2._R16P</span><span class="p">],</span> <span class="n">delimiters</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;(&#39;</span><span class="p">,</span> <span class="s1">&#39;)&#39;</span><span class="p">])</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span> <span class="k">use </span><span class="n">penf</span>
+ <span class="k">print</span> <span class="s2">&quot;(A)&quot;</span><span class="p">,</span> <span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="p">[</span><span class="mf">1._R16P</span><span class="p">,</span> <span class="o">-</span><span class="mf">2._R16P</span><span class="p">],</span> <span class="n">compact</span><span class="o">=</span><span class="p">.</span><span class="n">true</span><span class="p">.)</span>
+</pre></div>
     
 
     <h3>Arguments</h3>
@@ -438,7 +461,7 @@ private pure function str_a_R16P(n, no_sign, separator, delimiters, compact) res
   <td>optional</td>
   
   <td></td><td>::</td>
-  <td><strong>separator</strong>(1)</td><td><p>Eventual separator of array values.</p></td>
+  <td><strong>separator</strong></td><td><p>Eventual separator of array values.</p></td>
   
 </tr>
 
@@ -656,28 +679,58 @@ private pure function str_a_R16P(n, no_sign, separator, delimiters, compact) res
     
     <section>
     <h2><span class="anchor" id="src"></span>Source Code</h2>
-    <div class="highlight"><pre><span></span>  <span class="k">pure function </span><span class="n">str_a_R16P</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">no_sign</span><span class="p">,</span> <span class="n">separator</span><span class="p">,</span> <span class="n">delimiters</span><span class="p">,</span> <span class="n">compact</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">str</span><span class="p">)</span>
-  <span class="c">!&lt; Converting real array to string.</span>
-  <span class="kt">real</span><span class="p">(</span><span class="n">R16P</span><span class="p">),</span>   <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span>           <span class="kd">::</span> <span class="n">n</span><span class="p">(:)</span>            <span class="c">!&lt; Real array to be converted.</span>
-  <span class="kt">logical</span><span class="p">,</span>      <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span> <span class="k">optional</span> <span class="kd">::</span> <span class="n">no_sign</span>         <span class="c">!&lt; Flag for leaving out the sign.</span>
-  <span class="kt">character</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span> <span class="k">optional</span> <span class="kd">::</span> <span class="n">separator</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>    <span class="c">!&lt; Eventual separator of array values.</span>
-  <span class="kt">character</span><span class="p">(</span><span class="o">*</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span> <span class="k">optional</span> <span class="kd">::</span> <span class="n">delimiters</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">)</span> <span class="c">!&lt; Eventual delimiters of array values.</span>
-  <span class="kt">logical</span><span class="p">,</span>      <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span> <span class="k">optional</span> <span class="kd">::</span> <span class="n">compact</span>         <span class="c">!&lt; Flag for *compacting* string encoding.</span>
-  <span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="p">:),</span> <span class="k">allocatable</span>      <span class="kd">::</span> <span class="n">str</span>             <span class="c">!&lt; Returned string containing input number.</span>
-  <span class="kt">character</span><span class="p">(</span><span class="n">DR16P</span><span class="p">)</span>                   <span class="kd">::</span> <span class="n">strn</span>            <span class="c">!&lt; String containing of element of input array number.</span>
-  <span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>                   <span class="kd">::</span> <span class="n">sep</span>             <span class="c">!&lt; Array values separator</span>
-  <span class="kt">integer</span>                            <span class="kd">::</span> <span class="n">i</span>               <span class="c">!&lt; Counter.</span>
+    <div class="highlight"><pre><span></span>   <span class="k">pure function </span><span class="n">str_a_R16P</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">no_sign</span><span class="p">,</span> <span class="n">separator</span><span class="p">,</span> <span class="n">delimiters</span><span class="p">,</span> <span class="n">compact</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">str</span><span class="p">)</span>
+   <span class="c">!&lt; Converting real array to string.</span>
+   <span class="c">!&lt;</span>
+   <span class="c">!&lt;```fortran</span>
+   <span class="c">!&lt; use penf</span>
+   <span class="c">!&lt; print &quot;(A)&quot;, str(n=[1._R16P, -2._R16P])</span>
+   <span class="c">!&lt;```</span>
+   <span class="c">!=&gt; +0.100000000000000000000000000000000E+0001,-0.200000000000000000000000000000000E+0001 &lt;&lt;&lt;</span>
+   <span class="c">!&lt;</span>
+   <span class="c">!&lt;```fortran</span>
+   <span class="c">!&lt; use penf</span>
+   <span class="c">!&lt; print &quot;(A)&quot;, str(n=[1._R16P, 2._R16P], no_sign=.true.)</span>
+   <span class="c">!&lt;```</span>
+   <span class="c">!=&gt; 0.100000000000000000000000000000000E+0001,0.200000000000000000000000000000000E+0001 &lt;&lt;&lt;</span>
+   <span class="c">!&lt;</span>
+   <span class="c">!&lt;```fortran</span>
+   <span class="c">!&lt; use penf</span>
+   <span class="c">!&lt; print &quot;(A)&quot;, str(n=[1._R16P, -2._R16P], separator=&#39;|&#39;)</span>
+   <span class="c">!&lt;```</span>
+   <span class="c">!=&gt; +0.100000000000000000000000000000000E+0001|-0.200000000000000000000000000000000E+0001 &lt;&lt;&lt;</span>
+   <span class="c">!&lt;</span>
+   <span class="c">!&lt;```fortran</span>
+   <span class="c">!&lt; use penf</span>
+   <span class="c">!&lt; print &quot;(A)&quot;, str(n=[1._R16P, -2._R16P], delimiters=[&#39;(&#39;, &#39;)&#39;])</span>
+   <span class="c">!&lt;```</span>
+   <span class="c">!=&gt; (+0.100000000000000000000000000000000E+0001,-0.200000000000000000000000000000000E+0001) &lt;&lt;&lt;</span>
+   <span class="c">!&lt;</span>
+   <span class="c">!&lt;```fortran</span>
+   <span class="c">!&lt; use penf</span>
+   <span class="c">!&lt; print &quot;(A)&quot;, str(n=[1._R16P, -2._R16P], compact=.true.)</span>
+   <span class="c">!&lt;```</span>
+   <span class="c">!=&gt; +0.1E+1,-0.2E+1 &lt;&lt;&lt;</span>
+   <span class="kt">real</span><span class="p">(</span><span class="n">R16P</span><span class="p">),</span>   <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span>           <span class="kd">::</span> <span class="n">n</span><span class="p">(:)</span>            <span class="c">!&lt; Real array to be converted.</span>
+   <span class="kt">logical</span><span class="p">,</span>      <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span> <span class="k">optional</span> <span class="kd">::</span> <span class="n">no_sign</span>         <span class="c">!&lt; Flag for leaving out the sign.</span>
+   <span class="kt">character</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span> <span class="k">optional</span> <span class="kd">::</span> <span class="n">separator</span>       <span class="c">!&lt; Eventual separator of array values.</span>
+   <span class="kt">character</span><span class="p">(</span><span class="o">*</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span> <span class="k">optional</span> <span class="kd">::</span> <span class="n">delimiters</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">)</span> <span class="c">!&lt; Eventual delimiters of array values.</span>
+   <span class="kt">logical</span><span class="p">,</span>      <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span> <span class="k">optional</span> <span class="kd">::</span> <span class="n">compact</span>         <span class="c">!&lt; Flag for *compacting* string encoding.</span>
+   <span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="p">:),</span> <span class="k">allocatable</span>      <span class="kd">::</span> <span class="n">str</span>             <span class="c">!&lt; Returned string containing input number.</span>
+   <span class="kt">character</span><span class="p">(</span><span class="n">DR16P</span><span class="p">)</span>                   <span class="kd">::</span> <span class="n">strn</span>            <span class="c">!&lt; String containing of element of input array number.</span>
+   <span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>                   <span class="kd">::</span> <span class="n">sep</span>             <span class="c">!&lt; Array values separator</span>
+   <span class="kt">integer</span>                            <span class="kd">::</span> <span class="n">i</span>               <span class="c">!&lt; Counter.</span>
 
-  <span class="n">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-  <span class="n">sep</span> <span class="o">=</span> <span class="s1">&#39;,&#39;</span>
-  <span class="k">if</span><span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">separator</span><span class="p">))</span> <span class="n">sep</span> <span class="o">=</span> <span class="n">separator</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-  <span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">size</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-    <span class="n">strn</span> <span class="o">=</span> <span class="n">str_R16P</span><span class="p">(</span><span class="n">no_sign</span><span class="o">=</span><span class="n">no_sign</span><span class="p">,</span> <span class="n">compact</span><span class="o">=</span><span class="n">compact</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
-    <span class="n">str</span> <span class="o">=</span> <span class="n">str</span><span class="o">//</span><span class="n">sep</span><span class="o">//</span><span class="nb">trim</span><span class="p">(</span><span class="n">strn</span><span class="p">)</span>
-  <span class="n">enddo</span>
-  <span class="n">str</span> <span class="o">=</span> <span class="nb">trim</span><span class="p">(</span><span class="n">str</span><span class="p">(</span><span class="mi">2</span><span class="p">:))</span>
-  <span class="k">if</span> <span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">delimiters</span><span class="p">))</span> <span class="n">str</span> <span class="o">=</span> <span class="n">delimiters</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">//</span><span class="n">str</span><span class="o">//</span><span class="n">delimiters</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-  <span class="n">endfunction</span> <span class="n">str_a_R16P</span>
+   <span class="n">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+   <span class="n">sep</span> <span class="o">=</span> <span class="s1">&#39;,&#39;</span>
+   <span class="k">if</span><span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">separator</span><span class="p">))</span> <span class="n">sep</span> <span class="o">=</span> <span class="n">separator</span>
+   <span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">size</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+     <span class="n">strn</span> <span class="o">=</span> <span class="n">str_R16P</span><span class="p">(</span><span class="n">no_sign</span><span class="o">=</span><span class="n">no_sign</span><span class="p">,</span> <span class="n">compact</span><span class="o">=</span><span class="n">compact</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+     <span class="n">str</span> <span class="o">=</span> <span class="n">str</span><span class="o">//</span><span class="n">sep</span><span class="o">//</span><span class="nb">trim</span><span class="p">(</span><span class="n">strn</span><span class="p">)</span>
+   <span class="n">enddo</span>
+   <span class="n">str</span> <span class="o">=</span> <span class="nb">trim</span><span class="p">(</span><span class="n">str</span><span class="p">(</span><span class="mi">2</span><span class="p">:))</span>
+   <span class="k">if</span> <span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">delimiters</span><span class="p">))</span> <span class="n">str</span> <span class="o">=</span> <span class="n">delimiters</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">//</span><span class="n">str</span><span class="o">//</span><span class="n">delimiters</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+   <span class="n">endfunction</span> <span class="n">str_a_R16P</span>
 </pre></div>
 
     </section>

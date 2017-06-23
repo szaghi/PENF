@@ -665,10 +665,10 @@ public subroutine penf_init()
   <span class="c">!&lt; Initialize PENF&#39;s variables that are not initialized into the definition specification.</span>
 
   <span class="k">call </span><span class="n">check_endian</span>
+  <span class="n">BIR16P</span> <span class="o">=</span> <span class="nb">bit_size</span><span class="p">(</span><span class="n">MaxR16P</span><span class="p">)</span> <span class="p">;</span> <span class="n">BYR16P</span> <span class="o">=</span> <span class="n">BIR16P</span><span class="o">/</span><span class="mi">8_I2P</span>
   <span class="n">BIR8P</span>  <span class="o">=</span> <span class="nb">bit_size</span><span class="p">(</span><span class="n">MaxR8P</span><span class="p">)</span>  <span class="p">;</span> <span class="n">BYR8P</span>  <span class="o">=</span> <span class="n">BIR8P</span><span class="o">/</span><span class="mi">8_I1P</span>
   <span class="n">BIR4P</span>  <span class="o">=</span> <span class="nb">bit_size</span><span class="p">(</span><span class="n">MaxR4P</span><span class="p">)</span>  <span class="p">;</span> <span class="n">BYR4P</span>  <span class="o">=</span> <span class="n">BIR4P</span><span class="o">/</span><span class="mi">8_I1P</span>
   <span class="n">BIR_P</span>  <span class="o">=</span> <span class="nb">bit_size</span><span class="p">(</span><span class="n">MaxR_P</span><span class="p">)</span>  <span class="p">;</span> <span class="n">BYR_P</span>  <span class="o">=</span> <span class="n">BIR_P</span><span class="o">/</span><span class="mi">8_I1P</span>
-  <span class="n">BIR16P</span> <span class="o">=</span> <span class="nb">bit_size</span><span class="p">(</span><span class="n">MaxR16P</span><span class="p">)</span> <span class="p">;</span> <span class="n">BYR16P</span> <span class="o">=</span> <span class="n">BIR16P</span><span class="o">/</span><span class="mi">8_I2P</span>
   <span class="n">is_initialized</span> <span class="o">=</span> <span class="p">.</span><span class="n">true</span><span class="p">.</span>
   <span class="n">endsubroutine</span> <span class="n">penf_init</span>
 </pre></div>

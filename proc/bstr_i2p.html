@@ -384,6 +384,9 @@ private elemental function bstr_I2P(n) result(bstr)
     
     <p>Convert integer to string of bits.</p>
 <p></p><div class="alert alert-info" role="alert"><h4>Note</h4><p>It is assumed that I2P is represented by means of 16 bits, but this is not ensured in all architectures.</p></div>
+<div class="codehilite"><pre><span></span> <span class="k">use </span><span class="n">penf</span>
+ <span class="k">print</span> <span class="s2">&quot;(A)&quot;</span><span class="p">,</span> <span class="n">bstr</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">1_I2P</span><span class="p">)</span>
+</pre></div>
     
 
     <h3>Arguments</h3>
@@ -597,15 +600,21 @@ private elemental function bstr_I2P(n) result(bstr)
     
     <section>
     <h2><span class="anchor" id="src"></span>Source Code</h2>
-    <div class="highlight"><pre><span></span>  <span class="k">elemental function </span><span class="n">bstr_I2P</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">bstr</span><span class="p">)</span>
-  <span class="c">!&lt; Convert integer to string of bits.</span>
-  <span class="c">!&lt;</span>
-  <span class="c">!&lt; @note It is assumed that I2P is represented by means of 16 bits, but this is not ensured in all architectures.</span>
-  <span class="kt">integer</span><span class="p">(</span><span class="n">I2P</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">n</span>    <span class="c">!&lt; Real to be converted.</span>
-  <span class="kt">character</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>            <span class="kd">::</span> <span class="n">bstr</span> <span class="c">!&lt; Returned bit-string containing input number.</span>
+    <div class="highlight"><pre><span></span>   <span class="k">elemental function </span><span class="n">bstr_I2P</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">bstr</span><span class="p">)</span>
+   <span class="c">!&lt; Convert integer to string of bits.</span>
+   <span class="c">!&lt;</span>
+   <span class="c">!&lt; @note It is assumed that I2P is represented by means of 16 bits, but this is not ensured in all architectures.</span>
+   <span class="c">!&lt;</span>
+   <span class="c">!&lt;```fortran</span>
+   <span class="c">!&lt; use penf</span>
+   <span class="c">!&lt; print &quot;(A)&quot;, bstr(n=1_I2P)</span>
+   <span class="c">!&lt;```</span>
+   <span class="c">!=&gt; 0000000000000001 &lt;&lt;&lt;</span>
+   <span class="kt">integer</span><span class="p">(</span><span class="n">I2P</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">n</span>    <span class="c">!&lt; Real to be converted.</span>
+   <span class="kt">character</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>            <span class="kd">::</span> <span class="n">bstr</span> <span class="c">!&lt; Returned bit-string containing input number.</span>
 
-  <span class="k">write</span><span class="p">(</span><span class="n">bstr</span><span class="p">,</span> <span class="s1">&#39;(B16.16)&#39;</span><span class="p">)</span> <span class="n">n</span>
-  <span class="n">endfunction</span> <span class="n">bstr_I2P</span>
+   <span class="k">write</span><span class="p">(</span><span class="n">bstr</span><span class="p">,</span> <span class="s1">&#39;(B16.16)&#39;</span><span class="p">)</span> <span class="n">n</span>
+   <span class="n">endfunction</span> <span class="n">bstr_I2P</span>
 </pre></div>
 
     </section>

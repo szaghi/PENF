@@ -383,6 +383,14 @@ private elemental function strz_I8P(n, nz_pad) result(str)
 
     
     <p>Converting integer to string, prefixing with the right number of zeros.</p>
+<div class="codehilite"><pre><span></span> <span class="k">use </span><span class="n">penf</span>
+ <span class="k">print</span> <span class="s2">&quot;(A)&quot;</span><span class="p">,</span> <span class="n">strz</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">1_I8P</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span> <span class="k">use </span><span class="n">penf</span>
+ <span class="k">print</span> <span class="s2">&quot;(A)&quot;</span><span class="p">,</span> <span class="n">strz</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">1_I8P</span><span class="p">,</span> <span class="n">nz_pad</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
     
 
     <h3>Arguments</h3>
@@ -611,16 +619,28 @@ private elemental function strz_I8P(n, nz_pad) result(str)
     
     <section>
     <h2><span class="anchor" id="src"></span>Source Code</h2>
-    <div class="highlight"><pre><span></span>  <span class="k">elemental function </span><span class="n">strz_I8P</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">nz_pad</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">str</span><span class="p">)</span>
-  <span class="c">!&lt; Converting integer to string, prefixing with the right number of zeros.</span>
-  <span class="kt">integer</span><span class="p">(</span><span class="n">I8P</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span>           <span class="kd">::</span> <span class="n">n</span>      <span class="c">!&lt; Integer to be converted.</span>
-  <span class="kt">integer</span><span class="p">(</span><span class="n">I4P</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span> <span class="k">optional</span> <span class="kd">::</span> <span class="n">nz_pad</span> <span class="c">!&lt; Number of zeros padding.</span>
-  <span class="kt">character</span><span class="p">(</span><span class="n">DI8P</span><span class="p">)</span>                    <span class="kd">::</span> <span class="n">str</span>    <span class="c">!&lt; Returned string containing input number plus padding zeros.</span>
+    <div class="highlight"><pre><span></span>   <span class="k">elemental function </span><span class="n">strz_I8P</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">nz_pad</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">str</span><span class="p">)</span>
+   <span class="c">!&lt; Converting integer to string, prefixing with the right number of zeros.</span>
+   <span class="c">!&lt;</span>
+   <span class="c">!&lt;```fortran</span>
+   <span class="c">!&lt; use penf</span>
+   <span class="c">!&lt; print &quot;(A)&quot;, strz(n=1_I8P)</span>
+   <span class="c">!&lt;```</span>
+   <span class="c">!=&gt; 0000000000000000001 &lt;&lt;&lt;</span>
+   <span class="c">!&lt;</span>
+   <span class="c">!&lt;```fortran</span>
+   <span class="c">!&lt; use penf</span>
+   <span class="c">!&lt; print &quot;(A)&quot;, strz(n=1_I8P, nz_pad=5)</span>
+   <span class="c">!&lt;```</span>
+   <span class="c">!=&gt; 00001 &lt;&lt;&lt;</span>
+   <span class="kt">integer</span><span class="p">(</span><span class="n">I8P</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span>           <span class="kd">::</span> <span class="n">n</span>      <span class="c">!&lt; Integer to be converted.</span>
+   <span class="kt">integer</span><span class="p">(</span><span class="n">I4P</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span> <span class="k">optional</span> <span class="kd">::</span> <span class="n">nz_pad</span> <span class="c">!&lt; Number of zeros padding.</span>
+   <span class="kt">character</span><span class="p">(</span><span class="n">DI8P</span><span class="p">)</span>                    <span class="kd">::</span> <span class="n">str</span>    <span class="c">!&lt; Returned string containing input number plus padding zeros.</span>
 
-  <span class="k">write</span><span class="p">(</span><span class="n">str</span><span class="p">,</span><span class="n">FI8PZP</span><span class="p">)</span> <span class="n">n</span>                              <span class="c">! Casting of n to string.</span>
-  <span class="n">str</span><span class="o">=</span><span class="n">str</span><span class="p">(</span><span class="mi">2</span><span class="p">:)</span>                                      <span class="c">! Leaving out the sign.</span>
-  <span class="k">if</span> <span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">nz_pad</span><span class="p">))</span> <span class="n">str</span><span class="o">=</span><span class="n">str</span><span class="p">(</span><span class="n">DI8P</span><span class="o">-</span><span class="n">nz_pad</span><span class="p">:</span><span class="n">DI8P</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="c">! Leaving out the extra zeros padding</span>
-  <span class="n">endfunction</span> <span class="n">strz_I8P</span>
+   <span class="k">write</span><span class="p">(</span><span class="n">str</span><span class="p">,</span><span class="n">FI8PZP</span><span class="p">)</span> <span class="n">n</span>                              <span class="c">! Casting of n to string.</span>
+   <span class="n">str</span><span class="o">=</span><span class="n">str</span><span class="p">(</span><span class="mi">2</span><span class="p">:)</span>                                      <span class="c">! Leaving out the sign.</span>
+   <span class="k">if</span> <span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">nz_pad</span><span class="p">))</span> <span class="n">str</span><span class="o">=</span><span class="n">str</span><span class="p">(</span><span class="n">DI8P</span><span class="o">-</span><span class="n">nz_pad</span><span class="p">:</span><span class="n">DI8P</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="c">! Leaving out the extra zeros padding</span>
+   <span class="n">endfunction</span> <span class="n">strz_I8P</span>
 </pre></div>
 
     </section>

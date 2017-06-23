@@ -383,6 +383,11 @@ private pure function str_ascii_ascii(input) result(output)
 
     
     <p>Convert string of ASCII kind to ASCII string, just for convenience in sanitize strings.</p>
+<div class="codehilite"><pre><span></span> <span class="k">use </span><span class="n">penf</span>
+ <span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="p">:,</span> <span class="nb">kind</span><span class="o">=</span><span class="n">ASCII</span><span class="p">),</span> <span class="k">allocatable</span> <span class="kd">::</span> <span class="n">string</span>
+ <span class="n">string</span> <span class="o">=</span> <span class="n">str_ascii</span><span class="p">(</span><span class="s1">&#39;I was ASCII kind and I am still ASCII&#39;</span><span class="p">)</span>
+ <span class="k">print</span> <span class="s2">&quot;(A)&quot;</span><span class="p">,</span> <span class="n">string</span>
+</pre></div>
     
 
     <h3>Arguments</h3>
@@ -485,6 +490,14 @@ private pure function str_ascii_ascii(input) result(output)
     <h2><span class="anchor" id="src"></span>Source Code</h2>
     <div class="highlight"><pre><span></span>   <span class="k">pure function </span><span class="n">str_ascii_ascii</span><span class="p">(</span><span class="n">input</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
    <span class="c">!&lt; Convert string of ASCII kind to ASCII string, just for convenience in sanitize strings.</span>
+   <span class="c">!&lt;</span>
+   <span class="c">!&lt;```fortran</span>
+   <span class="c">!&lt; use penf</span>
+   <span class="c">!&lt; character(len=:, kind=ASCII), allocatable :: string</span>
+   <span class="c">!&lt; string = str_ascii(&#39;I was ASCII kind and I am still ASCII&#39;)</span>
+   <span class="c">!&lt; print &quot;(A)&quot;, string</span>
+   <span class="c">!&lt;```</span>
+   <span class="c">!=&gt; I was ASCII kind and I am still ASCII &lt;&lt;&lt;</span>
    <span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=*</span><span class="p">,</span> <span class="nb">kind</span><span class="o">=</span><span class="n">ASCII</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span>  <span class="kd">::</span> <span class="n">input</span>  <span class="c">!&lt; Input string of ASCII kind.</span>
    <span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="p">:,</span> <span class="nb">kind</span><span class="o">=</span><span class="n">ASCII</span><span class="p">),</span> <span class="k">allocatable</span> <span class="kd">::</span> <span class="n">output</span> <span class="c">!&lt; Output string of ASCII kind.</span>
 

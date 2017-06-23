@@ -383,6 +383,19 @@ private elemental function str_R16P(n, no_sign, compact) result(str)
 
     
     <p>Convert real to string.</p>
+<div class="codehilite"><pre><span></span> <span class="k">use </span><span class="n">penf</span>
+ <span class="k">print</span> <span class="s2">&quot;(A)&quot;</span><span class="p">,</span> <span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=-</span><span class="mf">1._R16P</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span> <span class="k">use </span><span class="n">penf</span>
+ <span class="k">print</span> <span class="s2">&quot;(A)&quot;</span><span class="p">,</span> <span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=-</span><span class="mf">1._R16P</span><span class="p">,</span> <span class="n">no_sign</span><span class="o">=</span><span class="p">.</span><span class="n">true</span><span class="p">.)</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span> <span class="k">use </span><span class="n">penf</span>
+ <span class="k">print</span> <span class="s2">&quot;(A)&quot;</span><span class="p">,</span> <span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=-</span><span class="mf">1._R16P</span><span class="p">,</span> <span class="n">compact</span><span class="o">=</span><span class="p">.</span><span class="n">true</span><span class="p">.)</span>
+</pre></div>
     
 
     <h3>Arguments</h3>
@@ -715,20 +728,38 @@ private elemental function str_R16P(n, no_sign, compact) result(str)
     
     <section>
     <h2><span class="anchor" id="src"></span>Source Code</h2>
-    <div class="highlight"><pre><span></span>  <span class="k">elemental function </span><span class="n">str_R16P</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">no_sign</span><span class="p">,</span> <span class="n">compact</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">str</span><span class="p">)</span>
-  <span class="c">!&lt; Convert real to string.</span>
-  <span class="kt">real</span><span class="p">(</span><span class="n">R16P</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span>           <span class="kd">::</span> <span class="n">n</span>       <span class="c">!&lt; Real to be converted.</span>
-  <span class="kt">logical</span><span class="p">,</span>    <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span> <span class="k">optional</span> <span class="kd">::</span> <span class="n">no_sign</span> <span class="c">!&lt; Flag for leaving out the sign.</span>
-  <span class="kt">logical</span><span class="p">,</span>    <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span> <span class="k">optional</span> <span class="kd">::</span> <span class="n">compact</span> <span class="c">!&lt; Flag for *compacting* string encoding.</span>
-  <span class="kt">character</span><span class="p">(</span><span class="n">DR16P</span><span class="p">)</span>                 <span class="kd">::</span> <span class="n">str</span>     <span class="c">!&lt; Returned string containing input number.</span>
+    <div class="highlight"><pre><span></span>   <span class="k">elemental function </span><span class="n">str_R16P</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">no_sign</span><span class="p">,</span> <span class="n">compact</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">str</span><span class="p">)</span>
+   <span class="c">!&lt; Convert real to string.</span>
+   <span class="c">!&lt;</span>
+   <span class="c">!&lt;```fortran</span>
+   <span class="c">!&lt; use penf</span>
+   <span class="c">!&lt; print &quot;(A)&quot;, str(n=-1._R16P)</span>
+   <span class="c">!&lt;```</span>
+   <span class="c">!=&gt; -0.100000000000000000000000000000000E+0001 &lt;&lt;&lt;</span>
+   <span class="c">!&lt;</span>
+   <span class="c">!&lt;```fortran</span>
+   <span class="c">!&lt; use penf</span>
+   <span class="c">!&lt; print &quot;(A)&quot;, str(n=-1._R16P, no_sign=.true.)</span>
+   <span class="c">!&lt;```</span>
+   <span class="c">!=&gt; 0.100000000000000000000000000000000E+0001 &lt;&lt;&lt;</span>
+   <span class="c">!&lt;</span>
+   <span class="c">!&lt;```fortran</span>
+   <span class="c">!&lt; use penf</span>
+   <span class="c">!&lt; print &quot;(A)&quot;, str(n=-1._R16P, compact=.true.)</span>
+   <span class="c">!&lt;```</span>
+   <span class="c">!=&gt; -0.1E+1 &lt;&lt;&lt;</span>
+   <span class="kt">real</span><span class="p">(</span><span class="n">R16P</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span>           <span class="kd">::</span> <span class="n">n</span>       <span class="c">!&lt; Real to be converted.</span>
+   <span class="kt">logical</span><span class="p">,</span>    <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span> <span class="k">optional</span> <span class="kd">::</span> <span class="n">no_sign</span> <span class="c">!&lt; Flag for leaving out the sign.</span>
+   <span class="kt">logical</span><span class="p">,</span>    <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span> <span class="k">optional</span> <span class="kd">::</span> <span class="n">compact</span> <span class="c">!&lt; Flag for *compacting* string encoding.</span>
+   <span class="kt">character</span><span class="p">(</span><span class="n">DR16P</span><span class="p">)</span>                 <span class="kd">::</span> <span class="n">str</span>     <span class="c">!&lt; Returned string containing input number.</span>
 
-  <span class="k">write</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="n">FR16P</span><span class="p">)</span> <span class="n">n</span>               <span class="c">! Casting of n to string.</span>
-  <span class="k">if</span> <span class="p">(</span><span class="n">n</span><span class="o">&gt;</span><span class="mf">0._R16P</span><span class="p">)</span> <span class="n">str</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">)</span><span class="o">=</span><span class="s1">&#39;+&#39;</span>       <span class="c">! Prefixing plus if n&gt;0.</span>
-  <span class="k">if</span> <span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">no_sign</span><span class="p">))</span> <span class="n">str</span><span class="o">=</span><span class="n">str</span><span class="p">(</span><span class="mi">2</span><span class="p">:)</span> <span class="c">! Leaving out the sign.</span>
-  <span class="k">if</span> <span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">compact</span><span class="p">))</span> <span class="k">then</span>
-<span class="k">    if</span> <span class="p">(</span><span class="n">compact</span><span class="p">)</span> <span class="k">call </span><span class="n">compact_real_string</span><span class="p">(</span><span class="n">string</span><span class="o">=</span><span class="n">str</span><span class="p">)</span>
-  <span class="n">endif</span>
-  <span class="n">endfunction</span> <span class="n">str_R16P</span>
+   <span class="k">write</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="n">FR16P</span><span class="p">)</span> <span class="n">n</span>               <span class="c">! Casting of n to string.</span>
+   <span class="k">if</span> <span class="p">(</span><span class="n">n</span><span class="o">&gt;</span><span class="mf">0._R16P</span><span class="p">)</span> <span class="n">str</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">)</span><span class="o">=</span><span class="s1">&#39;+&#39;</span>       <span class="c">! Prefixing plus if n&gt;0.</span>
+   <span class="k">if</span> <span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">no_sign</span><span class="p">))</span> <span class="n">str</span><span class="o">=</span><span class="n">str</span><span class="p">(</span><span class="mi">2</span><span class="p">:)</span> <span class="c">! Leaving out the sign.</span>
+   <span class="k">if</span> <span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">compact</span><span class="p">))</span> <span class="k">then</span>
+<span class="k">     if</span> <span class="p">(</span><span class="n">compact</span><span class="p">)</span> <span class="k">call </span><span class="n">compact_real_string</span><span class="p">(</span><span class="n">string</span><span class="o">=</span><span class="n">str</span><span class="p">)</span>
+   <span class="n">endif</span>
+   <span class="n">endfunction</span> <span class="n">str_R16P</span>
 </pre></div>
 
     </section>

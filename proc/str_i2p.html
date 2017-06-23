@@ -383,6 +383,14 @@ private elemental function str_I2P(n, no_sign) result(str)
 
     
     <p>Convert integer to string.</p>
+<div class="codehilite"><pre><span></span> <span class="k">use </span><span class="n">penf</span>
+ <span class="k">print</span> <span class="s2">&quot;(A)&quot;</span><span class="p">,</span> <span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=-</span><span class="mi">1_I2P</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span> <span class="k">use </span><span class="n">penf</span>
+ <span class="k">print</span> <span class="s2">&quot;(A)&quot;</span><span class="p">,</span> <span class="n">str</span><span class="p">(</span><span class="n">n</span><span class="o">=-</span><span class="mi">1_I2P</span><span class="p">,</span> <span class="n">no_sign</span><span class="o">=</span><span class="p">.</span><span class="n">true</span><span class="p">.)</span>
+</pre></div>
     
 
     <h3>Arguments</h3>
@@ -514,16 +522,16 @@ private elemental function str_I2P(n, no_sign) result(str)
 <path fill="none" stroke="#000000" d="M292.726,-270.307C304.256,-266.831 317.316,-261.846 328,-255 346.619,-243.069 363.666,-224.524 375.318,-210.126"/>
 <polygon fill="#000000" stroke="#000000" points="378.11,-212.238 381.527,-202.21 372.602,-207.918 378.11,-212.238"/>
 </g>
-<!-- proc~bctor_r8p -->
-<g id="node6" class="node"><title>proc~bctor_r8p</title>
-<a xlink:href="../proc/bctor_r8p.html" xlink:title="bctor_R8P">
-<polygon fill="#d94e8f" stroke="#d94e8f" points="295,-246 233,-246 233,-220 295,-220 295,-246"/>
-<text text-anchor="middle" x="264" y="-230.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">bctor_R8P</text>
+<!-- proc~bctoi_i8p -->
+<g id="node6" class="node"><title>proc~bctoi_i8p</title>
+<a xlink:href="../proc/bctoi_i8p.html" xlink:title="bctoi_I8P">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="292,-246 236,-246 236,-220 292,-220 292,-246"/>
+<text text-anchor="middle" x="264" y="-230.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">bctoi_I8P</text>
 </a>
 </g>
-<!-- proc~bctor_r8p&#45;&gt;interface~str -->
-<g id="edge20" class="edge"><title>proc~bctor_r8p&#45;&gt;interface~str</title>
-<path fill="none" stroke="#000000" d="M295.586,-222.176C305.921,-218.626 317.453,-214.654 328,-211 336.51,-208.051 345.662,-204.865 354.28,-201.857"/>
+<!-- proc~bctoi_i8p&#45;&gt;interface~str -->
+<g id="edge20" class="edge"><title>proc~bctoi_i8p&#45;&gt;interface~str</title>
+<path fill="none" stroke="#000000" d="M292.683,-223.173C303.727,-219.381 316.454,-215 328,-211 336.51,-208.051 345.662,-204.865 354.28,-201.857"/>
 <polygon fill="#000000" stroke="#000000" points="355.435,-205.161 363.721,-198.558 353.127,-198.552 355.435,-205.161"/>
 </g>
 <!-- proc~bctor_r16p -->
@@ -550,39 +558,15 @@ private elemental function str_I2P(n, no_sign) result(str)
 <path fill="none" stroke="#000000" d="M292.501,-189C310.603,-189 334.222,-189 353.794,-189"/>
 <polygon fill="#000000" stroke="#000000" points="353.899,-192.5 363.899,-189 353.899,-185.5 353.899,-192.5"/>
 </g>
-<!-- proc~bctoi_i8p -->
-<g id="node9" class="node"><title>proc~bctoi_i8p</title>
-<a xlink:href="../proc/bctoi_i8p.html" xlink:title="bctoi_I8P">
-<polygon fill="#d94e8f" stroke="#d94e8f" points="292,-158 236,-158 236,-132 292,-132 292,-158"/>
-<text text-anchor="middle" x="264" y="-142.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">bctoi_I8P</text>
-</a>
-</g>
-<!-- proc~bctoi_i8p&#45;&gt;interface~str -->
-<g id="edge26" class="edge"><title>proc~bctoi_i8p&#45;&gt;interface~str</title>
-<path fill="none" stroke="#000000" d="M292.683,-154.827C303.727,-158.619 316.454,-163 328,-167 336.51,-169.949 345.662,-173.135 354.28,-176.143"/>
-<polygon fill="#000000" stroke="#000000" points="353.127,-179.448 363.721,-179.442 355.435,-172.839 353.127,-179.448"/>
-</g>
-<!-- proc~bctoi_i2p -->
-<g id="node10" class="node"><title>proc~bctoi_i2p</title>
-<a xlink:href="../proc/bctoi_i2p.html" xlink:title="bctoi_I2P">
-<polygon fill="#d94e8f" stroke="#d94e8f" points="292,-114 236,-114 236,-88 292,-88 292,-114"/>
-<text text-anchor="middle" x="264" y="-98.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">bctoi_I2P</text>
-</a>
-</g>
-<!-- proc~bctoi_i2p&#45;&gt;interface~str -->
-<g id="edge28" class="edge"><title>proc~bctoi_i2p&#45;&gt;interface~str</title>
-<path fill="none" stroke="#000000" d="M292.726,-107.693C304.256,-111.169 317.316,-116.154 328,-123 346.619,-134.931 363.666,-153.476 375.318,-167.874"/>
-<polygon fill="#000000" stroke="#000000" points="372.602,-170.082 381.527,-175.79 378.11,-165.762 372.602,-170.082"/>
-</g>
 <!-- program~penf_test_all -->
-<g id="node11" class="node"><title>program~penf_test_all</title>
+<g id="node9" class="node"><title>program~penf_test_all</title>
 <a xlink:href="../program/penf_test_all.html" xlink:title="penf_test_all">
 <polygon fill="#f0ad4e" stroke="#f0ad4e" points="73,-310 1,-310 1,-284 73,-284 73,-310"/>
 <text text-anchor="middle" x="37" y="-294.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">penf_test_all</text>
 </a>
 </g>
 <!-- program~penf_test_all&#45;&gt;interface~str -->
-<g id="edge30" class="edge"><title>program~penf_test_all&#45;&gt;interface~str</title>
+<g id="edge26" class="edge"><title>program~penf_test_all&#45;&gt;interface~str</title>
 <path fill="none" stroke="#000000" d="M59.3164,-310.178C111.28,-338.961 242.431,-400.447 328,-343 371.715,-313.652 385.117,-248.025 389.211,-212.659"/>
 <polygon fill="#000000" stroke="#000000" points="392.732,-212.622 390.24,-202.324 385.767,-211.928 392.732,-212.622"/>
 </g>
@@ -599,16 +583,40 @@ private elemental function str_I2P(n, no_sign) result(str)
 <polygon fill="#000000" stroke="#000000" points="110.113,-254.363 116.649,-246.025 106.339,-248.468 110.113,-254.363"/>
 </g>
 <!-- program~penf_test_compact_real -->
-<g id="node12" class="node"><title>program~penf_test_compact_real</title>
+<g id="node10" class="node"><title>program~penf_test_compact_real</title>
 <a xlink:href="../program/penf_test_compact_real.html" xlink:title="penf_test_compact_real">
 <polygon fill="#f0ad4e" stroke="#f0ad4e" points="327,-26 201,-26 201,-1.24345e-14 327,-3.55271e-15 327,-26"/>
 <text text-anchor="middle" x="264" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">penf_test_compact_real</text>
 </a>
 </g>
 <!-- program~penf_test_compact_real&#45;&gt;interface~str -->
-<g id="edge32" class="edge"><title>program~penf_test_compact_real&#45;&gt;interface~str</title>
+<g id="edge28" class="edge"><title>program~penf_test_compact_real&#45;&gt;interface~str</title>
 <path fill="none" stroke="#000000" d="M315.561,-26.1424C320.082,-28.6071 324.327,-31.5312 328,-35 365.738,-70.6381 381.537,-132.118 387.603,-165.605"/>
 <polygon fill="#000000" stroke="#000000" points="384.208,-166.523 389.305,-175.811 391.112,-165.371 384.208,-166.523"/>
+</g>
+<!-- proc~bctoi_i2p -->
+<g id="node11" class="node"><title>proc~bctoi_i2p</title>
+<a xlink:href="../proc/bctoi_i2p.html" xlink:title="bctoi_I2P">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="292,-158 236,-158 236,-132 292,-132 292,-158"/>
+<text text-anchor="middle" x="264" y="-142.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">bctoi_I2P</text>
+</a>
+</g>
+<!-- proc~bctoi_i2p&#45;&gt;interface~str -->
+<g id="edge30" class="edge"><title>proc~bctoi_i2p&#45;&gt;interface~str</title>
+<path fill="none" stroke="#000000" d="M292.683,-154.827C303.727,-158.619 316.454,-163 328,-167 336.51,-169.949 345.662,-173.135 354.28,-176.143"/>
+<polygon fill="#000000" stroke="#000000" points="353.127,-179.448 363.721,-179.442 355.435,-172.839 353.127,-179.448"/>
+</g>
+<!-- proc~bctor_r8p -->
+<g id="node12" class="node"><title>proc~bctor_r8p</title>
+<a xlink:href="../proc/bctor_r8p.html" xlink:title="bctor_R8P">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="295,-114 233,-114 233,-88 295,-88 295,-114"/>
+<text text-anchor="middle" x="264" y="-98.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">bctor_R8P</text>
+</a>
+</g>
+<!-- proc~bctor_r8p&#45;&gt;interface~str -->
+<g id="edge32" class="edge"><title>proc~bctor_r8p&#45;&gt;interface~str</title>
+<path fill="none" stroke="#000000" d="M295.638,-108.593C306.416,-112.012 318.206,-116.724 328,-123 346.619,-134.931 363.666,-153.476 375.318,-167.874"/>
+<polygon fill="#000000" stroke="#000000" points="372.602,-170.082 381.527,-175.79 378.11,-165.762 372.602,-170.082"/>
 </g>
 <!-- interface~bcton&#45;&gt;proc~bctor_r4p -->
 <g id="edge4" class="edge"><title>interface~bcton&#45;&gt;proc~bctor_r4p</title>
@@ -620,25 +628,25 @@ private elemental function str_I2P(n, no_sign) result(str)
 <path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M164.279,-242.558C175.359,-246.433 188.287,-250.942 200,-255 208.299,-257.875 217.208,-260.947 225.663,-263.856"/>
 <polygon fill="#000000" stroke="#000000" points="224.722,-267.233 235.317,-267.173 226.997,-260.613 224.722,-267.233"/>
 </g>
-<!-- interface~bcton&#45;&gt;proc~bctor_r8p -->
-<g id="edge8" class="edge"><title>interface~bcton&#45;&gt;proc~bctor_r8p</title>
-<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M164.245,-233C181.095,-233 203.067,-233 222.099,-233"/>
-<polygon fill="#000000" stroke="#000000" points="222.32,-236.5 232.32,-233 222.32,-229.5 222.32,-236.5"/>
+<!-- interface~bcton&#45;&gt;proc~bctoi_i8p -->
+<g id="edge8" class="edge"><title>interface~bcton&#45;&gt;proc~bctoi_i8p</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M164.245,-233C182.038,-233 205.542,-233 225.266,-233"/>
+<polygon fill="#000000" stroke="#000000" points="225.479,-236.5 235.479,-233 225.479,-229.5 225.479,-236.5"/>
 </g>
 <!-- interface~bcton&#45;&gt;proc~bctoi_i4p -->
 <g id="edge10" class="edge"><title>interface~bcton&#45;&gt;proc~bctoi_i4p</title>
 <path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M164.279,-223.442C175.359,-219.567 188.287,-215.058 200,-211 208.299,-208.125 217.208,-205.053 225.663,-202.144"/>
 <polygon fill="#000000" stroke="#000000" points="226.997,-205.387 235.317,-198.827 224.722,-198.767 226.997,-205.387"/>
 </g>
-<!-- interface~bcton&#45;&gt;proc~bctoi_i8p -->
-<g id="edge12" class="edge"><title>interface~bcton&#45;&gt;proc~bctoi_i8p</title>
+<!-- interface~bcton&#45;&gt;proc~bctoi_i2p -->
+<g id="edge12" class="edge"><title>interface~bcton&#45;&gt;proc~bctoi_i2p</title>
 <path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M146.473,-219.79C157.703,-205.01 177.727,-181.272 200,-167 207.763,-162.026 216.779,-158.034 225.552,-154.89"/>
 <polygon fill="#000000" stroke="#000000" points="226.868,-158.142 235.274,-151.693 224.681,-151.492 226.868,-158.142"/>
 </g>
-<!-- interface~bcton&#45;&gt;proc~bctoi_i2p -->
-<g id="edge14" class="edge"><title>interface~bcton&#45;&gt;proc~bctoi_i2p</title>
-<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M141.1,-219.786C148.882,-196.83 167.944,-149.505 200,-123 207.381,-116.897 216.551,-112.45 225.622,-109.223"/>
-<polygon fill="#000000" stroke="#000000" points="226.84,-112.51 235.336,-106.18 224.747,-105.83 226.84,-112.51"/>
+<!-- interface~bcton&#45;&gt;proc~bctor_r8p -->
+<g id="edge14" class="edge"><title>interface~bcton&#45;&gt;proc~bctor_r8p</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M141.1,-219.786C148.882,-196.83 167.944,-149.505 200,-123 206.638,-117.511 214.723,-113.362 222.882,-110.235"/>
+<polygon fill="#000000" stroke="#000000" points="224.058,-113.532 232.411,-107.015 221.817,-106.901 224.058,-113.532"/>
 </g>
 </g>
 </svg>
@@ -766,17 +774,29 @@ private elemental function str_I2P(n, no_sign) result(str)
     
     <section>
     <h2><span class="anchor" id="src"></span>Source Code</h2>
-    <div class="highlight"><pre><span></span>  <span class="k">elemental function </span><span class="n">str_I2P</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">no_sign</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">str</span><span class="p">)</span>
-  <span class="c">!&lt; Convert integer to string.</span>
-  <span class="kt">integer</span><span class="p">(</span><span class="n">I2P</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span>           <span class="kd">::</span> <span class="n">n</span>       <span class="c">!&lt; Integer to be converted.</span>
-  <span class="kt">logical</span><span class="p">,</span>      <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span> <span class="k">optional</span> <span class="kd">::</span> <span class="n">no_sign</span> <span class="c">!&lt; Flag for leaving out the sign.</span>
-  <span class="kt">character</span><span class="p">(</span><span class="n">DI2P</span><span class="p">)</span>                    <span class="kd">::</span> <span class="n">str</span>     <span class="c">!&lt; Returned string containing input number plus padding zeros.</span>
+    <div class="highlight"><pre><span></span>   <span class="k">elemental function </span><span class="n">str_I2P</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">no_sign</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">str</span><span class="p">)</span>
+   <span class="c">!&lt; Convert integer to string.</span>
+   <span class="c">!&lt;</span>
+   <span class="c">!&lt;```fortran</span>
+   <span class="c">!&lt; use penf</span>
+   <span class="c">!&lt; print &quot;(A)&quot;, str(n=-1_I2P)</span>
+   <span class="c">!&lt;```</span>
+   <span class="c">!=&gt; -1 &lt;&lt;&lt;</span>
+   <span class="c">!&lt;</span>
+   <span class="c">!&lt;```fortran</span>
+   <span class="c">!&lt; use penf</span>
+   <span class="c">!&lt; print &quot;(A)&quot;, str(n=-1_I2P, no_sign=.true.)</span>
+   <span class="c">!&lt;```</span>
+   <span class="c">!=&gt; 1 &lt;&lt;&lt;</span>
+   <span class="kt">integer</span><span class="p">(</span><span class="n">I2P</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span>           <span class="kd">::</span> <span class="n">n</span>       <span class="c">!&lt; Integer to be converted.</span>
+   <span class="kt">logical</span><span class="p">,</span>      <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span> <span class="k">optional</span> <span class="kd">::</span> <span class="n">no_sign</span> <span class="c">!&lt; Flag for leaving out the sign.</span>
+   <span class="kt">character</span><span class="p">(</span><span class="n">DI2P</span><span class="p">)</span>                    <span class="kd">::</span> <span class="n">str</span>     <span class="c">!&lt; Returned string containing input number plus padding zeros.</span>
 
-  <span class="k">write</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="n">FI2P</span><span class="p">)</span> <span class="n">n</span>                <span class="c">! Casting of n to string.</span>
-  <span class="n">str</span> <span class="o">=</span> <span class="nb">adjustl</span><span class="p">(</span><span class="nb">trim</span><span class="p">(</span><span class="n">str</span><span class="p">))</span>          <span class="c">! Removing white spaces.</span>
-  <span class="k">if</span> <span class="p">(</span><span class="n">n</span><span class="o">&gt;=</span><span class="mi">0_I2P</span><span class="p">)</span> <span class="n">str</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="o">//</span><span class="nb">trim</span><span class="p">(</span><span class="n">str</span><span class="p">)</span>  <span class="c">! Prefixing plus if n&gt;0.</span>
-  <span class="k">if</span> <span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">no_sign</span><span class="p">))</span> <span class="n">str</span><span class="o">=</span><span class="n">str</span><span class="p">(</span><span class="mi">2</span><span class="p">:)</span> <span class="c">! Leaving out the sign.</span>
-  <span class="n">endfunction</span> <span class="n">str_I2P</span>
+   <span class="k">write</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="n">FI2P</span><span class="p">)</span> <span class="n">n</span>                <span class="c">! Casting of n to string.</span>
+   <span class="n">str</span> <span class="o">=</span> <span class="nb">adjustl</span><span class="p">(</span><span class="nb">trim</span><span class="p">(</span><span class="n">str</span><span class="p">))</span>          <span class="c">! Removing white spaces.</span>
+   <span class="k">if</span> <span class="p">(</span><span class="n">n</span><span class="o">&gt;=</span><span class="mi">0_I2P</span><span class="p">)</span> <span class="n">str</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="o">//</span><span class="nb">trim</span><span class="p">(</span><span class="n">str</span><span class="p">)</span>  <span class="c">! Prefixing plus if n&gt;0.</span>
+   <span class="k">if</span> <span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">no_sign</span><span class="p">))</span> <span class="n">str</span><span class="o">=</span><span class="n">str</span><span class="p">(</span><span class="mi">2</span><span class="p">:)</span> <span class="c">! Leaving out the sign.</span>
+   <span class="n">endfunction</span> <span class="n">str_I2P</span>
 </pre></div>
 
     </section>

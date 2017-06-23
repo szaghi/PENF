@@ -15,17 +15,17 @@ private
 save
 ! global parameters and variables
 public :: endianL, endianB, endian, is_initialized
-public :: ASCII, UCS4
-public :: R16P, FR16P, DR16P, MinR16P, MaxR16P, BIR16P, BYR16P, smallR16P, ZeroR16
-public :: R8P,  FR8P,  DR8P,  MinR8P,  MaxR8P,  BIR8P,  BYR8P,  smallR8P,  ZeroR8
-public :: R4P,  FR4P,  DR4P,  MinR4P,  MaxR4P,  BIR4P,  BYR4P,  smallR4P,  ZeroR4
-public :: R_P,  FR_P,  DR_P,  MinR_P,  MaxR_P,  BIR_P,  BYR_P,  smallR_P,  Zero
+public :: ASCII, UCS4, CK
+public :: R16P, FR16P, DR16P, MinR16P, MaxR16P, BIR16P, BYR16P, smallR16P, ZeroR16P
+public :: R8P,  FR8P,  DR8P,  MinR8P,  MaxR8P,  BIR8P,  BYR8P,  smallR8P,  ZeroR8P
+public :: R4P,  FR4P,  DR4P,  MinR4P,  MaxR4P,  BIR4P,  BYR4P,  smallR4P,  ZeroR4P
+public :: R_P,  FR_P,  DR_P,  MinR_P,  MaxR_P,  BIR_P,  BYR_P,  smallR_P,  ZeroR_P
 public :: I8P,  FI8P,  DI8P,  MinI8P,  MaxI8P,  BII8P,  BYI8P
 public :: I4P,  FI4P,  DI4P,  MinI4P,  MaxI4P,  BII4P,  BYI4P
 public :: I2P,  FI2P,  DI2P,  MinI2P,  MaxI2P,  BII2P,  BYI2P
 public :: I1P,  FI1P,  DI1P,  MinI1P,  MaxI1P,  BII1P,  BYI1P
 public :: I_P,  FI_P,  DI_P,  MinI_P,  MaxI_P,  BII_P,  BYI_P
-public :: REAL_KINDS_LIST, REAL_FORMATS_LIST
+public :: CHARACTER_KINDS_LIST, REAL_KINDS_LIST, REAL_FORMATS_LIST
 public :: INTEGER_KINDS_LIST, INTEGER_FORMATS_LIST
 ! bit/byte size functions
 public :: bit_size, byte_size
@@ -38,6 +38,9 @@ public :: check_endian
 public :: digit
 public :: penf_Init
 public :: penf_print
+
+integer, protected :: endian         = endianL !< Bit ordering: Little endian (endianL), or Big endian (endianB).
+logical, protected :: is_initialized = .false. !< Check the initialization of some variables that must be initialized.
 
 #ifdef __GFORTRAN__
 ! work-around for strange gfortran bug...
@@ -116,10 +119,10 @@ contains
   !< Initialize PENF's variables that are not initialized into the definition specification.
 
   call check_endian
+  BIR16P = bit_size(MaxR16P) ; BYR16P = BIR16P/8_I2P
   BIR8P  = bit_size(MaxR8P)  ; BYR8P  = BIR8P/8_I1P
   BIR4P  = bit_size(MaxR4P)  ; BYR4P  = BIR4P/8_I1P
   BIR_P  = bit_size(MaxR_P)  ; BYR_P  = BIR_P/8_I1P
-  BIR16P = bit_size(MaxR16P) ; BYR16P = BIR16P/8_I2P
   is_initialized = .true.
   endsubroutine penf_init
 
@@ -136,45 +139,54 @@ contains
   if (.not.is_initialized) call penf_init
   prefd = '' ; if (present(pref)) prefd = pref
   if (endian==endianL) then
-    write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)prefd//' This architecture has LITTLE Endian bit ordering'
+    write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)prefd//'This architecture has LITTLE Endian bit ordering'
   else
-    write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)prefd//' This architecture has BIG Endian bit ordering'
+    write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)prefd//'This architecture has BIG Endian bit ordering'
   endif
-  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//' Reals kind, format and characters number:'
-  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'   R16P: '//str(n=R16P)//','//FR16P//','//str(n=DR16P)
-  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'   R8P:  '//str(n=R8P )//','//FR8P //','//str(n=DR8P )
-  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'   R4P:  '//str(n=R4P )//','//FR4P //','//str(n=DR4P )
-  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'   R_P:  '//str(n=R_P )//','//FR_P //','//str(n=DR_P )
-  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//' Integers kind, format and characters number:'
-  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'   I8P:  '//str(n=I8P )//','//FI8P //','//str(n=DI8P )
-  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'   I4P:  '//str(n=I4P )//','//FI4P //','//str(n=DI4P )
-  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'   I2P:  '//str(n=I2P )//','//FI2P //','//str(n=DI2P )
-  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'   I1P:  '//str(n=I1P )//','//FI1P //','//str(n=DI1P )
-  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//' Reals minimum and maximum values:'
-  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'   R16P: '//str(n=MinR16P)//','//str(n=MaxR16P)
-  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'   R8P:  '//str(n=MinR8P )//','//str(n=MaxR8P )
-  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'   R4P:  '//str(n=MinR4P )//','//str(n=MaxR4P )
-  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'   R_P:  '//str(n=MinR_P )//','//str(n=MaxR_P )
-  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//' Integergs minimum and maximum values:'
-  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'   I8P:  '//str(n=MinI8P )//','//str(n=MaxI8P )
-  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'   I4P:  '//str(n=MinI4P )//','//str(n=MaxI4P )
-  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'   I2P:  '//str(n=MinI2P )//','//str(n=MaxI2P )
-  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'   I1P:  '//str(n=MinI1P )//','//str(n=MaxI1P )
-  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//' Reals bits/bytes sizes:'
-  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'   R16P: '//str(n=BIR16P)//'/'//str(n=BYR16P)
-  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'   R8P:  '//str(n=BIR8P )//'/'//str(n=BYR8P )
-  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'   R4P:  '//str(n=BIR4P )//'/'//str(n=BYR4P )
-  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'   R_P:  '//str(n=BIR_P )//'/'//str(n=BYR_P )
-  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//' Integers bits/bytes sizes:'
-  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'   I8P:  '//str(n=BII8P )//'/'//str(n=BYI8P )
-  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'   I4P:  '//str(n=BII4P )//'/'//str(n=BYI4P )
-  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'   I2P:  '//str(n=BII2P )//'/'//str(n=BYI2P )
-  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'   I1P:  '//str(n=BII1P )//'/'//str(n=BYI1P )
-  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//' Machine precisions'
-  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'   ZeroR16: '//str(ZeroR16,.true.)
-  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'   ZeroR8:  '//str(ZeroR8 ,.true.)
-  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'   ZeroR4:  '//str(ZeroR4 ,.true.)
-  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'   Zero:    '//str(Zero   ,.true.)
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'Character kind:'
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  ASCII: '//str(n=ASCII)
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  UCS4:  '//str(n=UCS4)
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  CK:    '//str(n=CK)
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'Reals kind, format and characters number:'
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  R16P: '//str(n=R16P)//','//FR16P//','//str(n=DR16P)
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  R8P:  '//str(n=R8P )//','//FR8P //','//str(n=DR8P )
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  R4P:  '//str(n=R4P )//','//FR4P //','//str(n=DR4P )
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  R_P:  '//str(n=R_P )//','//FR_P //','//str(n=DR_P )
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'Integers kind, format and characters number:'
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  I8P:  '//str(n=I8P)//','//FI8P //','//str(n=DI8P)
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  I4P:  '//str(n=I4P)//','//FI4P //','//str(n=DI4P)
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  I2P:  '//str(n=I2P)//','//FI2P //','//str(n=DI2P)
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  I1P:  '//str(n=I1P)//','//FI1P //','//str(n=DI1P)
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'Reals minimum and maximum values:'
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  R16P: '//str(n=MinR16P)//','//str(n=MaxR16P)
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  R8P:  '//str(n=MinR8P )//','//str(n=MaxR8P )
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  R4P:  '//str(n=MinR4P )//','//str(n=MaxR4P )
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  R_P:  '//str(n=MinR_P )//','//str(n=MaxR_P )
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'Integergs minimum and maximum values:'
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  I8P:  '//str(n=MinI8P )//','//str(n=MaxI8P)
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  I4P:  '//str(n=MinI4P )//','//str(n=MaxI4P)
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  I2P:  '//str(n=MinI2P )//','//str(n=MaxI2P)
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  I1P:  '//str(n=MinI1P )//','//str(n=MaxI1P)
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'Reals bits/bytes sizes:'
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  R16P: '//str(n=BIR16P)//'/'//str(n=BYR16P)
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  R8P:  '//str(n=BIR8P )//'/'//str(n=BYR8P )
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  R4P:  '//str(n=BIR4P )//'/'//str(n=BYR4P )
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  R_P:  '//str(n=BIR_P )//'/'//str(n=BYR_P )
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'Integers bits/bytes sizes:'
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  I8P:  '//str(n=BII8P)//'/'//str(n=BYI8P)
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  I4P:  '//str(n=BII4P)//'/'//str(n=BYI4P)
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  I2P:  '//str(n=BII2P)//'/'//str(n=BYI2P)
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  I1P:  '//str(n=BII1P)//'/'//str(n=BYI1P)
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'Smallest reals'
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  smallR16P: '//str(smallR16P, .true.)
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  smallR8P:  '//str(smallR8P,  .true.)
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  smallR4P:  '//str(smallR4P,  .true.)
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  smallR_P:  '//str(smallR_P,  .true.)
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'Machine zero'
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  ZeroR16P: '//str(ZeroR16P, .true.)
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  ZeroR8P:  '//str(ZeroR8P,  .true.)
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  ZeroR4P:  '//str(ZeroR4P,  .true.)
+  write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  ZeroR_P:  '//str(ZeroR_P,  .true.)
   if (present(iostat)) iostat = iostatd
   if (present(iomsg))  iomsg  = iomsgd
   endsubroutine penf_print
