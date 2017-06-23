@@ -15,33 +15,39 @@ integer, parameter :: endianB        = 0       !< Big endian parameter.
 integer            :: endian         = endianL !< Bit ordering: Little endian (endianL), or Big endian (endianB).
 
 ! portable kind parameters
-#ifdef r16p
-integer, parameter :: R16P = selected_real_kind(33,4931) !< 33 digits, range \([10^{-4931}, 10^{+4931} - 1]\); 128 bits.
+#ifdef _ASCII_SUPPORTED
+integer, parameter :: ASCII = selected_char_kind('ascii')     !< ASCII character set kind.
 #else
-integer, parameter :: R16P = selected_real_kind(15,307)  !< Defined as R8P; 64 bits.
+integer, parameter :: ASCII = selected_char_kind('default')   !< ASCII character set kind defined as default set.
 #endif
-integer, parameter :: R8P  = selected_real_kind(15,307)  !< 15 digits, range \([10^{-307} , 10^{+307}  - 1]\); 64 bits.
-integer, parameter :: R4P  = selected_real_kind(6,37)    !< 6  digits, range \([10^{-37}  , 10^{+37}   - 1]\); 32 bits.
-#ifdef r16p
-integer, parameter :: R_P  = R16P                        !< Default real precision.
+#ifdef _UCS4_SUPPORTED
+integer, parameter :: UCS4  = selected_char_kind('iso_10646') !< Unicode character set kind.
 #else
-integer, parameter :: R_P  = R8P                         !< Default real precision.
+integer, parameter :: UCS4  = selected_char_kind('default')   !< Unicode character set kind defined as default set.
 #endif
-integer, parameter :: I8P  = selected_int_kind(18)       !< Range \([-2^{63},+2^{63} - 1]\), 19 digits plus sign; 64 bits.
-integer, parameter :: I4P  = selected_int_kind(9)        !< Range \([-2^{31},+2^{31} - 1]\), 10 digits plus sign; 32 bits.
-integer, parameter :: I2P  = selected_int_kind(4)        !< Range \([-2^{15},+2^{15} - 1]\), 5  digits plus sign; 16 bits.
-integer, parameter :: I1P  = selected_int_kind(2)        !< Range \([-2^{7} ,+2^{7}  - 1]\), 3  digits plus sign; 8  bits.
-integer, parameter :: I_P  = I4P                         !< Default integer precision.
+#ifdef _R16P_SUPPORTED
+integer, parameter :: R16P = selected_real_kind(33,4931)      !< 33 digits, range \([10^{-4931}, 10^{+4931} - 1]\); 128 bits.
+#else
+integer, parameter :: R16P = selected_real_kind(15,307)       !< Defined as R8P; 64 bits.
+#endif
+integer, parameter :: R8P  = selected_real_kind(15,307)       !< 15 digits, range \([10^{-307} , 10^{+307}  - 1]\); 64 bits.
+integer, parameter :: R4P  = selected_real_kind(6,37)         !< 6  digits, range \([10^{-37}  , 10^{+37}   - 1]\); 32 bits.
+integer, parameter :: R_P  = R8P                              !< Default real precision.
+integer, parameter :: I8P  = selected_int_kind(18)            !< Range \([-2^{63},+2^{63} - 1]\), 19 digits plus sign; 64 bits.
+integer, parameter :: I4P  = selected_int_kind(9)             !< Range \([-2^{31},+2^{31} - 1]\), 10 digits plus sign; 32 bits.
+integer, parameter :: I2P  = selected_int_kind(4)             !< Range \([-2^{15},+2^{15} - 1]\), 5  digits plus sign; 16 bits.
+integer, parameter :: I1P  = selected_int_kind(2)             !< Range \([-2^{7} ,+2^{7}  - 1]\), 3  digits plus sign; 8  bits.
+integer, parameter :: I_P  = I4P                              !< Default integer precision.
 
 ! format parameters
-#ifdef r16p
+#ifdef _R16P_SUPPORTED
 character(*), parameter :: FR16P  = '(E42.33E4)' !< Output format for kind=R16P real.
 #else
 character(*), parameter :: FR16P  = '(E23.15E3)' !< Output format for kind=R16P real.
 #endif
 character(*), parameter :: FR8P   = '(E23.15E3)' !< Output format for kind=R8P real.
 character(*), parameter :: FR4P   = '(E13.6E2)'  !< Output format for kind=R4P real.
-#ifdef r16p
+#ifdef _R16P_SUPPORTED
 character(*), parameter :: FR_P   = FR16P        !< Output format for kind=R_P real.
 #else
 character(*), parameter :: FR_P   = FR8P         !< Output format for kind=R_P real.
@@ -58,14 +64,14 @@ character(*), parameter :: FI_P   = FI4P         !< Output format for kind=I_P i
 character(*), parameter :: FI_PZP = FI4PZP       !< Output format for kind=I_P integer with zero prefixing.
 
 ! length (number of digits) of formatted numbers
-#ifdef r16p
+#ifdef _R16P_SUPPORTED
 integer, parameter :: DR16P = 42    !< Number of digits of output format FR16P.
 #else
 integer, parameter :: DR16P = 23    !< Number of digits of output format FR16P.
 #endif
 integer, parameter :: DR8P  = 23    !< Number of digits of output format FR8P.
 integer, parameter :: DR4P  = 13    !< Number of digits of output format FR4P.
-#ifdef r16p
+#ifdef _R16P_SUPPORTED
 integer, parameter :: DR_P  = DR16P !< Number of digits of output format FR_P.
 #else
 integer, parameter :: DR_P  = DR8P  !< Number of digits of output format FR_P.
