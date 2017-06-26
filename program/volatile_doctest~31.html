@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	 
+	 <meta name="description" content="PENF, Portability Environment for Fortran poor people">
+    
+    <meta name="author" content="Stefano Zaghi" >
+    <link rel="icon" href="../favicon.png">
+
+    <title>volatile_doctest &ndash; PENF</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/pygments.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/local.css" rel="stylesheet">
+    
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <script src="../js/jquery-2.1.3.min.js"></script>
+    <script src="../js/svg-pan-zoom.min.js"></script>
+
+    
+    <script src="../tipuesearch/tipuesearch_content.js"></script>
+    <link  href="../tipuesearch/tipuesearch.css" rel="stylesheet">
+    <script src="../tipuesearch/tipuesearch_set.js"></script>
+    <script src="../tipuesearch/tipuesearch.js"></script>
+    
+
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../index.html">PENF </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+				
+            <li class="dropdown hidden-xs visible-sm visible-md hidden-lg">
+              <a href="#" class="dropdown-toggle"
+              data-toggle="dropdown" role="button"
+              aria-haspopup="true"
+		 aria-expanded="false">Contents <span class="caret"></span></a>
+	      <ul class="dropdown-menu">
+              
+            <li><a href="../lists/files.html">Source Files</a></li>
+				
+				
+            <li><a href="../lists/modules.html">Modules</a></li>
+				
+            
+                                
+            <li><a href="../lists/procedures.html">Procedures</a></li>
+				
+								
+				
+            <li><a href="../lists/programs.html">Programs</a></li>
+				
+            </ul>
+            </li>
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/files.html">Source Files</a></li>
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/modules.html">Modules</a></li>
+
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/procedures.html">Procedures</a></li>
+
+                             
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/programs.html">Programs</a></li>
+
+          </ul>
+        
+        <form action="../search.html" class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search" name="q" id="tipue_search_input" autocomplete="off" required>
+        </div>
+<!--
+        <button type="submit" class="btn btn-default">Submit</button>
+-->
+        </form>
+        
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+    
+  
+  <div class="row">
+    <h1>volatile_doctest
+    <small>Program</small>
+    
+    </h1>
+    
+<div class="row">
+  <div class="col-lg-12">
+<div class="well well-sm">
+  <ul class="list-inline" style="margin-bottom:0px;display:inline">
+     
+     
+     
+     
+    
+    
+     <li><i class="fa fa-list-ol"></i>
+       <a data-toggle="tooltip"
+	  data-placement="bottom" data-html="true"
+	  title=" 1.2% of total for programs.">7 statements</a>
+     </li> 
+     
+     
+    <li><i class="fa fa-code"></i><a href="../src/penf_stringify-doctest-2.f90"> Source File</a></li>
+     
+  </ul>
+  <ol class="breadcrumb in-well text-right">
+  
+     <li><a href='../sourcefile/penf_stringify-doctest-2.f90.html'>penf_stringify-doctest-2.f90</a></li>
+  
+     <li class="active">volatile_doctest</li>
+  </ol>
+</div>
+</div>
+</div>
+<script>
+  $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+  })
+</script>
+
+  </div>
+  
+  <div class="row">
+    <div class="col-md-3 hidden-xs hidden-sm visible-md visible-lg">
+    
+<div id="sidebar">
+  
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#vars-0">Variables</a></h3></div>
+  <div id="vars-0" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E31.html#variable-string%7E3">string</a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title">Source Code</h3></div>
+  <div class="list-group">
+    <a class="list-group-item" href="../program/volatile_doctest%7E31.html#src">volatile_doctest</a>
+  </div>
+</div>
+
+
+  <hr>
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#allprogs-0">All Programs</a></h3></div>
+  <div id="allprogs-0" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../program/volatile_doctest.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E2.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E3.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E4.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E5.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E6.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E7.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E8.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E9.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E10.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E11.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E12.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E13.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E14.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E15.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E16.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E17.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E18.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E19.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E20.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E21.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E22.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E23.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E24.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E25.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E26.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E27.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E28.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E29.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E30.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E31.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E32.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E33.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E34.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E35.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E36.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E37.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E38.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E39.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E40.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E41.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E42.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E43.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E44.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E45.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E46.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E47.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E48.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E49.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E50.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E51.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E52.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E53.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E54.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E55.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E56.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E57.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E58.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E59.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E60.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E61.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E62.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E63.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E64.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E65.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E66.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E67.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E68.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E69.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E70.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E71.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E72.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E73.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E74.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E75.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E76.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E77.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E78.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E79.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E80.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E81.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E82.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E83.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E84.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E85.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E86.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E87.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E88.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E89.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E90.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E91.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E92.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E93.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E94.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E95.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E96.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E97.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E98.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E99.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E100.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E101.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E102.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E103.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E104.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E105.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E106.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E107.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E108.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E109.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E110.html">volatile_doctest</a>
+      
+    </div>
+  </div>
+</div>
+
+
+</div>  
+
+    </div>
+    
+    <div class="col-md-9" id='text'>
+    
+  
+    <ul class="list-inline">
+      <li><h4>Uses:</h4></li>
+      
+      <li><a href='../module/penf_stringify.html'>penf_stringify</a></li>
+      
+      <li><a href='../module/penf.html'>penf</a></li>
+      
+    </ul>
+    
+                <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.26.3 (20100126.1600)
+ -->
+<!-- Title: program~~volatile_doctest~31~~UsesGraph Pages: 1 -->
+<svg id="programvolatile_doctest31UsesGraph" width="634pt" height="123pt"
+ viewBox="0.00 0.00 634.00 122.91" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="program~~volatile_doctest~31~~UsesGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 118.909)">
+<title>program~~volatile_doctest~31~~UsesGraph</title>
+<polygon fill="white" stroke="white" points="-4,5 -4,-118.909 631,-118.909 631,5 -4,5"/>
+<!-- program~volatile_doctest~31 -->
+<g id="node1" class="node"><title>program~volatile_doctest~31</title>
+<polygon fill="none" stroke="black" points="626,-84.4743 540,-84.4743 540,-58.4743 626,-58.4743 626,-84.4743"/>
+<text text-anchor="middle" x="583" y="-69.0243" font-family="Helvetica,sans-Serif" font-size="10.50">volatile_doctest</text>
+</g>
+<!-- module~penf -->
+<g id="node2" class="node"><title>module~penf</title>
+<a xlink:href="../module/penf.html" xlink:title="penf">
+<polygon fill="#337ab7" stroke="#337ab7" points="504,-105.474 450,-105.474 450,-79.4743 504,-79.4743 504,-105.474"/>
+<text text-anchor="middle" x="477" y="-90.0243" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">penf</text>
+</a>
+</g>
+<!-- module~penf&#45;&gt;program~volatile_doctest~31 -->
+<g id="edge16" class="edge"><title>module~penf&#45;&gt;program~volatile_doctest~31</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M504.023,-87.1208C511.955,-85.5492 520.92,-83.7733 529.888,-81.9965"/>
+<polygon fill="#000000" stroke="#000000" points="530.832,-85.3776 539.961,-80.0009 529.471,-78.5111 530.832,-85.3776"/>
+</g>
+<!-- module~penf_stringify -->
+<g id="node3" class="node"><title>module~penf_stringify</title>
+<a xlink:href="../module/penf_stringify.html" xlink:title="penf_stringify">
+<polygon fill="#337ab7" stroke="#337ab7" points="414,-64.4743 338,-64.4743 338,-38.4743 414,-38.4743 414,-64.4743"/>
+<text text-anchor="middle" x="376" y="-49.0243" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">penf_stringify</text>
+</a>
+</g>
+<!-- module~penf_stringify&#45;&gt;program~volatile_doctest~31 -->
+<g id="edge18" class="edge"><title>module~penf_stringify&#45;&gt;program~volatile_doctest~31</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M414.45,-55.1893C446.8,-58.3149 493.409,-62.8182 529.418,-66.2973"/>
+<polygon fill="#000000" stroke="#000000" points="529.458,-69.8173 539.748,-67.2954 530.131,-62.8498 529.458,-69.8173"/>
+</g>
+<!-- module~penf_stringify&#45;&gt;module~penf -->
+<g id="edge8" class="edge"><title>module~penf_stringify&#45;&gt;module~penf</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M408.235,-64.5597C418.489,-68.7224 429.905,-73.3565 440.442,-77.634"/>
+<polygon fill="#000000" stroke="#000000" points="439.231,-80.9198 449.813,-81.4382 441.864,-74.4338 439.231,-80.9198"/>
+</g>
+<!-- module~penf_global_parameters_variables -->
+<g id="node4" class="node"><title>module~penf_global_parameters_variables</title>
+<a xlink:href="../module/penf_global_parameters_variables.html" xlink:title="penf_global_parameters_variables">
+<polygon fill="#337ab7" stroke="#337ab7" points="178,-86.4743 8.52651e-14,-86.4743 0,-60.4743 178,-60.4743 178,-86.4743"/>
+<text text-anchor="middle" x="89" y="-71.0243" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">penf_global_parameters_variables</text>
+</a>
+</g>
+<!-- module~penf_global_parameters_variables&#45;&gt;module~penf -->
+<g id="edge4" class="edge"><title>module~penf_global_parameters_variables&#45;&gt;module~penf</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M142.899,-86.5235C200.34,-99.1703 294.103,-116.213 376,-114.474"/>
+</g>
+<!-- module~penf_global_parameters_variables&#45;&gt;module~penf_stringify -->
+<g id="edge14" class="edge"><title>module~penf_global_parameters_variables&#45;&gt;module~penf_stringify</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M106.903,-60.3798C130.193,-44.2365 172.791,-17.6855 214,-7.47432 251.963,1.93255 264.287,2.89065 302,-7.47432 319.852,-12.3808 337.753,-22.8403 351.476,-32.3305"/>
+<polygon fill="#000000" stroke="#000000" points="349.688,-35.3559 359.849,-38.3588 353.778,-29.6752 349.688,-35.3559"/>
+</g>
+<!-- module~penf_b_size -->
+<g id="node5" class="node"><title>module~penf_b_size</title>
+<a xlink:href="../module/penf_b_size.html" xlink:title="penf_b_size">
+<polygon fill="#337ab7" stroke="#337ab7" points="293,-86.4743 223,-86.4743 223,-60.4743 293,-60.4743 293,-86.4743"/>
+<text text-anchor="middle" x="258" y="-71.0243" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">penf_b_size</text>
+</a>
+</g>
+<!-- module~penf_global_parameters_variables&#45;&gt;module~penf_b_size -->
+<g id="edge2" class="edge"><title>module~penf_global_parameters_variables&#45;&gt;module~penf_b_size</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M178.449,-73.4743C190.206,-73.4743 201.835,-73.4743 212.422,-73.4743"/>
+<polygon fill="#000000" stroke="#000000" points="212.627,-76.9744 222.627,-73.4743 212.627,-69.9744 212.627,-76.9744"/>
+</g>
+<!-- module~penf_b_size&#45;&gt;module~penf -->
+<g id="edge6" class="edge"><title>module~penf_b_size&#45;&gt;module~penf</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M280.267,-86.5285C303.419,-98.808 341.091,-115.216 376,-114.474"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M376,-114.474C397.596,-114.016 421.212,-109.125 440.175,-104.071"/>
+<polygon fill="#000000" stroke="#000000" points="441.217,-107.414 449.909,-101.355 439.336,-100.671 441.217,-107.414"/>
+</g>
+<!-- module~penf_b_size&#45;&gt;module~penf_stringify -->
+<g id="edge12" class="edge"><title>module~penf_b_size&#45;&gt;module~penf_stringify</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M293.084,-66.9332C304.014,-64.8955 316.261,-62.6122 327.919,-60.4387"/>
+<polygon fill="#000000" stroke="#000000" points="328.775,-63.8395 337.964,-58.5658 327.492,-56.958 328.775,-63.8395"/>
+</g>
+<!-- iso_fortran_env -->
+<g id="node10" class="node"><title>iso_fortran_env</title>
+<a xlink:href="https://gcc.gnu.org/onlinedocs/gfortran/ISO_005fFORTRAN_005fENV.html" xlink:title="iso_fortran_env">
+<polygon fill="#337ab7" stroke="#337ab7" points="301,-42.4743 215,-42.4743 215,-16.4743 301,-16.4743 301,-42.4743"/>
+<text text-anchor="middle" x="258" y="-27.0243" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">iso_fortran_env</text>
+</a>
+</g>
+<!-- iso_fortran_env&#45;&gt;module~penf_stringify -->
+<g id="edge10" class="edge"><title>iso_fortran_env&#45;&gt;module~penf_stringify</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M301.604,-37.6038C310.097,-39.1874 319.049,-40.8563 327.684,-42.4663"/>
+<polygon fill="#000000" stroke="#000000" points="327.158,-45.9284 337.63,-44.3206 328.441,-39.047 327.158,-45.9284"/>
+</g>
+</g>
+</svg>
+</div>
+                <div><a type="button" class="graph-help" data-toggle="modal" href="#graph-help-text">Help</a></div>
+                <div class="modal fade" id="graph-help-text" tabindex="-1" role="dialog">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                      </div>
+                      <div class="modal-body">
+                        
+    <p>Nodes of different colours represent the following: </p>
+    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.26.3 (20100126.1600)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="486pt" height="34pt"
+ viewBox="0.00 0.00 486.00 34.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph1" class="graph" transform="scale(1 1) rotate(0) translate(4 30)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="white" points="-4,5 -4,-30 483,-30 483,5 -4,5"/>
+<!-- Module -->
+<g id="node1" class="node"><title>Module</title>
+<polygon fill="#337ab7" stroke="#337ab7" points="54,-26 2.13163e-14,-26 0,-1.24345e-14 54,-3.55271e-15 54,-26"/>
+<text text-anchor="middle" x="27" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Module</text>
+</g>
+<!-- Submodule -->
+<g id="node2" class="node"><title>Submodule</title>
+<polygon fill="#5bc0de" stroke="#5bc0de" points="138,-26 72,-26 72,-1.24345e-14 138,-3.55271e-15 138,-26"/>
+<text text-anchor="middle" x="105" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Submodule</text>
+</g>
+<!-- Subroutine -->
+<g id="node3" class="node"><title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="220,-26 156,-26 156,-1.24345e-14 220,-3.55271e-15 220,-26"/>
+<text text-anchor="middle" x="188" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node4" class="node"><title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="292,-26 238,-26 238,-1.24345e-14 292,-3.55271e-15 292,-26"/>
+<text text-anchor="middle" x="265" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Program -->
+<g id="node5" class="node"><title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="364,-26 310,-26 310,-1.24345e-14 364,-3.55271e-15 364,-26"/>
+<text text-anchor="middle" x="337" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node6" class="node"><title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="478,-26 382,-26 382,-1.24345e-14 478,-3.55271e-15 478,-26"/>
+<text text-anchor="middle" x="430" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+    
+    <p>Solid arrows point from a parent (sub)module to the submodule which is
+    descended from it. Dashed arrows point from a module being used to the
+    module or program unit using it.
+    </p>
+    
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+    
+
+    <br><br>
+    
+    
+     <h3>Calls</h3>
+     
+                <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.26.3 (20100126.1600)
+ -->
+<!-- Title: program~~volatile_doctest~31~~CallsGraph Pages: 1 -->
+<svg id="programvolatile_doctest31CallsGraph" width="310pt" height="34pt"
+ viewBox="0.00 0.00 310.00 34.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="program~~volatile_doctest~31~~CallsGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 30)">
+<title>program~~volatile_doctest~31~~CallsGraph</title>
+<polygon fill="white" stroke="white" points="-4,5 -4,-30 307,-30 307,5 -4,5"/>
+<!-- program~volatile_doctest~31 -->
+<g id="node1" class="node"><title>program~volatile_doctest~31</title>
+<polygon fill="none" stroke="black" points="86,-26 4.26326e-14,-26 0,-1.24345e-14 86,-3.55271e-15 86,-26"/>
+<text text-anchor="middle" x="43" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50">volatile_doctest</text>
+</g>
+<!-- interface~str_ascii -->
+<g id="node2" class="node"><title>interface~str_ascii</title>
+<a xlink:href="../interface/str_ascii.html" xlink:title="str_ascii">
+<polygon fill="#a7506f" stroke="#a7506f" points="176,-26 122,-26 122,-1.24345e-14 176,-3.55271e-15 176,-26"/>
+<text text-anchor="middle" x="149" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">str_ascii</text>
+</a>
+</g>
+<!-- program~volatile_doctest~31&#45;&gt;interface~str_ascii -->
+<g id="edge4" class="edge"><title>program~volatile_doctest~31&#45;&gt;interface~str_ascii</title>
+<path fill="none" stroke="#000000" d="M86.1143,-13C94.5776,-13 103.39,-13 111.645,-13"/>
+<polygon fill="#000000" stroke="#000000" points="111.737,-16.5001 121.737,-13 111.737,-9.5001 111.737,-16.5001"/>
+</g>
+<!-- proc~str_ascii_default -->
+<g id="node3" class="node"><title>proc~str_ascii_default</title>
+<a xlink:href="../proc/str_ascii_default.html" xlink:title="str_ascii_default">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="302,-26 212,-26 212,-1.24345e-14 302,-3.55271e-15 302,-26"/>
+<text text-anchor="middle" x="257" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">str_ascii_default</text>
+</a>
+</g>
+<!-- interface~str_ascii&#45;&gt;proc~str_ascii_default -->
+<g id="edge2" class="edge"><title>interface~str_ascii&#45;&gt;proc~str_ascii_default</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M176.253,-13C183.978,-13 192.68,-13 201.437,-13"/>
+<polygon fill="#000000" stroke="#000000" points="201.687,-16.5001 211.687,-13 201.687,-9.5001 201.687,-16.5001"/>
+</g>
+</g>
+</svg>
+</div>
+                <div><a type="button" class="graph-help" data-toggle="modal" href="#graph-help-text">Help</a></div>
+                <div class="modal fade" id="graph-help-text" tabindex="-1" role="dialog">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                      </div>
+                      <div class="modal-body">
+                        
+    <p>Nodes of different colours represent the following: </p>
+    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.26.3 (20100126.1600)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="556pt" height="34pt"
+ viewBox="0.00 0.00 556.00 34.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph1" class="graph" transform="scale(1 1) rotate(0) translate(4 30)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="white" points="-4,5 -4,-30 553,-30 553,5 -4,5"/>
+<!-- Subroutine -->
+<g id="node1" class="node"><title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="64,-26 3.19744e-14,-26 0,-1.24345e-14 64,-3.55271e-15 64,-26"/>
+<text text-anchor="middle" x="32" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node2" class="node"><title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="136,-26 82,-26 82,-1.24345e-14 136,-3.55271e-15 136,-26"/>
+<text text-anchor="middle" x="109" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Interface -->
+<g id="node3" class="node"><title>Interface</title>
+<polygon fill="#a7506f" stroke="#a7506f" points="208,-26 154,-26 154,-1.24345e-14 208,-3.55271e-15 208,-26"/>
+<text text-anchor="middle" x="181" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Interface</text>
+</g>
+<!-- Unknown Procedure Type -->
+<g id="node4" class="node"><title>Unknown Procedure Type</title>
+<polygon fill="#777777" stroke="#777777" points="362,-26 226,-26 226,-1.24345e-14 362,-3.55271e-15 362,-26"/>
+<text text-anchor="middle" x="294" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Unknown Procedure Type</text>
+</g>
+<!-- Program -->
+<g id="node5" class="node"><title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="434,-26 380,-26 380,-1.24345e-14 434,-3.55271e-15 434,-26"/>
+<text text-anchor="middle" x="407" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node6" class="node"><title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="548,-26 452,-26 452,-1.24345e-14 548,-3.55271e-15 548,-26"/>
+<text text-anchor="middle" x="500" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+    
+    <p>Solid arrows point from a procedure to one which it calls. Dashed 
+    arrows point from an interface to procedures which implement that interface.
+    This could include the module procedures in a generic interface or the
+    implementation in a submodule of an interface in a parent module.
+    </p>
+    
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+     
+    <br>
+
+     <section class="visible-xs visible-sm hidden-md">
+       
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#vars-1">Variables</a></h3></div>
+  <div id="vars-1" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E31.html#variable-string%7E3">string</a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title">Source Code</h3></div>
+  <div class="list-group">
+    <a class="list-group-item" href="../program/volatile_doctest%7E31.html#src">volatile_doctest</a>
+  </div>
+</div>
+
+
+     </section>
+     <br class="visible-xs visible-sm hidden-md">
+
+     
+
+    
+    <section>
+    <h2>Variables</h2>
+    
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+
+<th>Attributes</th><th></th><th>Name</th><th></th><th>Initial</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-string%7E3"></span>character(kind=len=:,ASCII),</td>
+  
+  
+  <td>allocatable</td><td>::</td>
+  <td><strong>string</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+    </section>
+    <br>
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+
+
+    
+    
+    
+    <section>
+    <h2 id="src">Source Code</h2>
+    <div class="highlight"><pre><span></span><span class="k">program </span><span class="n">volatile_doctest</span>
+<span class="k">use </span><span class="n">penf_stringify</span>
+ <span class="k">use </span><span class="n">penf</span>
+ <span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="p">:,</span> <span class="nb">kind</span><span class="o">=</span><span class="n">ASCII</span><span class="p">),</span> <span class="k">allocatable</span> <span class="kd">::</span> <span class="n">string</span>
+ <span class="n">string</span> <span class="o">=</span> <span class="n">str_ascii</span><span class="p">(</span><span class="s1">&#39;I was ASCII kind and I am still ASCII&#39;</span><span class="p">)</span>
+ <span class="k">print</span> <span class="s2">&quot;(A)&quot;</span><span class="p">,</span> <span class="n">string</span>
+<span class="n">endprogram</span> <span class="n">volatile_doctest</span>
+</pre></div>
+
+    </section>
+    
+    
+    </div>
+  </div>
+
+  <section class="visible-xs visible-sm hidden-md">
+    <hr>
+    
+
+<div class="panel panel-default">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#allprogs-1">All Programs</a></h3></div>
+  <div id="allprogs-1" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../program/volatile_doctest.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E2.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E3.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E4.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E5.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E6.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E7.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E8.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E9.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E10.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E11.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E12.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E13.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E14.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E15.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E16.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E17.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E18.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E19.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E20.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E21.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E22.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E23.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E24.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E25.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E26.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E27.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E28.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E29.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E30.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E31.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E32.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E33.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E34.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E35.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E36.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E37.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E38.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E39.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E40.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E41.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E42.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E43.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E44.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E45.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E46.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E47.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E48.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E49.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E50.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E51.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E52.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E53.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E54.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E55.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E56.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E57.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E58.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E59.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E60.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E61.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E62.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E63.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E64.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E65.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E66.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E67.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E68.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E69.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E70.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E71.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E72.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E73.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E74.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E75.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E76.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E77.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E78.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E79.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E80.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E81.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E82.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E83.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E84.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E85.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E86.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E87.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E88.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E89.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E90.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E91.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E92.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E93.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E94.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E95.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E96.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E97.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E98.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E99.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E100.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E101.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E102.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E103.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E104.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E105.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E106.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E107.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E108.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E109.html">volatile_doctest</a>
+      
+      <a class="list-group-item" href="../program/volatile_doctest%7E110.html">volatile_doctest</a>
+      
+    </div>
+  </div>
+</div>
+
+
+  </section>
+  
+    <hr>    
+    </div> <!-- /container -->
+    <footer>
+      <div class="container">
+      <div class="row">
+        <div class="col-xs-6 col-md-4"><p>&copy; 2017 </p></div>
+        <div class="col-xs-6 col-md-4 col-md-push-4">
+          <p class="text-right">
+            Documentation generated by 
+            <a href="https://github.com/cmacmackin/ford">FORD</a>
+            
+          </p>
+        </div>
+        <div class="col-xs-12 col-md-4 col-md-pull-4"><p class="text-center"> PENF was developed by Stefano Zaghi</p></div>
+      </div>
+      <br>
+      </div> <!-- /container -->    
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+<!--
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+-->
+    <script src="../js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../js/ie10-viewport-bug-workaround.js"></script>
+
+    <!-- MathJax JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } },
+        jax: ['input/TeX','input/MathML','output/HTML-CSS'],
+        extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js'],
+        'HTML-CSS': { 
+           styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: '#000000 ! important'} }
+        }
+      });
+    </script>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  </body>
+</html>

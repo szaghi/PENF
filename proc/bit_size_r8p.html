@@ -383,6 +383,9 @@ private elemental function bit_size_R8P(i) result(bits)
 
     
     <p>Compute the number of bits of a real variable.</p>
+<div class="codehilite"><pre><span></span> <span class="k">use </span><span class="n">penf</span>
+ <span class="k">print </span><span class="n">FI1P</span><span class="p">,</span> <span class="nb">bit_size</span><span class="p">(</span><span class="mf">1._R8P</span><span class="p">)</span>
+</pre></div>
     
 
     <h3>Arguments</h3>
@@ -584,14 +587,20 @@ private elemental function bit_size_R8P(i) result(bits)
     
     <section>
     <h2><span class="anchor" id="src"></span>Source Code</h2>
-    <div class="highlight"><pre><span></span>  <span class="k">elemental function </span><span class="n">bit_size_R8P</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">bits</span><span class="p">)</span>
-  <span class="c">!&lt; Compute the number of bits of a real variable.</span>
-  <span class="kt">real</span><span class="p">(</span><span class="n">R8P</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">i</span>       <span class="c">!&lt; Real variable whose number of bits must be computed.</span>
-  <span class="kt">integer</span><span class="p">(</span><span class="n">I1P</span><span class="p">)</span>          <span class="kd">::</span> <span class="n">bits</span>    <span class="c">!&lt; Number of bits of r.</span>
-  <span class="kt">integer</span><span class="p">(</span><span class="n">I1P</span><span class="p">)</span>          <span class="kd">::</span> <span class="n">mold</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c">!&lt; &quot;Molding&quot; dummy variable for bits counting.</span>
+    <div class="highlight"><pre><span></span>   <span class="k">elemental function </span><span class="n">bit_size_R8P</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">bits</span><span class="p">)</span>
+   <span class="c">!&lt; Compute the number of bits of a real variable.</span>
+   <span class="c">!&lt;</span>
+   <span class="c">!&lt;```fortran</span>
+   <span class="c">!&lt; use penf</span>
+   <span class="c">!&lt; print FI1P, bit_size(1._R8P)</span>
+   <span class="c">!&lt;```</span>
+   <span class="c">!=&gt; 64 &lt;&lt;&lt;</span>
+   <span class="kt">real</span><span class="p">(</span><span class="n">R8P</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">i</span>       <span class="c">!&lt; Real variable whose number of bits must be computed.</span>
+   <span class="kt">integer</span><span class="p">(</span><span class="n">I1P</span><span class="p">)</span>          <span class="kd">::</span> <span class="n">bits</span>    <span class="c">!&lt; Number of bits of r.</span>
+   <span class="kt">integer</span><span class="p">(</span><span class="n">I1P</span><span class="p">)</span>          <span class="kd">::</span> <span class="n">mold</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c">!&lt; &quot;Molding&quot; dummy variable for bits counting.</span>
 
-  <span class="n">bits</span> <span class="o">=</span> <span class="n">size</span><span class="p">(</span><span class="nb">transfer</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">mold</span><span class="p">),</span> <span class="nb">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="nb">kind</span><span class="o">=</span><span class="n">I1P</span><span class="p">)</span> <span class="o">*</span> <span class="mi">8_I1P</span>
-  <span class="n">endfunction</span> <span class="n">bit_size_R8P</span>
+   <span class="n">bits</span> <span class="o">=</span> <span class="n">size</span><span class="p">(</span><span class="nb">transfer</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">mold</span><span class="p">),</span> <span class="nb">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="nb">kind</span><span class="o">=</span><span class="n">I1P</span><span class="p">)</span> <span class="o">*</span> <span class="mi">8_I1P</span>
+   <span class="n">endfunction</span> <span class="n">bit_size_R8P</span>
 </pre></div>
 
     </section>

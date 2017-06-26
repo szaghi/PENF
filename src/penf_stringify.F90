@@ -1224,11 +1224,10 @@ contains
    !< print "(A)", b(17:)
    !<```
    !=> 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001111111100111111 <<<
-   real(R16P), intent(in)    :: n         !< Real to be converted.
-   character(128)            :: bstr      !< Returned bit-string containing input number.
-   integer(I1P), allocatable :: buffer(:) !< Transfer buffer.
+   real(R16P), intent(in) :: n          !< Real to be converted.
+   character(128)         :: bstr       !< Returned bit-string containing input number.
+   integer(I1P)           :: buffer(16) !< Transfer buffer.
 
-   allocate(buffer(16))
    buffer = transfer(n, buffer)
    write(bstr, '(16B8.8)') buffer
    endfunction bstr_R16P
@@ -1243,11 +1242,10 @@ contains
    !< print "(A)", bstr(n=1._R8P)
    !<```
    !=> 0000000000000000000000000000000000000000000000001111000000111111 <<<
-   real(R8P), intent(in)     :: n         !< Real to be converted.
-   character(64)             :: bstr      !< Returned bit-string containing input number.
-   integer(I1P), allocatable :: buffer(:) !< Transfer buffer.
+   real(R8P), intent(in) :: n         !< Real to be converted.
+   character(64)         :: bstr      !< Returned bit-string containing input number.
+   integer(I1P)          :: buffer(8) !< Transfer buffer.
 
-   allocate(buffer(8))
    buffer = transfer(n, buffer)
    write(bstr, '(8B8.8)') buffer
    endfunction bstr_R8P
@@ -1262,11 +1260,10 @@ contains
    !< print "(A)", bstr(n=1._R4P)
    !<```
    !=> 00000000000000001000000000111111 <<<
-   real(R4P), intent(in)     :: n         !< Real to be converted.
-   character(32)             :: bstr      !< Returned bit-string containing input number.
-   integer(I1P), allocatable :: buffer(:) !< Transfer buffer.
+   real(R4P), intent(in) :: n         !< Real to be converted.
+   character(32)         :: bstr      !< Returned bit-string containing input number.
+   integer(I1P)          :: buffer(4) !< Transfer buffer.
 
-   allocate(buffer(4))
    buffer = transfer(n, buffer)
    write(bstr, '(4B8.8)') buffer
    endfunction bstr_R4P
@@ -1337,33 +1334,64 @@ contains
 
    elemental function bctor_R16P(bstr, knd) result(n)
    !< Convert bit-string to real.
-   character(*), intent(in) :: bstr !< String containing input number.
-   real(R16P),   intent(in) :: knd  !< Number kind.
-   real(R16P)               :: n    !< Number returned.
+   !<
+   !<```fortran
+   !< use penf
+   !< print FR16P, bcton('00000000000000000000000000000000000000000000000000000000000000000000000000000'//&
+   !<                    '000000000000000000000000000000000001111111100111111', knd=1._R16P)
+   !<```
+   !=> 0.100000000000000000000000000000000E+0001 <<<
+   character(*), intent(in) :: bstr       !< String containing input number.
+   real(R16P),   intent(in) :: knd        !< Number kind.
+   real(R16P)               :: n          !< Number returned.
+   integer(I1P)             :: buffer(16) !< Transfer buffer.
 
-   read(bstr, '(B'//trim(str(bit_size(knd), .true.))//'.'//trim(str(bit_size(knd), .true.))//')') n
+   read(bstr, '(16B8.8)') buffer
+   n = transfer(buffer, n)
    endfunction bctor_R16P
 
    elemental function bctor_R8P(bstr, knd) result(n)
    !< Convert bit-string to real.
-   character(*), intent(in) :: bstr !< String containing input number.
-   real(R8P),    intent(in) :: knd  !< Number kind.
-   real(R8P)                :: n    !< Number returned.
+   !<
+   !<```fortran
+   !< use penf
+   !< print FR8P, bcton('0000000000000000000000000000000000000000000000001111000000111111', knd=1._R8P)
+   !<```
+   !=> 0.100000000000000E+001 <<<
+   character(*), intent(in) :: bstr      !< String containing input number.
+   real(R8P),    intent(in) :: knd       !< Number kind.
+   real(R8P)                :: n         !< Number returned.
+   integer(I1P)             :: buffer(8) !< Transfer buffer.
 
-   read(bstr, '(B'//trim(str(bit_size(knd), .true.))//'.'//trim(str(bit_size(knd), .true.))//')') n
+   read(bstr, '(8B8.8)') buffer
+   n = transfer(buffer, n)
    endfunction bctor_R8P
 
    elemental function bctor_R4P(bstr, knd) result(n)
    !< Convert bit-string to real.
-   character(*), intent(in) :: bstr !< String containing input number.
-   real(R4P),    intent(in) :: knd  !< Number kind.
-   real(R4P)                :: n    !< Number returned.
+   !<
+   !<```fortran
+   !< use penf
+   !< print FR4P, bcton('00000000000000001000000000111111', knd=1._R4P)
+   !<```
+   !=> 0.100000E+01 <<<
+   character(*), intent(in) :: bstr      !< String containing input number.
+   real(R4P),    intent(in) :: knd       !< Number kind.
+   real(R4P)                :: n         !< Number returned.
+   integer(I1P)             :: buffer(4) !< Transfer buffer.
 
-   read(bstr,'(B'//trim(str(bit_size(knd), .true.))//'.'//trim(str(bit_size(knd), .true.))//')') n
+   read(bstr, '(4B8.8)') buffer
+   n = transfer(buffer, n)
    endfunction bctor_R4P
 
    elemental function bctoi_I8P(bstr, knd) result(n)
    !< Convert bit-string to integer.
+   !<
+   !<```fortran
+   !< use penf
+   !< print FI8P, bcton('0000000000000000000000000000000000000000000000000000000000000001', knd=1_I8P)
+   !<```
+   !=> 1 <<<
    character(*), intent(in) :: bstr !< String containing input number.
    integer(I8P), intent(in) :: knd  !< Number kind.
    integer(I8P)             :: n    !< Number returned.
@@ -1373,6 +1401,12 @@ contains
 
    elemental function bctoi_I4P(bstr, knd) result(n)
    !< Convert bit-string to integer.
+   !<
+   !<```fortran
+   !< use penf
+   !< print FI4P, bcton('00000000000000000000000000000001', knd=1_I4P)
+   !<```
+   !=> 1 <<<
    character(*), intent(in) :: bstr !< String containing input number.
    integer(I4P), intent(in) :: knd  !< Number kind.
    integer(I4P)             :: n    !< Number returned.
@@ -1382,6 +1416,12 @@ contains
 
    elemental function bctoi_I2P(bstr, knd) result(n)
    !< Convert bit-string to integer.
+   !<
+   !<```fortran
+   !< use penf
+   !< print FI2P, bcton('0000000000000001', knd=1_I2P)
+   !<```
+   !=> 1 <<<
    character(*), intent(in) :: bstr !< String containing input number.
    integer(I2P), intent(in) :: knd  !< Number kind.
    integer(I2P)             :: n    !< Number returned.
@@ -1391,6 +1431,12 @@ contains
 
    elemental function bctoi_I1P(bstr, knd) result(n)
    !< Convert bit-string to integer.
+   !<
+   !<```fortran
+   !< use penf
+   !< print FI1P, bcton('00000001', knd=1_I1P)
+   !<```
+   !=> 1 <<<
    character(*), intent(in) :: bstr !< String containing input number.
    integer(I1P), intent(in) :: knd  !< Number kind.
    integer(I1P)             :: n    !< Number returned.
