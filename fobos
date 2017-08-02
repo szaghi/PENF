@@ -3,15 +3,20 @@ modes = shared-gnu static-gnu tests-gnu
         shared-gnu-debug static-gnu-debug tests-gnu-debug
         shared-intel static-intel tests-intel
         shared-intel-debug static-intel-debug tests-intel-debug
+        shared-ibm static-ibm tests-ibm
+        shared-ibm-debug static-ibm-debug tests-ibm-debug
 
 [common-variables]
-$CSHARED_GNU = -cpp -c -fPIC -frealloc-lhs
-$CSHARED_INT = -cpp -c -fpic -assume realloc_lhs
+$CSHARED_GNU = -c -fPIC -frealloc-lhs
+$CSHARED_INT = -c -fpic -assume realloc_lhs
+$CSHARED_IBM = -c -qpic -qmkshrobj -qxlf2003=autorealloc 
 $LSHARED     = -shared
 $CSTATIC_GNU = -c -frealloc-lhs
 $CSTATIC_INT = -c -assume realloc_lhs
+$CSTATIC_IBM = -c -qxlf2003=autorealloc 
 $DEBUG_GNU   = -Og -g3 -Warray-bounds -Wcharacter-truncation -Wline-truncation -Wimplicit-interface -Wimplicit-procedure -Wunderflow -Wuninitialized -fcheck=all -fmodule-private -ffree-line-length-132 -fimplicit-none -fbacktrace -fdump-core -finit-real=nan -std=f2008 -fall-intrinsics
 $DEBUG_INT   = -O0 -debug all -check all -warn all -extend-source 132 -traceback -gen-interfaces#-fpe-all=0 -fp-stack-check -fstack-protector-all -ftrapuv -no-ftz -std08
+$DEBUG_IBM   = -qcheck=all -qdbg=level=9 
 $OPTIMIZE    = -O2
 
 # main modes
@@ -85,6 +90,42 @@ mklib     = static
 
 [tests-intel-debug]
 template  = template-static-intel-debug
+build_dir = ./exe/
+
+[shared-ibm]
+template  = template-shared-ibm
+target    = src/lib/penf.F90
+build_dir = ./shared/
+output    = penf.so
+mklib     = shared
+
+[static-ibm]
+template  = template-static-ibm
+target    = src/lib/penf.F90
+build_dir = ./static/
+output    = penf.a
+mklib     = static
+
+[tests-ibm]
+template  = template-static-ibm
+build_dir = ./exe/
+
+[shared-ibm-debug]
+template  = template-shared-ibm-debug
+target    = src/lib/penf.F90
+build_dir = ./shared/
+output    = penf.so
+mklib     = shared
+
+[static-ibm-debug]
+template  = template-static-ibm-debug
+target    = src/lib/penf.F90
+build_dir = ./static/
+output    = penf.a
+mklib     = static
+
+[tests-ibm-debug]
+template  = template-static-ibm-debug
 build_dir = ./exe/
 
 #templates
@@ -185,6 +226,58 @@ cflags_heritage = True
 compiler        = intel
 cflags          = $CSTATIC_INT $DEBUG_INT
 lflags          = $DEBUG_INT
+mod_dir         = ./mod/
+obj_dir         = ./obj/
+src             = ./src/
+colors          = True
+quiet           = False
+log             = True
+jobs            = 4
+cflags_heritage = True
+
+[template-shared-ibm]
+compiler        = ibm
+cflags          = $CSHARED_IBM $OPTIMIZE
+lflags          = $LSHARED $OPTIMIZE
+mod_dir         = ./mod/
+obj_dir         = ./obj/
+src             = ./src/
+colors          = True
+quiet           = False
+log             = True
+jobs            = 4
+cflags_heritage = True
+
+[template-static-ibm]
+compiler        = ibm
+cflags          = $CSTATIC_IBM $OPTIMIZE
+lflags          = $OPTIMIZE
+mod_dir         = ./mod/
+obj_dir         = ./obj/
+src             = ./src/
+colors          = True
+quiet           = False
+log             = True
+jobs            = 4
+cflags_heritage = True
+
+[template-shared-ibm-debug]
+compiler        = ibm
+cflags          = $CSHARED_IBM $DEBUG_IBM
+lflags          = $LSHARED $DEBUG_IBM
+mod_dir         = ./mod/
+obj_dir         = ./obj/
+src             = ./src/
+colors          = True
+quiet           = False
+log             = True
+jobs            = 4
+cflags_heritage = True
+
+[template-static-ibm-debug]
+compiler        = ibm 
+cflags          = $CSTATIC_IBM $DEBUG_IBM
+lflags          = $DEBUG_IBM
 mod_dir         = ./mod/
 obj_dir         = ./obj/
 src             = ./src/

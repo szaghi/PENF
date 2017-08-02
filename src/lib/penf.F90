@@ -3,10 +3,10 @@
 module penf
 !< Portability Environment for Fortran poor people.
 use penf_global_parameters_variables
-#ifdef __GFORTRAN__
-use penf_b_size, only : bit_size, byte_size
-#else
+#ifdef __INTEL_COMPILER
 use penf_b_size
+#else
+use penf_b_size, only : bit_size, byte_size
 #endif
 use penf_stringify, only : str_ascii, str_ucs4, str, strz, cton, bstr, bcton
 
