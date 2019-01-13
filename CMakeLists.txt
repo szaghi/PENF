@@ -14,6 +14,11 @@ cmake_minimum_required(VERSION 3.10...3.11)
 project(PENF VERSION 1.2.1 LANGUAGES Fortran)
 
 #################################################################
+# seach path for additional cmake modules
+#################################################################
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake/Modules)
+
+#################################################################
 # CONFIGURATION TYPES & BUILD MODE & BUILD_TESTS
 #################################################################
 
