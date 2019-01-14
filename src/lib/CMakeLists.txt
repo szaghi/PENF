@@ -24,24 +24,24 @@ target_include_directories(${LIB}
 
 include(CheckFortranSourceRuns)
 
-check_fortran_source_runs("program r16p_support; integer, parameter :: r16p = selected_real_kind(33, 4931); if(r16p < 0) stop 1; end program r16p_support" _R16P_SUPPORTED SRC_EXT f90)
-if(_R16P_SUPPORTED)
-    set(_r16p_supported "_R16P_SUPPORTED")
+check_fortran_source_runs("program r16p_support; integer, parameter :: r16p = selected_real_kind(33, 4931); if(r16p < 0) stop 1; end program r16p_support" R16P_SUPPORTED SRC_EXT f90)
+if(R16P_SUPPORTED)
+    set(r16p_supported "_R16P_SUPPORTED")
 endif()
-check_fortran_source_runs("program ascii_support; integer, parameter :: ascii = selected_char_kind('ascii'); if(ascii < 0) stop 1; end program ascii_support" _ASCII_SUPPORTED SRC_EXT f90)
-if(_ASCII_SUPPORTED)
-    set(_ascii_supported "_ASCII_SUPPORTED")
+check_fortran_source_runs("program ascii_support; integer, parameter :: ascii = selected_char_kind('ascii'); if(ascii < 0) stop 1; end program ascii_support" ASCII_SUPPORTED SRC_EXT f90)
+if(ASCII_SUPPORTED)
+    set(ascii_supported "_ASCII_SUPPORTED")
 endif()
-check_fortran_source_runs("program ucs4_support; integer, parameter :: ucs4 = selected_char_kind('iso_10646'); if(ucs4 < 0) stop 1; end program ucs4_support" _UCS4_SUPPORTED SRC_EXT f90)
-if(_UCS4_SUPPORTED)
-    set(_ucs4_supported "_UCS4_SUPPORTED")
+check_fortran_source_runs("program ucs4_support; integer, parameter :: ucs4 = selected_char_kind('iso_10646'); if(ucs4 < 0) stop 1; end program ucs4_support" UCS4_SUPPORTED SRC_EXT f90)
+if(UCS4_SUPPORTED)
+    set(ucs4_supported "_UCS4_SUPPORTED")
 endif()
 
 target_compile_definitions(${LIB}
     PRIVATE
-        ${_r16p_supported}
-        ${_ascii_supported}
-        ${_ucs4_supported}
+        ${r16p_supported}
+        ${ascii_supported}
+        ${ucs4_supported}
 )
 
 set_target_properties(${LIB} PROPERTIES
