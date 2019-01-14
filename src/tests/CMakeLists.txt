@@ -17,7 +17,8 @@ function(add_penf_doctest test_src libraries)
     string(REGEX REPLACE "([+.])([^+.]*)" "\\\\\\1\\2" result ${result_raw})
 
     set_tests_properties(${test_name} PROPERTIES
-        PASS_REGULAR_EXPRESSION "${result}")
+        PASS_REGULAR_EXPRESSION "${result}"
+    )
 endfunction()
 
 file(GLOB_RECURSE penf_doctests *.f90)
