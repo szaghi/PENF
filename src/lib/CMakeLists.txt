@@ -15,7 +15,7 @@ add_library(${LIB}
     penf_global_parameters_variables.F90
     penf_stringify.F90
 )
-add_library(${NAMESPACE}::${LIB} ALIAS ${LIB})
+add_library(${NAMESPACE}${LIB} ALIAS ${LIB})
 
 target_include_directories(${LIB}
     INTERFACE
