@@ -19,10 +19,6 @@ project(PENF VERSION 1.2.1 LANGUAGES Fortran)
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake/Modules)
 
 #################################################################
-# CONFIGURATION TYPES & BUILD MODE & BUILD_TESTS
-#################################################################
-
-#################################################################
 # set export variables needed for building
 #################################################################
 
