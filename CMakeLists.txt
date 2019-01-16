@@ -7,34 +7,22 @@
 #
 # the config file is generatet in the build and install directories
 
-#################################################################
-# HEADER
-#################################################################
 cmake_minimum_required(VERSION 3.10...3.13)
 project(PENF VERSION 1.2.1 LANGUAGES Fortran)
 
-#################################################################
 # seach path for additional cmake modules
-#################################################################
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake/Modules)
 
-#################################################################
-# set export variables needed for building
-#################################################################
 
+# set export variables needed for building
 set(TARGETS_EXPORT_NAME "${PROJECT_NAME}Targets")
 set(NAMESPACE "${PROJECT_NAME}::")
 
-#################################################################
-# generate the library and install instructions
-#################################################################
 
+# generate the library and install instructions
 add_subdirectory(src/lib)
 
-#################################################################
-# ENABLE TESTING
-#################################################################
-
+# testing
 if(${PROJECT_SOURCE_DIR} STREQUAL ${CMAKE_SOURCE_DIR})
     set(main_project TRUE)
 else()
@@ -47,15 +35,12 @@ cmake_dependent_option(BUILD_TESTING_${PROJECT_NAME}
      "BUILD_TESTING;NOT main_project" OFF
 )
 
-if(main_project OR BUILD_TESTING_${PROJECT_NAME})
+if((main_project AND BUILD_TESTING) OR BUILD_TESTING_${PROJECT_NAME})
     enable_testing()
     add_subdirectory(src/tests)
 endif()
 
-#################################################################
 # generate package config files
-#################################################################
-
 include(GNUInstallDirs)
 set(project_config "${PROJECT_NAME}Config.cmake")
 set(cmake_files_dir "${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles")
