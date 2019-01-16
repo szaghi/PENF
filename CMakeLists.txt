@@ -1,9 +1,10 @@
 # The target of the library PENF is exported
 # as PENF::PENF to a package config file for PENF
 #
-# usage find_package(PENF)
-# ...
-# target_link_library(<target> PENF)
+# usage:
+#     find_package(PENF)
+#     ...
+#     target_link_library(<target> PENF)
 #
 # the config file is generatet in the build and install directories
 
