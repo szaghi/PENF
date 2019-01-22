@@ -28,3 +28,4 @@ doc/html/
 exe/
 wiki/
 get_automatic_changelog.sh
+/build
