@@ -9,14 +9,14 @@ modes = shared-gnu static-gnu tests-gnu
 [common-variables]
 $CSHARED_GNU = -c -fPIC -frealloc-lhs
 $CSHARED_INT = -c -fpic -assume realloc_lhs
-$CSHARED_IBM = -c -qpic -qmkshrobj -qxlf2003=autorealloc 
+$CSHARED_IBM = -c -qpic -qmkshrobj -qxlf2003=autorealloc
 $LSHARED     = -shared
 $CSTATIC_GNU = -c -frealloc-lhs
 $CSTATIC_INT = -c -assume realloc_lhs
-$CSTATIC_IBM = -c -qxlf2003=autorealloc 
+$CSTATIC_IBM = -c -qxlf2003=autorealloc
 $DEBUG_GNU   = -Og -g3 -Warray-bounds -Wcharacter-truncation -Wline-truncation -Wimplicit-interface -Wimplicit-procedure -Wunderflow -Wuninitialized -fcheck=all -fmodule-private -ffree-line-length-132 -fimplicit-none -fbacktrace -fdump-core -finit-real=nan -std=f2008 -fall-intrinsics
 $DEBUG_INT   = -O0 -debug all -check all -warn all -extend-source 132 -traceback -gen-interfaces#-fpe-all=0 -fp-stack-check -fstack-protector-all -ftrapuv -no-ftz -std08
-$DEBUG_IBM   = -qcheck=all -qdbg=level=9 
+$DEBUG_IBM   = -qcheck=all -qdbg=level=9
 $OPTIMIZE    = -O2
 
 # main modes
@@ -159,7 +159,7 @@ cflags_heritage = True
 compiler        = gnu
 cflags          = $CSHARED_GNU $DEBUG_GNU
 lflags          = $LSHARED $DEBUG_GNU
-preproc         = -D_R16P_SUPPORTED -D_ASCII_SUPPORTED -D_UCS4_SUPPORTED
+preproc         = -D_ASCII_SUPPORTED -D_UCS4_SUPPORTED
 mod_dir         = ./mod/
 obj_dir         = ./obj/
 src             = ./src/
@@ -173,7 +173,7 @@ cflags_heritage = True
 compiler        = gnu
 cflags          = $CSTATIC_GNU $DEBUG_GNU
 lflags          = $DEBUG_GNU
-preproc         = -D_R16P_SUPPORTED -D_ASCII_SUPPORTED -D_UCS4_SUPPORTED
+preproc         = -D_ASCII_SUPPORTED -D_UCS4_SUPPORTED
 mod_dir         = ./mod/
 obj_dir         = ./obj/
 src             = ./src/
@@ -275,7 +275,7 @@ jobs            = 4
 cflags_heritage = True
 
 [template-static-ibm-debug]
-compiler        = ibm 
+compiler        = ibm
 cflags          = $CSTATIC_IBM $DEBUG_IBM
 lflags          = $DEBUG_IBM
 mod_dir         = ./mod/

@@ -33,11 +33,7 @@ integer, parameter :: CK  = UCS4                              !< Default kind ch
 integer, parameter :: CK  = selected_char_kind('default')     !< Default kind character.
 #endif
 
-#ifdef _R16P_SUPPORTED
 integer, parameter :: R16P = selected_real_kind(33,4931) !< 33 digits, range \([10^{-4931}, 10^{+4931} - 1]\); 128 bits.
-#else
-integer, parameter :: R16P = selected_real_kind(15,307)  !< Defined as R8P; 64 bits.
-#endif
 integer, parameter :: R8P  = selected_real_kind(15,307)  !< 15 digits, range \([10^{-307} , 10^{+307}  - 1]\); 64 bits.
 integer, parameter :: R4P  = selected_real_kind(6,37)    !< 6  digits, range \([10^{-37}  , 10^{+37}   - 1]\); 32 bits.
 #if defined _R_P_IS_R16P
@@ -57,11 +53,7 @@ integer, parameter :: I1P = selected_int_kind(2)  !< Range \([-2^{7} ,+2^{7}  - 
 integer, parameter :: I_P = I4P                   !< Default integer precision.
 
 ! format parameters
-#ifdef _R16P_SUPPORTED
 character(*), parameter :: FR16P = '(E42.33E4)' !< Output format for kind=R16P real.
-#else
-character(*), parameter :: FR16P = '(E23.15E3)' !< Output format for kind=R16P real.
-#endif
 character(*), parameter :: FR8P  = '(E23.15E3)' !< Output format for kind=R8P real.
 character(*), parameter :: FR4P  = '(E13.6E2)'  !< Output format for kind=R4P real.
 #if defined _R_P_IS_R16P
@@ -86,11 +78,7 @@ character(*), parameter :: FI_P   = FI4P       !< Output format for kind=I_P int
 character(*), parameter :: FI_PZP = FI4PZP     !< Output format for kind=I_P integer with zero prefixing.
 
 ! length (number of digits) of formatted numbers
-#ifdef _R16P_SUPPORTED
 integer, parameter :: DR16P = 42    !< Number of digits of output format FR16P.
-#else
-integer, parameter :: DR16P = 23    !< Number of digits of output format FR16P.
-#endif
 integer, parameter :: DR8P  = 23    !< Number of digits of output format FR8P.
 integer, parameter :: DR4P  = 13    !< Number of digits of output format FR4P.
 #if defined _R_P_IS_R16P
