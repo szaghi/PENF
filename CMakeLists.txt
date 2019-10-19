@@ -1,5 +1,5 @@
-# The target of the library PENF is exported
-# as PENF::PENF to a package config file for PENF
+# The target of the PENF library is exported
+# as PENF::PENF to a package configuration file for this library
 #
 # usage:
 #     find_package(PENF)
@@ -48,16 +48,18 @@ endif()
 include(GNUInstallDirs)
 set(project_config "${PROJECT_NAME}-config.cmake")
 set(cmake_files_dir "${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles")
-set(config_install_dir "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}")
-set(config_build_dir "${CMAKE_CURRENT_BINARY_DIR}/${config_install_dir}")
+set(default_config_install_dir "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}")
+set(config_build_dir "${CMAKE_CURRENT_BINARY_DIR}/${default_config_install_dir}")
+set(${PROJECT_NAME}_INSTALL_CMAKEDIR ${default_config_install_dir} CACHE PATH "Path to the cmake files for Project ${PROJECT_NAME}")
 
 # export targets for install
 install(EXPORT ${TARGETS_EXPORT_NAME}
     NAMESPACE
         ${NAMESPACE}
     DESTINATION
-        ${config_install_dir}
-    COMPONENT Development
+        ${${PROJECT_NAME}_INSTALL_CMAKEDIR}
+    COMPONENT
+        ${PROJECT_NAME}_Development
 )
 
 # export targets into build
@@ -69,20 +71,24 @@ export(EXPORT ${TARGETS_EXPORT_NAME}
 )
 
 # create package config
-# Variables needed by PackageConfig.cmake.in: PROJECT_NAME, TARGETS_EXPORT_NAME,
-#   EXPORTED_TARGET
-
-set(EXPORTED_TARGET PENF::PENF)
+# Variables needed by PackageConfig.cmake.in: PROJECT_NAME, TARGETS_EXPORT_NAME
 
 include(CMakePackageConfigHelpers)
 configure_package_config_file(cmake/PackageConfig.cmake.in ${cmake_files_dir}/${project_config}
-    INSTALL_DESTINATION ${config_install_dir}
-)
-install(FILES ${cmake_files_dir}/${project_config}
-    DESTINATION ${config_install_dir}
+    INSTALL_DESTINATION ${${PROJECT_NAME}_INSTALL_CMAKEDIR}
 )
 
 configure_package_config_file(cmake/PackageConfig.cmake.in ${config_build_dir}/${project_config}
     INSTALL_DESTINATION ${config_build_dir}
     INSTALL_PREFIX ${CMAKE_CURRENT_BINARY_DIR}
+)
+
+write_basic_package_version_file(
+    ${PROJECT_NAME}ConfigVersion.cmake
+    VERSION ${PROJECT_VERSION}
+    COMPATIBILITY SameMajorVersion
+)
+
+install(FILES ${cmake_files_dir}/${project_config} ${PROJECT_NAME}ConfigVersion.cmake
+    DESTINATION ${${PROJECT_NAME}_INSTALL_CMAKEDIR}
 )
