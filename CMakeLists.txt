@@ -2,11 +2,18 @@
 # as PENF::PENF to a package configuration file for this library
 #
 # usage:
-#     find_package(PENF)
+#     find_package(PENF)/add_subdirectory(...)
 #     ...
 #     target_link_library(<target> PENF::PENF)
 #
 # the config file is generatet in the build and install directories
+#
+# to build the documentation build the target doc (ford is needed)
+#
+# to build the tests enable the option BUILD_TESTING (PENF_BUILD_TESTING)
+# if this is the main project (a subproject)
+# afterwards they can be run with ctest
+#
 
 cmake_minimum_required(VERSION 3.10...3.15)
 project(PENF VERSION 1.2.1 LANGUAGES Fortran)
@@ -21,12 +28,12 @@ set(NAMESPACE "${PROJECT_NAME}::")
 # generate the library and install instructions
 add_subdirectory(src/lib)
 
+add_subdirectory(doc EXCLUDE_FROM_ALL)
+
 # testing
 if(${PROJECT_SOURCE_DIR} STREQUAL ${CMAKE_SOURCE_DIR})
     set(main_project TRUE)
-    enable_testing()
     option(BUILD_TESTING "Build the testing tree." OFF)
-    #include(CTest)
 else()
     set(main_project FALSE)
 
@@ -38,9 +45,11 @@ else()
         "Build the testing tree for project ${PROJECT_NAME}." OFF
         "BUILD_TESTING;NOT main_project" OFF
     )
+
 endif()
 
 if((main_project OR BUILD_TESTING_${PROJECT_NAME}) AND BUILD_TESTING)
+    enable_testing()
     add_subdirectory(src/tests)
 endif()
 
