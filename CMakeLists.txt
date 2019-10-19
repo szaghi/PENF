@@ -8,17 +8,15 @@
 #
 # the config file is generatet in the build and install directories
 
-cmake_minimum_required(VERSION 3.10...3.13)
+cmake_minimum_required(VERSION 3.10...3.15)
 project(PENF VERSION 1.2.1 LANGUAGES Fortran)
 
 # seach path for additional cmake modules
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake/Modules)
 
-
 # set export variables needed for building
 set(TARGETS_EXPORT_NAME "${PROJECT_NAME}-targets")
 set(NAMESPACE "${PROJECT_NAME}::")
-
 
 # generate the library and install instructions
 add_subdirectory(src/lib)
@@ -26,18 +24,23 @@ add_subdirectory(src/lib)
 # testing
 if(${PROJECT_SOURCE_DIR} STREQUAL ${CMAKE_SOURCE_DIR})
     set(main_project TRUE)
+    enable_testing()
+    option(BUILD_TESTING "Build the testing tree." ON)
+    #include(CTest)
 else()
     set(main_project FALSE)
+
+    # if this is not the main project but BUILD_TESTIG is set to TRUE
+    # the tests for this project can be enabled by also setting
+    # BUILD_TESTING_${PROJECT_NAME} to TRUE
+    include(CMakeDependentOption)
+    cmake_dependent_option(BUILD_TESTING_${PROJECT_NAME}
+        "Build the testing tree for project ${PROJECT_NAME}." OFF
+        "BUILD_TESTING;NOT main_project" OFF
+    )
 endif()
 
-include(CMakeDependentOption)
-cmake_dependent_option(BUILD_TESTING_${PROJECT_NAME}
-     "Build the testing tree for project ${PROJECT_NAME}." OFF
-     "BUILD_TESTING;NOT main_project" OFF
-)
-
-if((main_project AND BUILD_TESTING) OR BUILD_TESTING_${PROJECT_NAME})
-    enable_testing()
+if((main_project OR BUILD_TESTING_${PROJECT_NAME}) AND BUILD_TESTING)
     add_subdirectory(src/tests)
 endif()
 
