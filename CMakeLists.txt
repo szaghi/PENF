@@ -13,13 +13,9 @@
 # to build the tests enable the option BUILD_TESTING (PENF_BUILD_TESTING)
 # if this is the main project (a subproject)
 # afterwards they can be run with ctest
-#
 
-cmake_minimum_required(VERSION 3.10...3.15)
+cmake_minimum_required(VERSION 3.14...3.15)
 project(PENF VERSION 1.2.1 LANGUAGES Fortran)
-
-# seach path for additional cmake modules
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake/Modules)
 
 # set export variables needed for building
 set(TARGETS_EXPORT_NAME "${PROJECT_NAME}-targets")
