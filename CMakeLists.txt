@@ -25,7 +25,7 @@ add_subdirectory(src/lib)
 if(${PROJECT_SOURCE_DIR} STREQUAL ${CMAKE_SOURCE_DIR})
     set(main_project TRUE)
     enable_testing()
-    option(BUILD_TESTING "Build the testing tree." ON)
+    option(BUILD_TESTING "Build the testing tree." OFF)
     #include(CTest)
 else()
     set(main_project FALSE)
@@ -47,6 +47,7 @@ endif()
 # generate package config files
 include(GNUInstallDirs)
 set(project_config "${PROJECT_NAME}-config.cmake")
+set(project_config_version "${PROJECT_NAME}-config-version.cmake")
 set(cmake_files_dir "${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles")
 set(default_config_install_dir "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}")
 set(config_build_dir "${CMAKE_CURRENT_BINARY_DIR}/${default_config_install_dir}")
@@ -84,11 +85,15 @@ configure_package_config_file(cmake/PackageConfig.cmake.in ${config_build_dir}/$
 )
 
 write_basic_package_version_file(
-    ${PROJECT_NAME}ConfigVersion.cmake
+    ${project_config_version}
     VERSION ${PROJECT_VERSION}
     COMPATIBILITY SameMajorVersion
 )
 
-install(FILES ${cmake_files_dir}/${project_config} ${PROJECT_NAME}ConfigVersion.cmake
-    DESTINATION ${${PROJECT_NAME}_INSTALL_CMAKEDIR}
+install(
+    FILES
+        ${cmake_files_dir}/${project_config}
+        ${CMAKE_CURRENT_BINARY_DIR}/${project_config_version}
+    DESTINATION
+        ${${PROJECT_NAME}_INSTALL_CMAKEDIR}
 )
