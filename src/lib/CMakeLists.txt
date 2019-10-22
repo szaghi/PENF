@@ -29,7 +29,9 @@ check_fortran_source_runs(
          if(ascii < 0) stop 1;
      end program ascii_support"
     ASCII_SUPPORTED
-    SRC_EXT f90)
+    SRC_EXT f90
+)
+
 if(ASCII_SUPPORTED)
     set(ascii_supported "_ASCII_SUPPORTED")
 endif()
@@ -43,6 +45,7 @@ check_fortran_source_runs(
     ASCII_NEQ_DEFAULT
     SRC_EXT f90
 )
+
 if(ASCII_NEQ_DEFAULT)
     set(ascii_neq_default "_ASCII_NEQ_DEFAULT")
 endif()
@@ -53,7 +56,9 @@ check_fortran_source_runs(
          if(ucs4 < 0) stop 1;
      end program ucs4_support"
     UCS4_SUPPORTED
-    SRC_EXT f90)
+    SRC_EXT f90
+)
+
 if(UCS4_SUPPORTED)
     set(ucs4_supported "_UCS4_SUPPORTED")
 endif()
@@ -73,8 +78,8 @@ set_target_properties(${LIB} PROPERTIES
 )
 
 # installation and export of targets
-install(DIRECTORY ${CMAKE_Fortran_MODULE_DIRECTORY}/
-    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}
+install(DIRECTORY "${CMAKE_Fortran_MODULE_DIRECTORY}/"
+    DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}"
     COMPONENT ${PROJECT_NAME}_Developement
 )
 
@@ -90,6 +95,6 @@ install(TARGETS ${LIB} EXPORT ${TARGETS_EXPORT_NAME}
         DESTINATION ${CMAKE_INSTALL_BINDIR}
         COMPONENT ${PROJECT_NAME}_Runtime
     INCLUDES
-        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}
+        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}"
         COMPONENT ${PROJECT_NAME}_Development
 )
