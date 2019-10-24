@@ -22,16 +22,6 @@ target_include_directories(${LIB}
 
 # set variables used for compile definitions of targets after support check
 include(CheckFortranSourceRuns)
-check_fortran_source_runs(
-    "program r16p_support;
-         integer, parameter :: r16p = selected_real_kind(33, 4931);
-         if(r16p < 0) stop 1;
-     end program r16p_support"
-     R16P_SUPPORTED
-     SRC_EXT f90)
-if(R16P_SUPPORTED)
-    set(r16p_supported "_R16P_SUPPORTED")
-endif()
 
 check_fortran_source_runs(
     "program ascii_support;
@@ -39,7 +29,9 @@ check_fortran_source_runs(
          if(ascii < 0) stop 1;
      end program ascii_support"
     ASCII_SUPPORTED
-    SRC_EXT f90)
+    SRC_EXT f90
+)
+
 if(ASCII_SUPPORTED)
     set(ascii_supported "_ASCII_SUPPORTED")
 endif()
@@ -53,6 +45,7 @@ check_fortran_source_runs(
     ASCII_NEQ_DEFAULT
     SRC_EXT f90
 )
+
 if(ASCII_NEQ_DEFAULT)
     set(ascii_neq_default "_ASCII_NEQ_DEFAULT")
 endif()
@@ -63,14 +56,15 @@ check_fortran_source_runs(
          if(ucs4 < 0) stop 1;
      end program ucs4_support"
     UCS4_SUPPORTED
-    SRC_EXT f90)
+    SRC_EXT f90
+)
+
 if(UCS4_SUPPORTED)
     set(ucs4_supported "_UCS4_SUPPORTED")
 endif()
 
 target_compile_definitions(${LIB}
     PRIVATE
-        ${r16p_supported}
         ${ascii_supported}
         ${ascii_neq_default}
         ${ucs4_supported}
@@ -84,14 +78,23 @@ set_target_properties(${LIB} PROPERTIES
 )
 
 # installation and export of targets
-install(DIRECTORY ${CMAKE_Fortran_MODULE_DIRECTORY}/
-    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}
-    COMPONENT Developement
+install(DIRECTORY "${CMAKE_Fortran_MODULE_DIRECTORY}/"
+    DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}"
+    COMPONENT ${PROJECT_NAME}_Developement
 )
 
 install(TARGETS ${LIB} EXPORT ${TARGETS_EXPORT_NAME}
-    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR} COMPONENT Development
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} COMPONENT RuntimeLibraries
-    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR} COMPONENT RuntimeLibraries
-    INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}
+    ARCHIVE
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        COMPONENT ${PROJECT_NAME}_Development
+    LIBRARY
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        COMPONENT ${PROJECT_NAME}_Runtime
+        NAMELINK_COMPONENT ${PROJECT_NAME}_Developement
+    RUNTIME
+        DESTINATION ${CMAKE_INSTALL_BINDIR}
+        COMPONENT ${PROJECT_NAME}_Runtime
+    INCLUDES
+        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}"
+        COMPONENT ${PROJECT_NAME}_Development
 )
