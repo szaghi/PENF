@@ -94,10 +94,6 @@ contains
    !=> 4 <<<
 
    call check_endian
-   BIR16P = bit_size(MaxR16P) ; BYR16P = BIR16P / 8_I2P
-   BIR8P  = bit_size(MaxR8P)  ; BYR8P  = BIR8P  / 8_I1P
-   BIR4P  = bit_size(MaxR4P)  ; BYR4P  = BIR4P  / 8_I1P
-   BIR_P  = bit_size(MaxR_P)  ; BYR_P  = BIR_P  / 8_I1P
    is_initialized = .true.
    endsubroutine penf_init
 

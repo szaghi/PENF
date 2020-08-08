@@ -140,23 +140,23 @@ real(R4P),  parameter :: ZeroR4P  = nearest(1._R4P, 1._R4P) - &
 real(R_P),  parameter :: ZeroR_P  = nearest(1._R_P, 1._R_P) - &
                                     nearest(1._R_P,-1._R_P)   !< Smallest representable difference of kind=R_P real.
 
-! bits/bytes memory requirements (real variables must be computed at runtime)
-integer(I2P)            :: BIR16P                         !< Number of bits of kind=R16P real.
-integer(I1P)            :: BIR8P                          !< Number of bits of kind=R8P real.
-integer(I1P)            :: BIR4P                          !< Number of bits of kind=R4P real.
-integer(I1P)            :: BIR_P                          !< Number of bits of kind=R_P real.
-integer(I2P)            :: BYR16P                         !< Number of bytes of kind=R16P real.
-integer(I1P)            :: BYR8P                          !< Number of bytes of kind=R8P real.
-integer(I1P)            :: BYR4P                          !< Number of bytes of kind=R4P real.
-integer(I1P)            :: BYR_P                          !< Number of bytes of kind=R_P real.
-integer(I8P), parameter :: BII8P = bit_size(MaxI8P)       !< Number of bits of kind=I8P integer.
-integer(I4P), parameter :: BII4P = bit_size(MaxI4P)       !< Number of bits of kind=I4P integer.
-integer(I2P), parameter :: BII2P = bit_size(MaxI2P)       !< Number of bits of kind=I2P integer.
-integer(I1P), parameter :: BII1P = bit_size(MaxI1P)       !< Number of bits of kind=I1P integer.
-integer(I_P), parameter :: BII_P = bit_size(MaxI_P)       !< Number of bits of kind=I_P integer.
-integer(I8P), parameter :: BYI8P = bit_size(MaxI8P)/8_I8P !< Number of bytes of kind=I8P integer.
-integer(I4P), parameter :: BYI4P = bit_size(MaxI4P)/8_I4P !< Number of bytes of kind=I4P integer.
-integer(I2P), parameter :: BYI2P = bit_size(MaxI2P)/8_I2P !< Number of bytes of kind=I2P integer.
-integer(I1P), parameter :: BYI1P = bit_size(MaxI1P)/8_I1P !< Number of bytes of kind=I1P integer.
-integer(I_P), parameter :: BYI_P = bit_size(MaxI_P)/8_I_P !< Number of bytes of kind=I_P integer.
+! bits/bytes memory requirements
+integer(I2P), parameter :: BIR16P = storage_size(MaxR16P)      !< Number of bits of kind=R16P real.
+integer(I1P), parameter :: BIR8P  = storage_size(MaxR8P)       !< Number of bits of kind=R8P real.
+integer(I1P), parameter :: BIR4P  = storage_size(MaxR4P)       !< Number of bits of kind=R4P real.
+integer(I1P), parameter :: BIR_P  = storage_size(MaxR_P)       !< Number of bits of kind=R_P real.
+integer(I2P), parameter :: BYR16P = BIR16P/8_I2P               !< Number of bytes of kind=R16P real.
+integer(I1P), parameter :: BYR8P  = BIR8P/8_I1P                !< Number of bytes of kind=R8P real.
+integer(I1P), parameter :: BYR4P  = BIR4P/8_I1P                !< Number of bytes of kind=R4P real.
+integer(I1P), parameter :: BYR_P  = BIR_P/8_I1P                !< Number of bytes of kind=R_P real.
+integer(I8P), parameter :: BII8P  = storage_size(MaxI8P)       !< Number of bits of kind=I8P integer.
+integer(I4P), parameter :: BII4P  = storage_size(MaxI4P)       !< Number of bits of kind=I4P integer.
+integer(I2P), parameter :: BII2P  = storage_size(MaxI2P)       !< Number of bits of kind=I2P integer.
+integer(I1P), parameter :: BII1P  = storage_size(MaxI1P)       !< Number of bits of kind=I1P integer.
+integer(I_P), parameter :: BII_P  = storage_size(MaxI_P)       !< Number of bits of kind=I_P integer.
+integer(I8P), parameter :: BYI8P  = BII8P/8_I8P                !< Number of bytes of kind=I8P integer.
+integer(I4P), parameter :: BYI4P  = BII4P/8_I4P                !< Number of bytes of kind=I4P integer.
+integer(I2P), parameter :: BYI2P  = BII2P/8_I2P                !< Number of bytes of kind=I2P integer.
+integer(I1P), parameter :: BYI1P  = BII1P/8_I1P                !< Number of bytes of kind=I1P integer.
+integer(I_P), parameter :: BYI_P  = BII_P/8_I_P                !< Number of bytes of kind=I_P integer.
 endmodule penf_global_parameters_variables
