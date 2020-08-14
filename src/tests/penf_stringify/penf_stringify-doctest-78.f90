@@ -1,3 +1,4 @@
+#if defined _r16p
 program volatile_doctest
 use penf_stringify
  use penf
@@ -5,3 +6,4 @@ use penf_stringify
  b = bstr(n=1._R16P)
  print "(A)", b(17:)
 endprogram volatile_doctest
+#endif
