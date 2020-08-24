@@ -38,7 +38,7 @@ endinterface
 interface str
   !< Convert number (real and integer) to string (number to string type casting).
   module procedure                       &
-#if defined _r16p
+#if defined _R16P
                    strf_R16P,str_R16P,   &
 #endif
                    strf_R8P ,str_R8P,    &
@@ -48,7 +48,7 @@ interface str
                    strf_I2P ,str_I2P,    &
                    strf_I1P ,str_I1P,    &
                              str_bol,    &
-#if defined _r16p
+#if defined _R16P
                              str_a_R16P, &
 #endif
                              str_a_R8P,  &
@@ -67,7 +67,7 @@ endinterface
 interface cton
   !< Convert string to number (real and integer, string to number type casting).
   module procedure            &
-#if defined _r16p
+#if defined _R16P
                    ctor_R16P, &
 #endif
                    ctor_R8P,  &
@@ -81,7 +81,7 @@ endinterface
 interface bstr
   !< Convert number (real and integer) to bit-string (number to bit-string type casting).
   module procedure            &
-#if defined _r16p
+#if defined _R16P
                    bstr_R16P, &
 #endif
                    bstr_R8P,  &
@@ -95,7 +95,7 @@ endinterface
 interface bcton
   !< Convert bit-string to number (real and integer, bit-string to number type casting).
   module procedure             &
-#if defined _r16p
+#if defined _R16P
                    bctor_R16P, &
 #endif
                    bctor_R8P,  &
@@ -203,7 +203,7 @@ contains
    output = input
    endfunction str_ucs4_ucs4
 
-#if defined _r16p
+#if defined _R16P
    elemental function strf_R16P(fm, n) result(str)
    !< Convert real to string.
    !<
@@ -310,7 +310,7 @@ contains
    write(str, trim(fm)) n
    endfunction strf_I1P
 
-#if defined _r16p
+#if defined _R16P
    elemental function str_R16P(n, no_sign, compact) result(str)
    !< Convert real to string.
    !<
@@ -521,7 +521,7 @@ contains
    write(str, '(L1)') n
    endfunction str_bol
 
-#if defined _r16p
+#if defined _R16P
    pure function str_a_R16P(n, no_sign, separator, delimiters, compact) result(str)
    !< Converting real array to string.
    !<
@@ -1050,7 +1050,7 @@ contains
    if (present(nz_pad)) str=str(DI1P-nz_pad:DI1P-1) ! Leaving out the extra zeros padding
    endfunction strz_I1P
 
-#if defined _r16p
+#if defined _R16P
    function ctor_R16P(str, knd, pref, error) result(n)
    !< Convert string to real.
    !<
@@ -1220,7 +1220,7 @@ contains
    if (present(error)) error = err
    endfunction ctoi_I1P
 
-#if defined _r16p
+#if defined _R16P
    elemental function bstr_R16P(n) result(bstr)
    !< Convert real to string of bits.
    !<
@@ -1342,7 +1342,7 @@ contains
    write(bstr, '(B8.8)') n
    endfunction bstr_I1P
 
-#if defined _r16p
+#if defined _R16P
    elemental function bctor_R16P(bstr, knd) result(n)
    !< Convert bit-string to real.
    !<

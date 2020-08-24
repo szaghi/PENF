@@ -12,7 +12,7 @@ public :: bit_size, byte_size
 interface bit_size
   !< Overloading of the intrinsic *bit_size* function for computing the number of bits of (also) real and character variables.
   module procedure                &
-#if defined _r16p
+#if defined _R16P
                    bit_size_R16P, &
 #endif
                    bit_size_R8P,  &
@@ -27,7 +27,7 @@ interface byte_size
                    byte_size_I4P,  &
                    byte_size_I2P,  &
                    byte_size_I1P,  &
-#if defined _r16p
+#if defined _R16P
                    byte_size_R16P, &
 #endif
                    byte_size_R8P,  &
@@ -36,7 +36,7 @@ interface byte_size
 endinterface
 
 contains
-#if defined _r16p
+#if defined _R16P
    elemental function bit_size_R16P(i) result(bits)
    !< Compute the number of bits of a real variable.
    !<
@@ -98,7 +98,7 @@ contains
    bits = size(transfer(i, mold), dim=1, kind=I4P) * 8_I4P
    endfunction bit_size_chr
 
-#if defined _r16p
+#if defined _R16P
    elemental function byte_size_R16P(i) result(bytes)
    !< Compute the number of bytes of a real variable.
    !<
