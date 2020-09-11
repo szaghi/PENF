@@ -162,12 +162,12 @@ real(R_P),  parameter :: smallR_P  = tiny(1._R_P ) !< Smallest representable val
 real(R16P), parameter :: ZeroR16P = nearest(1._R16P, 1._R16P) - &
                                     nearest(1._R16P,-1._R16P) !< Smallest representable difference of kind=R16P real.
 #endif
-real(R8P),  parameter :: ZeroR8P  = nearest(1._R8P, 1._R8P) - &
-                                    nearest(1._R8P,-1._R8P)   !< Smallest representable difference of kind=R8P real.
-real(R4P),  parameter :: ZeroR4P  = nearest(1._R4P, 1._R4P) - &
-                                    nearest(1._R4P,-1._R4P)   !< Smallest representable difference of kind=R4P real.
-real(R_P),  parameter :: ZeroR_P  = nearest(1._R_P, 1._R_P) - &
-                                    nearest(1._R_P,-1._R_P)   !< Smallest representable difference of kind=R_P real.
+real(R8P),  parameter :: ZeroR8P  = 0._R8P !nearest(1._R8P, 1._R8P) - &
+                                    !nearest(1._R8P,-1._R8P)   !< Smallest representable difference of kind=R8P real.
+real(R4P),  parameter :: ZeroR4P  = 0._R4P !nearest(1._R4P, 1._R4P) - &
+                                    !nearest(1._R4P,-1._R4P)   !< Smallest representable difference of kind=R4P real.
+real(R_P),  parameter :: ZeroR_P  = 0._R_P !nearest(1._R_P, 1._R_P) - &
+                                    !nearest(1._R_P,-1._R_P)   !< Smallest representable difference of kind=R_P real.
 
 ! bits/bytes memory requirements
 #if defined _R16P
