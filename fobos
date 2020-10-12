@@ -1,5 +1,6 @@
 [modes]
-modes = shared-gnu static-gnu tests-gnu
+modes = static-pgi
+        shared-gnu static-gnu tests-gnu
         shared-gnu-debug static-gnu-debug tests-gnu-debug
         shared-intel static-intel tests-intel
         shared-intel-debug static-intel-debug tests-intel-debug
@@ -127,6 +128,25 @@ mklib     = static
 [tests-ibm-debug]
 template  = template-static-ibm-debug
 build_dir = ./exe/
+
+[static-pgi]
+template  = template-static-pgi
+target    = src/lib/penf.F90
+build_dir = ./static/
+output    = penf.a
+mklib     = static
+
+[template-static-pgi]
+compiler     = pgi
+cflags       = -c -O3
+exclude_dirs = $EXDIRS
+mod_dir      = ./mod/
+obj_dir      = ./obj/
+src          = ./src/
+colors       = True
+quiet        = False
+log          = True
+jobs         = 2
 
 #templates
 [template-shared-gnu]
