@@ -1,8 +1,6 @@
-#if defined _R16P
 program volatile_doctest
 use penf_stringify
  use penf
  print FR16P, bcton('00000000000000000000000000000000000000000000000000000000000000000000000000000'//&
                     '000000000000000000000000000000000001111111100111111', knd=1._R16P)
 endprogram volatile_doctest
-#endif

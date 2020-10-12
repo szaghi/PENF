@@ -35,6 +35,8 @@ integer, parameter :: CK  = selected_char_kind('default')     !< Default kind ch
 
 #if defined _R16P
 integer, parameter :: R16P = selected_real_kind(33,4931) !< 33 digits, range \([10^{-4931}, 10^{+4931} - 1]\); 128 bits.
+#else
+integer, parameter :: R16P = selected_real_kind(15,307)  !< 15 digits, range \([10^{-307} , 10^{+307}  - 1]\); 64 bits.
 #endif
 integer, parameter :: R8P  = selected_real_kind(15,307)  !< 15 digits, range \([10^{-307} , 10^{+307}  - 1]\); 64 bits.
 integer, parameter :: R4P  = selected_real_kind(6,37)    !< 6  digits, range \([10^{-37}  , 10^{+37}   - 1]\); 32 bits.
@@ -60,6 +62,8 @@ integer, parameter :: I_P = I4P                   !< Default integer precision.
 ! format parameters
 #if defined _R16P
 character(*), parameter :: FR16P = '(E42.33E4)' !< Output format for kind=R16P real.
+#else
+character(*), parameter :: FR16P = '(E23.15E3)' !< Output format for kind=R8P real.
 #endif
 character(*), parameter :: FR8P  = '(E23.15E3)' !< Output format for kind=R8P real.
 character(*), parameter :: FR4P  = '(E13.6E2)'  !< Output format for kind=R4P real.
@@ -90,6 +94,8 @@ character(*), parameter :: FI_PZP = FI4PZP     !< Output format for kind=I_P int
 ! length (number of digits) of formatted numbers
 #if defined _R16P
 integer, parameter :: DR16P = 42    !< Number of digits of output format FR16P.
+#else
+integer, parameter :: DR16P = 23    !< Number of digits of output format FR8P.
 #endif
 integer, parameter :: DR8P  = 23    !< Number of digits of output format FR8P.
 integer, parameter :: DR4P  = 13    !< Number of digits of output format FR4P.
@@ -131,6 +137,9 @@ character(*), parameter :: INTEGER_FORMATS_LIST(1:5) = [FI8P, FI4P, FI2P//' ', F
 #if defined _R16P
 real(R16P),   parameter :: MinR16P = -huge(1._R16P) !< Minimum value of kind=R16P real.
 real(R16P),   parameter :: MaxR16P =  huge(1._R16P) !< Maximum value of kind=R16P real.
+#else
+real(R8P),    parameter :: MinR16P = -huge(1._R8P ) !< Minimum value of kind=R8P real.
+real(R8P),    parameter :: MaxR16P =  huge(1._R8P ) !< Maximum value of kind=R8P real.
 #endif
 real(R8P),    parameter :: MinR8P  = -huge(1._R8P ) !< Minimum value of kind=R8P real.
 real(R8P),    parameter :: MaxR8P  =  huge(1._R8P ) !< Maximum value of kind=R8P real.
@@ -152,6 +161,8 @@ integer(I_P), parameter :: MaxI_P  =  huge(1_I_P)   !< Maximum value of kind=I_P
 ! real smallest (representable) values
 #if defined _R16P
 real(R16P), parameter :: smallR16P = tiny(1._R16P) !< Smallest representable value of kind=R16P real.
+#else
+real(R8P),  parameter :: smallR16P = tiny(1._R8P ) !< Smallest representable value of kind=R8P real.
 #endif
 real(R8P),  parameter :: smallR8P  = tiny(1._R8P ) !< Smallest representable value of kind=R8P real.
 real(R4P),  parameter :: smallR4P  = tiny(1._R4P ) !< Smallest representable value of kind=R4P real.
@@ -161,6 +172,9 @@ real(R_P),  parameter :: smallR_P  = tiny(1._R_P ) !< Smallest representable val
 #if defined _R16P
 real(R16P), parameter :: ZeroR16P = nearest(1._R16P, 1._R16P) - &
                                     nearest(1._R16P,-1._R16P) !< Smallest representable difference of kind=R16P real.
+#else
+real(R8P),  parameter :: ZeroR16P = 0._R8P !nearest(1._R8P, 1._R8P) - &
+                                    !nearest(1._R8P,-1._R8P)   !< Smallest representable difference of kind=R8P real.
 #endif
 real(R8P),  parameter :: ZeroR8P  = 0._R8P !nearest(1._R8P, 1._R8P) - &
                                     !nearest(1._R8P,-1._R8P)   !< Smallest representable difference of kind=R8P real.
@@ -172,12 +186,16 @@ real(R_P),  parameter :: ZeroR_P  = 0._R_P !nearest(1._R_P, 1._R_P) - &
 ! bits/bytes memory requirements
 #if defined _R16P
 integer(I2P), parameter :: BIR16P = storage_size(MaxR16P)      !< Number of bits of kind=R16P real.
+#else
+integer(I1P), parameter :: BIR16P = storage_size(MaxR8P)       !< Number of bits of kind=R8P real.
 #endif
 integer(I1P), parameter :: BIR8P  = storage_size(MaxR8P)       !< Number of bits of kind=R8P real.
 integer(I1P), parameter :: BIR4P  = storage_size(MaxR4P)       !< Number of bits of kind=R4P real.
 integer(I1P), parameter :: BIR_P  = storage_size(MaxR_P)       !< Number of bits of kind=R_P real.
 #if defined _R16P
 integer(I2P), parameter :: BYR16P = BIR16P/8_I2P               !< Number of bytes of kind=R16P real.
+#else
+integer(I1P), parameter :: BYR16P = BIR8P/8_I1P                !< Number of bytes of kind=R8P real.
 #endif
 integer(I1P), parameter :: BYR8P  = BIR8P/8_I1P                !< Number of bytes of kind=R8P real.
 integer(I1P), parameter :: BYR4P  = BIR4P/8_I1P                !< Number of bytes of kind=R4P real.

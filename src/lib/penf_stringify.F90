@@ -203,7 +203,6 @@ contains
    output = input
    endfunction str_ucs4_ucs4
 
-#if defined _R16P
    elemental function strf_R16P(fm, n) result(str)
    !< Convert real to string.
    !<
@@ -218,7 +217,6 @@ contains
 
    write(str, trim(fm)) n
    endfunction strf_R16P
-#endif
 
    elemental function strf_R8P(fm, n) result(str)
    !< Convert real to string.
@@ -310,7 +308,6 @@ contains
    write(str, trim(fm)) n
    endfunction strf_I1P
 
-#if defined _R16P
    elemental function str_R16P(n, no_sign, compact) result(str)
    !< Convert real to string.
    !<
@@ -343,7 +340,6 @@ contains
      if (compact) call compact_real_string(string=str)
    endif
    endfunction str_R16P
-#endif
 
    elemental function str_R8P(n, no_sign, compact) result(str)
    !< Convert real to string.
@@ -521,7 +517,6 @@ contains
    write(str, '(L1)') n
    endfunction str_bol
 
-#if defined _R16P
    pure function str_a_R16P(n, no_sign, separator, delimiters, compact) result(str)
    !< Converting real array to string.
    !<
@@ -574,7 +569,6 @@ contains
    str = trim(str(2:))
    if (present(delimiters)) str = delimiters(1)//str//delimiters(2)
    endfunction str_a_R16P
-#endif
 
    pure function str_a_R8P(n, no_sign, separator, delimiters, compact) result(str)
    !< Convert real array to string.
@@ -1050,7 +1044,6 @@ contains
    if (present(nz_pad)) str=str(DI1P-nz_pad:DI1P-1) ! Leaving out the extra zeros padding
    endfunction strz_I1P
 
-#if defined _R16P
    function ctor_R16P(str, knd, pref, error) result(n)
    !< Convert string to real.
    !<
@@ -1074,7 +1067,6 @@ contains
    endif
    if (present(error)) error = err
    endfunction ctor_R16P
-#endif
 
    function ctor_R8P(str, knd, pref, error) result(n)
    !< Convert string to real.
@@ -1220,7 +1212,6 @@ contains
    if (present(error)) error = err
    endfunction ctoi_I1P
 
-#if defined _R16P
    elemental function bstr_R16P(n) result(bstr)
    !< Convert real to string of bits.
    !<
@@ -1240,7 +1231,6 @@ contains
    buffer = transfer(n, buffer)
    write(bstr, '(16B8.8)') buffer
    endfunction bstr_R16P
-#endif
 
    elemental function bstr_R8P(n) result(bstr)
    !< Convert real to string of bits.
@@ -1342,7 +1332,6 @@ contains
    write(bstr, '(B8.8)') n
    endfunction bstr_I1P
 
-#if defined _R16P
    elemental function bctor_R16P(bstr, knd) result(n)
    !< Convert bit-string to real.
    !<
@@ -1360,7 +1349,6 @@ contains
    read(bstr, '(16B8.8)') buffer
    n = transfer(buffer, n)
    endfunction bctor_R16P
-#endif
 
    elemental function bctor_R8P(bstr, knd) result(n)
    !< Convert bit-string to real.
