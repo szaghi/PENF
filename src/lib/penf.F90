@@ -16,7 +16,7 @@ save
 ! global parameters and variables
 public :: endianL, endianB, endian, is_initialized
 public :: ASCII, UCS4, CK
-#if defined _R16P
+#if defined _real128
 public :: R16P, FR16P, DR16P, MinR16P, MaxR16P, BIR16P, BYR16P, smallR16P, ZeroR16P
 #endif
 public :: R8P,  FR8P,  DR8P,  MinR8P,  MaxR8P,  BIR8P,  BYR8P,  smallR8P,  ZeroR8P
@@ -131,7 +131,7 @@ contains
    write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  UCS4:  '//str(n=UCS4)
    write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  CK:    '//str(n=CK)
    write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'Reals kind, format and characters number:'
-#if defined _R16P
+#if defined _real128
    write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  R16P: '//str(n=R16P)//','//FR16P//','//str(n=DR16P)
 #endif
    write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  R8P:  '//str(n=R8P )//','//FR8P //','//str(n=DR8P )
@@ -143,7 +143,7 @@ contains
    write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  I2P:  '//str(n=I2P)//','//FI2P //','//str(n=DI2P)
    write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  I1P:  '//str(n=I1P)//','//FI1P //','//str(n=DI1P)
    write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'Reals minimum and maximum values:'
-#if defined _R16P
+#if defined _real128
    write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  R16P: '//str(n=MinR16P)//','//str(n=MaxR16P)
 #endif
    write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  R8P:  '//str(n=MinR8P )//','//str(n=MaxR8P )
@@ -155,7 +155,7 @@ contains
    write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  I2P:  '//str(n=MinI2P )//','//str(n=MaxI2P)
    write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  I1P:  '//str(n=MinI1P )//','//str(n=MaxI1P)
    write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'Reals bits/bytes sizes:'
-#if defined _R16P
+#if defined _real128
    write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  R16P: '//str(n=BIR16P)//'/'//str(n=BYR16P)
 #endif
    write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  R8P:  '//str(n=BIR8P )//'/'//str(n=BYR8P )
@@ -167,14 +167,14 @@ contains
    write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  I2P:  '//str(n=BII2P)//'/'//str(n=BYI2P)
    write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  I1P:  '//str(n=BII1P)//'/'//str(n=BYI1P)
    write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'Smallest reals'
-#if defined _R16P
+#if defined _real128
    write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  smallR16P: '//str(smallR16P, .true.)
 #endif
    write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  smallR8P:  '//str(smallR8P,  .true.)
    write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  smallR4P:  '//str(smallR4P,  .true.)
    write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  smallR_P:  '//str(smallR_P,  .true.)
    write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'Machine zero'
-#if defined _R16P
+#if defined _real128
    write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  ZeroR16P: '//str(ZeroR16P, .true.)
 #endif
    write(unit=unit,fmt='(A)',iostat=iostatd,iomsg=iomsgd)  prefd//'  ZeroR8P:  '//str(ZeroR8P,  .true.)

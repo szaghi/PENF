@@ -1,4 +1,4 @@
-#if defined _R16P
+#if defined _real128
 program volatile_doctest
 use penf_stringify
  use penf
