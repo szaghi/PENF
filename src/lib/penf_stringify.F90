@@ -38,7 +38,7 @@ endinterface
 interface str
   !< Convert number (real and integer) to string (number to string type casting).
   module procedure                       &
-#if defined _R16P
+#if defined _real128
                    strf_R16P,str_R16P,   &
 #endif
                    strf_R8P ,str_R8P,    &
@@ -48,7 +48,7 @@ interface str
                    strf_I2P ,str_I2P,    &
                    strf_I1P ,str_I1P,    &
                              str_bol,    &
-#if defined _R16P
+#if defined _real128
                              str_a_R16P, &
 #endif
                              str_a_R8P,  &
@@ -67,7 +67,7 @@ endinterface
 interface cton
   !< Convert string to number (real and integer, string to number type casting).
   module procedure            &
-#if defined _R16P
+#if defined _real128
                    ctor_R16P, &
 #endif
                    ctor_R8P,  &
@@ -81,7 +81,7 @@ endinterface
 interface bstr
   !< Convert number (real and integer) to bit-string (number to bit-string type casting).
   module procedure            &
-#if defined _R16P
+#if defined _real128
                    bstr_R16P, &
 #endif
                    bstr_R8P,  &
@@ -95,7 +95,7 @@ endinterface
 interface bcton
   !< Convert bit-string to number (real and integer, bit-string to number type casting).
   module procedure             &
-#if defined _R16P
+#if defined _real128
                    bctor_R16P, &
 #endif
                    bctor_R8P,  &
