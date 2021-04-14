@@ -12,14 +12,14 @@ INCLUDE(CheckFortranSourceRuns)
 
 check_fortran_source_runs(
     "program r16p_support;
-         integer, parameter :: r16p = selected_real_kind(33, 4931);
-         if(r16p < 0) stop 1;
-     end program r16p_support"
-     R16P_SUPPORTED
-     SRC_EXT f90)
-if(R16P_SUPPORTED)
-    set(r16p_supported "-D_R16P")
-endif()
+        integer, parameter :: r16p = selected_real_kind(33, 4931);
+        if(r16p < 0) stop 1;
+    end program r16p_support"
+    R16P_SUPPORTED
+    SRC_EXT f90)
+IF(R16P_SUPPORTED)
+    SET(r16p_supported "-D_R16P")
+ENDIF()
 
 check_fortran_source_runs(
     "program ascii_support;

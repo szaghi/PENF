@@ -21,11 +21,6 @@ if _os == 'Windows':
     #print("Installation DONE!!")
 else:
     cmake_def = ""
-    opt = getOption("USE_OpenMP", ["ON", "OFF"])
-    if(opt == " "):
-        opt = "ON"
-    cmake_def += " -DUSE_OpenMP=" + opt
-
     opt = getOption("CMAKE_BUILD_TYPE", ["Release", "Debug"])
     if(opt == " "):
         opt = "Release"
@@ -38,8 +33,8 @@ else:
 
     opt = getOption("CMAKE_INSTALL_PREFIX", ["${PREFIX}"])
     if( opt == " "):
-    #   opt = "${HOME}/PENF"
-      opt = "${EASIFEM_EXTPKGS}"
+        opt = "${HOME}/PENF"
+        # opt = "${EASIFEM_EXTPKGS}"
     cmake_def += " -DCMAKE_INSTALL_PREFIX=" + opt
 
     print("CMAKE DEF : ", cmake_def)
