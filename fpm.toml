@@ -1,0 +1,13 @@
+name = "PENF"
+author = "Stefano Zaghi"
+copyright = "Copyright © 2016, Stefano Zaghi"
+license = "Multiple licenses"
+description = "Portability Environment for Fortran poor people"
+maintainer = "Stefano Zaghi"
+homepage = "https://github.com/szaghi/PENF"
+
+[library]
+source-dir = "src/lib"
+
+[install]
+library = true

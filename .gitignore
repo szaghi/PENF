@@ -29,3 +29,6 @@ exe/
 wiki/
 get_automatic_changelog.sh
 /build
+
+# mac
+.DS_Store
