@@ -7,7 +7,7 @@ maintainer = "Stefano Zaghi"
 homepage = "https://github.com/szaghi/PENF"
 
 [library]
-source-dir = "src"
+source-dir = "src/lib"
 
 [install]
 library = true
