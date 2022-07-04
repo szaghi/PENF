@@ -4,9 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	 
-	 <meta name="description" content="PENF, Portability Environment for Fortran poor people">
-    
+   <meta name="description" content="PENF, Portability Environment for Fortran poor people">
     <meta name="author" content="Stefano Zaghi" >
     <link rel="icon" href="./favicon.png">
 
@@ -16,7 +14,7 @@
     <link href="./css/pygments.css" rel="stylesheet">
     <link href="./css/font-awesome.min.css" rel="stylesheet">
     <link href="./css/local.css" rel="stylesheet">
-    
+    <link  href="./tipuesearch/tipuesearch.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -26,13 +24,6 @@
     
     <script src="./js/jquery-2.1.3.min.js"></script>
     <script src="./js/svg-pan-zoom.min.js"></script>
-
-    
-    <script src="./tipuesearch/tipuesearch_content.js"></script>
-    <link  href="./tipuesearch/tipuesearch.css" rel="stylesheet">
-    <script src="./tipuesearch/tipuesearch_set.js"></script>
-    <script src="./tipuesearch/tipuesearch.js"></script>
-    
 
   </head>
 
@@ -52,45 +43,25 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-				
             <li class="dropdown hidden-xs visible-sm visible-md hidden-lg">
               <a href="#" class="dropdown-toggle"
               data-toggle="dropdown" role="button"
               aria-haspopup="true"
-		 aria-expanded="false">Contents <span class="caret"></span></a>
-	      <ul class="dropdown-menu">
-              
+     aria-expanded="false">Contents <span class="caret"></span></a>
+        <ul class="dropdown-menu">
             <li><a href="./lists/files.html">Source Files</a></li>
-				
-				
             <li><a href="./lists/modules.html">Modules</a></li>
-				
-            
-                                
             <li><a href="./lists/procedures.html">Procedures</a></li>
-				
-								
-				
-            <li><a href="./lists/programs.html">Programs</a></li>
-				
+                   <li><a href="./lists/programs.html">Programs</a></li>
+       
             </ul>
-            </li>
-
-<li class="visible-xs hidden-sm visible-lg"><a href="./lists/files.html">Source Files</a></li>
-
-
-<li class="visible-xs hidden-sm visible-lg"><a href="./lists/modules.html">Modules</a></li>
-
-
-
-<li class="visible-xs hidden-sm visible-lg"><a href="./lists/procedures.html">Procedures</a></li>
-
-                             
-
-<li class="visible-xs hidden-sm visible-lg"><a href="./lists/programs.html">Programs</a></li>
-
-          </ul>
         
+            </li>
+<li class="visible-xs hidden-sm visible-lg"><a href="./lists/files.html">Source Files</a></li>
+<li class="visible-xs hidden-sm visible-lg"><a href="./lists/modules.html">Modules</a></li>
+<li class="visible-xs hidden-sm visible-lg"><a href="./lists/procedures.html">Procedures</a></li>
+                             <li class="visible-xs hidden-sm visible-lg"><a href="./lists/programs.html">Programs</a></li>
+          </ul>
         <form action="./search.html" class="navbar-form navbar-right" role="search">
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Search" name="q" id="tipue_search_input" autocomplete="off" required>
@@ -99,37 +70,25 @@
         <button type="submit" class="btn btn-default">Submit</button>
 -->
         </form>
-        
         </div><!--/.nav-collapse -->
       </div>
     </nav>
 
     <div class="container">
-    
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
         <p>PENF, Portability Environment for Fortran poor people</p>
-        	 
 	<p> Find us on&hellip;</p>
         <p>
-        	 
           <a class="btn btn-lg btn-primary" href="https://github.com/szaghi/PENF" role="button">GitHub</a>
-			 
-			 
-			 
-			 
-	         
-			 
         </p>
       </div>
 
       <div class="row" id='text'>
-		  
         <div class="col-md-8">
-		  
           <h1>PENF</h1>
           <p><a name="top"></a></p>
-<h1 id="penf"><a class="toclink" href="#penf">PENF <a href=""><img alt="GitHub tag" src="https://img.shields.io/github/tag/szaghi/PENF.svg"></a></a></h1>
+<h1 id="penf">PENF <a href=""><img alt="GitHub tag" src="https://img.shields.io/github/tag/szaghi/PENF.svg"></a></h1>
 <p><a href=""><img alt="License" src="https://img.shields.io/badge/license-GNU%20GeneraL%20Public%20License%20v3%20,%20GPLv3-blue.svg"></a>
 <a href=""><img alt="License" src="https://img.shields.io/badge/license-BSD2-red.svg"></a>
 <a href=""><img alt="License" src="https://img.shields.io/badge/license-BSD3-red.svg"></a>
@@ -137,7 +96,7 @@
 <p><a href=""><img alt="Status" src="https://img.shields.io/badge/status-stable-brightgreen.svg"></a>
 <a href="https://travis-ci.org/szaghi/PENF"><img alt="Build Status" src="https://travis-ci.org/szaghi/PENF.svg?branch=master"></a>
 <a href="http://codecov.io/github/szaghi/PENF?branch=master"><img alt="Coverage Status" src="https://img.shields.io/codecov/c/github/szaghi/PENF.svg"></a></p>
-<h3 id="penf-portability-environment-for-fortran-poor-people"><a class="toclink" href="#penf-portability-environment-for-fortran-poor-people">PENF, Portability Environment for Fortran poor people</a></h3>
+<h3 id="penf-portability-environment-for-fortran-poor-people">PENF, Portability Environment for Fortran poor people</h3>
 <p>A KISS library for exploiting codes portability for modern (2003+) Fortran projects.</p>
 <ul>
 <li>PENF is a pure Fortran (KISS) library for achieving portable codes for modern Fortran projects;</li>
@@ -145,7 +104,7 @@
 <li>PENF is Fortran 2003+ standard compliant;</li>
 <li>PENF is a Free, Open Source Project.</li>
 </ul>
-<h4 id="table-of-contents"><a class="toclink" href="#table-of-contents">Table of Contents</a></h4>
+<h4 id="table-of-contents">Table of Contents</h4>
 <ul>
 <li><a href="#what-is-penf?">What is PENF?</a></li>
 <li><a href="#main-features">Main features</a></li>
@@ -155,35 +114,35 @@
 </ul>
 </li>
 </ul>
-<h4 id="issues"><a class="toclink" href="#issues">Issues</a></h4>
+<h4 id="issues">Issues</h4>
 <p><a href=""><img alt="GitHub issues" src="https://img.shields.io/github/issues/szaghi/PENF.svg"></a>
 <a href="https://waffle.io/szaghi/PENF"><img alt="Ready in backlog" src="https://badge.waffle.io/szaghi/PENF.png?label=ready&amp;title=Ready"></a>
 <a href="https://waffle.io/szaghi/PENF"><img alt="In Progress" src="https://badge.waffle.io/szaghi/PENF.png?label=in%20progress&amp;title=In%20Progress"></a>
 <a href="https://waffle.io/szaghi/PENF"><img alt="Open bugs" src="https://badge.waffle.io/szaghi/PENF.png?label=bug&amp;title=Open%20Bugs"></a></p>
-<h4 id="compiler-support"><a class="toclink" href="#compiler-support">Compiler Support</a></h4>
+<h4 id="compiler-support">Compiler Support</h4>
 <p><a href=""><img alt="Compiler" src="https://img.shields.io/badge/GNU-v4.9.2+-brightgreen.svg"></a>
 <a href=""><img alt="Compiler" src="https://img.shields.io/badge/Intel-v12.x+-brightgreen.svg"></a>
 <a href=""><img alt="Compiler" src="https://img.shields.io/badge/IBM%20XL-not%20tested-yellow.svg"></a>
 <a href=""><img alt="Compiler" src="https://img.shields.io/badge/g95-not%20tested-yellow.svg"></a>
 <a href=""><img alt="Compiler" src="https://img.shields.io/badge/NAG-not%20tested-yellow.svg"></a>
 <a href=""><img alt="Compiler" src="https://img.shields.io/badge/PGI-not%20tested-yellow.svg"></a></p>
-<h2 id="what-is-penf"><a class="toclink" href="#what-is-penf">What is PENF?</a></h2>
+<h2 id="what-is-penf">What is PENF?</h2>
 <p>Fortran is the most popular programming language for scientific computing. With Fortran it is quite simple obtain fast code and manage large multidimensional array. Because Fortran permits the achievement of high performance it is also used on great range of different computer-architectures, and often on the fastest supercomputer in the world. Therefore Fortran programs must be <em>portable</em>: portability means that the code will give the same results on every different computer-architectures. One of the most important goal of the numeric code is to control the numeric error due to finite precision of numerical operations. Fortran uses the <strong>IEEE</strong> representations. Integers and reals (floating point) are represented with a finite precision. So when the code computes an operation it has a truncation error due to the truncation of the numerical finite representations. For numerical and more in general scientific applications this source of errors must be controlled. The programmer must know which is the precision associated to the code variables. Before the standard Fortran 90/95 there are not any way to select the precision of the numerical variables in a portable fashion.</p>
 <p>Modern Fortran standards (2003+) have introduced better support for codes portability. With the possibility to specify a kind parameter for variables, the standard Fortran 90+ makes available useful functions to select the kind precision in a portable parametric way. Using these functions the programmer can accurately control the precision of its own variables in a portable manner.</p>
 <p>PENF module provides an effective KISS library to achieve portability and concurrently it provides many tools to handles parametrized numbers.</p>
 <p>Go to <a href="#top">Top</a></p>
-<h2 id="main-features"><a class="toclink" href="#main-features">Main features</a></h2>
+<h2 id="main-features">Main features</h2>
 <p>The library provides portable kind-parameters and many useful procedures to deal with them:</p>
-<ul class="checklist">
-<li><input type="checkbox" disabled checked> integer and reals parameters for 1,2,4,8,16 bytes-like representations;</li>
-<li><input type="checkbox" disabled checked> integer and real formats definitions for all parameters;</li>
-<li><input type="checkbox" disabled checked> integer and real minimum maximum representable numbers;</li>
-<li><input type="checkbox" disabled checked> number-to-string and string-to-number casting procedures;</li>
-<li><input type="checkbox" disabled checked> endianism procedures checking.</li>
+<ul>
+<li>[X] integer and reals parameters for 1,2,4,8,16 bytes-like representations;</li>
+<li>[X] integer and real formats definitions for all parameters;</li>
+<li>[X] integer and real minimum maximum representable numbers;</li>
+<li>[X] number-to-string and string-to-number casting procedures;</li>
+<li>[X] endianism procedures checking.</li>
 </ul>
 <p>Any feature request is welcome.</p>
 <p>Go to <a href="#top">Top</a></p>
-<h2 id="copyrights"><a class="toclink" href="#copyrights">Copyrights</a></h2>
+<h2 id="copyrights">Copyrights</h2>
 <p>PENF is an open source project, it is distributed under a multi-licensing system:</p>
 <ul>
 <li>for FOSS projects:</li>
@@ -196,12 +155,12 @@
 <p>Anyone is interest to use, to develop or to contribute to PENF is welcome, feel free to select the license that best matches your soul!</p>
 <p>More details can be found on <a href="https://github.com/szaghi/PENF/wiki/Copyrights">wiki</a>.</p>
 <p>Go to <a href="#top">Top</a></p>
-<h2 id="documentation"><a class="toclink" href="#documentation">Documentation</a></h2>
+<h2 id="documentation">Documentation</h2>
 <p>Besides this README file the PENF documentation is contained into its own <a href="https://github.com/szaghi/PENF/wiki">wiki</a>. Detailed documentation of the API is contained into the <a href="http://szaghi.github.io/PENF/index.html">GitHub Pages</a> that can also be created locally by means of <a href="https://github.com/cmacmackin/ford">ford tool</a>.</p>
-<h3 id="a-taste-of-penf"><a class="toclink" href="#a-taste-of-penf">A Taste of PENF</a></h3>
+<h3 id="a-taste-of-penf">A Taste of PENF</h3>
 <p>To be written.</p>
 <p>Go to <a href="#top">Top</a></p>
-<h3 id="project-history"><a class="toclink" href="#project-history">Project history</a></h3>
+<h3 id="project-history">Project history</h3>
 <blockquote>
 <p>a graphical overview of the history and evolution of PENF project</p>
 </blockquote>
@@ -209,534 +168,70 @@
 <p><img alt="survival" src="doc/survival_plot.png"></p>
 <p>Go to <a href="#top">Top</a></p>
         </div>
-		  
         <div class="col-md-4">
 	  <div class="well">
           <h2>Developer Info</h2>
           <h4>Stefano Zaghi</h4>
           
-          
-			   
             <div class="text-center"><div class="btn-group" role="group">
-              
               <a class="btn btn-lg btn-primary" href="mailto:stefano.zaghi@gmail.com"><i class="fa fa-envelope fa-lg"></i></a>
-              
-              
-              
               <a class="btn btn-lg btn-primary" href="https://github.com/szaghi"><i class="fa fa-github fa-lg"></i></a>
-				  
-				  
-              
-              
-              
-              
             </div></div>
-            
        </div>
        </div>
-       
       </div>
-      
-      
-      
-      
-		
       <div class="row">
         <div class="col-xs-6 col-sm-4">
               <h3>Source Files</h3>
-              <ul>
-                
-                  
-                    <li><a href='./sourcefile/penf-doctest-1.f90.html'>penf-doctest-1.f90</a></li>
-                  
-                
-                  
+              <ul>                    <li><a href='./sourcefile/penf-doctest-1.f90.html'>penf-doctest-1.f90</a></li>
                     <li><a href='./sourcefile/penf-doctest-2.f90.html'>penf-doctest-2.f90</a></li>
-                  
-                
-                  
                     <li><a href='./sourcefile/penf-doctest-3.f90.html'>penf-doctest-3.f90</a></li>
-                  
-                
-                  
                     <li><a href='./sourcefile/penf-doctest-4.f90.html'>penf-doctest-4.f90</a></li>
-                  
-                
-                  
                     <li><a href='./sourcefile/penf-doctest-5.f90.html'>penf-doctest-5.f90</a></li>
-                  
-                
-                  
                     <li><a href='./sourcefile/penf-doctest-6.f90.html'>penf-doctest-6.f90</a></li>
-                  
-                
-                  
                     <li><a href='./sourcefile/penf-doctest-7.f90.html'>penf-doctest-7.f90</a></li>
-                  
-                
-                  
                     <li><a href='./sourcefile/penf.f90.html'>penf.F90</a></li>
-                  
-                
-                  
                     <li><a href='./sourcefile/penf_b_size-doctest-1.f90.html'>penf_b_size-doctest-1.f90</a></li>
-                  
-                
-                  
                     <li><a href='./sourcefile/penf_b_size-doctest-10.f90.html'>penf_b_size-doctest-10.f90</a></li>
-                  
-                
-                  
-                    <li><a href="./lists/files.html"><em>All source files&hellip;</em></a></li>
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-              </ul>
+</ul>
           </div>
-          
 		  <div class="col-xs-6 col-sm-4">
               <h3>Modules</h3>
-              <ul>
-                
-                  
-                    <li><a href='./module/penf.html'>penf</a></li>
-                  
-                
-                  
+              <ul>                    <li><a href='./module/penf.html'>penf</a></li>
                     <li><a href='./module/penf_b_size.html'>penf_b_size</a></li>
-                  
-                
-                  
                     <li><a href='./module/penf_global_parameters_variables.html'>penf_global_parameters_variables</a></li>
-                  
-                
-                  
                     <li><a href='./module/penf_stringify.html'>penf_stringify</a></li>
-                  
-                
-              </ul>
+</ul>
           </div>
-          
-          
 		  <div class="col-xs-6 col-sm-4">
               <h3>Procedures</h3>
-              <ul>
-                
-                  
-                    <li><a href='./proc/bctoi_i1p.html'>bctoi_I1P</a></li>
-                  
-                
-                  
+              <ul>                    <li><a href='./proc/bctoi_i1p.html'>bctoi_I1P</a></li>
                     <li><a href='./proc/bctoi_i2p.html'>bctoi_I2P</a></li>
-                  
-                
-                  
                     <li><a href='./proc/bctoi_i4p.html'>bctoi_I4P</a></li>
-                  
-                
-                  
                     <li><a href='./proc/bctoi_i8p.html'>bctoi_I8P</a></li>
-                  
-                
-                  
                     <li><a href='./interface/bcton.html'>bcton</a></li>
-                  
-                
-                  
                     <li><a href='./proc/bctor_r16p.html'>bctor_R16P</a></li>
-                  
-                
-                  
                     <li><a href='./proc/bctor_r4p.html'>bctor_R4P</a></li>
-                  
-                
-                  
                     <li><a href='./proc/bctor_r8p.html'>bctor_R8P</a></li>
-                  
-                
-                  
                     <li><a href='./interface/bit_size.html'>bit_size</a></li>
-                  
-                
-                  
-                    <li><a href='./interface/bit_size%7E2.html'>bit_size</a></li>
-                  
-                
-                  
-                    <li><a href="./lists/procedures.html"><em>All procedures&hellip;</em></a></li>
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-                  
-                
-              </ul>
+                    <li><a href='./interface/bit_size~2.html'>bit_size</a></li>
+</ul>
           </div>
-          
-          
       </div>
-
     <hr>    
     </div> <!-- /container -->
     <footer>
       <div class="container">
       <div class="row">
-        <div class="col-xs-6 col-md-4"><p>&copy; 2017 </p></div>
-        <div class="col-xs-6 col-md-4 col-md-push-4">
+        <div class="col-xs-6 col-md-6"><p>PENF was developed by Stefano Zaghi<br>&copy; 2022 
+</p>
+        </div>
+        <div class="col-xs-6 col-md-6">
           <p class="text-right">
             Documentation generated by 
-            <a href="https://github.com/cmacmackin/ford">FORD</a>
-            
+            <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
           </p>
         </div>
-        <div class="col-xs-12 col-md-4 col-md-pull-4"><p class="text-center"> PENF was developed by Stefano Zaghi</p></div>
       </div>
       <br>
       </div> <!-- /container -->    
@@ -759,12 +254,14 @@
       MathJax.Hub.Config({
         TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } },
         jax: ['input/TeX','input/MathML','output/HTML-CSS'],
-        extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js'],
-        'HTML-CSS': { 
-           styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: '#000000 ! important'} }
-        }
+        extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']
       });
     </script>
-    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script src="./tipuesearch/tipuesearch_content.js"></script>
+    <script src="./tipuesearch/tipuesearch_set.js"></script>
+    <script src="./tipuesearch/tipuesearch.js"></script>
+    
   </body>
 </html>

@@ -4,9 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	 
-	 <meta name="description" content="PENF, Portability Environment for Fortran poor people">
-    
+   <meta name="description" content="PENF, Portability Environment for Fortran poor people">
     <meta name="author" content="Stefano Zaghi" >
     <link rel="icon" href="../favicon.png">
 
@@ -16,7 +14,7 @@
     <link href="../css/pygments.css" rel="stylesheet">
     <link href="../css/font-awesome.min.css" rel="stylesheet">
     <link href="../css/local.css" rel="stylesheet">
-    
+    <link  href="../tipuesearch/tipuesearch.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -26,13 +24,6 @@
     
     <script src="../js/jquery-2.1.3.min.js"></script>
     <script src="../js/svg-pan-zoom.min.js"></script>
-
-    
-    <script src="../tipuesearch/tipuesearch_content.js"></script>
-    <link  href="../tipuesearch/tipuesearch.css" rel="stylesheet">
-    <script src="../tipuesearch/tipuesearch_set.js"></script>
-    <script src="../tipuesearch/tipuesearch.js"></script>
-    
 
   </head>
 
@@ -52,45 +43,25 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-				
             <li class="dropdown hidden-xs visible-sm visible-md hidden-lg">
               <a href="#" class="dropdown-toggle"
               data-toggle="dropdown" role="button"
               aria-haspopup="true"
-		 aria-expanded="false">Contents <span class="caret"></span></a>
-	      <ul class="dropdown-menu">
-              
+     aria-expanded="false">Contents <span class="caret"></span></a>
+        <ul class="dropdown-menu">
             <li><a href="../lists/files.html">Source Files</a></li>
-				
-				
             <li><a href="../lists/modules.html">Modules</a></li>
-				
-            
-                                
             <li><a href="../lists/procedures.html">Procedures</a></li>
-				
-								
-				
-            <li><a href="../lists/programs.html">Programs</a></li>
-				
+                   <li><a href="../lists/programs.html">Programs</a></li>
+       
             </ul>
-            </li>
-
-<li class="visible-xs hidden-sm visible-lg"><a href="../lists/files.html">Source Files</a></li>
-
-
-<li class="visible-xs hidden-sm visible-lg"><a href="../lists/modules.html">Modules</a></li>
-
-
-
-<li class="visible-xs hidden-sm visible-lg"><a href="../lists/procedures.html">Procedures</a></li>
-
-                             
-
-<li class="visible-xs hidden-sm visible-lg"><a href="../lists/programs.html">Programs</a></li>
-
-          </ul>
         
+            </li>
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/files.html">Source Files</a></li>
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/modules.html">Modules</a></li>
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/procedures.html">Procedures</a></li>
+                             <li class="visible-xs hidden-sm visible-lg"><a href="../lists/programs.html">Programs</a></li>
+          </ul>
         <form action="../search.html" class="navbar-form navbar-right" role="search">
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Search" name="q" id="tipue_search_input" autocomplete="off" required>
@@ -99,46 +70,29 @@
         <button type="submit" class="btn btn-default">Submit</button>
 -->
         </form>
-        
         </div><!--/.nav-collapse -->
       </div>
     </nav>
 
     <div class="container">
-    
-  
   <div class="row">
     <h1>penf_init
       <small>Subroutine</small>
-    
     </h1>
-    
-<div class="row">
+    <div class="row">
   <div class="col-lg-12">
 <div class="well well-sm">
   <ul class="list-inline" style="margin-bottom:0px;display:inline">
-     
-     
-     
-     
-    
-    
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
-	  data-placement="bottom" data-html="true"
-	  title=" 1.5% of total for procedures.">12 statements</a>
+    data-placement="bottom" data-html="true"
+    title=" 0.5% of total for procedures.">4 statements</a>
      </li> 
-     
-     
     <li><i class="fa fa-code"></i><a href="../src/penf.F90"> Source File</a></li>
-     
   </ul>
   <ol class="breadcrumb in-well text-right">
-  
      <li><a href='../sourcefile/penf.f90.html'>penf.F90</a></li>
-  
      <li><a href='../module/penf.html'>penf</a></li>
-  
      <li class="active">penf_init</li>
   </ol>
 </div>
@@ -154,29 +108,9 @@
   
   <div class="row">
     <div class="col-md-3 hidden-xs hidden-sm visible-md visible-lg">
-    
-<div id="sidebar">
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <div id="sidebar">
+  <h3>Contents</h3>
+ 
 <div class="panel panel-primary">
   <div class="panel-heading text-left"><h3 class="panel-title">Source Code</h3></div>
   <div class="list-group">
@@ -184,302 +118,111 @@
   </div>
 </div>
 
-
-  <hr>
-  
-
-<div class="panel panel-default">
-  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#allprocs-0">All Procedures</a></h3></div>
-  <div id="allprocs-0" class="panel-collapse collapse">
-    <div class="list-group">
-      
-      <a class="list-group-item" href="../proc/bctoi_i1p.html">bctoi_I1P</a>
-      
-      <a class="list-group-item" href="../proc/bctoi_i2p.html">bctoi_I2P</a>
-      
-      <a class="list-group-item" href="../proc/bctoi_i4p.html">bctoi_I4P</a>
-      
-      <a class="list-group-item" href="../proc/bctoi_i8p.html">bctoi_I8P</a>
-      
-      <a class="list-group-item" href="../interface/bcton.html">bcton</a>
-      
-      <a class="list-group-item" href="../proc/bctor_r16p.html">bctor_R16P</a>
-      
-      <a class="list-group-item" href="../proc/bctor_r4p.html">bctor_R4P</a>
-      
-      <a class="list-group-item" href="../proc/bctor_r8p.html">bctor_R8P</a>
-      
-      <a class="list-group-item" href="../interface/bit_size.html">bit_size</a>
-      
-      <a class="list-group-item" href="../interface/bit_size%7E2.html">bit_size</a>
-      
-      <a class="list-group-item" href="../proc/bit_size_chr.html">bit_size_chr</a>
-      
-      <a class="list-group-item" href="../proc/bit_size_r16p.html">bit_size_R16P</a>
-      
-      <a class="list-group-item" href="../proc/bit_size_r4p.html">bit_size_R4P</a>
-      
-      <a class="list-group-item" href="../proc/bit_size_r8p.html">bit_size_R8P</a>
-      
-      <a class="list-group-item" href="../interface/bstr.html">bstr</a>
-      
-      <a class="list-group-item" href="../proc/bstr_i1p.html">bstr_I1P</a>
-      
-      <a class="list-group-item" href="../proc/bstr_i2p.html">bstr_I2P</a>
-      
-      <a class="list-group-item" href="../proc/bstr_i4p.html">bstr_I4P</a>
-      
-      <a class="list-group-item" href="../proc/bstr_i8p.html">bstr_I8P</a>
-      
-      <a class="list-group-item" href="../proc/bstr_r16p.html">bstr_R16P</a>
-      
-      <a class="list-group-item" href="../proc/bstr_r4p.html">bstr_R4P</a>
-      
-      <a class="list-group-item" href="../proc/bstr_r8p.html">bstr_R8P</a>
-      
-      <a class="list-group-item" href="../interface/byte_size.html">byte_size</a>
-      
-      <a class="list-group-item" href="../proc/byte_size_chr.html">byte_size_chr</a>
-      
-      <a class="list-group-item" href="../proc/byte_size_i1p.html">byte_size_I1P</a>
-      
-      <a class="list-group-item" href="../proc/byte_size_i2p.html">byte_size_I2P</a>
-      
-      <a class="list-group-item" href="../proc/byte_size_i4p.html">byte_size_I4P</a>
-      
-      <a class="list-group-item" href="../proc/byte_size_i8p.html">byte_size_I8P</a>
-      
-      <a class="list-group-item" href="../proc/byte_size_r16p.html">byte_size_R16P</a>
-      
-      <a class="list-group-item" href="../proc/byte_size_r4p.html">byte_size_R4P</a>
-      
-      <a class="list-group-item" href="../proc/byte_size_r8p.html">byte_size_R8P</a>
-      
-      <a class="list-group-item" href="../proc/check_endian.html">check_endian</a>
-      
-      <a class="list-group-item" href="../proc/compact_real_string.html">compact_real_string</a>
-      
-      <a class="list-group-item" href="../proc/ctoi_i1p.html">ctoi_I1P</a>
-      
-      <a class="list-group-item" href="../proc/ctoi_i2p.html">ctoi_I2P</a>
-      
-      <a class="list-group-item" href="../proc/ctoi_i4p.html">ctoi_I4P</a>
-      
-      <a class="list-group-item" href="../proc/ctoi_i8p.html">ctoi_I8P</a>
-      
-      <a class="list-group-item" href="../interface/cton.html">cton</a>
-      
-      <a class="list-group-item" href="../proc/ctor_r16p.html">ctor_R16P</a>
-      
-      <a class="list-group-item" href="../proc/ctor_r4p.html">ctor_R4P</a>
-      
-      <a class="list-group-item" href="../proc/ctor_r8p.html">ctor_R8P</a>
-      
-      <a class="list-group-item" href="../interface/digit.html">digit</a>
-      
-      <a class="list-group-item" href="../proc/digit_i1.html">digit_I1</a>
-      
-      <a class="list-group-item" href="../proc/digit_i2.html">digit_I2</a>
-      
-      <a class="list-group-item" href="../proc/digit_i4.html">digit_I4</a>
-      
-      <a class="list-group-item" href="../proc/digit_i8.html">digit_I8</a>
-      
-      <a class="list-group-item" href="../proc/penf_init.html">penf_init</a>
-      
-      <a class="list-group-item" href="../proc/penf_print.html">penf_print</a>
-      
-      <a class="list-group-item" href="../interface/str.html">str</a>
-      
-      <a class="list-group-item" href="../proc/str_a_i1p.html">str_a_I1P</a>
-      
-      <a class="list-group-item" href="../proc/str_a_i2p.html">str_a_I2P</a>
-      
-      <a class="list-group-item" href="../proc/str_a_i4p.html">str_a_I4P</a>
-      
-      <a class="list-group-item" href="../proc/str_a_i8p.html">str_a_I8P</a>
-      
-      <a class="list-group-item" href="../proc/str_a_r16p.html">str_a_R16P</a>
-      
-      <a class="list-group-item" href="../proc/str_a_r4p.html">str_a_R4P</a>
-      
-      <a class="list-group-item" href="../proc/str_a_r8p.html">str_a_R8P</a>
-      
-      <a class="list-group-item" href="../interface/str_ascii.html">str_ascii</a>
-      
-      <a class="list-group-item" href="../proc/str_ascii_ascii.html">str_ascii_ascii</a>
-      
-      <a class="list-group-item" href="../proc/str_ascii_default.html">str_ascii_default</a>
-      
-      <a class="list-group-item" href="../proc/str_ascii_ucs4.html">str_ascii_ucs4</a>
-      
-      <a class="list-group-item" href="../proc/str_bol.html">str_bol</a>
-      
-      <a class="list-group-item" href="../proc/str_i1p.html">str_I1P</a>
-      
-      <a class="list-group-item" href="../proc/str_i2p.html">str_I2P</a>
-      
-      <a class="list-group-item" href="../proc/str_i4p.html">str_I4P</a>
-      
-      <a class="list-group-item" href="../proc/str_i8p.html">str_I8P</a>
-      
-      <a class="list-group-item" href="../proc/str_r16p.html">str_R16P</a>
-      
-      <a class="list-group-item" href="../proc/str_r4p.html">str_R4P</a>
-      
-      <a class="list-group-item" href="../proc/str_r8p.html">str_R8P</a>
-      
-      <a class="list-group-item" href="../interface/str_ucs4.html">str_ucs4</a>
-      
-      <a class="list-group-item" href="../proc/str_ucs4_ascii.html">str_ucs4_ascii</a>
-      
-      <a class="list-group-item" href="../proc/str_ucs4_default.html">str_ucs4_default</a>
-      
-      <a class="list-group-item" href="../proc/str_ucs4_ucs4.html">str_ucs4_ucs4</a>
-      
-      <a class="list-group-item" href="../proc/strf_i1p.html">strf_I1P</a>
-      
-      <a class="list-group-item" href="../proc/strf_i2p.html">strf_I2P</a>
-      
-      <a class="list-group-item" href="../proc/strf_i4p.html">strf_I4P</a>
-      
-      <a class="list-group-item" href="../proc/strf_i8p.html">strf_I8P</a>
-      
-      <a class="list-group-item" href="../proc/strf_r16p.html">strf_R16P</a>
-      
-      <a class="list-group-item" href="../proc/strf_r4p.html">strf_R4P</a>
-      
-      <a class="list-group-item" href="../proc/strf_r8p.html">strf_R8P</a>
-      
-      <a class="list-group-item" href="../interface/strz.html">strz</a>
-      
-      <a class="list-group-item" href="../proc/strz_i1p.html">strz_I1P</a>
-      
-      <a class="list-group-item" href="../proc/strz_i2p.html">strz_I2P</a>
-      
-      <a class="list-group-item" href="../proc/strz_i4p.html">strz_I4P</a>
-      
-      <a class="list-group-item" href="../proc/strz_i8p.html">strz_I8P</a>
-      
-    </div>
-  </div>
 </div>
-
-
-</div>  
 
     </div>
     
     <div class="col-md-9" id='text'>
-    <h2>
-public subroutine penf_init()
+    <h2>public subroutine penf_init()</h2>
     
-    
-	 
-</h2>
-    
-  
 
-
-    
-    <p>Initialize PENF's variables that are not initialized into the definition specification.</p>
-<div class="codehilite"><pre><span></span> <span class="k">use </span><span class="n">penf</span>
- <span class="k">call </span><span class="n">penf_init</span>
- <span class="k">print </span><span class="n">FI1P</span><span class="p">,</span> <span class="n">BYR4P</span>
-</pre></div>
-    
+    <p>Initialize PENF&rsquo;s variables that are not initialized into the definition specification.</p>
+<div class="codehilite"><pre><span></span><code><span class="w"> </span><span class="k">use </span><span class="n">penf</span><span class="w"></span>
+<span class="w"> </span><span class="k">call </span><span class="n">penf_init</span><span class="w"></span>
+<span class="w"> </span><span class="k">print </span><span class="n">FI1P</span><span class="p">,</span><span class="w"> </span><span class="n">BYR4P</span><span class="w"></span>
+</code></pre></div>
 
     <h3>Arguments</h3>
-    
-      <em>None</em>
-    
-    
-    
-     <h3>Calls</h3>
-     
-                <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+    <em>None</em>
+    <br>
+    <br>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+  <h3 class="panel-title">Calls</h3>
+      </div>
+      <div class="panel-body">
+  <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<!-- Generated by graphviz version 2.36.0 (20140111.2315)
+<!-- Generated by graphviz version 2.43.0 (0)
  -->
 <!-- Title: proc~~penf_init~~CallsGraph Pages: 1 -->
-<svg id="procpenf_initCallsGraph" width="178pt" height="32pt"
- viewBox="0.00 0.00 178.00 32.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg id="procpenf_initCallsGraph" width="188pt" height="32pt"
+ viewBox="0.00 0.00 188.00 32.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="proc~~penf_init~~CallsGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 28)">
 <title>proc~~penf_init~~CallsGraph</title>
-<polygon fill="white" stroke="none" points="-4,4 -4,-28 174,-28 174,4 -4,4"/>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-28 184,-28 184,4 -4,4"/>
 <!-- proc~penf_init -->
-<g id="proc~~penf_init~~CallsGraph_node1" class="node"><title>proc~penf_init</title>
-<polygon fill="none" stroke="black" points="54,-24 0,-24 0,-0 54,-0 54,-24"/>
-<text text-anchor="middle" x="27" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50">penf_init</text>
+<g id="proc~~penf_init~~CallsGraph_node1" class="node">
+<title>proc~penf_init</title>
+<polygon fill="none" stroke="black" points="58,-24 0,-24 0,0 58,0 58,-24"/>
+<text text-anchor="middle" x="29" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50">penf_init</text>
 </g>
 <!-- proc~check_endian -->
-<g id="proc~~penf_init~~CallsGraph_node2" class="node"><title>proc~check_endian</title>
-<g id="a_proc~~penf_init~~CallsGraph_node2"><a xlink:href="../proc/check_endian.html" xlink:title="check_endian">
-<polygon fill="#d9534f" stroke="#d9534f" points="169.5,-24 90.5,-24 90.5,-0 169.5,-0 169.5,-24"/>
-<text text-anchor="middle" x="130" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">check_endian</text>
+<g id="proc~~penf_init~~CallsGraph_node2" class="node">
+<title>proc~check_endian</title>
+<g id="a_proc~~penf_init~~CallsGraph_node2"><a xlink:href=".././proc/check_endian.html" xlink:title="check_endian">
+<polygon fill="#d9534f" stroke="#d9534f" points="180,-24 94,-24 94,0 180,0 180,-24"/>
+<text text-anchor="middle" x="137" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">check_endian</text>
 </a>
 </g>
 </g>
 <!-- proc~penf_init&#45;&gt;proc~check_endian -->
-<g id="proc~~penf_init~~CallsGraph_edge1" class="edge"><title>proc~penf_init&#45;&gt;proc~check_endian</title>
-<path fill="none" stroke="#000000" d="M54.01,-12C61.9937,-12 71.0549,-12 80.0504,-12"/>
-<polygon fill="#000000" stroke="#000000" points="80.1178,-15.5001 90.1178,-12 80.1178,-8.5001 80.1178,-15.5001"/>
+<g id="proc~~penf_init~~CallsGraph_edge1" class="edge">
+<title>proc~penf_init&#45;&gt;proc~check_endian</title>
+<path fill="none" stroke="#000000" d="M58.13,-12C65.97,-12 74.76,-12 83.53,-12"/>
+<polygon fill="#000000" stroke="#000000" points="83.76,-15.5 93.76,-12 83.76,-8.5 83.76,-15.5"/>
 </g>
 </g>
 </svg>
-</div>
-                <div><a type="button" class="graph-help" data-toggle="modal" href="#graph-help-text">Help</a></div>
-                <div class="modal fade" id="graph-help-text" tabindex="-1" role="dialog">
-                  <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
-                      </div>
-                      <div class="modal-body">
-                        
+</div><div><a type="button" class="graph-help" data-toggle="modal" href="#graph-help-text">Help</a></div><div class="modal fade" id="graph-help-text" tabindex="-1" role="dialog"><div class="modal-dialog modal-lg" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title" id="-graph-help-label">Graph Key</h4></div><div class="modal-body">
     <p>Nodes of different colours represent the following: </p>
     <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<!-- Generated by graphviz version 2.36.0 (20140111.2315)
+<!-- Generated by graphviz version 2.43.0 (0)
  -->
 <!-- Title: Graph Key Pages: 1 -->
-<svg width="559pt" height="32pt"
- viewBox="0.00 0.00 559.00 32.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="597pt" height="32pt"
+ viewBox="0.00 0.00 596.50 32.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 28)">
 <title>Graph Key</title>
-<polygon fill="white" stroke="none" points="-4,4 -4,-28 555,-28 555,4 -4,4"/>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-28 592.5,-28 592.5,4 -4,4"/>
 <!-- Subroutine -->
-<g id="node1" class="node"><title>Subroutine</title>
-<polygon fill="#d9534f" stroke="#d9534f" points="64,-24 0,-24 0,-0 64,-0 64,-24"/>
-<text text-anchor="middle" x="32" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+<g id="node1" class="node">
+<title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="70,-24 0,-24 0,0 70,0 70,-24"/>
+<text text-anchor="middle" x="35" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
 </g>
 <!-- Function -->
-<g id="node2" class="node"><title>Function</title>
-<polygon fill="#d94e8f" stroke="#d94e8f" points="136,-24 82,-24 82,-0 136,-0 136,-24"/>
-<text text-anchor="middle" x="109" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+<g id="node2" class="node">
+<title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="146,-24 88,-24 88,0 146,0 146,-24"/>
+<text text-anchor="middle" x="117" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
 </g>
 <!-- Interface -->
-<g id="node3" class="node"><title>Interface</title>
-<polygon fill="#a7506f" stroke="#a7506f" points="209.25,-24 154.75,-24 154.75,-0 209.25,-0 209.25,-24"/>
-<text text-anchor="middle" x="182" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Interface</text>
+<g id="node3" class="node">
+<title>Interface</title>
+<polygon fill="#a7506f" stroke="#a7506f" points="225.5,-24 164.5,-24 164.5,0 225.5,0 225.5,-24"/>
+<text text-anchor="middle" x="195" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Interface</text>
 </g>
 <!-- Unknown Procedure Type -->
-<g id="node4" class="node"><title>Unknown Procedure Type</title>
-<polygon fill="#777777" stroke="#777777" points="364,-24 228,-24 228,-0 364,-0 364,-24"/>
-<text text-anchor="middle" x="296" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Unknown Procedure Type</text>
+<g id="node4" class="node">
+<title>Unknown Procedure Type</title>
+<polygon fill="#777777" stroke="#777777" points="388.5,-24 243.5,-24 243.5,0 388.5,0 388.5,-24"/>
+<text text-anchor="middle" x="316" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Unknown Procedure Type</text>
 </g>
 <!-- Program -->
-<g id="node5" class="node"><title>Program</title>
-<polygon fill="#f0ad4e" stroke="#f0ad4e" points="436,-24 382,-24 382,-0 436,-0 436,-24"/>
-<text text-anchor="middle" x="409" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+<g id="node5" class="node">
+<title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="465,-24 407,-24 407,0 465,0 465,-24"/>
+<text text-anchor="middle" x="436" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
 </g>
 <!-- This Page&#39;s Entity -->
-<g id="node6" class="node"><title>This Page&#39;s Entity</title>
-<polygon fill="none" stroke="black" points="551.25,-24 454.75,-24 454.75,-0 551.25,-0 551.25,-24"/>
-<text text-anchor="middle" x="503" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+<g id="node6" class="node">
+<title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="588.5,-24 483.5,-24 483.5,0 588.5,0 588.5,-24"/>
+<text text-anchor="middle" x="536" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
 </g>
 </g>
 </svg>
@@ -490,99 +233,126 @@ public subroutine penf_init()
     This could include the module procedures in a generic interface or the
     implementation in a submodule of an interface in a parent module.
     </p>
-    
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-     
-     
-     <h3>Called By</h3>
-     
-                <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+    </div></div></div></div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+  <h3 class="panel-title">Called by</h3>
+      </div>
+      <div class="panel-body">
+  <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<!-- Generated by graphviz version 2.36.0 (20140111.2315)
+<!-- Generated by graphviz version 2.43.0 (0)
  -->
 <!-- Title: proc~~penf_init~~CalledByGraph Pages: 1 -->
-<svg id="procpenf_initCalledByGraph" width="184pt" height="32pt"
- viewBox="0.00 0.00 184.00 32.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="proc~~penf_init~~CalledByGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 28)">
+<svg id="procpenf_initCalledByGraph" width="330pt" height="74pt"
+ viewBox="0.00 0.00 330.00 74.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="proc~~penf_init~~CalledByGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 70)">
 <title>proc~~penf_init~~CalledByGraph</title>
-<polygon fill="white" stroke="none" points="-4,4 -4,-28 180,-28 180,4 -4,4"/>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-70 326,-70 326,4 -4,4"/>
 <!-- proc~penf_init -->
-<g id="proc~~penf_init~~CalledByGraph_node1" class="node"><title>proc~penf_init</title>
-<polygon fill="none" stroke="black" points="176,-24 122,-24 122,-0 176,-0 176,-24"/>
-<text text-anchor="middle" x="149" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50">penf_init</text>
+<g id="proc~~penf_init~~CalledByGraph_node1" class="node">
+<title>proc~penf_init</title>
+<polygon fill="none" stroke="black" points="322,-45 264,-45 264,-21 322,-21 322,-45"/>
+<text text-anchor="middle" x="293" y="-30.6" font-family="Helvetica,sans-Serif" font-size="10.50">penf_init</text>
 </g>
-<!-- program~volatile_doctest~2 -->
-<g id="proc~~penf_init~~CalledByGraph_node2" class="node"><title>program~volatile_doctest~2</title>
-<g id="a_proc~~penf_init~~CalledByGraph_node2"><a xlink:href="../program/volatile_doctest%7E2.html" xlink:title="volatile_doctest">
-<polygon fill="#f0ad4e" stroke="#f0ad4e" points="86,-24 0,-24 0,-0 86,-0 86,-24"/>
-<text text-anchor="middle" x="43" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">volatile_doctest</text>
+<!-- proc~penf_print -->
+<g id="proc~~penf_init~~CalledByGraph_node2" class="node">
+<title>proc~penf_print</title>
+<g id="a_proc~~penf_init~~CalledByGraph_node2"><a xlink:href=".././proc/penf_print.html" xlink:title="penf_print">
+<polygon fill="#d9534f" stroke="#d9534f" points="213.5,-66 146.5,-66 146.5,-42 213.5,-42 213.5,-66"/>
+<text text-anchor="middle" x="180" y="-51.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">penf_print</text>
 </a>
 </g>
 </g>
-<!-- program~volatile_doctest~2&#45;&gt;proc~penf_init -->
-<g id="proc~~penf_init~~CalledByGraph_edge1" class="edge"><title>program~volatile_doctest~2&#45;&gt;proc~penf_init</title>
-<path fill="none" stroke="#000000" d="M86.001,-12C94.4836,-12 103.335,-12 111.606,-12"/>
-<polygon fill="#000000" stroke="#000000" points="111.701,-15.5001 121.701,-12 111.701,-8.5001 111.701,-15.5001"/>
+<!-- proc~penf_print&#45;&gt;proc~penf_init -->
+<g id="proc~~penf_init~~CalledByGraph_edge1" class="edge">
+<title>proc~penf_print&#45;&gt;proc~penf_init</title>
+<path fill="none" stroke="#000000" d="M213.7,-47.81C226.22,-45.45 240.6,-42.72 253.6,-40.26"/>
+<polygon fill="#000000" stroke="#000000" points="254.49,-43.66 263.67,-38.36 253.19,-36.78 254.49,-43.66"/>
+</g>
+<!-- program~volatile_doctest~92 -->
+<g id="proc~~penf_init~~CalledByGraph_node3" class="node">
+<title>program~volatile_doctest~92</title>
+<g id="a_proc~~penf_init~~CalledByGraph_node3"><a xlink:href=".././program/volatile_doctest~92.html" xlink:title="volatile_doctest">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="228,-24 132,-24 132,0 228,0 228,-24"/>
+<text text-anchor="middle" x="180" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">volatile_doctest</text>
+</a>
+</g>
+</g>
+<!-- program~volatile_doctest~92&#45;&gt;proc~penf_init -->
+<g id="proc~~penf_init~~CalledByGraph_edge2" class="edge">
+<title>program~volatile_doctest~92&#45;&gt;proc~penf_init</title>
+<path fill="none" stroke="#000000" d="M228.07,-20.91C236.73,-22.54 245.66,-24.23 254.01,-25.81"/>
+<polygon fill="#000000" stroke="#000000" points="253.36,-29.25 263.84,-27.67 254.66,-22.37 253.36,-29.25"/>
+</g>
+<!-- program~volatile_doctest~96 -->
+<g id="proc~~penf_init~~CalledByGraph_node4" class="node">
+<title>program~volatile_doctest~96</title>
+<g id="a_proc~~penf_init~~CalledByGraph_node4"><a xlink:href=".././program/volatile_doctest~96.html" xlink:title="volatile_doctest">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="96,-66 0,-66 0,-42 96,-42 96,-66"/>
+<text text-anchor="middle" x="48" y="-51.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">volatile_doctest</text>
+</a>
+</g>
+</g>
+<!-- program~volatile_doctest~96&#45;&gt;proc~penf_print -->
+<g id="proc~~penf_init~~CalledByGraph_edge3" class="edge">
+<title>program~volatile_doctest~96&#45;&gt;proc~penf_print</title>
+<path fill="none" stroke="#000000" d="M96.3,-54C109.23,-54 123.18,-54 135.86,-54"/>
+<polygon fill="#000000" stroke="#000000" points="136.17,-57.5 146.17,-54 136.17,-50.5 136.17,-57.5"/>
 </g>
 </g>
 </svg>
-</div>
-                <div><a type="button" class="graph-help" data-toggle="modal" href="#graph-help-text">Help</a></div>
-                <div class="modal fade" id="graph-help-text" tabindex="-1" role="dialog">
-                  <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
-                      </div>
-                      <div class="modal-body">
-                        
+</div><div><a type="button" class="graph-help" data-toggle="modal" href="#graph-help-text">Help</a></div><div class="modal fade" id="graph-help-text" tabindex="-1" role="dialog"><div class="modal-dialog modal-lg" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title" id="-graph-help-label">Graph Key</h4></div><div class="modal-body">
     <p>Nodes of different colours represent the following: </p>
     <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<!-- Generated by graphviz version 2.36.0 (20140111.2315)
+<!-- Generated by graphviz version 2.43.0 (0)
  -->
 <!-- Title: Graph Key Pages: 1 -->
-<svg width="559pt" height="32pt"
- viewBox="0.00 0.00 559.00 32.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="597pt" height="32pt"
+ viewBox="0.00 0.00 596.50 32.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 28)">
 <title>Graph Key</title>
-<polygon fill="white" stroke="none" points="-4,4 -4,-28 555,-28 555,4 -4,4"/>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-28 592.5,-28 592.5,4 -4,4"/>
 <!-- Subroutine -->
-<g id="node1" class="node"><title>Subroutine</title>
-<polygon fill="#d9534f" stroke="#d9534f" points="64,-24 0,-24 0,-0 64,-0 64,-24"/>
-<text text-anchor="middle" x="32" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+<g id="node1" class="node">
+<title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="70,-24 0,-24 0,0 70,0 70,-24"/>
+<text text-anchor="middle" x="35" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
 </g>
 <!-- Function -->
-<g id="node2" class="node"><title>Function</title>
-<polygon fill="#d94e8f" stroke="#d94e8f" points="136,-24 82,-24 82,-0 136,-0 136,-24"/>
-<text text-anchor="middle" x="109" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+<g id="node2" class="node">
+<title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="146,-24 88,-24 88,0 146,0 146,-24"/>
+<text text-anchor="middle" x="117" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
 </g>
 <!-- Interface -->
-<g id="node3" class="node"><title>Interface</title>
-<polygon fill="#a7506f" stroke="#a7506f" points="209.25,-24 154.75,-24 154.75,-0 209.25,-0 209.25,-24"/>
-<text text-anchor="middle" x="182" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Interface</text>
+<g id="node3" class="node">
+<title>Interface</title>
+<polygon fill="#a7506f" stroke="#a7506f" points="225.5,-24 164.5,-24 164.5,0 225.5,0 225.5,-24"/>
+<text text-anchor="middle" x="195" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Interface</text>
 </g>
 <!-- Unknown Procedure Type -->
-<g id="node4" class="node"><title>Unknown Procedure Type</title>
-<polygon fill="#777777" stroke="#777777" points="364,-24 228,-24 228,-0 364,-0 364,-24"/>
-<text text-anchor="middle" x="296" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Unknown Procedure Type</text>
+<g id="node4" class="node">
+<title>Unknown Procedure Type</title>
+<polygon fill="#777777" stroke="#777777" points="388.5,-24 243.5,-24 243.5,0 388.5,0 388.5,-24"/>
+<text text-anchor="middle" x="316" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Unknown Procedure Type</text>
 </g>
 <!-- Program -->
-<g id="node5" class="node"><title>Program</title>
-<polygon fill="#f0ad4e" stroke="#f0ad4e" points="436,-24 382,-24 382,-0 436,-0 436,-24"/>
-<text text-anchor="middle" x="409" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+<g id="node5" class="node">
+<title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="465,-24 407,-24 407,0 465,0 465,-24"/>
+<text text-anchor="middle" x="436" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
 </g>
 <!-- This Page&#39;s Entity -->
-<g id="node6" class="node"><title>This Page&#39;s Entity</title>
-<polygon fill="none" stroke="black" points="551.25,-24 454.75,-24 454.75,-0 551.25,-0 551.25,-24"/>
-<text text-anchor="middle" x="503" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+<g id="node6" class="node">
+<title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="588.5,-24 483.5,-24 483.5,0 588.5,0 588.5,-24"/>
+<text text-anchor="middle" x="536" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
 </g>
 </g>
 </svg>
@@ -593,37 +363,14 @@ public subroutine penf_init()
     This could include the module procedures in a generic interface or the
     implementation in a submodule of an interface in a parent module.
     </p>
-    
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-     
+    </div></div></div></div>
+      </div>
+    </div>
     <br>
 
     <section class="visible-xs visible-sm hidden-md">
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      <h3>Contents</h3>
+ 
 <div class="panel panel-primary">
   <div class="panel-heading text-left"><h3 class="panel-title">Source Code</h3></div>
   <div class="list-group">
@@ -631,254 +378,55 @@ public subroutine penf_init()
   </div>
 </div>
 
-
     </section>
     <br class="visible-xs visible-sm hidden-md">
 
-    
 
-    
-    
-    
     
     
 
     
     
-    
-    
-    
 
 
-    
-    
     
     <section>
     <h2><span class="anchor" id="src"></span>Source Code</h2>
-    <div class="highlight"><pre><span></span>   <span class="k">subroutine </span><span class="n">penf_init</span><span class="p">()</span>
-   <span class="c">!&lt; Initialize PENF&#39;s variables that are not initialized into the definition specification.</span>
-   <span class="c">!&lt;</span>
-   <span class="c">!&lt;```fortran</span>
-   <span class="c">!&lt; use penf</span>
-   <span class="c">!&lt; call penf_init</span>
-   <span class="c">!&lt; print FI1P, BYR4P</span>
-   <span class="c">!&lt;```</span>
-   <span class="c">!=&gt; 4 &lt;&lt;&lt;</span>
+    <div class="highlight"><pre><span></span><span class="w">   </span><span class="k">subroutine </span><span class="n">penf_init</span><span class="p">()</span><span class="w"></span>
+<span class="w">   </span><span class="c">!&lt; Initialize PENF&#39;s variables that are not initialized into the definition specification.</span>
+<span class="w">   </span><span class="c">!&lt;</span>
+<span class="w">   </span><span class="c">!&lt;```fortran</span>
+<span class="w">   </span><span class="c">!&lt; use penf</span>
+<span class="w">   </span><span class="c">!&lt; call penf_init</span>
+<span class="w">   </span><span class="c">!&lt; print FI1P, BYR4P</span>
+<span class="w">   </span><span class="c">!&lt;```</span>
+<span class="w">   </span><span class="c">!=&gt; 4 &lt;&lt;&lt;</span>
 
-   <span class="k">call </span><span class="n">check_endian</span>
-   <span class="n">BIR16P</span> <span class="o">=</span> <span class="nb">bit_size</span><span class="p">(</span><span class="n">MaxR16P</span><span class="p">)</span> <span class="p">;</span> <span class="n">BYR16P</span> <span class="o">=</span> <span class="n">BIR16P</span> <span class="o">/</span> <span class="mi">8_I2P</span>
-   <span class="n">BIR8P</span>  <span class="o">=</span> <span class="nb">bit_size</span><span class="p">(</span><span class="n">MaxR8P</span><span class="p">)</span>  <span class="p">;</span> <span class="n">BYR8P</span>  <span class="o">=</span> <span class="n">BIR8P</span>  <span class="o">/</span> <span class="mi">8_I1P</span>
-   <span class="n">BIR4P</span>  <span class="o">=</span> <span class="nb">bit_size</span><span class="p">(</span><span class="n">MaxR4P</span><span class="p">)</span>  <span class="p">;</span> <span class="n">BYR4P</span>  <span class="o">=</span> <span class="n">BIR4P</span>  <span class="o">/</span> <span class="mi">8_I1P</span>
-   <span class="n">BIR_P</span>  <span class="o">=</span> <span class="nb">bit_size</span><span class="p">(</span><span class="n">MaxR_P</span><span class="p">)</span>  <span class="p">;</span> <span class="n">BYR_P</span>  <span class="o">=</span> <span class="n">BIR_P</span>  <span class="o">/</span> <span class="mi">8_I1P</span>
-   <span class="n">is_initialized</span> <span class="o">=</span> <span class="p">.</span><span class="n">true</span><span class="p">.</span>
-   <span class="n">endsubroutine</span> <span class="n">penf_init</span>
+<span class="w">   </span><span class="k">call </span><span class="n">check_endian</span><span class="w"></span>
+<span class="w">   </span><span class="n">is_initialized</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">.</span><span class="n">true</span><span class="p">.</span><span class="w"></span>
+<span class="w">   </span><span class="k">endsubroutine </span><span class="n">penf_init</span><span class="w"></span>
 </pre></div>
 
     </section>
     <br>
     
-    
     </div>
   </div>
-
-  <section class="visible-xs visible-sm hidden-md">
-    <hr>
-    
-
-<div class="panel panel-default">
-  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#allprocs-1">All Procedures</a></h3></div>
-  <div id="allprocs-1" class="panel-collapse collapse">
-    <div class="list-group">
-      
-      <a class="list-group-item" href="../proc/bctoi_i1p.html">bctoi_I1P</a>
-      
-      <a class="list-group-item" href="../proc/bctoi_i2p.html">bctoi_I2P</a>
-      
-      <a class="list-group-item" href="../proc/bctoi_i4p.html">bctoi_I4P</a>
-      
-      <a class="list-group-item" href="../proc/bctoi_i8p.html">bctoi_I8P</a>
-      
-      <a class="list-group-item" href="../interface/bcton.html">bcton</a>
-      
-      <a class="list-group-item" href="../proc/bctor_r16p.html">bctor_R16P</a>
-      
-      <a class="list-group-item" href="../proc/bctor_r4p.html">bctor_R4P</a>
-      
-      <a class="list-group-item" href="../proc/bctor_r8p.html">bctor_R8P</a>
-      
-      <a class="list-group-item" href="../interface/bit_size.html">bit_size</a>
-      
-      <a class="list-group-item" href="../interface/bit_size%7E2.html">bit_size</a>
-      
-      <a class="list-group-item" href="../proc/bit_size_chr.html">bit_size_chr</a>
-      
-      <a class="list-group-item" href="../proc/bit_size_r16p.html">bit_size_R16P</a>
-      
-      <a class="list-group-item" href="../proc/bit_size_r4p.html">bit_size_R4P</a>
-      
-      <a class="list-group-item" href="../proc/bit_size_r8p.html">bit_size_R8P</a>
-      
-      <a class="list-group-item" href="../interface/bstr.html">bstr</a>
-      
-      <a class="list-group-item" href="../proc/bstr_i1p.html">bstr_I1P</a>
-      
-      <a class="list-group-item" href="../proc/bstr_i2p.html">bstr_I2P</a>
-      
-      <a class="list-group-item" href="../proc/bstr_i4p.html">bstr_I4P</a>
-      
-      <a class="list-group-item" href="../proc/bstr_i8p.html">bstr_I8P</a>
-      
-      <a class="list-group-item" href="../proc/bstr_r16p.html">bstr_R16P</a>
-      
-      <a class="list-group-item" href="../proc/bstr_r4p.html">bstr_R4P</a>
-      
-      <a class="list-group-item" href="../proc/bstr_r8p.html">bstr_R8P</a>
-      
-      <a class="list-group-item" href="../interface/byte_size.html">byte_size</a>
-      
-      <a class="list-group-item" href="../proc/byte_size_chr.html">byte_size_chr</a>
-      
-      <a class="list-group-item" href="../proc/byte_size_i1p.html">byte_size_I1P</a>
-      
-      <a class="list-group-item" href="../proc/byte_size_i2p.html">byte_size_I2P</a>
-      
-      <a class="list-group-item" href="../proc/byte_size_i4p.html">byte_size_I4P</a>
-      
-      <a class="list-group-item" href="../proc/byte_size_i8p.html">byte_size_I8P</a>
-      
-      <a class="list-group-item" href="../proc/byte_size_r16p.html">byte_size_R16P</a>
-      
-      <a class="list-group-item" href="../proc/byte_size_r4p.html">byte_size_R4P</a>
-      
-      <a class="list-group-item" href="../proc/byte_size_r8p.html">byte_size_R8P</a>
-      
-      <a class="list-group-item" href="../proc/check_endian.html">check_endian</a>
-      
-      <a class="list-group-item" href="../proc/compact_real_string.html">compact_real_string</a>
-      
-      <a class="list-group-item" href="../proc/ctoi_i1p.html">ctoi_I1P</a>
-      
-      <a class="list-group-item" href="../proc/ctoi_i2p.html">ctoi_I2P</a>
-      
-      <a class="list-group-item" href="../proc/ctoi_i4p.html">ctoi_I4P</a>
-      
-      <a class="list-group-item" href="../proc/ctoi_i8p.html">ctoi_I8P</a>
-      
-      <a class="list-group-item" href="../interface/cton.html">cton</a>
-      
-      <a class="list-group-item" href="../proc/ctor_r16p.html">ctor_R16P</a>
-      
-      <a class="list-group-item" href="../proc/ctor_r4p.html">ctor_R4P</a>
-      
-      <a class="list-group-item" href="../proc/ctor_r8p.html">ctor_R8P</a>
-      
-      <a class="list-group-item" href="../interface/digit.html">digit</a>
-      
-      <a class="list-group-item" href="../proc/digit_i1.html">digit_I1</a>
-      
-      <a class="list-group-item" href="../proc/digit_i2.html">digit_I2</a>
-      
-      <a class="list-group-item" href="../proc/digit_i4.html">digit_I4</a>
-      
-      <a class="list-group-item" href="../proc/digit_i8.html">digit_I8</a>
-      
-      <a class="list-group-item" href="../proc/penf_init.html">penf_init</a>
-      
-      <a class="list-group-item" href="../proc/penf_print.html">penf_print</a>
-      
-      <a class="list-group-item" href="../interface/str.html">str</a>
-      
-      <a class="list-group-item" href="../proc/str_a_i1p.html">str_a_I1P</a>
-      
-      <a class="list-group-item" href="../proc/str_a_i2p.html">str_a_I2P</a>
-      
-      <a class="list-group-item" href="../proc/str_a_i4p.html">str_a_I4P</a>
-      
-      <a class="list-group-item" href="../proc/str_a_i8p.html">str_a_I8P</a>
-      
-      <a class="list-group-item" href="../proc/str_a_r16p.html">str_a_R16P</a>
-      
-      <a class="list-group-item" href="../proc/str_a_r4p.html">str_a_R4P</a>
-      
-      <a class="list-group-item" href="../proc/str_a_r8p.html">str_a_R8P</a>
-      
-      <a class="list-group-item" href="../interface/str_ascii.html">str_ascii</a>
-      
-      <a class="list-group-item" href="../proc/str_ascii_ascii.html">str_ascii_ascii</a>
-      
-      <a class="list-group-item" href="../proc/str_ascii_default.html">str_ascii_default</a>
-      
-      <a class="list-group-item" href="../proc/str_ascii_ucs4.html">str_ascii_ucs4</a>
-      
-      <a class="list-group-item" href="../proc/str_bol.html">str_bol</a>
-      
-      <a class="list-group-item" href="../proc/str_i1p.html">str_I1P</a>
-      
-      <a class="list-group-item" href="../proc/str_i2p.html">str_I2P</a>
-      
-      <a class="list-group-item" href="../proc/str_i4p.html">str_I4P</a>
-      
-      <a class="list-group-item" href="../proc/str_i8p.html">str_I8P</a>
-      
-      <a class="list-group-item" href="../proc/str_r16p.html">str_R16P</a>
-      
-      <a class="list-group-item" href="../proc/str_r4p.html">str_R4P</a>
-      
-      <a class="list-group-item" href="../proc/str_r8p.html">str_R8P</a>
-      
-      <a class="list-group-item" href="../interface/str_ucs4.html">str_ucs4</a>
-      
-      <a class="list-group-item" href="../proc/str_ucs4_ascii.html">str_ucs4_ascii</a>
-      
-      <a class="list-group-item" href="../proc/str_ucs4_default.html">str_ucs4_default</a>
-      
-      <a class="list-group-item" href="../proc/str_ucs4_ucs4.html">str_ucs4_ucs4</a>
-      
-      <a class="list-group-item" href="../proc/strf_i1p.html">strf_I1P</a>
-      
-      <a class="list-group-item" href="../proc/strf_i2p.html">strf_I2P</a>
-      
-      <a class="list-group-item" href="../proc/strf_i4p.html">strf_I4P</a>
-      
-      <a class="list-group-item" href="../proc/strf_i8p.html">strf_I8P</a>
-      
-      <a class="list-group-item" href="../proc/strf_r16p.html">strf_R16P</a>
-      
-      <a class="list-group-item" href="../proc/strf_r4p.html">strf_R4P</a>
-      
-      <a class="list-group-item" href="../proc/strf_r8p.html">strf_R8P</a>
-      
-      <a class="list-group-item" href="../interface/strz.html">strz</a>
-      
-      <a class="list-group-item" href="../proc/strz_i1p.html">strz_I1P</a>
-      
-      <a class="list-group-item" href="../proc/strz_i2p.html">strz_I2P</a>
-      
-      <a class="list-group-item" href="../proc/strz_i4p.html">strz_I4P</a>
-      
-      <a class="list-group-item" href="../proc/strz_i8p.html">strz_I8P</a>
-      
-    </div>
-  </div>
-</div>
-
-
-  </section>
 
     <hr>    
     </div> <!-- /container -->
     <footer>
       <div class="container">
       <div class="row">
-        <div class="col-xs-6 col-md-4"><p>&copy; 2017 </p></div>
-        <div class="col-xs-6 col-md-4 col-md-push-4">
+        <div class="col-xs-6 col-md-6"><p>PENF was developed by Stefano Zaghi<br>&copy; 2022 
+</p>
+        </div>
+        <div class="col-xs-6 col-md-6">
           <p class="text-right">
             Documentation generated by 
-            <a href="https://github.com/cmacmackin/ford">FORD</a>
-            
+            <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
           </p>
         </div>
-        <div class="col-xs-12 col-md-4 col-md-pull-4"><p class="text-center"> PENF was developed by Stefano Zaghi</p></div>
       </div>
       <br>
       </div> <!-- /container -->    
@@ -901,12 +449,14 @@ public subroutine penf_init()
       MathJax.Hub.Config({
         TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } },
         jax: ['input/TeX','input/MathML','output/HTML-CSS'],
-        extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js'],
-        'HTML-CSS': { 
-           styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: '#000000 ! important'} }
-        }
+        extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']
       });
     </script>
-    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script src="../tipuesearch/tipuesearch_content.js"></script>
+    <script src="../tipuesearch/tipuesearch_set.js"></script>
+    <script src="../tipuesearch/tipuesearch.js"></script>
+    
   </body>
 </html>
