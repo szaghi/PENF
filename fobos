@@ -336,7 +336,6 @@ rule = tar --xform="s%^%PENF/%" -czf PENF.tar.gz *
 help   = Perform coverage analysis
 rule_1 = FoBiS.py doctests -mode tests-gnu-debug -coverage
 rule_2 = gcov -o exe/obj/ src/lib/*
-rule_3 = rm -f *.gcov
 
 [rule-makecoverage-analysis]
 help   = Perform coverage analysis and saving reports in markdown
