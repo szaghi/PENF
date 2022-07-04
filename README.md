@@ -1,6 +1,6 @@
 <a name="top"></a>
 
-# PENF [![GitHub tag](https://img.shields.io/github/tag/szaghi/PENF.svg)]()
+# PENF [![GitHub tag](https://img.shields.io/github/tag/szaghi/PENF.svg)](https://github.com/szaghi/PENF/releases)
 
 [![License](https://img.shields.io/badge/license-GNU%20GeneraL%20Public%20License%20v3%20,%20GPLv3-blue.svg)]()
 [![License](https://img.shields.io/badge/license-BSD2-red.svg)]()
@@ -8,8 +8,8 @@
 [![License](https://img.shields.io/badge/license-MIT-red.svg)]()
 
 [![Status](https://img.shields.io/badge/status-stable-brightgreen.svg)]()
-[![Build Status](https://travis-ci.org/szaghi/PENF.svg?branch=master)](https://travis-ci.org/szaghi/PENF)
-[![Coverage Status](https://img.shields.io/codecov/c/github/szaghi/PENF.svg)](http://codecov.io/github/szaghi/PENF?branch=master)
+[![CI Status](https://github.com/szaghi/PENF/actions/workflows/ci.yml/badge.svg)](https://github.com/szaghi/PENF/actions)
+[![Coverage Status](https://img.shields.io/codecov/c/github/szaghi/PENF.svg)](https://app.codecov.io/gh/szaghi/PENF)
 
 ### PENF, Portability Environment for Fortran poor people
 A KISS library for exploiting codes portability for modern (2003+) Fortran projects.
@@ -30,9 +30,6 @@ A KISS library for exploiting codes portability for modern (2003+) Fortran proje
 #### Issues
 
 [![GitHub issues](https://img.shields.io/github/issues/szaghi/PENF.svg)]()
-[![Ready in backlog](https://badge.waffle.io/szaghi/PENF.png?label=ready&title=Ready)](https://waffle.io/szaghi/PENF)
-[![In Progress](https://badge.waffle.io/szaghi/PENF.png?label=in%20progress&title=In%20Progress)](https://waffle.io/szaghi/PENF)
-[![Open bugs](https://badge.waffle.io/szaghi/PENF.png?label=bug&title=Open%20Bugs)](https://waffle.io/szaghi/PENF)
 
 #### Compiler Support
 
