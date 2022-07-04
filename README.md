@@ -93,6 +93,8 @@ Go to [Top](#top)
 
 ### Project history
 
+See [CHANGELOG](CHANGELOG.md) for the complete list of changes.
+
 > a graphical overview of the history and evolution of PENF project
 
 ![stack](doc/stack_plot.png)
