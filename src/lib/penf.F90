@@ -9,6 +9,7 @@ use penf_b_size
 use penf_b_size, only : bit_size, byte_size
 #endif
 use penf_stringify, only : str_ascii, str_ucs4, str, strz, cton, bstr, bcton
+use penf_allocatable_memory
 
 implicit none
 private
@@ -33,10 +34,15 @@ public :: bit_size, byte_size
 public :: str_ascii, str_ucs4
 public :: str, strz, cton
 public :: bstr, bcton
+! allocatable memory facility
+public :: allocate_variable
+public :: assign_allocatable
+public :: get_memory_info
+public :: save_memory_status
 ! miscellanea facility
 public :: check_endian
 public :: digit
-public :: penf_Init
+public :: penf_init
 public :: penf_print
 
 integer, protected :: endian         = endianL !< Bit ordering: Little endian (endianL), or Big endian (endianB).
