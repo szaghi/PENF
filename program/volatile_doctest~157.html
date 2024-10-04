@@ -77,14 +77,14 @@
 
             <li class="list-inline-item" id="source-file">
               <i class="fa fa-code"></i>
-              <a href="../src/penf_allocatable_memory-doctest-2.f90"> Source File</a>
+              <a href="../src/penf_allocatable_memory-doctest-30.f90"> Source File</a>
             </li>
         </ul>
       </div>
       <div class="col">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb justify-content-end mb-0">
-                <li class="breadcrumb-item"><a href='../sourcefile/penf_allocatable_memory-doctest-2.f90.html'>penf_allocatable_memory-doctest-2.f90</a></li>
+                <li class="breadcrumb-item"><a href='../sourcefile/penf_allocatable_memory-doctest-30.f90.html'>penf_allocatable_memory-doctest-30.f90</a></li>
             <li class="breadcrumb-item active" aria-current="page">volatile_doctest</li>
           </ol>
         </nav>
@@ -111,8 +111,8 @@
       </a>
       <div id="vars-0" class="collapse">
         <div class="list-group list-group-flush">
-            <a class="list-group-item" href="../program/volatile_doctest~157.html#variable-a~72">a</a>
-            <a class="list-group-item" href="../program/volatile_doctest~157.html#variable-ulb~88">ulb</a>
+            <a class="list-group-item" href="../program/volatile_doctest~157.html#variable-a~73">a</a>
+            <a class="list-group-item" href="../program/volatile_doctest~157.html#variable-ulb~33">ulb</a>
         </div>
       </div>
     </div>
@@ -2139,8 +2139,8 @@ implementation in a submodule of an interface in a parent module.
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-a~72"></span>
-              real(kind=R16P),
+              <span class="anchor" id="variable-a~73"></span>
+              integer(kind=I4P),
             </td>
             <td>
               allocatable
@@ -2155,7 +2155,7 @@ implementation in a submodule of an interface in a parent module.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-ulb~88"></span>
+              <span class="anchor" id="variable-ulb~33"></span>
               integer(kind=I4P)
             </td>
             <td>
@@ -2188,10 +2188,10 @@ implementation in a submodule of an interface in a parent module.
     <div class="hl codehilite"><pre><span></span><span class="k">program </span><span class="n">volatile_doctest</span>
 <span class="k">use </span><span class="n">penf_allocatable_memory</span>
 <span class="w"> </span><span class="k">use </span><span class="n">penf</span>
-<span class="w"> </span><span class="kt">real</span><span class="p">(</span><span class="n">R16P</span><span class="p">),</span><span class="w"> </span><span class="k">allocatable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">a</span><span class="p">(:,:)</span>
-<span class="w"> </span><span class="kt">integer</span><span class="p">(</span><span class="n">I4P</span><span class="p">)</span><span class="w">            </span><span class="kd">::</span><span class="w"> </span><span class="n">ulb</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">=</span><span class="nb">reshape</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
-<span class="w">                                              </span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],&amp;</span>
-<span class="w">                                             </span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="w"> </span><span class="kt">integer</span><span class="p">(</span><span class="n">I4P</span><span class="p">),</span><span class="w"> </span><span class="k">allocatable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">a</span><span class="p">(:,:)</span>
+<span class="w"> </span><span class="kt">integer</span><span class="p">(</span><span class="n">I4P</span><span class="p">)</span><span class="w">              </span><span class="kd">::</span><span class="w"> </span><span class="n">ulb</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">=</span><span class="nb">reshape</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                                                </span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],&amp;</span>
+<span class="w">                                               </span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
 <span class="w"> </span><span class="k">call </span><span class="n">allocate_variable</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">ulb</span><span class="p">)</span>
 <span class="w"> </span><span class="k">print</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="nb">allocated</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 <span class="k">endprogram </span><span class="n">volatile_doctest</span>

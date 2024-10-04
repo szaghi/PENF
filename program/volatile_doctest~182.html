@@ -77,14 +77,14 @@
 
             <li class="list-inline-item" id="source-file">
               <i class="fa fa-code"></i>
-              <a href="../src/penf_allocatable_memory-doctest-66.f90"> Source File</a>
+              <a href="../src/penf_allocatable_memory-doctest-73.f90"> Source File</a>
             </li>
         </ul>
       </div>
       <div class="col">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb justify-content-end mb-0">
-                <li class="breadcrumb-item"><a href='../sourcefile/penf_allocatable_memory-doctest-66.f90.html'>penf_allocatable_memory-doctest-66.f90</a></li>
+                <li class="breadcrumb-item"><a href='../sourcefile/penf_allocatable_memory-doctest-73.f90.html'>penf_allocatable_memory-doctest-73.f90</a></li>
             <li class="breadcrumb-item active" aria-current="page">volatile_doctest</li>
           </ol>
         </nav>
@@ -112,7 +112,7 @@
       <div id="vars-0" class="collapse">
         <div class="list-group list-group-flush">
             <a class="list-group-item" href="../program/volatile_doctest~182.html#variable-a~86">a</a>
-            <a class="list-group-item" href="../program/volatile_doctest~182.html#variable-b~40">b</a>
+            <a class="list-group-item" href="../program/volatile_doctest~182.html#variable-b~46">b</a>
         </div>
       </div>
     </div>
@@ -3031,7 +3031,7 @@ implementation in a submodule of an interface in a parent module.
         <tr>
             <td>
               <span class="anchor" id="variable-a~86"></span>
-              real(kind=R4P),
+              integer(kind=I8P),
             </td>
             <td>
               allocatable
@@ -3046,8 +3046,8 @@ implementation in a submodule of an interface in a parent module.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-b~40"></span>
-              real(kind=R4P),
+              <span class="anchor" id="variable-b~46"></span>
+              integer(kind=I8P),
             </td>
             <td>
               allocatable
@@ -3079,7 +3079,7 @@ implementation in a submodule of an interface in a parent module.
     <div class="hl codehilite"><pre><span></span><span class="k">program </span><span class="n">volatile_doctest</span>
 <span class="k">use </span><span class="n">penf_allocatable_memory</span>
 <span class="w"> </span><span class="k">use </span><span class="n">penf</span>
-<span class="w"> </span><span class="kt">real</span><span class="p">(</span><span class="n">R4P</span><span class="p">),</span><span class="w"> </span><span class="k">allocatable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">a</span><span class="p">(:,:,:),</span><span class="w"> </span><span class="n">b</span><span class="p">(:,:,:)</span>
+<span class="w"> </span><span class="kt">integer</span><span class="p">(</span><span class="n">I8P</span><span class="p">),</span><span class="w"> </span><span class="k">allocatable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">a</span><span class="p">(:,:,:),</span><span class="w"> </span><span class="n">b</span><span class="p">(:,:,:)</span>
 <span class="w"> </span><span class="k">allocate</span><span class="p">(</span><span class="n">b</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">))</span>
 <span class="w"> </span><span class="k">call </span><span class="n">assign_allocatable</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span>
 <span class="w"> </span><span class="k">print</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="nb">allocated</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
