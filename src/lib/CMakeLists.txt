@@ -9,6 +9,7 @@ SET(CMAKE_Fortran_MODULE_DIRECTORY "${PROJECT_BINARY_DIR}/modules")
 set(LIB PENF)
 add_library(${LIB}
     penf.F90
+    penf_allocatable_memory.F90
     penf_b_size.F90
     penf_global_parameters_variables.F90
     penf_stringify.F90
