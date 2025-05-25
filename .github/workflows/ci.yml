@@ -8,14 +8,30 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    env:
+      GCC_V: 14 # gcc version
 
     steps:
-    - name: PREPARE SYSTEM
+
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        submodules: 'true'
+ 
+    - name: Install GCC
       run: |
-        python --version
-        gfortran --version
-        gcov --version
-        sudo apt install graphviz
+        sudo add-apt-repository --yes ppa:ubuntu-toolchain-r/test
+        sudo apt update
+        sudo apt install -y gcc-${GCC_V} gfortran-${GCC_V} g++-${GCC_V}
+        sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-${GCC_V} 100 \
+        --slave /usr/bin/gfortran gfortran /usr/bin/gfortran-${GCC_V} \
+        --slave /usr/bin/gcov gcov /usr/bin/gcov-${GCC_V}
+
+    - name: Install Graphviz
+      uses: ts-graphviz/setup-graphviz@v2
+ 
+    - name: Install FOBIS-FORD
+      run: |
         pip install --upgrade markdown
         pip install --upgrade markdown-include
         pip install --upgrade python-markdown-math
@@ -26,24 +42,33 @@ jobs:
         pip install --upgrade graphviz
         pip install --upgrade tqdm
         pip install --upgrade importlib-metadata
-        pip install --upgrade ford && ford --version
-        pip install --upgrade FoBiS.py && FoBiS.py --version
-    
-    - name: CHECKOUT
-      id: checkout
-      run: |
-        git clone --recursive https://github.com/$GITHUB_REPOSITORY ./
-        git log -n 1
-        tag=`git tag | tail -n 1`
-        echo "RELEASE=$tag" >> $GITHUB_ENV
+        pip install --upgrade ford
+        pip install --upgrade FoBiS.py
 
-    - name: MAKE TAR
+    - name: Check system
+      run: |
+        echo 'GFORTRAN'
+        gfortran --version
+        echo
+        echo 'GCOV'
+        gcov --version
+        echo
+        echo 'PYTHON'
+        python --version
+        echo
+        echo 'FOBIS'
+        FoBiS.py --version
+        echo
+        echo 'FORD'
+        ford --version
+
+    - name: Make TAR
       run: |
         echo "release version:" ${{ env.RELEASE }}
         FoBiS.py rule -ex maketar
         ls *.tar.gz
 
-    - name: DEPLOY ASSET
+    - name: Deploy Asset
       if: ${{ !env.ACT }}
       uses: "marvinpinto/action-automatic-releases@latest"
       with:
@@ -55,19 +80,19 @@ jobs:
           *.tar.gz
           ./scripts/install.sh
 
-    - name: MAKE COVERAGE
+    - name: Make Coverage
       run: |
         FoBiS.py rule -ex makecoverage
 
-    - name: UPLOAD COVERAGE to CODECOV
+    - name: Upload Coverage to CODECOV
       if: ${{ !env.ACT }}
       uses: codecov/codecov-action@v3
 
-    - name: MAKE DOC
+    - name: Make doc
       run: |
         FoBiS.py rule -ex makedoc
 
-    - name: PUSH DOC to GH Pages
+    - name: Push doc to GH Pages
       if: ${{ !env.ACT }}
       uses: JamesIves/github-pages-deploy-action@v4
       with:

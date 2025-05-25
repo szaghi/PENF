@@ -1,11 +1,11 @@
 [modes]
-modes = static-pgi
-        shared-gnu static-gnu tests-gnu
+modes = shared-gnu static-gnu tests-gnu
         shared-gnu-debug static-gnu-debug tests-gnu-debug
         shared-intel static-intel tests-intel
         shared-intel-debug static-intel-debug tests-intel-debug
         shared-ibm static-ibm tests-ibm
         shared-ibm-debug static-ibm-debug tests-ibm-debug
+        static-pgi
 
 [common-variables]
 $CSHARED_GNU = -c -fPIC -frealloc-lhs
@@ -136,176 +136,106 @@ build_dir = ./static/
 output    = penf.a
 mklib     = static
 
+#templates
+[template-base]
+mod_dir         = ./mod/
+obj_dir         = ./obj/
+src             = ./src/
+colors          = True
+quiet           = False
+log             = True
+jobs            = 4
+cflags_heritage = True
+
 [template-static-pgi]
+template     = template-base
 compiler     = pgi
 cflags       = -c -O3
 exclude_dirs = $EXDIRS
-mod_dir      = ./mod/
-obj_dir      = ./obj/
-src          = ./src/
-colors       = True
-quiet        = False
-log          = True
-jobs         = 2
 
-#templates
 [template-shared-gnu]
-compiler        = gnu
-cflags          = $CSHARED_GNU $OPTIMIZE
-lflags          = $LSHARED $OPTIMIZE
-mod_dir         = ./mod/
-obj_dir         = ./obj/
-src             = ./src/
-colors          = True
-quiet           = False
-log             = True
-jobs            = 4
-cflags_heritage = True
+template = template-base
+compiler = gnu
+cflags   = $CSHARED_GNU $OPTIMIZE
+lflags   = $LSHARED $OPTIMIZE
+preproc  = -D_ASCII_SUPPORTED -D_UCS4_SUPPORTED -D_R16P
 
 [template-static-gnu]
-compiler        = gnu
-cflags          = $CSTATIC_GNU $OPTIMIZE
-lflags          = $OPTIMIZE
-mod_dir         = ./mod/
-obj_dir         = ./obj/
-src             = ./src/
-colors          = True
-quiet           = False
-log             = True
-jobs            = 4
-cflags_heritage = True
+template = template-base
+compiler = gnu
+cflags   = $CSTATIC_GNU $OPTIMIZE
+lflags   = $OPTIMIZE
+preproc  = -D_ASCII_SUPPORTED -D_UCS4_SUPPORTED -D_R16P
 
 [template-shared-gnu-debug]
-compiler        = gnu
-cflags          = $CSHARED_GNU $DEBUG_GNU
-lflags          = $LSHARED $DEBUG_GNU
-preproc         = -D_ASCII_SUPPORTED -D_UCS4_SUPPORTED
-mod_dir         = ./mod/
-obj_dir         = ./obj/
-src             = ./src/
-colors          = True
-quiet           = False
-log             = True
-jobs            = 4
-cflags_heritage = True
+template = template-base
+compiler = gnu
+cflags   = $CSHARED_GNU $DEBUG_GNU
+lflags   = $LSHARED $DEBUG_GNU
+preproc  = -D_ASCII_SUPPORTED -D_UCS4_SUPPORTED -D_R16P
 
 [template-static-gnu-debug]
-compiler        = gnu
-cflags          = $CSTATIC_GNU $DEBUG_GNU
-lflags          = $DEBUG_GNU
-preproc         = -D_ASCII_SUPPORTED -D_UCS4_SUPPORTED
-mod_dir         = ./mod/
-obj_dir         = ./obj/
-src             = ./src/
-colors          = True
-quiet           = False
-log             = True
-jobs            = 4
-cflags_heritage = True
+template = template-base
+compiler = gnu
+cflags   = $CSTATIC_GNU $DEBUG_GNU
+lflags   = $DEBUG_GNU
+preproc  = -D_ASCII_SUPPORTED -D_UCS4_SUPPORTED -D_R16P
 
 [template-shared-intel]
-compiler        = intel
-cflags          = $CSHARED_INT $OPTIMIZE
-lflags          = $LSHARED $OPTIMIZE
-mod_dir         = ./mod/
-obj_dir         = ./obj/
-src             = ./src/
-colors          = True
-quiet           = False
-log             = True
-jobs            = 4
-cflags_heritage = True
+template = template-base
+compiler = intel
+cflags   = $CSHARED_INT $OPTIMIZE
+lflags   = $LSHARED $OPTIMIZE
+preproc  = -D_R16P
 
 [template-static-intel]
-compiler        = intel
-cflags          = $CSTATIC_INT $OPTIMIZE
-lflags          = $OPTIMIZE
-mod_dir         = ./mod/
-obj_dir         = ./obj/
-src             = ./src/
-colors          = True
-quiet           = False
-log             = True
-jobs            = 4
-cflags_heritage = True
+template = template-base
+compiler = intel
+cflags   = $CSTATIC_INT $OPTIMIZE
+lflags   = $OPTIMIZE
+preproc  = -D_R16P
 
 [template-shared-intel-debug]
-compiler        = intel
-cflags          = $CSHARED_INT $DEBUG_INT
-lflags          = $LSHARED $DEBUG_INT
-mod_dir         = ./mod/
-obj_dir         = ./obj/
-src             = ./src/
-colors          = True
-quiet           = False
-log             = True
-jobs            = 4
-cflags_heritage = True
+template = template-base
+compiler = intel
+cflags   = $CSHARED_INT $DEBUG_INT
+lflags   = $LSHARED $DEBUG_INT
+preproc  = -D_R16P
 
 [template-static-intel-debug]
-compiler        = intel
-cflags          = $CSTATIC_INT $DEBUG_INT
-lflags          = $DEBUG_INT
-mod_dir         = ./mod/
-obj_dir         = ./obj/
-src             = ./src/
-colors          = True
-quiet           = False
-log             = True
-jobs            = 4
-cflags_heritage = True
+template = template-base
+compiler = intel
+cflags   = $CSTATIC_INT $DEBUG_INT
+lflags   = $DEBUG_INT
+preproc  = -D_R16P
 
 [template-shared-ibm]
-compiler        = ibm
-cflags          = $CSHARED_IBM $OPTIMIZE
-lflags          = $LSHARED $OPTIMIZE
-mod_dir         = ./mod/
-obj_dir         = ./obj/
-src             = ./src/
-colors          = True
-quiet           = False
-log             = True
-jobs            = 4
-cflags_heritage = True
+template = template-base
+compiler = ibm
+cflags   = $CSHARED_IBM $OPTIMIZE
+lflags   = $LSHARED $OPTIMIZE
+preproc  = -D_R16P
 
 [template-static-ibm]
-compiler        = ibm
-cflags          = $CSTATIC_IBM $OPTIMIZE
-lflags          = $OPTIMIZE
-mod_dir         = ./mod/
-obj_dir         = ./obj/
-src             = ./src/
-colors          = True
-quiet           = False
-log             = True
-jobs            = 4
-cflags_heritage = True
+template = template-base
+compiler = ibm
+cflags   = $CSTATIC_IBM $OPTIMIZE
+lflags   = $OPTIMIZE
+preproc  = -D_R16P
 
 [template-shared-ibm-debug]
-compiler        = ibm
-cflags          = $CSHARED_IBM $DEBUG_IBM
-lflags          = $LSHARED $DEBUG_IBM
-mod_dir         = ./mod/
-obj_dir         = ./obj/
-src             = ./src/
-colors          = True
-quiet           = False
-log             = True
-jobs            = 4
-cflags_heritage = True
+template = template-base
+compiler = ibm
+cflags   = $CSHARED_IBM $DEBUG_IBM
+lflags   = $LSHARED $DEBUG_IBM
+preproc  = -D_R16P
 
 [template-static-ibm-debug]
-compiler        = ibm
-cflags          = $CSTATIC_IBM $DEBUG_IBM
-lflags          = $DEBUG_IBM
-mod_dir         = ./mod/
-obj_dir         = ./obj/
-src             = ./src/
-colors          = True
-quiet           = False
-log             = True
-jobs            = 4
-cflags_heritage = True
+template = template-base
+compiler = ibm
+cflags   = $CSTATIC_IBM $DEBUG_IBM
+lflags   = $DEBUG_IBM
+preproc  = -D_R16P
 
 [rule-makedoc]
 help   = Build documentation from source files
