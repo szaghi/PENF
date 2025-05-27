@@ -87,13 +87,11 @@ jobs:
         ls *.tar.gz
 
     - name: Deploy Asset
-      if: ${{ !env.ACT }}
-      uses: "marvinpinto/action-automatic-releases@latest"
+      uses: softprops/action-gh-release@v1
       with:
-        repo_token: "${{ secrets.GITHUB_TOKEN }}"
-        automatic_release_tag: ${{ env.RELEASE }}
-        prerelease: false
-        title: ${{ env.RELEASE }}
         files: |
           *.tar.gz
           ./scripts/install.sh
+        tag_name: latest
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
