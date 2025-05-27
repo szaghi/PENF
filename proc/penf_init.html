@@ -12,14 +12,29 @@
 
     <title>penf_init &ndash; PENF</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link href="../css/pygments.css" rel="stylesheet">
-    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Font Awesome -->
+    <link href="../css/fontawesome.min.css" rel="stylesheet">
+    <link href="../css/brands.min.css" rel="stylesheet">
+    <link href="../css/regular.min.css" rel="stylesheet">
+    <link href="../css/solid.min.css" rel="stylesheet">
+    <link href="../css/v4-font-face.min.css" rel="stylesheet">
+    <link href="../css/v4-shims.min.css" rel="stylesheet">
+    <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } }
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async
+            integrity="sha256-DViIOMYdwlM/axqoGDPeUyf0urLoHMN4QACBKyB58Uw=" crossorigin="anonymous"></script>
+    <!-- Other scripts and stylesheets -->
     <link href="../css/local.css" rel="stylesheet">
-      <link  href="../tipuesearch/tipuesearch.css" rel="stylesheet">
-
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <link href="../css/pygments.css" rel="stylesheet">
     <script src="../js/svg-pan-zoom.min.js"></script>
   </head>
 
@@ -73,7 +88,7 @@
 
             <li class="list-inline-item" id="statements"><i class="fa fa-list-ol"></i>
               <a data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true"
-                 title=" 0.2% of total for procedures.">4 statements</a>
+                 title=" 0.1% of total for procedures.">4 statements</a>
             </li>
 
             <li class="list-inline-item" id="source-file">
@@ -94,9 +109,11 @@
     </div>
   </div>
   <script>
-    $(function () {
-    $('[data-bs-toggle="tooltip"]').tooltip()
-    })
+    // Enable Bootstrap tooltips
+    (function () {
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    })();
   </script>
 
   </div>
@@ -308,33 +325,33 @@ implementation in a submodule of an interface in a parent module.
 <path fill="none" stroke="#000000" d="M213.7,-47.81C226.22,-45.45 240.6,-42.72 253.6,-40.26"/>
 <polygon fill="#000000" stroke="#000000" points="254.49,-43.66 263.67,-38.36 253.19,-36.78 254.49,-43.66"/>
 </g>
-<!-- program~volatile_doctest~38 -->
+<!-- program~volatile_doctest~85 -->
 <g id="proc~~penf_init~~CalledByGraph_node3" class="node">
-<title>program~volatile_doctest~38</title>
-<g id="a_proc~~penf_init~~CalledByGraph_node3"><a xlink:href="../program/volatile_doctest~38.html" xlink:title="volatile_doctest">
+<title>program~volatile_doctest~85</title>
+<g id="a_proc~~penf_init~~CalledByGraph_node3"><a xlink:href="../program/volatile_doctest~85.html" xlink:title="volatile_doctest">
 <polygon fill="#f0ad4e" stroke="#f0ad4e" points="228,-24 132,-24 132,0 228,0 228,-24"/>
 <text text-anchor="middle" x="180" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">volatile_doctest</text>
 </a>
 </g>
 </g>
-<!-- program~volatile_doctest~38&#45;&gt;proc~penf_init -->
+<!-- program~volatile_doctest~85&#45;&gt;proc~penf_init -->
 <g id="proc~~penf_init~~CalledByGraph_edge2" class="edge">
-<title>program~volatile_doctest~38&#45;&gt;proc~penf_init</title>
+<title>program~volatile_doctest~85&#45;&gt;proc~penf_init</title>
 <path fill="none" stroke="#000000" d="M228.07,-20.91C236.73,-22.54 245.66,-24.23 254.01,-25.81"/>
 <polygon fill="#000000" stroke="#000000" points="253.36,-29.25 263.84,-27.67 254.66,-22.37 253.36,-29.25"/>
 </g>
-<!-- program~volatile_doctest~20 -->
+<!-- program~volatile_doctest~106 -->
 <g id="proc~~penf_init~~CalledByGraph_node4" class="node">
-<title>program~volatile_doctest~20</title>
-<g id="a_proc~~penf_init~~CalledByGraph_node4"><a xlink:href="../program/volatile_doctest~20.html" xlink:title="volatile_doctest">
+<title>program~volatile_doctest~106</title>
+<g id="a_proc~~penf_init~~CalledByGraph_node4"><a xlink:href="../program/volatile_doctest~106.html" xlink:title="volatile_doctest">
 <polygon fill="#f0ad4e" stroke="#f0ad4e" points="96,-66 0,-66 0,-42 96,-42 96,-66"/>
 <text text-anchor="middle" x="48" y="-51.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">volatile_doctest</text>
 </a>
 </g>
 </g>
-<!-- program~volatile_doctest~20&#45;&gt;proc~penf_print -->
+<!-- program~volatile_doctest~106&#45;&gt;proc~penf_print -->
 <g id="proc~~penf_init~~CalledByGraph_edge3" class="edge">
-<title>program~volatile_doctest~20&#45;&gt;proc~penf_print</title>
+<title>program~volatile_doctest~106&#45;&gt;proc~penf_print</title>
 <path fill="none" stroke="#000000" d="M96.3,-54C109.23,-54 123.18,-54 135.86,-54"/>
 <polygon fill="#000000" stroke="#000000" points="136.17,-57.5 146.17,-54 136.17,-50.5 136.17,-57.5"/>
 </g>
@@ -462,7 +479,7 @@ implementation in a submodule of an interface in a parent module.
           <div class="col">
             <p>
               PENF
- was developed by Stefano Zaghi<br>              &copy; 2024 
+ was developed by Stefano Zaghi<br>              &copy; 2025 
 </p>
           </div>
           <div class="col">
@@ -475,27 +492,5 @@ implementation in a submodule of an interface in a parent module.
         <br>
       </div> <!-- /container -->
     </footer>
-
-    <!-- Bootstrap core JavaScript -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>    
-
-    <!-- MathJax JavaScript
-             ================================================== -->
-             <!-- Placed at the end of the document so the pages load faster -->
-        <script type="text/x-mathjax-config">
-          MathJax.Hub.Config({
-          TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } },
-          jax: ['input/TeX','input/MathML','output/HTML-CSS'],
-          extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']
-          });
-        </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-          <script src="../tipuesearch/tipuesearch_content.js"></script>
-          <script src="../tipuesearch/tipuesearch_set.js"></script>
-          <script src="../tipuesearch/tipuesearch.js"></script>
-
   </body>
 </html>

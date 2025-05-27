@@ -12,14 +12,29 @@
 
     <title>digit_I2 &ndash; PENF</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link href="../css/pygments.css" rel="stylesheet">
-    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Font Awesome -->
+    <link href="../css/fontawesome.min.css" rel="stylesheet">
+    <link href="../css/brands.min.css" rel="stylesheet">
+    <link href="../css/regular.min.css" rel="stylesheet">
+    <link href="../css/solid.min.css" rel="stylesheet">
+    <link href="../css/v4-font-face.min.css" rel="stylesheet">
+    <link href="../css/v4-shims.min.css" rel="stylesheet">
+    <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } }
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async
+            integrity="sha256-DViIOMYdwlM/axqoGDPeUyf0urLoHMN4QACBKyB58Uw=" crossorigin="anonymous"></script>
+    <!-- Other scripts and stylesheets -->
     <link href="../css/local.css" rel="stylesheet">
-      <link  href="../tipuesearch/tipuesearch.css" rel="stylesheet">
-
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <link href="../css/pygments.css" rel="stylesheet">
     <script src="../js/svg-pan-zoom.min.js"></script>
   </head>
 
@@ -73,7 +88,7 @@
 
             <li class="list-inline-item" id="statements"><i class="fa fa-list-ol"></i>
               <a data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true"
-                 title=" 0.3% of total for procedures.">7 statements</a>
+                 title=" 0.2% of total for procedures.">7 statements</a>
             </li>
 
             <li class="list-inline-item" id="source-file">
@@ -94,9 +109,11 @@
     </div>
   </div>
   <script>
-    $(function () {
-    $('[data-bs-toggle="tooltip"]').tooltip()
-    })
+    // Enable Bootstrap tooltips
+    (function () {
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    })();
   </script>
 
   </div>
@@ -161,7 +178,7 @@
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-n~3"></span>
+              <span class="anchor" id="variable-n~50"></span>
               integer(kind=I2P),
             </td>
 <td>intent(in)</td>
@@ -222,63 +239,63 @@
 <path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M186.4,-75C194.39,-75 203.31,-75 211.82,-75"/>
 <polygon fill="#000000" stroke="#000000" points="211.92,-78.5 221.92,-75 211.92,-71.5 211.92,-78.5"/>
 </g>
-<!-- program~volatile_doctest~104 -->
+<!-- program~volatile_doctest~10 -->
 <g id="proc~~digit_i2~~CalledByGraph_node3" class="node">
-<title>program~volatile_doctest~104</title>
-<g id="a_proc~~digit_i2~~CalledByGraph_node3"><a xlink:href="../program/volatile_doctest~104.html" xlink:title="volatile_doctest">
+<title>program~volatile_doctest~10</title>
+<g id="a_proc~~digit_i2~~CalledByGraph_node3"><a xlink:href="../program/volatile_doctest~10.html" xlink:title="volatile_doctest">
 <polygon fill="#f0ad4e" stroke="#f0ad4e" points="96,-150 0,-150 0,-126 96,-126 96,-150"/>
 <text text-anchor="middle" x="48" y="-135.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">volatile_doctest</text>
 </a>
 </g>
 </g>
-<!-- program~volatile_doctest~104&#45;&gt;interface~digit -->
+<!-- program~volatile_doctest~10&#45;&gt;interface~digit -->
 <g id="proc~~digit_i2~~CalledByGraph_edge2" class="edge">
-<title>program~volatile_doctest~104&#45;&gt;interface~digit</title>
+<title>program~volatile_doctest~10&#45;&gt;interface~digit</title>
 <path fill="none" stroke="#000000" d="M78.22,-125.9C84.2,-123.16 90.38,-120.13 96,-117 108.82,-109.87 122.38,-100.86 133.54,-93.02"/>
 <polygon fill="#000000" stroke="#000000" points="135.82,-95.7 141.92,-87.04 131.75,-90 135.82,-95.7"/>
 </g>
-<!-- program~volatile_doctest~122 -->
+<!-- program~volatile_doctest~139 -->
 <g id="proc~~digit_i2~~CalledByGraph_node4" class="node">
-<title>program~volatile_doctest~122</title>
-<g id="a_proc~~digit_i2~~CalledByGraph_node4"><a xlink:href="../program/volatile_doctest~122.html" xlink:title="volatile_doctest">
+<title>program~volatile_doctest~139</title>
+<g id="a_proc~~digit_i2~~CalledByGraph_node4"><a xlink:href="../program/volatile_doctest~139.html" xlink:title="volatile_doctest">
 <polygon fill="#f0ad4e" stroke="#f0ad4e" points="96,-108 0,-108 0,-84 96,-84 96,-108"/>
 <text text-anchor="middle" x="48" y="-93.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">volatile_doctest</text>
 </a>
 </g>
 </g>
-<!-- program~volatile_doctest~122&#45;&gt;interface~digit -->
+<!-- program~volatile_doctest~139&#45;&gt;interface~digit -->
 <g id="proc~~digit_i2~~CalledByGraph_edge3" class="edge">
-<title>program~volatile_doctest~122&#45;&gt;interface~digit</title>
+<title>program~volatile_doctest~139&#45;&gt;interface~digit</title>
 <path fill="none" stroke="#000000" d="M96.18,-86.91C104.75,-85.26 113.57,-83.56 121.77,-81.98"/>
 <polygon fill="#000000" stroke="#000000" points="122.6,-85.38 131.76,-80.06 121.28,-78.51 122.6,-85.38"/>
 </g>
-<!-- program~volatile_doctest~195 -->
+<!-- program~volatile_doctest~196 -->
 <g id="proc~~digit_i2~~CalledByGraph_node5" class="node">
-<title>program~volatile_doctest~195</title>
-<g id="a_proc~~digit_i2~~CalledByGraph_node5"><a xlink:href="../program/volatile_doctest~195.html" xlink:title="volatile_doctest">
+<title>program~volatile_doctest~196</title>
+<g id="a_proc~~digit_i2~~CalledByGraph_node5"><a xlink:href="../program/volatile_doctest~196.html" xlink:title="volatile_doctest">
 <polygon fill="#f0ad4e" stroke="#f0ad4e" points="96,-66 0,-66 0,-42 96,-42 96,-66"/>
 <text text-anchor="middle" x="48" y="-51.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">volatile_doctest</text>
 </a>
 </g>
 </g>
-<!-- program~volatile_doctest~195&#45;&gt;interface~digit -->
+<!-- program~volatile_doctest~196&#45;&gt;interface~digit -->
 <g id="proc~~digit_i2~~CalledByGraph_edge4" class="edge">
-<title>program~volatile_doctest~195&#45;&gt;interface~digit</title>
+<title>program~volatile_doctest~196&#45;&gt;interface~digit</title>
 <path fill="none" stroke="#000000" d="M96.18,-63.09C104.75,-64.74 113.57,-66.44 121.77,-68.02"/>
 <polygon fill="#000000" stroke="#000000" points="121.28,-71.49 131.76,-69.94 122.6,-64.62 121.28,-71.49"/>
 </g>
-<!-- program~volatile_doctest~60 -->
+<!-- program~volatile_doctest~97 -->
 <g id="proc~~digit_i2~~CalledByGraph_node6" class="node">
-<title>program~volatile_doctest~60</title>
-<g id="a_proc~~digit_i2~~CalledByGraph_node6"><a xlink:href="../program/volatile_doctest~60.html" xlink:title="volatile_doctest">
+<title>program~volatile_doctest~97</title>
+<g id="a_proc~~digit_i2~~CalledByGraph_node6"><a xlink:href="../program/volatile_doctest~97.html" xlink:title="volatile_doctest">
 <polygon fill="#f0ad4e" stroke="#f0ad4e" points="96,-24 0,-24 0,0 96,0 96,-24"/>
 <text text-anchor="middle" x="48" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">volatile_doctest</text>
 </a>
 </g>
 </g>
-<!-- program~volatile_doctest~60&#45;&gt;interface~digit -->
+<!-- program~volatile_doctest~97&#45;&gt;interface~digit -->
 <g id="proc~~digit_i2~~CalledByGraph_edge5" class="edge">
-<title>program~volatile_doctest~60&#45;&gt;interface~digit</title>
+<title>program~volatile_doctest~97&#45;&gt;interface~digit</title>
 <path fill="none" stroke="#000000" d="M78.22,-24.1C84.2,-26.84 90.38,-29.87 96,-33 108.82,-40.13 122.38,-49.14 133.54,-56.98"/>
 <polygon fill="#000000" stroke="#000000" points="131.75,-60 141.92,-62.96 135.82,-54.3 131.75,-60"/>
 </g>
@@ -408,7 +425,7 @@ implementation in a submodule of an interface in a parent module.
           <div class="col">
             <p>
               PENF
- was developed by Stefano Zaghi<br>              &copy; 2024 
+ was developed by Stefano Zaghi<br>              &copy; 2025 
 </p>
           </div>
           <div class="col">
@@ -421,27 +438,5 @@ implementation in a submodule of an interface in a parent module.
         <br>
       </div> <!-- /container -->
     </footer>
-
-    <!-- Bootstrap core JavaScript -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>    
-
-    <!-- MathJax JavaScript
-             ================================================== -->
-             <!-- Placed at the end of the document so the pages load faster -->
-        <script type="text/x-mathjax-config">
-          MathJax.Hub.Config({
-          TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } },
-          jax: ['input/TeX','input/MathML','output/HTML-CSS'],
-          extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']
-          });
-        </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-          <script src="../tipuesearch/tipuesearch_content.js"></script>
-          <script src="../tipuesearch/tipuesearch_set.js"></script>
-          <script src="../tipuesearch/tipuesearch.js"></script>
-
   </body>
 </html>
