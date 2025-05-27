@@ -67,10 +67,8 @@ jobs:
         FoBiS.py rule -ex makecoverage
 
     - name: Upload Coverage to CODECOV
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
       run: |
-         bash <(curl -s https://codecov.io/bash)
+         bash <(curl -s https://codecov.io/bash) -t ${{ secrets.CODECOV_TOKEN }}
 
   # deploy:
   #   runs-on: ubuntu-latest
