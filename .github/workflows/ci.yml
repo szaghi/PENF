@@ -3,7 +3,7 @@ name: CI
 on: push
 
 jobs:
-  test:
+  test-deploy:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -68,13 +68,6 @@ jobs:
     - name: Upload Coverage to CODECOV
       run: |
          bash <(curl -s https://codecov.io/bash) -t ${{ secrets.CODECOV_TOKEN }}
-
-  deploy:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-
-    steps:
 
     - name: Make doc
       run: |
