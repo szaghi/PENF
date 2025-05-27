@@ -4,7 +4,6 @@ on: push
 
 jobs:
   test:
-
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -70,36 +69,38 @@ jobs:
       run: |
          bash <(curl -s https://codecov.io/bash) -t ${{ secrets.CODECOV_TOKEN }}
 
-  # deploy:
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     contents: write
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
-  #   - name: Make doc
-  #     run: |
-  #       FoBiS.py rule -ex makedoc
+    steps:
 
-  #   - name: Push doc to GH Pages
-  #     if: ${{ !env.ACT }}
-  #     uses: JamesIves/github-pages-deploy-action@v4
-  #     with:
-  #       branch: gh-pages
-  #       folder: doc/html
+    - name: Make doc
+      run: |
+        FoBiS.py rule -ex makedoc
 
-  #   - name: Make TAR
-  #     run: |
-  #       echo "release version:" ${{ env.RELEASE }}
-  #       FoBiS.py rule -ex maketar
-  #       ls *.tar.gz
+    - name: Push doc to GH Pages
+      if: ${{ !env.ACT }}
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        branch: gh-pages
+        folder: doc/html
 
-  #   - name: Deploy Asset
-  #     if: ${{ !env.ACT }}
-  #     uses: "marvinpinto/action-automatic-releases@latest"
-  #     with:
-  #       repo_token: "${{ secrets.GITHUB_TOKEN }}"
-  #       automatic_release_tag: ${{ env.RELEASE }}
-  #       prerelease: false
-  #       title: ${{ env.RELEASE }}
-  #       files: |
-  #         *.tar.gz
-  #         ./scripts/install.sh
+    - name: Make TAR
+      run: |
+        echo "release version:" ${{ env.RELEASE }}
+        FoBiS.py rule -ex maketar
+        ls *.tar.gz
+
+    - name: Deploy Asset
+      if: ${{ !env.ACT }}
+      uses: "marvinpinto/action-automatic-releases@latest"
+      with:
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        automatic_release_tag: ${{ env.RELEASE }}
+        prerelease: false
+        title: ${{ env.RELEASE }}
+        files: |
+          *.tar.gz
+          ./scripts/install.sh
