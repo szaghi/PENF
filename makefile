@@ -69,10 +69,17 @@ $(DOBJ)penf_b_size.o: src/lib/penf_b_size.F90 \
 	@echo $(COTEXT)
 	@$(FC) $(OPTSC)  $< -o $@
 
+$(DOBJ)penf_allocatable_memory.o: src/lib/penf_allocatable_memory.F90 \
+	$(DOBJ)penf_global_parameters_variables.o \
+	$(DOBJ)penf_stringify.o
+	@echo $(COTEXT)
+	@$(FC) $(OPTSC)  $< -o $@
+
 $(DOBJ)penf.o: src/lib/penf.F90 \
 	$(DOBJ)penf_global_parameters_variables.o \
 	$(DOBJ)penf_b_size.o \
-	$(DOBJ)penf_stringify.o
+	$(DOBJ)penf_stringify.o \
+	$(DOBJ)penf_allocatable_memory.o
 	@echo $(COTEXT)
 	@$(FC) $(OPTSC)  $< -o $@
 
