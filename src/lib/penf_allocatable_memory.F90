@@ -2,10 +2,11 @@
 
 module penf_allocatable_memory
 !< PENF allocatable memory facility.
+!< Wrap allocatable arrays routines providing extra information about memory handling.
 
+use, intrinsic :: iso_fortran_env, only : stdout=>output_unit
 use penf_global_parameters_variables
 use penf_stringify
-! use, intrinsic :: iso_c_binding
 
 implicit none
 save
@@ -130,40 +131,45 @@ endinterface assign_allocatable
 contains
    ! allocate variable
    ! R16P
-   subroutine alloc_var_R16P_1D(var, ulb, msg, verbose)
+   subroutine alloc_var_R16P_1D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind R16P, rank 1).
    !<
    !<```fortran
    !< use penf
    !< real(R16P), allocatable :: a(:)
    !< integer(I4P)            :: ulb(2)=[1,1]
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
    real(R16P), allocatable, intent(inout)        :: var(:)              !< Varibale to be allocate on CPU.
-   integer(I4P),           intent(in)            :: ulb(2)              !< Upper/lower bounds of variable.
-   character(*),           intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                intent(in), optional  :: verbose             !< Flag to activate verbose mode.
+   integer(I4P),            intent(in)           :: ulb(2)              !< Upper/lower bounds of variable.
+   integer(I4P),            intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),            intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                 intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                  :: file_unit_          !< File unit for verbose output, local var.
    character(:), allocatable                     :: msg_                !< Message to be printed in verbose mode, local var.
    logical                                       :: verbose_            !< Flag to activate verbose mode, local var.
    integer(I8P)                                  :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_, '(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1):ulb(2)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_R16P_1D
 
-   subroutine alloc_var_R16P_2D(var, ulb, msg, verbose)
+   subroutine alloc_var_R16P_2D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind R16P, rank 2).
    !<
    !<```fortran
@@ -172,33 +178,38 @@ contains
    !< integer(I4P)            :: ulb(2,2)=reshape([1,1, &
    !<                                              1,2],&
    !<                                             [2,2])
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
    real(R16P), allocatable, intent(inout)        :: var(:,:)            !< Varibale to be allocate on CPU.
-   integer(I4P),           intent(in)            :: ulb(2,2)            !< Upper/lower bounds of variable.
-   character(*),           intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                intent(in), optional  :: verbose             !< Flag to activate verbose mode.
+   integer(I4P),            intent(in)           :: ulb(2,2)            !< Upper/lower bounds of variable.
+   integer(I4P),            intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),            intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                 intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                  :: file_unit_          !< File unit for verbose output, local var.
    character(:), allocatable                     :: msg_                !< Message to be printed in verbose mode, local var.
    logical                                       :: verbose_            !< Flag to activate verbose mode, local var.
    integer(I8P)                                  :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1,1):ulb(2,1), ulb(1,2):ulb(2,2)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_R16P_2D
 
-   subroutine alloc_var_R16P_3D(var, ulb, msg, verbose)
+   subroutine alloc_var_R16P_3D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind R16P, rank 3).
    !<
    !<```fortran
@@ -208,33 +219,38 @@ contains
    !<                                              1,2, &
    !<                                              1,3],&
    !<                                             [2,3])
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
    real(R16P), allocatable, intent(inout)        :: var(:,:,:)          !< Varibale to be allocate on CPU.
-   integer(I4P),           intent(in)            :: ulb(2,3)            !< Upper/lower bounds of variable.
-   character(*),           intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                intent(in), optional  :: verbose             !< Flag to activate verbose mode.
+   integer(I4P),            intent(in)           :: ulb(2,3)            !< Upper/lower bounds of variable.
+   integer(I4P),            intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),            intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                 intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                  :: file_unit_          !< File unit for verbose output, local var.
    character(:), allocatable                     :: msg_                !< Message to be printed in verbose mode, local var.
    logical                                       :: verbose_            !< Flag to activate verbose mode, local var.
    integer(I8P)                                  :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1,1):ulb(2,1), ulb(1,2):ulb(2,2), ulb(1,3):ulb(2,3)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_R16P_3D
 
-   subroutine alloc_var_R16P_4D(var, ulb, msg, verbose)
+   subroutine alloc_var_R16P_4D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind R16P, rank 4).
    !<
    !<```fortran
@@ -245,33 +261,38 @@ contains
    !<                                              1,3, &
    !<                                              1,4],&
    !<                                             [2,4])
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
    real(R16P), allocatable, intent(inout)        :: var(:,:,:,:)        !< Varibale to be allocate on CPU.
-   integer(I4P),           intent(in)            :: ulb(2,4)            !< Upper/lower bounds of variable.
-   character(*),           intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                intent(in), optional  :: verbose             !< Flag to activate verbose mode.
+   integer(I4P),            intent(in)           :: ulb(2,4)            !< Upper/lower bounds of variable.
+   integer(I4P),            intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),            intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                 intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                  :: file_unit_          !< File unit for verbose output, local var.
    character(:), allocatable                     :: msg_                !< Message to be printed in verbose mode, local var.
    logical                                       :: verbose_            !< Flag to activate verbose mode, local var.
    integer(I8P)                                  :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1,1):ulb(2,1), ulb(1,2):ulb(2,2), ulb(1,3):ulb(2,3), ulb(1,4):ulb(2,4)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_R16P_4D
 
-   subroutine alloc_var_R16P_5D(var, ulb, msg, verbose)
+   subroutine alloc_var_R16P_5D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind R16P, rank 5).
    !<
    !<```fortran
@@ -283,33 +304,38 @@ contains
    !<                                              1,4, &
    !<                                              1,5],&
    !<                                             [2,5])
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
    real(R16P), allocatable, intent(inout)        :: var(:,:,:,:,:)      !< Varibale to be allocate on CPU.
-   integer(I4P),           intent(in)            :: ulb(2,5)            !< Upper/lower bounds of variable.
-   character(*),           intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                intent(in), optional  :: verbose             !< Flag to activate verbose mode.
+   integer(I4P),            intent(in)           :: ulb(2,5)            !< Upper/lower bounds of variable.
+   integer(I4P),            intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),            intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                 intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                  :: file_unit_          !< File unit for verbose output, local var.
    character(:), allocatable                     :: msg_                !< Message to be printed in verbose mode, local var.
    logical                                       :: verbose_            !< Flag to activate verbose mode, local var.
    integer(I8P)                                  :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1,1):ulb(2,1), ulb(1,2):ulb(2,2), ulb(1,3):ulb(2,3), ulb(1,4):ulb(2,4), ulb(1,5):ulb(2,5)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_R16P_5D
 
-   subroutine alloc_var_R16P_6D(var, ulb, msg, verbose)
+   subroutine alloc_var_R16P_6D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind R16P, rank 6).
    !<
    !<```fortran
@@ -322,33 +348,38 @@ contains
    !<                                              1,5, &
    !<                                              1,6],&
    !<                                             [2,6])
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
    real(R16P), allocatable, intent(inout)        :: var(:,:,:,:,:,:)    !< Varibale to be allocate on CPU.
-   integer(I4P),           intent(in)            :: ulb(2,6)            !< Upper/lower bounds of variable.
-   character(*),           intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                intent(in), optional  :: verbose             !< Flag to activate verbose mode.
+   integer(I4P),            intent(in)           :: ulb(2,6)            !< Upper/lower bounds of variable.
+   integer(I4P),            intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),            intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                 intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                  :: file_unit_          !< File unit for verbose output, local var.
    character(:), allocatable                     :: msg_                !< Message to be printed in verbose mode, local var.
    logical                                       :: verbose_            !< Flag to activate verbose mode, local var.
    integer(I8P)                                  :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1,1):ulb(2,1), ulb(1,2):ulb(2,2), ulb(1,3):ulb(2,3), ulb(1,4):ulb(2,4), ulb(1,5):ulb(2,5), ulb(1,6):ulb(2,6)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_R16P_6D
 
-   subroutine alloc_var_R16P_7D(var, ulb, msg, verbose)
+   subroutine alloc_var_R16P_7D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind R16P, rank 6).
    !<
    !<```fortran
@@ -362,68 +393,78 @@ contains
    !<                                              1,6, &
    !<                                              1,7],&
    !<                                             [2,7])
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
    real(R16P), allocatable, intent(inout)        :: var(:,:,:,:,:,:,:)  !< Varibale to be allocate on CPU.
-   integer(I4P),           intent(in)            :: ulb(2,7)            !< Upper/lower bounds of variable.
-   character(*),           intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                intent(in), optional  :: verbose             !< Flag to activate verbose mode.
+   integer(I4P),            intent(in)           :: ulb(2,7)            !< Upper/lower bounds of variable.
+   integer(I4P),            intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),            intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                 intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                  :: file_unit_          !< File unit for verbose output, local var.
    character(:), allocatable                     :: msg_                !< Message to be printed in verbose mode, local var.
    logical                                       :: verbose_            !< Flag to activate verbose mode, local var.
    integer(I8P)                                  :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1,1):ulb(2,1), ulb(1,2):ulb(2,2), ulb(1,3):ulb(2,3), ulb(1,4):ulb(2,4), ulb(1,5):ulb(2,5), ulb(1,6):ulb(2,6), &
                 ulb(1,7):ulb(2,7)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_R16P_7D
 
    ! R8P
-   subroutine alloc_var_R8P_1D(var, ulb, msg, verbose)
+   subroutine alloc_var_R8P_1D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind R8P, rank 1).
    !<
    !<```fortran
    !< use penf
    !< real(R8P), allocatable :: a(:)
    !< integer(I4P)           :: ulb(2)=[1,1]
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   real(R8P), allocatable, intent(inout)         :: var(:)              !< Varibale to be allocate on CPU.
-   integer(I4P),           intent(in)            :: ulb(2)              !< Upper/lower bounds of variable.
-   character(*),           intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                intent(in), optional  :: verbose             !< Flag to activate verbose mode.
-   character(:), allocatable                     :: msg_                !< Message to be printed in verbose mode, local var.
-   logical                                       :: verbose_            !< Flag to activate verbose mode, local var.
-   integer(I8P)                                  :: mem_free, mem_total !< CPU memory.
+   real(R8P), allocatable, intent(inout)        :: var(:)              !< Varibale to be allocate on CPU.
+   integer(I4P),           intent(in)           :: ulb(2)              !< Upper/lower bounds of variable.
+   integer(I4P),           intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),           intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                 :: file_unit_          !< File unit for verbose output, local var.
+   character(:), allocatable                    :: msg_                !< Message to be printed in verbose mode, local var.
+   logical                                      :: verbose_            !< Flag to activate verbose mode, local var.
+   integer(I8P)                                 :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1):ulb(2)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_R8P_1D
 
-   subroutine alloc_var_R8P_2D(var, ulb, msg, verbose)
+   subroutine alloc_var_R8P_2D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind R8P, rank 2).
    !<
    !<```fortran
@@ -432,33 +473,38 @@ contains
    !< integer(I4P)           :: ulb(2,2)=reshape([1,1, &
    !<                                             1,2],&
    !<                                            [2,2])
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   real(R8P), allocatable, intent(inout)         :: var(:,:)            !< Varibale to be allocate on CPU.
-   integer(I4P),           intent(in)            :: ulb(2,2)            !< Upper/lower bounds of variable.
-   character(*),           intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                intent(in), optional  :: verbose             !< Flag to activate verbose mode.
-   character(:), allocatable                     :: msg_                !< Message to be printed in verbose mode, local var.
-   logical                                       :: verbose_            !< Flag to activate verbose mode, local var.
-   integer(I8P)                                  :: mem_free, mem_total !< CPU memory.
+   real(R8P), allocatable, intent(inout)        :: var(:,:)            !< Varibale to be allocate on CPU.
+   integer(I4P),           intent(in)           :: ulb(2,2)            !< Upper/lower bounds of variable.
+   integer(I4P),           intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),           intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                 :: file_unit_          !< File unit for verbose output, local var.
+   character(:), allocatable                    :: msg_                !< Message to be printed in verbose mode, local var.
+   logical                                      :: verbose_            !< Flag to activate verbose mode, local var.
+   integer(I8P)                                 :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1,1):ulb(2,1), ulb(1,2):ulb(2,2)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_R8P_2D
 
-   subroutine alloc_var_R8P_3D(var, ulb, msg, verbose)
+   subroutine alloc_var_R8P_3D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind R8P, rank 3).
    !<
    !<```fortran
@@ -468,33 +514,38 @@ contains
    !<                                             1,2, &
    !<                                             1,3],&
    !<                                            [2,3])
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   real(R8P), allocatable, intent(inout)         :: var(:,:,:)          !< Varibale to be allocate on CPU.
-   integer(I4P),           intent(in)            :: ulb(2,3)            !< Upper/lower bounds of variable.
-   character(*),           intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                intent(in), optional  :: verbose             !< Flag to activate verbose mode.
-   character(:), allocatable                     :: msg_                !< Message to be printed in verbose mode, local var.
-   logical                                       :: verbose_            !< Flag to activate verbose mode, local var.
-   integer(I8P)                                  :: mem_free, mem_total !< CPU memory.
+   real(R8P), allocatable, intent(inout)        :: var(:,:,:)          !< Varibale to be allocate on CPU.
+   integer(I4P),           intent(in)           :: ulb(2,3)            !< Upper/lower bounds of variable.
+   integer(I4P),           intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),           intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                 :: file_unit_          !< File unit for verbose output, local var.
+   character(:), allocatable                    :: msg_                !< Message to be printed in verbose mode, local var.
+   logical                                      :: verbose_            !< Flag to activate verbose mode, local var.
+   integer(I8P)                                 :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1,1):ulb(2,1), ulb(1,2):ulb(2,2), ulb(1,3):ulb(2,3)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_R8P_3D
 
-   subroutine alloc_var_R8P_4D(var, ulb, msg, verbose)
+   subroutine alloc_var_R8P_4D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind R8P, rank 4).
    !<
    !<```fortran
@@ -505,33 +556,38 @@ contains
    !<                                             1,3, &
    !<                                             1,4],&
    !<                                            [2,4])
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   real(R8P), allocatable, intent(inout)         :: var(:,:,:,:)        !< Varibale to be allocate on CPU.
-   integer(I4P),           intent(in)            :: ulb(2,4)            !< Upper/lower bounds of variable.
-   character(*),           intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                intent(in), optional  :: verbose             !< Flag to activate verbose mode.
-   character(:), allocatable                     :: msg_                !< Message to be printed in verbose mode, local var.
-   logical                                       :: verbose_            !< Flag to activate verbose mode, local var.
-   integer(I8P)                                  :: mem_free, mem_total !< CPU memory.
+   real(R8P), allocatable, intent(inout)        :: var(:,:,:,:)        !< Varibale to be allocate on CPU.
+   integer(I4P),           intent(in)           :: ulb(2,4)            !< Upper/lower bounds of variable.
+   integer(I4P),           intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),           intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                 :: file_unit_          !< File unit for verbose output, local var.
+   character(:), allocatable                    :: msg_                !< Message to be printed in verbose mode, local var.
+   logical                                      :: verbose_            !< Flag to activate verbose mode, local var.
+   integer(I8P)                                 :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1,1):ulb(2,1), ulb(1,2):ulb(2,2), ulb(1,3):ulb(2,3), ulb(1,4):ulb(2,4)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_R8P_4D
 
-   subroutine alloc_var_R8P_5D(var, ulb, msg, verbose)
+   subroutine alloc_var_R8P_5D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind R8P, rank 5).
    !<
    !<```fortran
@@ -543,33 +599,38 @@ contains
    !<                                             1,4, &
    !<                                             1,5],&
    !<                                            [2,5])
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   real(R8P), allocatable, intent(inout)         :: var(:,:,:,:,:)      !< Varibale to be allocate on CPU.
-   integer(I4P),           intent(in)            :: ulb(2,5)            !< Upper/lower bounds of variable.
-   character(*),           intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                intent(in), optional  :: verbose             !< Flag to activate verbose mode.
-   character(:), allocatable                     :: msg_                !< Message to be printed in verbose mode, local var.
-   logical                                       :: verbose_            !< Flag to activate verbose mode, local var.
-   integer(I8P)                                  :: mem_free, mem_total !< CPU memory.
+   real(R8P), allocatable, intent(inout)        :: var(:,:,:,:,:)      !< Varibale to be allocate on CPU.
+   integer(I4P),           intent(in)           :: ulb(2,5)            !< Upper/lower bounds of variable.
+   integer(I4P),           intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),           intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                 :: file_unit_          !< File unit for verbose output, local var.
+   character(:), allocatable                    :: msg_                !< Message to be printed in verbose mode, local var.
+   logical                                      :: verbose_            !< Flag to activate verbose mode, local var.
+   integer(I8P)                                 :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1,1):ulb(2,1), ulb(1,2):ulb(2,2), ulb(1,3):ulb(2,3), ulb(1,4):ulb(2,4), ulb(1,5):ulb(2,5)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_R8P_5D
 
-   subroutine alloc_var_R8P_6D(var, ulb, msg, verbose)
+   subroutine alloc_var_R8P_6D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind R8P, rank 6).
    !<
    !<```fortran
@@ -582,33 +643,38 @@ contains
    !<                                             1,5, &
    !<                                             1,6],&
    !<                                            [2,6])
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   real(R8P), allocatable, intent(inout)         :: var(:,:,:,:,:,:)    !< Varibale to be allocate on CPU.
-   integer(I4P),           intent(in)            :: ulb(2,6)            !< Upper/lower bounds of variable.
-   character(*),           intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                intent(in), optional  :: verbose             !< Flag to activate verbose mode.
-   character(:), allocatable                     :: msg_                !< Message to be printed in verbose mode, local var.
-   logical                                       :: verbose_            !< Flag to activate verbose mode, local var.
-   integer(I8P)                                  :: mem_free, mem_total !< CPU memory.
+   real(R8P), allocatable, intent(inout)        :: var(:,:,:,:,:,:)    !< Varibale to be allocate on CPU.
+   integer(I4P),           intent(in)           :: ulb(2,6)            !< Upper/lower bounds of variable.
+   integer(I4P),           intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),           intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                 :: file_unit_          !< File unit for verbose output, local var.
+   character(:), allocatable                    :: msg_                !< Message to be printed in verbose mode, local var.
+   logical                                      :: verbose_            !< Flag to activate verbose mode, local var.
+   integer(I8P)                                 :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1,1):ulb(2,1), ulb(1,2):ulb(2,2), ulb(1,3):ulb(2,3), ulb(1,4):ulb(2,4), ulb(1,5):ulb(2,5), ulb(1,6):ulb(2,6)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_R8P_6D
 
-   subroutine alloc_var_R8P_7D(var, ulb, msg, verbose)
+   subroutine alloc_var_R8P_7D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind R8P, rank 6).
    !<
    !<```fortran
@@ -622,68 +688,78 @@ contains
    !<                                             1,6, &
    !<                                             1,7],&
    !<                                            [2,7])
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   real(R8P), allocatable, intent(inout)         :: var(:,:,:,:,:,:,:)  !< Varibale to be allocate on CPU.
-   integer(I4P),           intent(in)            :: ulb(2,7)            !< Upper/lower bounds of variable.
-   character(*),           intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                intent(in), optional  :: verbose             !< Flag to activate verbose mode.
-   character(:), allocatable                     :: msg_                !< Message to be printed in verbose mode, local var.
-   logical                                       :: verbose_            !< Flag to activate verbose mode, local var.
-   integer(I8P)                                  :: mem_free, mem_total !< CPU memory.
+   real(R8P), allocatable, intent(inout)        :: var(:,:,:,:,:,:,:)  !< Varibale to be allocate on CPU.
+   integer(I4P),           intent(in)           :: ulb(2,7)            !< Upper/lower bounds of variable.
+   integer(I4P),           intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),           intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                 :: file_unit_          !< File unit for verbose output, local var.
+   character(:), allocatable                    :: msg_                !< Message to be printed in verbose mode, local var.
+   logical                                      :: verbose_            !< Flag to activate verbose mode, local var.
+   integer(I8P)                                 :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1,1):ulb(2,1), ulb(1,2):ulb(2,2), ulb(1,3):ulb(2,3), ulb(1,4):ulb(2,4), ulb(1,5):ulb(2,5), ulb(1,6):ulb(2,6), &
                 ulb(1,7):ulb(2,7)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_R8P_7D
 
    ! R4P
-   subroutine alloc_var_R4P_1D(var, ulb, msg, verbose)
+   subroutine alloc_var_R4P_1D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind R4P, rank 1).
    !<
    !<```fortran
    !< use penf
    !< real(R4P), allocatable :: a(:)
    !< integer(I4P)           :: ulb(2)=[1,1]
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   real(R4P), allocatable, intent(inout)         :: var(:)              !< Varibale to be allocate on CPU.
-   integer(I4P),           intent(in)            :: ulb(2)              !< Upper/lower bounds of variable.
-   character(*),           intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                intent(in), optional  :: verbose             !< Flag to activate verbose mode.
-   character(:), allocatable                     :: msg_                !< Message to be printed in verbose mode, local var.
-   logical                                       :: verbose_            !< Flag to activate verbose mode, local var.
-   integer(I8P)                                  :: mem_free, mem_total !< CPU memory.
+   real(R4P), allocatable, intent(inout)        :: var(:)              !< Varibale to be allocate on CPU.
+   integer(I4P),           intent(in)           :: ulb(2)              !< Upper/lower bounds of variable.
+   integer(I4P),           intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),           intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                 :: file_unit_          !< File unit for verbose output, local var.
+   character(:), allocatable                    :: msg_                !< Message to be printed in verbose mode, local var.
+   logical                                      :: verbose_            !< Flag to activate verbose mode, local var.
+   integer(I8P)                                 :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1):ulb(2)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_R4P_1D
 
-   subroutine alloc_var_R4P_2D(var, ulb, msg, verbose)
+   subroutine alloc_var_R4P_2D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind R4P, rank 2).
    !<
    !<```fortran
@@ -692,33 +768,38 @@ contains
    !< integer(I4P)           :: ulb(2,2)=reshape([1,1, &
    !<                                             1,2],&
    !<                                            [2,2])
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   real(R4P), allocatable, intent(inout)         :: var(:,:)            !< Varibale to be allocate on CPU.
-   integer(I4P),           intent(in)            :: ulb(2,2)            !< Upper/lower bounds of variable.
-   character(*),           intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                intent(in), optional  :: verbose             !< Flag to activate verbose mode.
-   character(:), allocatable                     :: msg_                !< Message to be printed in verbose mode, local var.
-   logical                                       :: verbose_            !< Flag to activate verbose mode, local var.
-   integer(I8P)                                  :: mem_free, mem_total !< CPU memory.
+   real(R4P), allocatable, intent(inout)        :: var(:,:)            !< Varibale to be allocate on CPU.
+   integer(I4P),           intent(in)           :: ulb(2,2)            !< Upper/lower bounds of variable.
+   integer(I4P),           intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),           intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                 :: file_unit_          !< File unit for verbose output, local var.
+   character(:), allocatable                    :: msg_                !< Message to be printed in verbose mode, local var.
+   logical                                      :: verbose_            !< Flag to activate verbose mode, local var.
+   integer(I8P)                                 :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1,1):ulb(2,1), ulb(1,2):ulb(2,2)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_R4P_2D
 
-   subroutine alloc_var_R4P_3D(var, ulb, msg, verbose)
+   subroutine alloc_var_R4P_3D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind R4P, rank 3).
    !<
    !<```fortran
@@ -728,33 +809,38 @@ contains
    !<                                             1,2, &
    !<                                             1,3],&
    !<                                            [2,3])
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   real(R4P), allocatable, intent(inout)         :: var(:,:,:)          !< Varibale to be allocate on CPU.
-   integer(I4P),           intent(in)            :: ulb(2,3)            !< Upper/lower bounds of variable.
-   character(*),           intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                intent(in), optional  :: verbose             !< Flag to activate verbose mode.
-   character(:), allocatable                     :: msg_                !< Message to be printed in verbose mode, local var.
-   logical                                       :: verbose_            !< Flag to activate verbose mode, local var.
-   integer(I8P)                                  :: mem_free, mem_total !< CPU memory.
+   real(R4P), allocatable, intent(inout)        :: var(:,:,:)          !< Varibale to be allocate on CPU.
+   integer(I4P),           intent(in)           :: ulb(2,3)            !< Upper/lower bounds of variable.
+   integer(I4P),           intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),           intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                 :: file_unit_          !< File unit for verbose output, local var.
+   character(:), allocatable                    :: msg_                !< Message to be printed in verbose mode, local var.
+   logical                                      :: verbose_            !< Flag to activate verbose mode, local var.
+   integer(I8P)                                 :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1,1):ulb(2,1), ulb(1,2):ulb(2,2), ulb(1,3):ulb(2,3)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_R4P_3D
 
-   subroutine alloc_var_R4P_4D(var, ulb, msg, verbose)
+   subroutine alloc_var_R4P_4D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind R4P, rank 4).
    !<
    !<```fortran
@@ -765,33 +851,38 @@ contains
    !<                                             1,3, &
    !<                                             1,4],&
    !<                                            [2,4])
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   real(R4P), allocatable, intent(inout)         :: var(:,:,:,:)        !< Varibale to be allocate on CPU.
-   integer(I4P),           intent(in)            :: ulb(2,4)            !< Upper/lower bounds of variable.
-   character(*),           intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                intent(in), optional  :: verbose             !< Flag to activate verbose mode.
-   character(:), allocatable                     :: msg_                !< Message to be printed in verbose mode, local var.
-   logical                                       :: verbose_            !< Flag to activate verbose mode, local var.
-   integer(I8P)                                  :: mem_free, mem_total !< CPU memory.
+   real(R4P), allocatable, intent(inout)        :: var(:,:,:,:)        !< Varibale to be allocate on CPU.
+   integer(I4P),           intent(in)           :: ulb(2,4)            !< Upper/lower bounds of variable.
+   integer(I4P),           intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),           intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                 :: file_unit_          !< File unit for verbose output, local var.
+   character(:), allocatable                    :: msg_                !< Message to be printed in verbose mode, local var.
+   logical                                      :: verbose_            !< Flag to activate verbose mode, local var.
+   integer(I8P)                                 :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1,1):ulb(2,1), ulb(1,2):ulb(2,2), ulb(1,3):ulb(2,3), ulb(1,4):ulb(2,4)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_R4P_4D
 
-   subroutine alloc_var_R4P_5D(var, ulb, msg, verbose)
+   subroutine alloc_var_R4P_5D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind R4P, rank 5).
    !<
    !<```fortran
@@ -803,33 +894,38 @@ contains
    !<                                             1,4, &
    !<                                             1,5],&
    !<                                            [2,5])
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   real(R4P), allocatable, intent(inout)         :: var(:,:,:,:,:)      !< Varibale to be allocate on CPU.
-   integer(I4P),           intent(in)            :: ulb(2,5)            !< Upper/lower bounds of variable.
-   character(*),           intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                intent(in), optional  :: verbose             !< Flag to activate verbose mode.
-   character(:), allocatable                     :: msg_                !< Message to be printed in verbose mode, local var.
-   logical                                       :: verbose_            !< Flag to activate verbose mode, local var.
-   integer(I8P)                                  :: mem_free, mem_total !< CPU memory.
+   real(R4P), allocatable, intent(inout)        :: var(:,:,:,:,:)      !< Varibale to be allocate on CPU.
+   integer(I4P),           intent(in)           :: ulb(2,5)            !< Upper/lower bounds of variable.
+   integer(I4P),           intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),           intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                 :: file_unit_          !< File unit for verbose output, local var.
+   character(:), allocatable                    :: msg_                !< Message to be printed in verbose mode, local var.
+   logical                                      :: verbose_            !< Flag to activate verbose mode, local var.
+   integer(I8P)                                 :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1,1):ulb(2,1), ulb(1,2):ulb(2,2), ulb(1,3):ulb(2,3), ulb(1,4):ulb(2,4), ulb(1,5):ulb(2,5)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_R4P_5D
 
-   subroutine alloc_var_R4P_6D(var, ulb, msg, verbose)
+   subroutine alloc_var_R4P_6D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind R4P, rank 6).
    !<
    !<```fortran
@@ -842,33 +938,38 @@ contains
    !<                                             1,5, &
    !<                                             1,6],&
    !<                                            [2,6])
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   real(R4P), allocatable, intent(inout)         :: var(:,:,:,:,:,:)    !< Varibale to be allocate on CPU.
-   integer(I4P),           intent(in)            :: ulb(2,6)            !< Upper/lower bounds of variable.
-   character(*),           intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                intent(in), optional  :: verbose             !< Flag to activate verbose mode.
-   character(:), allocatable                     :: msg_                !< Message to be printed in verbose mode, local var.
-   logical                                       :: verbose_            !< Flag to activate verbose mode, local var.
-   integer(I8P)                                  :: mem_free, mem_total !< CPU memory.
+   real(R4P), allocatable, intent(inout)        :: var(:,:,:,:,:,:)    !< Varibale to be allocate on CPU.
+   integer(I4P),           intent(in)           :: ulb(2,6)            !< Upper/lower bounds of variable.
+   integer(I4P),           intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),           intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                 :: file_unit_          !< File unit for verbose output, local var.
+   character(:), allocatable                    :: msg_                !< Message to be printed in verbose mode, local var.
+   logical                                      :: verbose_            !< Flag to activate verbose mode, local var.
+   integer(I8P)                                 :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1,1):ulb(2,1), ulb(1,2):ulb(2,2), ulb(1,3):ulb(2,3), ulb(1,4):ulb(2,4), ulb(1,5):ulb(2,5), ulb(1,6):ulb(2,6)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_R4P_6D
 
-   subroutine alloc_var_R4P_7D(var, ulb, msg, verbose)
+   subroutine alloc_var_R4P_7D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind R4P, rank 6).
    !<
    !<```fortran
@@ -882,68 +983,78 @@ contains
    !<                                             1,6, &
    !<                                             1,7],&
    !<                                            [2,7])
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   real(R4P), allocatable, intent(inout)         :: var(:,:,:,:,:,:,:)  !< Varibale to be allocate on CPU.
-   integer(I4P),           intent(in)            :: ulb(2,7)            !< Upper/lower bounds of variable.
-   character(*),           intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                intent(in), optional  :: verbose             !< Flag to activate verbose mode.
-   character(:), allocatable                     :: msg_                !< Message to be printed in verbose mode, local var.
-   logical                                       :: verbose_            !< Flag to activate verbose mode, local var.
-   integer(I8P)                                  :: mem_free, mem_total !< CPU memory.
+   real(R4P), allocatable, intent(inout)        :: var(:,:,:,:,:,:,:)  !< Varibale to be allocate on CPU.
+   integer(I4P),           intent(in)           :: ulb(2,7)            !< Upper/lower bounds of variable.
+   integer(I4P),           intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),           intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                 :: file_unit_          !< File unit for verbose output, local var.
+   character(:), allocatable                    :: msg_                !< Message to be printed in verbose mode, local var.
+   logical                                      :: verbose_            !< Flag to activate verbose mode, local var.
+   integer(I8P)                                 :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1,1):ulb(2,1), ulb(1,2):ulb(2,2), ulb(1,3):ulb(2,3), ulb(1,4):ulb(2,4), ulb(1,5):ulb(2,5), ulb(1,6):ulb(2,6), &
                 ulb(1,7):ulb(2,7)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_R4P_7D
 
    ! I8P
-   subroutine alloc_var_I8P_1D(var, ulb, msg, verbose)
+   subroutine alloc_var_I8P_1D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind I8P, rank 1).
    !<
    !<```fortran
    !< use penf
    !< integer(I8P), allocatable :: a(:)
    !< integer(I4P)              :: ulb(2)=[1,1]
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   integer(I8P), allocatable, intent(inout)         :: var(:)              !< Varibale to be allocate on CPU.
-   integer(I4P),              intent(in)            :: ulb(2)              !< Upper/lower bounds of variable.
-   character(*),              intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                   intent(in), optional  :: verbose             !< Flag to activate verbose mode.
-   character(:), allocatable                        :: msg_                !< Message to be printed in verbose mode, local var.
-   logical                                          :: verbose_            !< Flag to activate verbose mode, local var.
-   integer(I8P)                                     :: mem_free, mem_total !< CPU memory.
+   integer(I8P), allocatable, intent(inout)        :: var(:)              !< Varibale to be allocate on CPU.
+   integer(I4P),              intent(in)           :: ulb(2)              !< Upper/lower bounds of variable.
+   integer(I4P),              intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),              intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                   intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                    :: file_unit_          !< File unit for verbose output, local var.
+   character(:), allocatable                       :: msg_                !< Message to be printed in verbose mode, local var.
+   logical                                         :: verbose_            !< Flag to activate verbose mode, local var.
+   integer(I8P)                                    :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1):ulb(2)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_I8P_1D
 
-   subroutine alloc_var_I8P_2D(var, ulb, msg, verbose)
+   subroutine alloc_var_I8P_2D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind I8P, rank 2).
    !<
    !<```fortran
@@ -952,33 +1063,38 @@ contains
    !< integer(I4P)              :: ulb(2,2)=reshape([1,1, &
    !<                                                1,2],&
    !<                                               [2,2])
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   integer(I8P), allocatable, intent(inout)         :: var(:,:)            !< Varibale to be allocate on CPU.
-   integer(I4P),              intent(in)            :: ulb(2,2)            !< Upper/lower bounds of variable.
-   character(*),              intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                   intent(in), optional  :: verbose             !< Flag to activate verbose mode.
-   character(:), allocatable                        :: msg_                !< Message to be printed in verbose mode, local var.
-   logical                                          :: verbose_            !< Flag to activate verbose mode, local var.
-   integer(I8P)                                     :: mem_free, mem_total !< CPU memory.
+   integer(I8P), allocatable, intent(inout)        :: var(:,:)            !< Varibale to be allocate on CPU.
+   integer(I4P),              intent(in)           :: ulb(2,2)            !< Upper/lower bounds of variable.
+   integer(I4P),              intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),              intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                   intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                    :: file_unit_          !< File unit for verbose output, local var.
+   character(:), allocatable                       :: msg_                !< Message to be printed in verbose mode, local var.
+   logical                                         :: verbose_            !< Flag to activate verbose mode, local var.
+   integer(I8P)                                    :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1,1):ulb(2,1), ulb(1,2):ulb(2,2)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_I8P_2D
 
-   subroutine alloc_var_I8P_3D(var, ulb, msg, verbose)
+   subroutine alloc_var_I8P_3D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind I8P, rank 3).
    !<
    !<```fortran
@@ -988,33 +1104,38 @@ contains
    !<                                                1,2, &
    !<                                                1,3],&
    !<                                               [2,3])
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   integer(I8P), allocatable, intent(inout)         :: var(:,:,:)          !< Varibale to be allocate on CPU.
-   integer(I4P),              intent(in)            :: ulb(2,3)            !< Upper/lower bounds of variable.
-   character(*),              intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                   intent(in), optional  :: verbose             !< Flag to activate verbose mode.
-   character(:), allocatable                        :: msg_                !< Message to be printed in verbose mode, local var.
-   logical                                          :: verbose_            !< Flag to activate verbose mode, local var.
-   integer(I8P)                                     :: mem_free, mem_total !< CPU memory.
+   integer(I8P), allocatable, intent(inout)        :: var(:,:,:)          !< Varibale to be allocate on CPU.
+   integer(I4P),              intent(in)           :: ulb(2,3)            !< Upper/lower bounds of variable.
+   integer(I4P),              intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),              intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                   intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                    :: file_unit_          !< File unit for verbose output, local var.
+   character(:), allocatable                       :: msg_                !< Message to be printed in verbose mode, local var.
+   logical                                         :: verbose_            !< Flag to activate verbose mode, local var.
+   integer(I8P)                                    :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1,1):ulb(2,1), ulb(1,2):ulb(2,2), ulb(1,3):ulb(2,3)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_I8P_3D
 
-   subroutine alloc_var_I8P_4D(var, ulb, msg, verbose)
+   subroutine alloc_var_I8P_4D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind I8P, rank 4).
    !<
    !<```fortran
@@ -1025,33 +1146,38 @@ contains
    !<                                                1,3, &
    !<                                                1,4],&
    !<                                               [2,4])
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   integer(I8P), allocatable, intent(inout)         :: var(:,:,:,:)        !< Varibale to be allocate on CPU.
-   integer(I4P),              intent(in)            :: ulb(2,4)            !< Upper/lower bounds of variable.
-   character(*),              intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                   intent(in), optional  :: verbose             !< Flag to activate verbose mode.
-   character(:), allocatable                        :: msg_                !< Message to be printed in verbose mode, local var.
-   logical                                          :: verbose_            !< Flag to activate verbose mode, local var.
-   integer(I8P)                                     :: mem_free, mem_total !< CPU memory.
+   integer(I8P), allocatable, intent(inout)        :: var(:,:,:,:)        !< Varibale to be allocate on CPU.
+   integer(I4P),              intent(in)           :: ulb(2,4)            !< Upper/lower bounds of variable.
+   integer(I4P),              intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),              intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                   intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                    :: file_unit_          !< File unit for verbose output, local var.
+   character(:), allocatable                       :: msg_                !< Message to be printed in verbose mode, local var.
+   logical                                         :: verbose_            !< Flag to activate verbose mode, local var.
+   integer(I8P)                                    :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1,1):ulb(2,1), ulb(1,2):ulb(2,2), ulb(1,3):ulb(2,3), ulb(1,4):ulb(2,4)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_I8P_4D
 
-   subroutine alloc_var_I8P_5D(var, ulb, msg, verbose)
+   subroutine alloc_var_I8P_5D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind I8P, rank 5).
    !<
    !<```fortran
@@ -1063,33 +1189,38 @@ contains
    !<                                                1,4, &
    !<                                                1,5],&
    !<                                               [2,5])
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   integer(I8P), allocatable, intent(inout)         :: var(:,:,:,:,:)      !< Varibale to be allocate on CPU.
-   integer(I4P),              intent(in)            :: ulb(2,5)            !< Upper/lower bounds of variable.
-   character(*),              intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                   intent(in), optional  :: verbose             !< Flag to activate verbose mode.
-   character(:), allocatable                        :: msg_                !< Message to be printed in verbose mode, local var.
-   logical                                          :: verbose_            !< Flag to activate verbose mode, local var.
-   integer(I8P)                                     :: mem_free, mem_total !< CPU memory.
+   integer(I8P), allocatable, intent(inout)        :: var(:,:,:,:,:)      !< Varibale to be allocate on CPU.
+   integer(I4P),              intent(in)           :: ulb(2,5)            !< Upper/lower bounds of variable.
+   integer(I4P),              intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),              intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                   intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                    :: file_unit_          !< File unit for verbose output, local var.
+   character(:), allocatable                       :: msg_                !< Message to be printed in verbose mode, local var.
+   logical                                         :: verbose_            !< Flag to activate verbose mode, local var.
+   integer(I8P)                                    :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1,1):ulb(2,1), ulb(1,2):ulb(2,2), ulb(1,3):ulb(2,3), ulb(1,4):ulb(2,4), ulb(1,5):ulb(2,5)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_I8P_5D
 
-   subroutine alloc_var_I8P_6D(var, ulb, msg, verbose)
+   subroutine alloc_var_I8P_6D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind I8P, rank 6).
    !<
    !<```fortran
@@ -1102,33 +1233,38 @@ contains
    !<                                                1,5, &
    !<                                                1,6],&
    !<                                               [2,6])
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   integer(I8P), allocatable, intent(inout)         :: var(:,:,:,:,:,:)    !< Varibale to be allocate on CPU.
-   integer(I4P),              intent(in)            :: ulb(2,6)            !< Upper/lower bounds of variable.
-   character(*),              intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                   intent(in), optional  :: verbose             !< Flag to activate verbose mode.
-   character(:), allocatable                        :: msg_                !< Message to be printed in verbose mode, local var.
-   logical                                          :: verbose_            !< Flag to activate verbose mode, local var.
-   integer(I8P)                                     :: mem_free, mem_total !< CPU memory.
+   integer(I8P), allocatable, intent(inout)        :: var(:,:,:,:,:,:)    !< Varibale to be allocate on CPU.
+   integer(I4P),              intent(in)           :: ulb(2,6)            !< Upper/lower bounds of variable.
+   integer(I4P),              intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),              intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                   intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                    :: file_unit_          !< File unit for verbose output, local var.
+   character(:), allocatable                       :: msg_                !< Message to be printed in verbose mode, local var.
+   logical                                         :: verbose_            !< Flag to activate verbose mode, local var.
+   integer(I8P)                                    :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1,1):ulb(2,1), ulb(1,2):ulb(2,2), ulb(1,3):ulb(2,3), ulb(1,4):ulb(2,4), ulb(1,5):ulb(2,5), ulb(1,6):ulb(2,6)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_I8P_6D
 
-   subroutine alloc_var_I8P_7D(var, ulb, msg, verbose)
+   subroutine alloc_var_I8P_7D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind I8P, rank 7).
    !<
    !<```fortran
@@ -1142,68 +1278,78 @@ contains
    !<                                                1,6, &
    !<                                                1,7],&
    !<                                               [2,7])
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   integer(I8P), allocatable, intent(inout)         :: var(:,:,:,:,:,:,:)  !< Varibale to be allocate on CPU.
-   integer(I4P),              intent(in)            :: ulb(2,7)            !< Upper/lower bounds of variable.
-   character(*),              intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                   intent(in), optional  :: verbose             !< Flag to activate verbose mode.
-   character(:), allocatable                        :: msg_                !< Message to be printed in verbose mode, local var.
-   logical                                          :: verbose_            !< Flag to activate verbose mode, local var.
-   integer(I8P)                                     :: mem_free, mem_total !< CPU memory.
+   integer(I8P), allocatable, intent(inout)        :: var(:,:,:,:,:,:,:)  !< Varibale to be allocate on CPU.
+   integer(I4P),              intent(in)           :: ulb(2,7)            !< Upper/lower bounds of variable.
+   integer(I4P),              intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),              intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                   intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                    :: file_unit_          !< File unit for verbose output, local var.
+   character(:), allocatable                       :: msg_                !< Message to be printed in verbose mode, local var.
+   logical                                         :: verbose_            !< Flag to activate verbose mode, local var.
+   integer(I8P)                                    :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1,1):ulb(2,1), ulb(1,2):ulb(2,2), ulb(1,3):ulb(2,3), ulb(1,4):ulb(2,4), ulb(1,5):ulb(2,5), ulb(1,6):ulb(2,6), &
                 ulb(1,7):ulb(2,7)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_I8P_7D
 
    ! I4P
-   subroutine alloc_var_I4P_1D(var, ulb, msg, verbose)
+   subroutine alloc_var_I4P_1D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind I4P, rank 1).
    !<
    !<```fortran
    !< use penf
    !< integer(I4P), allocatable :: a(:)
    !< integer(I4P)              :: ulb(2)=[1,1]
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   integer(I4P), allocatable, intent(inout)         :: var(:)              !< Varibale to be allocate on CPU.
-   integer(I4P),              intent(in)            :: ulb(2)              !< Upper/lower bounds of variable.
-   character(*),              intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                   intent(in), optional  :: verbose             !< Flag to activate verbose mode.
-   character(:), allocatable                        :: msg_                !< Message to be printed in verbose mode, local var.
-   logical                                          :: verbose_            !< Flag to activate verbose mode, local var.
-   integer(I8P)                                     :: mem_free, mem_total !< CPU memory.
+   integer(I4P), allocatable, intent(inout)        :: var(:)              !< Varibale to be allocate on CPU.
+   integer(I4P),              intent(in)           :: ulb(2)              !< Upper/lower bounds of variable.
+   integer(I4P),              intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),              intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                   intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                    :: file_unit_          !< File unit for verbose output, local var.
+   character(:), allocatable                       :: msg_                !< Message to be printed in verbose mode, local var.
+   logical                                         :: verbose_            !< Flag to activate verbose mode, local var.
+   integer(I8P)                                    :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1):ulb(2)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_I4P_1D
 
-   subroutine alloc_var_I4P_2D(var, ulb, msg, verbose)
+   subroutine alloc_var_I4P_2D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind I4P, rank 2).
    !<
    !<```fortran
@@ -1212,33 +1358,38 @@ contains
    !< integer(I4P)              :: ulb(2,2)=reshape([1,1, &
    !<                                                1,2],&
    !<                                               [2,2])
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   integer(I4P), allocatable, intent(inout)         :: var(:,:)            !< Varibale to be allocate on CPU.
-   integer(I4P),              intent(in)            :: ulb(2,2)            !< Upper/lower bounds of variable.
-   character(*),              intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                   intent(in), optional  :: verbose             !< Flag to activate verbose mode.
-   character(:), allocatable                        :: msg_                !< Message to be printed in verbose mode, local var.
-   logical                                          :: verbose_            !< Flag to activate verbose mode, local var.
-   integer(I8P)                                     :: mem_free, mem_total !< CPU memory.
+   integer(I4P), allocatable, intent(inout)        :: var(:,:)            !< Varibale to be allocate on CPU.
+   integer(I4P),              intent(in)           :: ulb(2,2)            !< Upper/lower bounds of variable.
+   integer(I4P),              intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),              intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                   intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                    :: file_unit_          !< File unit for verbose output, local var.
+   character(:), allocatable                       :: msg_                !< Message to be printed in verbose mode, local var.
+   logical                                         :: verbose_            !< Flag to activate verbose mode, local var.
+   integer(I8P)                                    :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1,1):ulb(2,1), ulb(1,2):ulb(2,2)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_I4P_2D
 
-   subroutine alloc_var_I4P_3D(var, ulb, msg, verbose)
+   subroutine alloc_var_I4P_3D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind I4P, rank 3).
    !<
    !<```fortran
@@ -1248,33 +1399,38 @@ contains
    !<                                                1,2, &
    !<                                                1,3],&
    !<                                               [2,3])
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   integer(I4P), allocatable, intent(inout)         :: var(:,:,:)          !< Varibale to be allocate on CPU.
-   integer(I4P),              intent(in)            :: ulb(2,3)            !< Upper/lower bounds of variable.
-   character(*),              intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                   intent(in), optional  :: verbose             !< Flag to activate verbose mode.
-   character(:), allocatable                        :: msg_                !< Message to be printed in verbose mode, local var.
-   logical                                          :: verbose_            !< Flag to activate verbose mode, local var.
-   integer(I8P)                                     :: mem_free, mem_total !< CPU memory.
+   integer(I4P), allocatable, intent(inout)        :: var(:,:,:)          !< Varibale to be allocate on CPU.
+   integer(I4P),              intent(in)           :: ulb(2,3)            !< Upper/lower bounds of variable.
+   integer(I4P),              intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),              intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                   intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                    :: file_unit_          !< File unit for verbose output, local var.
+   character(:), allocatable                       :: msg_                !< Message to be printed in verbose mode, local var.
+   logical                                         :: verbose_            !< Flag to activate verbose mode, local var.
+   integer(I8P)                                    :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1,1):ulb(2,1), ulb(1,2):ulb(2,2), ulb(1,3):ulb(2,3)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_I4P_3D
 
-   subroutine alloc_var_I4P_4D(var, ulb, msg, verbose)
+   subroutine alloc_var_I4P_4D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind I4P, rank 4).
    !<
    !<```fortran
@@ -1285,33 +1441,38 @@ contains
    !<                                                1,3, &
    !<                                                1,4],&
    !<                                               [2,4])
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   integer(I4P), allocatable, intent(inout)         :: var(:,:,:,:)        !< Varibale to be allocate on CPU.
-   integer(I4P),              intent(in)            :: ulb(2,4)            !< Upper/lower bounds of variable.
-   character(*),              intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                   intent(in), optional  :: verbose             !< Flag to activate verbose mode.
-   character(:), allocatable                        :: msg_                !< Message to be printed in verbose mode, local var.
-   logical                                          :: verbose_            !< Flag to activate verbose mode, local var.
-   integer(I8P)                                     :: mem_free, mem_total !< CPU memory.
+   integer(I4P), allocatable, intent(inout)        :: var(:,:,:,:)        !< Varibale to be allocate on CPU.
+   integer(I4P),              intent(in)           :: ulb(2,4)            !< Upper/lower bounds of variable.
+   integer(I4P),              intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),              intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                   intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                    :: file_unit_          !< File unit for verbose output, local var.
+   character(:), allocatable                       :: msg_                !< Message to be printed in verbose mode, local var.
+   logical                                         :: verbose_            !< Flag to activate verbose mode, local var.
+   integer(I8P)                                    :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1,1):ulb(2,1), ulb(1,2):ulb(2,2), ulb(1,3):ulb(2,3), ulb(1,4):ulb(2,4)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_I4P_4D
 
-   subroutine alloc_var_I4P_5D(var, ulb, msg, verbose)
+   subroutine alloc_var_I4P_5D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind I4P, rank 5).
    !<
    !<```fortran
@@ -1323,33 +1484,38 @@ contains
    !<                                                1,4, &
    !<                                                1,5],&
    !<                                               [2,5])
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   integer(I4P), allocatable, intent(inout)         :: var(:,:,:,:,:)      !< Varibale to be allocate on CPU.
-   integer(I4P),              intent(in)            :: ulb(2,5)            !< Upper/lower bounds of variable.
-   character(*),              intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                   intent(in), optional  :: verbose             !< Flag to activate verbose mode.
-   character(:), allocatable                        :: msg_                !< Message to be printed in verbose mode, local var.
-   logical                                          :: verbose_            !< Flag to activate verbose mode, local var.
-   integer(I8P)                                     :: mem_free, mem_total !< CPU memory.
+   integer(I4P), allocatable, intent(inout)        :: var(:,:,:,:,:)      !< Varibale to be allocate on CPU.
+   integer(I4P),              intent(in)           :: ulb(2,5)            !< Upper/lower bounds of variable.
+   integer(I4P),              intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),              intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                   intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                    :: file_unit_          !< File unit for verbose output, local var.
+   character(:), allocatable                       :: msg_                !< Message to be printed in verbose mode, local var.
+   logical                                         :: verbose_            !< Flag to activate verbose mode, local var.
+   integer(I8P)                                    :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1,1):ulb(2,1), ulb(1,2):ulb(2,2), ulb(1,3):ulb(2,3), ulb(1,4):ulb(2,4), ulb(1,5):ulb(2,5)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_I4P_5D
 
-   subroutine alloc_var_I4P_6D(var, ulb, msg, verbose)
+   subroutine alloc_var_I4P_6D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind I4P, rank 6).
    !<
    !<```fortran
@@ -1362,33 +1528,38 @@ contains
    !<                                                1,5, &
    !<                                                1,6],&
    !<                                               [2,6])
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   integer(I4P), allocatable, intent(inout)         :: var(:,:,:,:,:,:)    !< Varibale to be allocate on CPU.
-   integer(I4P),              intent(in)            :: ulb(2,6)            !< Upper/lower bounds of variable.
-   character(*),              intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                   intent(in), optional  :: verbose             !< Flag to activate verbose mode.
-   character(:), allocatable                        :: msg_                !< Message to be printed in verbose mode, local var.
-   logical                                          :: verbose_            !< Flag to activate verbose mode, local var.
-   integer(I8P)                                     :: mem_free, mem_total !< CPU memory.
+   integer(I4P), allocatable, intent(inout)        :: var(:,:,:,:,:,:)    !< Varibale to be allocate on CPU.
+   integer(I4P),              intent(in)           :: ulb(2,6)            !< Upper/lower bounds of variable.
+   integer(I4P),              intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),              intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                   intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                    :: file_unit_          !< File unit for verbose output, local var.
+   character(:), allocatable                       :: msg_                !< Message to be printed in verbose mode, local var.
+   logical                                         :: verbose_            !< Flag to activate verbose mode, local var.
+   integer(I8P)                                    :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1,1):ulb(2,1), ulb(1,2):ulb(2,2), ulb(1,3):ulb(2,3), ulb(1,4):ulb(2,4), ulb(1,5):ulb(2,5), ulb(1,6):ulb(2,6)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_I4P_6D
 
-   subroutine alloc_var_I4P_7D(var, ulb, msg, verbose)
+   subroutine alloc_var_I4P_7D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind I4P, rank 7).
    !<
    !<```fortran
@@ -1402,68 +1573,78 @@ contains
    !<                                                1,6, &
    !<                                                1,7],&
    !<                                               [2,7])
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   integer(I4P), allocatable, intent(inout)         :: var(:,:,:,:,:,:,:)  !< Varibale to be allocate on CPU.
-   integer(I4P),              intent(in)            :: ulb(2,7)            !< Upper/lower bounds of variable.
-   character(*),              intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                   intent(in), optional  :: verbose             !< Flag to activate verbose mode.
-   character(:), allocatable                        :: msg_                !< Message to be printed in verbose mode, local var.
-   logical                                          :: verbose_            !< Flag to activate verbose mode, local var.
-   integer(I8P)                                     :: mem_free, mem_total !< CPU memory.
+   integer(I4P), allocatable, intent(inout)        :: var(:,:,:,:,:,:,:)  !< Varibale to be allocate on CPU.
+   integer(I4P),              intent(in)           :: ulb(2,7)            !< Upper/lower bounds of variable.
+   integer(I4P),              intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),              intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                   intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                    :: file_unit_          !< File unit for verbose output, local var.
+   character(:), allocatable                       :: msg_                !< Message to be printed in verbose mode, local var.
+   logical                                         :: verbose_            !< Flag to activate verbose mode, local var.
+   integer(I8P)                                    :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1,1):ulb(2,1), ulb(1,2):ulb(2,2), ulb(1,3):ulb(2,3), ulb(1,4):ulb(2,4), ulb(1,5):ulb(2,5), ulb(1,6):ulb(2,6), &
                 ulb(1,7):ulb(2,7)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_I4P_7D
 
    ! I2P
-   subroutine alloc_var_I2P_1D(var, ulb, msg, verbose)
+   subroutine alloc_var_I2P_1D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind I2P, rank 1).
    !<
    !<```fortran
    !< use penf
    !< integer(I2P), allocatable :: a(:)
    !< integer(I4P)              :: ulb(2)=[1,1]
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   integer(I2P), allocatable, intent(inout)         :: var(:)              !< Varibale to be allocate on CPU.
-   integer(I4P),              intent(in)            :: ulb(2)              !< Upper/lower bounds of variable.
-   character(*),              intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                   intent(in), optional  :: verbose             !< Flag to activate verbose mode.
-   character(:), allocatable                        :: msg_                !< Message to be printed in verbose mode, local var.
-   logical                                          :: verbose_            !< Flag to activate verbose mode, local var.
-   integer(I8P)                                     :: mem_free, mem_total !< CPU memory.
+   integer(I2P), allocatable, intent(inout)        :: var(:)              !< Varibale to be allocate on CPU.
+   integer(I4P),              intent(in)           :: ulb(2)              !< Upper/lower bounds of variable.
+   integer(I4P),              intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),              intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                   intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                    :: file_unit_          !< File unit for verbose output, local var.
+   character(:), allocatable                       :: msg_                !< Message to be printed in verbose mode, local var.
+   logical                                         :: verbose_            !< Flag to activate verbose mode, local var.
+   integer(I8P)                                    :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1):ulb(2)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_I2P_1D
 
-   subroutine alloc_var_I2P_2D(var, ulb, msg, verbose)
+   subroutine alloc_var_I2P_2D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind I2P, rank 2).
    !<
    !<```fortran
@@ -1472,33 +1653,38 @@ contains
    !< integer(I4P)              :: ulb(2,2)=reshape([1,1, &
    !<                                                1,2],&
    !<                                               [2,2])
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   integer(I2P), allocatable, intent(inout)         :: var(:,:)            !< Varibale to be allocate on CPU.
-   integer(I4P),              intent(in)            :: ulb(2,2)            !< Upper/lower bounds of variable.
-   character(*),              intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                   intent(in), optional  :: verbose             !< Flag to activate verbose mode.
-   character(:), allocatable                        :: msg_                !< Message to be printed in verbose mode, local var.
-   logical                                          :: verbose_            !< Flag to activate verbose mode, local var.
-   integer(I8P)                                     :: mem_free, mem_total !< CPU memory.
+   integer(I2P), allocatable, intent(inout)        :: var(:,:)            !< Varibale to be allocate on CPU.
+   integer(I4P),              intent(in)           :: ulb(2,2)            !< Upper/lower bounds of variable.
+   integer(I4P),              intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),              intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                   intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                    :: file_unit_          !< File unit for verbose output, local var.
+   character(:), allocatable                       :: msg_                !< Message to be printed in verbose mode, local var.
+   logical                                         :: verbose_            !< Flag to activate verbose mode, local var.
+   integer(I8P)                                    :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1,1):ulb(2,1), ulb(1,2):ulb(2,2)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_I2P_2D
 
-   subroutine alloc_var_I2P_3D(var, ulb, msg, verbose)
+   subroutine alloc_var_I2P_3D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind I2P, rank 3).
    !<
    !<```fortran
@@ -1508,33 +1694,38 @@ contains
    !<                                                1,2, &
    !<                                                1,3],&
    !<                                               [2,3])
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   integer(I2P), allocatable, intent(inout)         :: var(:,:,:)          !< Varibale to be allocate on CPU.
-   integer(I4P),              intent(in)            :: ulb(2,3)            !< Upper/lower bounds of variable.
-   character(*),              intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                   intent(in), optional  :: verbose             !< Flag to activate verbose mode.
-   character(:), allocatable                        :: msg_                !< Message to be printed in verbose mode, local var.
-   logical                                          :: verbose_            !< Flag to activate verbose mode, local var.
-   integer(I8P)                                     :: mem_free, mem_total !< CPU memory.
+   integer(I2P), allocatable, intent(inout)        :: var(:,:,:)          !< Varibale to be allocate on CPU.
+   integer(I4P),              intent(in)           :: ulb(2,3)            !< Upper/lower bounds of variable.
+   integer(I4P),              intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),              intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                   intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                    :: file_unit_          !< File unit for verbose output, local var.
+   character(:), allocatable                       :: msg_                !< Message to be printed in verbose mode, local var.
+   logical                                         :: verbose_            !< Flag to activate verbose mode, local var.
+   integer(I8P)                                    :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1,1):ulb(2,1), ulb(1,2):ulb(2,2), ulb(1,3):ulb(2,3)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_I2P_3D
 
-   subroutine alloc_var_I2P_4D(var, ulb, msg, verbose)
+   subroutine alloc_var_I2P_4D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind I2P, rank 4).
    !<
    !<```fortran
@@ -1545,33 +1736,38 @@ contains
    !<                                                1,3, &
    !<                                                1,4],&
    !<                                               [2,4])
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   integer(I2P), allocatable, intent(inout)         :: var(:,:,:,:)        !< Varibale to be allocate on CPU.
-   integer(I4P),              intent(in)            :: ulb(2,4)            !< Upper/lower bounds of variable.
-   character(*),              intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                   intent(in), optional  :: verbose             !< Flag to activate verbose mode.
-   character(:), allocatable                        :: msg_                !< Message to be printed in verbose mode, local var.
-   logical                                          :: verbose_            !< Flag to activate verbose mode, local var.
-   integer(I8P)                                     :: mem_free, mem_total !< CPU memory.
+   integer(I2P), allocatable, intent(inout)        :: var(:,:,:,:)        !< Varibale to be allocate on CPU.
+   integer(I4P),              intent(in)           :: ulb(2,4)            !< Upper/lower bounds of variable.
+   integer(I4P),              intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),              intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                   intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                    :: file_unit_          !< File unit for verbose output, local var.
+   character(:), allocatable                       :: msg_                !< Message to be printed in verbose mode, local var.
+   logical                                         :: verbose_            !< Flag to activate verbose mode, local var.
+   integer(I8P)                                    :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1,1):ulb(2,1), ulb(1,2):ulb(2,2), ulb(1,3):ulb(2,3), ulb(1,4):ulb(2,4)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_I2P_4D
 
-   subroutine alloc_var_I2P_5D(var, ulb, msg, verbose)
+   subroutine alloc_var_I2P_5D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind I2P, rank 5).
    !<
    !<```fortran
@@ -1583,33 +1779,38 @@ contains
    !<                                                1,4, &
    !<                                                1,5],&
    !<                                               [2,5])
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   integer(I2P), allocatable, intent(inout)         :: var(:,:,:,:,:)      !< Varibale to be allocate on CPU.
-   integer(I4P),              intent(in)            :: ulb(2,5)            !< Upper/lower bounds of variable.
-   character(*),              intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                   intent(in), optional  :: verbose             !< Flag to activate verbose mode.
-   character(:), allocatable                        :: msg_                !< Message to be printed in verbose mode, local var.
-   logical                                          :: verbose_            !< Flag to activate verbose mode, local var.
-   integer(I8P)                                     :: mem_free, mem_total !< CPU memory.
+   integer(I2P), allocatable, intent(inout)        :: var(:,:,:,:,:)      !< Varibale to be allocate on CPU.
+   integer(I4P),              intent(in)           :: ulb(2,5)            !< Upper/lower bounds of variable.
+   integer(I4P),              intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),              intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                   intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                    :: file_unit_          !< File unit for verbose output, local var.
+   character(:), allocatable                       :: msg_                !< Message to be printed in verbose mode, local var.
+   logical                                         :: verbose_            !< Flag to activate verbose mode, local var.
+   integer(I8P)                                    :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1,1):ulb(2,1), ulb(1,2):ulb(2,2), ulb(1,3):ulb(2,3), ulb(1,4):ulb(2,4), ulb(1,5):ulb(2,5)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_I2P_5D
 
-   subroutine alloc_var_I2P_6D(var, ulb, msg, verbose)
+   subroutine alloc_var_I2P_6D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind I2P, rank 6).
    !<
    !<```fortran
@@ -1622,33 +1823,38 @@ contains
    !<                                                1,5, &
    !<                                                1,6],&
    !<                                               [2,6])
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   integer(I2P), allocatable, intent(inout)         :: var(:,:,:,:,:,:)    !< Varibale to be allocate on CPU.
-   integer(I4P),              intent(in)            :: ulb(2,6)            !< Upper/lower bounds of variable.
-   character(*),              intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                   intent(in), optional  :: verbose             !< Flag to activate verbose mode.
-   character(:), allocatable                        :: msg_                !< Message to be printed in verbose mode, local var.
-   logical                                          :: verbose_            !< Flag to activate verbose mode, local var.
-   integer(I8P)                                     :: mem_free, mem_total !< CPU memory.
+   integer(I2P), allocatable, intent(inout)        :: var(:,:,:,:,:,:)    !< Varibale to be allocate on CPU.
+   integer(I4P),              intent(in)           :: ulb(2,6)            !< Upper/lower bounds of variable.
+   integer(I4P),              intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),              intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                   intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                    :: file_unit_          !< File unit for verbose output, local var.
+   character(:), allocatable                       :: msg_                !< Message to be printed in verbose mode, local var.
+   logical                                         :: verbose_            !< Flag to activate verbose mode, local var.
+   integer(I8P)                                    :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1,1):ulb(2,1), ulb(1,2):ulb(2,2), ulb(1,3):ulb(2,3), ulb(1,4):ulb(2,4), ulb(1,5):ulb(2,5), ulb(1,6):ulb(2,6)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_I2P_6D
 
-   subroutine alloc_var_I2P_7D(var, ulb, msg, verbose)
+   subroutine alloc_var_I2P_7D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind I2P, rank 7).
    !<
    !<```fortran
@@ -1662,68 +1868,78 @@ contains
    !<                                                1,6, &
    !<                                                1,7],&
    !<                                               [2,7])
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   integer(I2P), allocatable, intent(inout)         :: var(:,:,:,:,:,:,:)  !< Varibale to be allocate on CPU.
-   integer(I4P),              intent(in)            :: ulb(2,7)            !< Upper/lower bounds of variable.
-   character(*),              intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                   intent(in), optional  :: verbose             !< Flag to activate verbose mode.
-   character(:), allocatable                        :: msg_                !< Message to be printed in verbose mode, local var.
-   logical                                          :: verbose_            !< Flag to activate verbose mode, local var.
-   integer(I8P)                                     :: mem_free, mem_total !< CPU memory.
+   integer(I2P), allocatable, intent(inout)        :: var(:,:,:,:,:,:,:)  !< Varibale to be allocate on CPU.
+   integer(I4P),              intent(in)           :: ulb(2,7)            !< Upper/lower bounds of variable.
+   integer(I4P),              intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),              intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                   intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                    :: file_unit_          !< File unit for verbose output, local var.
+   character(:), allocatable                       :: msg_                !< Message to be printed in verbose mode, local var.
+   logical                                         :: verbose_            !< Flag to activate verbose mode, local var.
+   integer(I8P)                                    :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1,1):ulb(2,1), ulb(1,2):ulb(2,2), ulb(1,3):ulb(2,3), ulb(1,4):ulb(2,4), ulb(1,5):ulb(2,5), ulb(1,6):ulb(2,6), &
                 ulb(1,7):ulb(2,7)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_I2P_7D
 
    ! I1P
-   subroutine alloc_var_I1P_1D(var, ulb, msg, verbose)
+   subroutine alloc_var_I1P_1D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind I1P, rank 1).
    !<
    !<```fortran
    !< use penf
    !< integer(I1P), allocatable :: a(:)
    !< integer(I4P)              :: ulb(2)=[1,1]
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   integer(I1P), allocatable, intent(inout)         :: var(:)              !< Varibale to be allocate on CPU.
-   integer(I4P),              intent(in)            :: ulb(2)              !< Upper/lower bounds of variable.
-   character(*),              intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                   intent(in), optional  :: verbose             !< Flag to activate verbose mode.
-   character(:), allocatable                        :: msg_                !< Message to be printed in verbose mode, local var.
-   logical                                          :: verbose_            !< Flag to activate verbose mode, local var.
-   integer(I8P)                                     :: mem_free, mem_total !< CPU memory.
+   integer(I1P), allocatable, intent(inout)        :: var(:)              !< Varibale to be allocate on CPU.
+   integer(I4P),              intent(in)           :: ulb(2)              !< Upper/lower bounds of variable.
+   integer(I4P),              intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),              intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                   intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                    :: file_unit_          !< File unit for verbose output, local var.
+   character(:), allocatable                       :: msg_                !< Message to be printed in verbose mode, local var.
+   logical                                         :: verbose_            !< Flag to activate verbose mode, local var.
+   integer(I8P)                                    :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1):ulb(2)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_I1P_1D
 
-   subroutine alloc_var_I1P_2D(var, ulb, msg, verbose)
+   subroutine alloc_var_I1P_2D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind I1P, rank 2).
    !<
    !<```fortran
@@ -1732,33 +1948,38 @@ contains
    !< integer(I4P)              :: ulb(2,2)=reshape([1,1, &
    !<                                                1,2],&
    !<                                               [2,2])
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   integer(I1P), allocatable, intent(inout)         :: var(:,:)            !< Varibale to be allocate on CPU.
-   integer(I4P),              intent(in)            :: ulb(2,2)            !< Upper/lower bounds of variable.
-   character(*),              intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                   intent(in), optional  :: verbose             !< Flag to activate verbose mode.
-   character(:), allocatable                        :: msg_                !< Message to be printed in verbose mode, local var.
-   logical                                          :: verbose_            !< Flag to activate verbose mode, local var.
-   integer(I8P)                                     :: mem_free, mem_total !< CPU memory.
+   integer(I1P), allocatable, intent(inout)        :: var(:,:)            !< Varibale to be allocate on CPU.
+   integer(I4P),              intent(in)           :: ulb(2,2)            !< Upper/lower bounds of variable.
+   integer(I4P),              intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),              intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                   intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                    :: file_unit_          !< File unit for verbose output, local var.
+   character(:), allocatable                       :: msg_                !< Message to be printed in verbose mode, local var.
+   logical                                         :: verbose_            !< Flag to activate verbose mode, local var.
+   integer(I8P)                                    :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1,1):ulb(2,1), ulb(1,2):ulb(2,2)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_I1P_2D
 
-   subroutine alloc_var_I1P_3D(var, ulb, msg, verbose)
+   subroutine alloc_var_I1P_3D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind I1P, rank 3).
    !<
    !<```fortran
@@ -1768,33 +1989,38 @@ contains
    !<                                                1,2, &
    !<                                                1,3],&
    !<                                               [2,3])
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   integer(I1P), allocatable, intent(inout)         :: var(:,:,:)          !< Varibale to be allocate on CPU.
-   integer(I4P),              intent(in)            :: ulb(2,3)            !< Upper/lower bounds of variable.
-   character(*),              intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                   intent(in), optional  :: verbose             !< Flag to activate verbose mode.
-   character(:), allocatable                        :: msg_                !< Message to be printed in verbose mode, local var.
-   logical                                          :: verbose_            !< Flag to activate verbose mode, local var.
-   integer(I8P)                                     :: mem_free, mem_total !< CPU memory.
+   integer(I1P), allocatable, intent(inout)        :: var(:,:,:)          !< Varibale to be allocate on CPU.
+   integer(I4P),              intent(in)           :: ulb(2,3)            !< Upper/lower bounds of variable.
+   integer(I4P),              intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),              intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                   intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                    :: file_unit_          !< File unit for verbose output, local var.
+   character(:), allocatable                       :: msg_                !< Message to be printed in verbose mode, local var.
+   logical                                         :: verbose_            !< Flag to activate verbose mode, local var.
+   integer(I8P)                                    :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1,1):ulb(2,1), ulb(1,2):ulb(2,2), ulb(1,3):ulb(2,3)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_I1P_3D
 
-   subroutine alloc_var_I1P_4D(var, ulb, msg, verbose)
+   subroutine alloc_var_I1P_4D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind I1P, rank 4).
    !<
    !<```fortran
@@ -1805,33 +2031,38 @@ contains
    !<                                                1,3, &
    !<                                                1,4],&
    !<                                               [2,4])
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   integer(I1P), allocatable, intent(inout)         :: var(:,:,:,:)        !< Varibale to be allocate on CPU.
-   integer(I4P),              intent(in)            :: ulb(2,4)            !< Upper/lower bounds of variable.
-   character(*),              intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                   intent(in), optional  :: verbose             !< Flag to activate verbose mode.
-   character(:), allocatable                        :: msg_                !< Message to be printed in verbose mode, local var.
-   logical                                          :: verbose_            !< Flag to activate verbose mode, local var.
-   integer(I8P)                                     :: mem_free, mem_total !< CPU memory.
+   integer(I1P), allocatable, intent(inout)        :: var(:,:,:,:)        !< Varibale to be allocate on CPU.
+   integer(I4P),              intent(in)           :: ulb(2,4)            !< Upper/lower bounds of variable.
+   integer(I4P),              intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),              intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                   intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                    :: file_unit_          !< File unit for verbose output, local var.
+   character(:), allocatable                       :: msg_                !< Message to be printed in verbose mode, local var.
+   logical                                         :: verbose_            !< Flag to activate verbose mode, local var.
+   integer(I8P)                                    :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1,1):ulb(2,1), ulb(1,2):ulb(2,2), ulb(1,3):ulb(2,3), ulb(1,4):ulb(2,4)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_I1P_4D
 
-   subroutine alloc_var_I1P_5D(var, ulb, msg, verbose)
+   subroutine alloc_var_I1P_5D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind I1P, rank 5).
    !<
    !<```fortran
@@ -1843,33 +2074,38 @@ contains
    !<                                                1,4, &
    !<                                                1,5],&
    !<                                               [2,5])
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   integer(I1P), allocatable, intent(inout)         :: var(:,:,:,:,:)      !< Varibale to be allocate on CPU.
-   integer(I4P),              intent(in)            :: ulb(2,5)            !< Upper/lower bounds of variable.
-   character(*),              intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                   intent(in), optional  :: verbose             !< Flag to activate verbose mode.
-   character(:), allocatable                        :: msg_                !< Message to be printed in verbose mode, local var.
-   logical                                          :: verbose_            !< Flag to activate verbose mode, local var.
-   integer(I8P)                                     :: mem_free, mem_total !< CPU memory.
+   integer(I1P), allocatable, intent(inout)        :: var(:,:,:,:,:)      !< Varibale to be allocate on CPU.
+   integer(I4P),              intent(in)           :: ulb(2,5)            !< Upper/lower bounds of variable.
+   integer(I4P),              intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),              intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                   intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                    :: file_unit_          !< File unit for verbose output, local var.
+   character(:), allocatable                       :: msg_                !< Message to be printed in verbose mode, local var.
+   logical                                         :: verbose_            !< Flag to activate verbose mode, local var.
+   integer(I8P)                                    :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1,1):ulb(2,1), ulb(1,2):ulb(2,2), ulb(1,3):ulb(2,3), ulb(1,4):ulb(2,4), ulb(1,5):ulb(2,5)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_I1P_5D
 
-   subroutine alloc_var_I1P_6D(var, ulb, msg, verbose)
+   subroutine alloc_var_I1P_6D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind I1P, rank 6).
    !<
    !<```fortran
@@ -1882,33 +2118,38 @@ contains
    !<                                                1,5, &
    !<                                                1,6],&
    !<                                               [2,6])
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   integer(I1P), allocatable, intent(inout)         :: var(:,:,:,:,:,:)    !< Varibale to be allocate on CPU.
-   integer(I4P),              intent(in)            :: ulb(2,6)            !< Upper/lower bounds of variable.
-   character(*),              intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                   intent(in), optional  :: verbose             !< Flag to activate verbose mode.
-   character(:), allocatable                        :: msg_                !< Message to be printed in verbose mode, local var.
-   logical                                          :: verbose_            !< Flag to activate verbose mode, local var.
-   integer(I8P)                                     :: mem_free, mem_total !< CPU memory.
+   integer(I1P), allocatable, intent(inout)        :: var(:,:,:,:,:,:)    !< Varibale to be allocate on CPU.
+   integer(I4P),              intent(in)           :: ulb(2,6)            !< Upper/lower bounds of variable.
+   integer(I4P),              intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),              intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                   intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                    :: file_unit_          !< File unit for verbose output, local var.
+   character(:), allocatable                       :: msg_                !< Message to be printed in verbose mode, local var.
+   logical                                         :: verbose_            !< Flag to activate verbose mode, local var.
+   integer(I8P)                                    :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1,1):ulb(2,1), ulb(1,2):ulb(2,2), ulb(1,3):ulb(2,3), ulb(1,4):ulb(2,4), ulb(1,5):ulb(2,5), ulb(1,6):ulb(2,6)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_I1P_6D
 
-   subroutine alloc_var_I1P_7D(var, ulb, msg, verbose)
+   subroutine alloc_var_I1P_7D(var, ulb, file_unit, msg, verbose)
    !< Allocate CPU variable with memory checking (kind I1P, rank 7).
    !<
    !<```fortran
@@ -1922,36 +2163,41 @@ contains
    !<                                                1,6, &
    !<                                                1,7],&
    !<                                               [2,7])
-   !< call allocate_variable(a, ulb)
+   !< open(unit=666, file='doctest-mem.log')
+   !< call allocate_variable(a, ulb, file_unit=666, verbose=.true.)
+   !< close(666, status='delete')
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   integer(I1P), allocatable, intent(inout)         :: var(:,:,:,:,:,:,:)  !< Varibale to be allocate on CPU.
-   integer(I4P),              intent(in)            :: ulb(2,7)            !< Upper/lower bounds of variable.
-   character(*),              intent(in), optional  :: msg                 !< Message to be printed in verbose mode.
-   logical,                   intent(in), optional  :: verbose             !< Flag to activate verbose mode.
-   character(:), allocatable                        :: msg_                !< Message to be printed in verbose mode, local var.
-   logical                                          :: verbose_            !< Flag to activate verbose mode, local var.
-   integer(I8P)                                     :: mem_free, mem_total !< CPU memory.
+   integer(I1P), allocatable, intent(inout)        :: var(:,:,:,:,:,:,:)  !< Varibale to be allocate on CPU.
+   integer(I4P),              intent(in)           :: ulb(2,7)            !< Upper/lower bounds of variable.
+   integer(I4P),              intent(in), optional :: file_unit           !< File unit for verbose output.
+   character(*),              intent(in), optional :: msg                 !< Message to be printed in verbose mode.
+   logical,                   intent(in), optional :: verbose             !< Flag to activate verbose mode.
+   integer(I4P)                                    :: file_unit_          !< File unit for verbose output, local var.
+   character(:), allocatable                       :: msg_                !< Message to be printed in verbose mode, local var.
+   logical                                         :: verbose_            !< Flag to activate verbose mode, local var.
+   integer(I8P)                                    :: mem_free, mem_total !< CPU memory.
 
-   msg_     = ''      ; if (present(msg    )) msg_     = msg
-   verbose_ = .false. ; if (present(verbose)) verbose_ = verbose
+   file_unit_ = stdout  ; if (present(file_unit)) file_unit_ = file_unit
+   msg_       = ''      ; if (present(msg    ))   msg_       = msg
+   verbose_   = .false. ; if (present(verbose))   verbose_   = verbose
    if (allocated(var)) deallocate(var)
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory BEFORE allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    allocate(var(ulb(1,1):ulb(2,1), ulb(1,2):ulb(2,2), ulb(1,3):ulb(2,3), ulb(1,4):ulb(2,4), ulb(1,5):ulb(2,5), ulb(1,6):ulb(2,6), &
                 ulb(1,7):ulb(2,7)))
    if (verbose_) then
       call get_memory_info(mem_total, mem_free)
-      print '(A)', msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
+      write(file_unit_,'(A)') msg_//'free/total memory AFTER  allocate:'//trim(str([mem_free,mem_total]))//'[bytes]'
    endif
    endsubroutine alloc_var_I1P_7D
 
    ! assign_allocatable
    ! R16P
-   subroutine assign_allocatable_R16P_1D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_R16P_1D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind R16P, rank 1).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -1963,21 +2209,22 @@ contains
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   real(R16P), allocatable, intent(inout)        :: lhs(:)  !< Left hand side of assignement.
-   real(R16P), allocatable, intent(in)           :: rhs(:)  !< Right hand side of assignement.
-   character(*),            intent(in), optional :: msg     !< Message to be printed in verbose mode.
-   logical,                 intent(in), optional :: verbose !< Flag to activate verbose mode.
+   real(R16P), allocatable, intent(inout)        :: lhs(:)    !< Left hand side of assignement.
+   real(R16P), allocatable, intent(in)           :: rhs(:)    !< Right hand side of assignement.
+   integer(I4P),            intent(in), optional :: file_unit !< File unit for verbose output.
+   character(*),            intent(in), optional :: msg       !< Message to be printed in verbose mode.
+   logical,                 intent(in), optional :: verbose   !< Flag to activate verbose mode.
 
    if (allocated(lhs)) deallocate(lhs)
    if (allocated(rhs)) then
       if (size(rhs, dim=1)>0) then
-         call allocate_variable(var=lhs, ulb=[lbound(rhs,dim=1),ubound(rhs,dim=1)], msg=msg, verbose=verbose)
+         call allocate_variable(var=lhs, ulb=[lbound(rhs,dim=1),ubound(rhs,dim=1)], file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_R16P_1D
 
-   subroutine assign_allocatable_R16P_2D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_R16P_2D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind R16P, rank 2).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -1989,10 +2236,11 @@ contains
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   real(R16P), allocatable, intent(inout)        :: lhs(:,:) !< Left hand side of assignement.
-   real(R16P), allocatable, intent(in)           :: rhs(:,:) !< Right hand side of assignement.
-   character(*),            intent(in), optional :: msg      !< Message to be printed in verbose mode.
-   logical,                 intent(in), optional :: verbose  !< Flag to activate verbose mode.
+   real(R16P), allocatable, intent(inout)        :: lhs(:,:)  !< Left hand side of assignement.
+   real(R16P), allocatable, intent(in)           :: rhs(:,:)  !< Right hand side of assignement.
+   integer(I4P),            intent(in), optional :: file_unit !< File unit for verbose output.
+   character(*),            intent(in), optional :: msg       !< Message to be printed in verbose mode.
+   logical,                 intent(in), optional :: verbose   !< Flag to activate verbose mode.
 
    if (allocated(lhs)) deallocate(lhs)
    if (allocated(rhs)) then
@@ -2000,13 +2248,13 @@ contains
          call allocate_variable(var=lhs,                                                  &
                                 ulb=reshape([lbound(rhs,dim=1),ubound(rhs,dim=1),         &
                                              lbound(rhs,dim=2),ubound(rhs,dim=2)],[2,2]), &
-                                msg=msg, verbose=verbose)
+                                file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_R16P_2D
 
-   subroutine assign_allocatable_R16P_3D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_R16P_3D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind R16P, rank 3).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -2020,6 +2268,7 @@ contains
    !=> T <<<
    real(R16P), allocatable, intent(inout)        :: lhs(:,:,:) !< Left hand side of assignement.
    real(R16P), allocatable, intent(in)           :: rhs(:,:,:) !< Right hand side of assignement.
+   integer(I4P),            intent(in), optional :: file_unit  !< File unit for verbose output.
    character(*),            intent(in), optional :: msg        !< Message to be printed in verbose mode.
    logical,                 intent(in), optional :: verbose    !< Flag to activate verbose mode.
 
@@ -2030,13 +2279,13 @@ contains
                                 ulb=reshape([lbound(rhs,dim=1),ubound(rhs,dim=1),         &
                                              lbound(rhs,dim=2),ubound(rhs,dim=2),         &
                                              lbound(rhs,dim=3),ubound(rhs,dim=3)],[2,3]), &
-                                msg=msg, verbose=verbose)
+                                file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_R16P_3D
 
-   subroutine assign_allocatable_R16P_4D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_R16P_4D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind R16P, rank 4).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -2050,6 +2299,7 @@ contains
    !=> T <<<
    real(R16P), allocatable, intent(inout)        :: lhs(:,:,:,:) !< Left hand side of assignement.
    real(R16P), allocatable, intent(in)           :: rhs(:,:,:,:) !< Right hand side of assignement.
+   integer(I4P),            intent(in), optional :: file_unit    !< File unit for verbose output.
    character(*),            intent(in), optional :: msg          !< Message to be printed in verbose mode.
    logical,                 intent(in), optional :: verbose      !< Flag to activate verbose mode.
 
@@ -2061,13 +2311,13 @@ contains
                                              lbound(rhs,dim=2),ubound(rhs,dim=2),         &
                                              lbound(rhs,dim=3),ubound(rhs,dim=3),         &
                                              lbound(rhs,dim=4),ubound(rhs,dim=4)],[2,4]), &
-                                msg=msg, verbose=verbose)
+                                file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_R16P_4D
 
-   subroutine assign_allocatable_R16P_5D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_R16P_5D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind R16P, rank 5).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -2081,6 +2331,7 @@ contains
    !=> T <<<
    real(R16P), allocatable, intent(inout)        :: lhs(:,:,:,:,:) !< Left hand side of assignement.
    real(R16P), allocatable, intent(in)           :: rhs(:,:,:,:,:) !< Right hand side of assignement.
+   integer(I4P),            intent(in), optional :: file_unit      !< File unit for verbose output.
    character(*),            intent(in), optional :: msg            !< Message to be printed in verbose mode.
    logical,                 intent(in), optional :: verbose        !< Flag to activate verbose mode.
 
@@ -2093,13 +2344,13 @@ contains
                                              lbound(rhs,dim=3),ubound(rhs,dim=3),         &
                                              lbound(rhs,dim=4),ubound(rhs,dim=4),         &
                                              lbound(rhs,dim=5),ubound(rhs,dim=5)],[2,5]), &
-                                msg=msg, verbose=verbose)
+                                file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_R16P_5D
 
-   subroutine assign_allocatable_R16P_6D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_R16P_6D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind R16P, rank 6).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -2113,6 +2364,7 @@ contains
    !=> T <<<
    real(R16P), allocatable, intent(inout)        :: lhs(:,:,:,:,:,:) !< Left hand side of assignement.
    real(R16P), allocatable, intent(in)           :: rhs(:,:,:,:,:,:) !< Right hand side of assignement.
+   integer(I4P),            intent(in), optional :: file_unit        !< File unit for verbose output.
    character(*),            intent(in), optional :: msg              !< Message to be printed in verbose mode.
    logical,                 intent(in), optional :: verbose          !< Flag to activate verbose mode.
 
@@ -2126,13 +2378,13 @@ contains
                                              lbound(rhs,dim=4),ubound(rhs,dim=4),         &
                                              lbound(rhs,dim=5),ubound(rhs,dim=5),         &
                                              lbound(rhs,dim=6),ubound(rhs,dim=6)],[2,6]), &
-                                msg=msg, verbose=verbose)
+                                file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_R16P_6D
 
-   subroutine assign_allocatable_R16P_7D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_R16P_7D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind R16P, rank 7).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -2146,6 +2398,7 @@ contains
    !=> T <<<
    real(R16P), allocatable, intent(inout)        :: lhs(:,:,:,:,:,:,:) !< Left hand side of assignement.
    real(R16P), allocatable, intent(in)           :: rhs(:,:,:,:,:,:,:) !< Right hand side of assignement.
+   integer(I4P),            intent(in), optional :: file_unit          !< File unit for verbose output.
    character(*),            intent(in), optional :: msg                !< Message to be printed in verbose mode.
    logical,                 intent(in), optional :: verbose            !< Flag to activate verbose mode.
 
@@ -2160,14 +2413,14 @@ contains
                                              lbound(rhs,dim=5),ubound(rhs,dim=5),         &
                                              lbound(rhs,dim=6),ubound(rhs,dim=6),         &
                                              lbound(rhs,dim=7),ubound(rhs,dim=7)],[2,7]), &
-                                msg=msg, verbose=verbose)
+                                file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_R16P_7D
 
    ! R8P
-   subroutine assign_allocatable_R8P_1D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_R8P_1D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind R8P, rank 1).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -2179,21 +2432,22 @@ contains
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   real(R8P), allocatable, intent(inout)        :: lhs(:)  !< Left hand side of assignement.
-   real(R8P), allocatable, intent(in)           :: rhs(:)  !< Right hand side of assignement.
-   character(*),           intent(in), optional :: msg     !< Message to be printed in verbose mode.
-   logical,                intent(in), optional :: verbose !< Flag to activate verbose mode.
+   real(R8P), allocatable, intent(inout)        :: lhs(:)    !< Left hand side of assignement.
+   real(R8P), allocatable, intent(in)           :: rhs(:)    !< Right hand side of assignement.
+   integer(I4P),           intent(in), optional :: file_unit !< File unit for verbose output.
+   character(*),           intent(in), optional :: msg       !< Message to be printed in verbose mode.
+   logical,                intent(in), optional :: verbose   !< Flag to activate verbose mode.
 
    if (allocated(lhs)) deallocate(lhs)
    if (allocated(rhs)) then
       if (size(rhs, dim=1)>0) then
-         call allocate_variable(var=lhs, ulb=[lbound(rhs,dim=1),ubound(rhs,dim=1)], msg=msg, verbose=verbose)
+         call allocate_variable(var=lhs, ulb=[lbound(rhs,dim=1),ubound(rhs,dim=1)], file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_R8P_1D
 
-   subroutine assign_allocatable_R8P_2D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_R8P_2D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind R8P, rank 2).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -2205,10 +2459,11 @@ contains
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   real(R8P), allocatable, intent(inout)        :: lhs(:,:) !< Left hand side of assignement.
-   real(R8P), allocatable, intent(in)           :: rhs(:,:) !< Right hand side of assignement.
-   character(*),           intent(in), optional :: msg      !< Message to be printed in verbose mode.
-   logical,                intent(in), optional :: verbose  !< Flag to activate verbose mode.
+   real(R8P), allocatable, intent(inout)        :: lhs(:,:)  !< Left hand side of assignement.
+   real(R8P), allocatable, intent(in)           :: rhs(:,:)  !< Right hand side of assignement.
+   integer(I4P),           intent(in), optional :: file_unit !< File unit for verbose output.
+   character(*),           intent(in), optional :: msg       !< Message to be printed in verbose mode.
+   logical,                intent(in), optional :: verbose   !< Flag to activate verbose mode.
 
    if (allocated(lhs)) deallocate(lhs)
    if (allocated(rhs)) then
@@ -2216,13 +2471,13 @@ contains
          call allocate_variable(var=lhs,                                                  &
                                 ulb=reshape([lbound(rhs,dim=1),ubound(rhs,dim=1),         &
                                              lbound(rhs,dim=2),ubound(rhs,dim=2)],[2,2]), &
-                                msg=msg, verbose=verbose)
+                                file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_R8P_2D
 
-   subroutine assign_allocatable_R8P_3D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_R8P_3D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind R8P, rank 3).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -2236,6 +2491,7 @@ contains
    !=> T <<<
    real(R8P), allocatable, intent(inout)        :: lhs(:,:,:) !< Left hand side of assignement.
    real(R8P), allocatable, intent(in)           :: rhs(:,:,:) !< Right hand side of assignement.
+   integer(I4P),           intent(in), optional :: file_unit  !< File unit for verbose output.
    character(*),           intent(in), optional :: msg        !< Message to be printed in verbose mode.
    logical,                intent(in), optional :: verbose    !< Flag to activate verbose mode.
 
@@ -2246,13 +2502,13 @@ contains
                                 ulb=reshape([lbound(rhs,dim=1),ubound(rhs,dim=1),         &
                                              lbound(rhs,dim=2),ubound(rhs,dim=2),         &
                                              lbound(rhs,dim=3),ubound(rhs,dim=3)],[2,3]), &
-                                msg=msg, verbose=verbose)
+                                file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_R8P_3D
 
-   subroutine assign_allocatable_R8P_4D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_R8P_4D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind R8P, rank 4).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -2266,6 +2522,7 @@ contains
    !=> T <<<
    real(R8P), allocatable, intent(inout)        :: lhs(:,:,:,:) !< Left hand side of assignement.
    real(R8P), allocatable, intent(in)           :: rhs(:,:,:,:) !< Right hand side of assignement.
+   integer(I4P),           intent(in), optional :: file_unit    !< File unit for verbose output.
    character(*),           intent(in), optional :: msg          !< Message to be printed in verbose mode.
    logical,                intent(in), optional :: verbose      !< Flag to activate verbose mode.
 
@@ -2277,13 +2534,13 @@ contains
                                              lbound(rhs,dim=2),ubound(rhs,dim=2),         &
                                              lbound(rhs,dim=3),ubound(rhs,dim=3),         &
                                              lbound(rhs,dim=4),ubound(rhs,dim=4)],[2,4]), &
-                                msg=msg, verbose=verbose)
+                                file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_R8P_4D
 
-   subroutine assign_allocatable_R8P_5D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_R8P_5D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind R8P, rank 5).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -2297,6 +2554,7 @@ contains
    !=> T <<<
    real(R8P), allocatable, intent(inout)        :: lhs(:,:,:,:,:) !< Left hand side of assignement.
    real(R8P), allocatable, intent(in)           :: rhs(:,:,:,:,:) !< Right hand side of assignement.
+   integer(I4P),           intent(in), optional :: file_unit      !< File unit for verbose output.
    character(*),           intent(in), optional :: msg            !< Message to be printed in verbose mode.
    logical,                intent(in), optional :: verbose        !< Flag to activate verbose mode.
 
@@ -2309,13 +2567,13 @@ contains
                                              lbound(rhs,dim=3),ubound(rhs,dim=3),         &
                                              lbound(rhs,dim=4),ubound(rhs,dim=4),         &
                                              lbound(rhs,dim=5),ubound(rhs,dim=5)],[2,5]), &
-                                msg=msg, verbose=verbose)
+                                file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_R8P_5D
 
-   subroutine assign_allocatable_R8P_6D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_R8P_6D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind R8P, rank 6).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -2329,6 +2587,7 @@ contains
    !=> T <<<
    real(R8P), allocatable, intent(inout)        :: lhs(:,:,:,:,:,:) !< Left hand side of assignement.
    real(R8P), allocatable, intent(in)           :: rhs(:,:,:,:,:,:) !< Right hand side of assignement.
+   integer(I4P),           intent(in), optional :: file_unit        !< File unit for verbose output.
    character(*),           intent(in), optional :: msg              !< Message to be printed in verbose mode.
    logical,                intent(in), optional :: verbose          !< Flag to activate verbose mode.
 
@@ -2342,13 +2601,13 @@ contains
                                              lbound(rhs,dim=4),ubound(rhs,dim=4),         &
                                              lbound(rhs,dim=5),ubound(rhs,dim=5),         &
                                              lbound(rhs,dim=6),ubound(rhs,dim=6)],[2,6]), &
-                                msg=msg, verbose=verbose)
+                                file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_R8P_6D
 
-   subroutine assign_allocatable_R8P_7D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_R8P_7D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind R8P, rank 7).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -2362,6 +2621,7 @@ contains
    !=> T <<<
    real(R8P), allocatable, intent(inout)        :: lhs(:,:,:,:,:,:,:) !< Left hand side of assignement.
    real(R8P), allocatable, intent(in)           :: rhs(:,:,:,:,:,:,:) !< Right hand side of assignement.
+   integer(I4P),           intent(in), optional :: file_unit          !< File unit for verbose output.
    character(*),           intent(in), optional :: msg                !< Message to be printed in verbose mode.
    logical,                intent(in), optional :: verbose            !< Flag to activate verbose mode.
 
@@ -2376,14 +2636,14 @@ contains
                                              lbound(rhs,dim=5),ubound(rhs,dim=5),         &
                                              lbound(rhs,dim=6),ubound(rhs,dim=6),         &
                                              lbound(rhs,dim=7),ubound(rhs,dim=7)],[2,7]), &
-                                msg=msg, verbose=verbose)
+                                file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_R8P_7D
 
    ! R4P
-   subroutine assign_allocatable_R4P_1D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_R4P_1D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind R4P, rank 1).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -2395,21 +2655,22 @@ contains
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   real(R4P), allocatable, intent(inout)        :: lhs(:)  !< Left hand side of assignement.
-   real(R4P), allocatable, intent(in)           :: rhs(:)  !< Right hand side of assignement.
-   character(*),           intent(in), optional :: msg     !< Message to be printed in verbose mode.
-   logical,                intent(in), optional :: verbose !< Flag to activate verbose mode.
+   real(R4P), allocatable, intent(inout)        :: lhs(:)    !< Left hand side of assignement.
+   real(R4P), allocatable, intent(in)           :: rhs(:)    !< Right hand side of assignement.
+   integer(I4P),           intent(in), optional :: file_unit !< File unit for verbose output.
+   character(*),           intent(in), optional :: msg       !< Message to be printed in verbose mode.
+   logical,                intent(in), optional :: verbose   !< Flag to activate verbose mode.
 
    if (allocated(lhs)) deallocate(lhs)
    if (allocated(rhs)) then
       if (size(rhs, dim=1)>0) then
-         call allocate_variable(var=lhs, ulb=[lbound(rhs,dim=1),ubound(rhs,dim=1)], msg=msg, verbose=verbose)
+         call allocate_variable(var=lhs, ulb=[lbound(rhs,dim=1),ubound(rhs,dim=1)], file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_R4P_1D
 
-   subroutine assign_allocatable_R4P_2D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_R4P_2D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind R4P, rank 2).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -2421,10 +2682,11 @@ contains
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   real(R4P), allocatable, intent(inout)        :: lhs(:,:) !< Left hand side of assignement.
-   real(R4P), allocatable, intent(in)           :: rhs(:,:) !< Right hand side of assignement.
-   character(*),           intent(in), optional :: msg      !< Message to be printed in verbose mode.
-   logical,                intent(in), optional :: verbose  !< Flag to activate verbose mode.
+   real(R4P), allocatable, intent(inout)        :: lhs(:,:)  !< Left hand side of assignement.
+   real(R4P), allocatable, intent(in)           :: rhs(:,:)  !< Right hand side of assignement.
+   integer(I4P),           intent(in), optional :: file_unit !< File unit for verbose output.
+   character(*),           intent(in), optional :: msg       !< Message to be printed in verbose mode.
+   logical,                intent(in), optional :: verbose   !< Flag to activate verbose mode.
 
    if (allocated(lhs)) deallocate(lhs)
    if (allocated(rhs)) then
@@ -2432,13 +2694,13 @@ contains
          call allocate_variable(var=lhs,                                                  &
                                 ulb=reshape([lbound(rhs,dim=1),ubound(rhs,dim=1),         &
                                              lbound(rhs,dim=2),ubound(rhs,dim=2)],[2,2]), &
-                                msg=msg, verbose=verbose)
+                                file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_R4P_2D
 
-   subroutine assign_allocatable_R4P_3D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_R4P_3D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind R4P, rank 3).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -2452,6 +2714,7 @@ contains
    !=> T <<<
    real(R4P), allocatable, intent(inout)        :: lhs(:,:,:) !< Left hand side of assignement.
    real(R4P), allocatable, intent(in)           :: rhs(:,:,:) !< Right hand side of assignement.
+   integer(I4P),           intent(in), optional :: file_unit  !< File unit for verbose output.
    character(*),           intent(in), optional :: msg        !< Message to be printed in verbose mode.
    logical,                intent(in), optional :: verbose    !< Flag to activate verbose mode.
 
@@ -2462,13 +2725,13 @@ contains
                                 ulb=reshape([lbound(rhs,dim=1),ubound(rhs,dim=1),         &
                                              lbound(rhs,dim=2),ubound(rhs,dim=2),         &
                                              lbound(rhs,dim=3),ubound(rhs,dim=3)],[2,3]), &
-                                msg=msg, verbose=verbose)
+                                file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_R4P_3D
 
-   subroutine assign_allocatable_R4P_4D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_R4P_4D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind R4P, rank 4).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -2482,6 +2745,7 @@ contains
    !=> T <<<
    real(R4P), allocatable, intent(inout)        :: lhs(:,:,:,:) !< Left hand side of assignement.
    real(R4P), allocatable, intent(in)           :: rhs(:,:,:,:) !< Right hand side of assignement.
+   integer(I4P),           intent(in), optional :: file_unit    !< File unit for verbose output.
    character(*),           intent(in), optional :: msg          !< Message to be printed in verbose mode.
    logical,                intent(in), optional :: verbose      !< Flag to activate verbose mode.
 
@@ -2493,13 +2757,13 @@ contains
                                              lbound(rhs,dim=2),ubound(rhs,dim=2),         &
                                              lbound(rhs,dim=3),ubound(rhs,dim=3),         &
                                              lbound(rhs,dim=4),ubound(rhs,dim=4)],[2,4]), &
-                                msg=msg, verbose=verbose)
+                                file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_R4P_4D
 
-   subroutine assign_allocatable_R4P_5D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_R4P_5D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind R4P, rank 5).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -2513,6 +2777,7 @@ contains
    !=> T <<<
    real(R4P), allocatable, intent(inout)        :: lhs(:,:,:,:,:) !< Left hand side of assignement.
    real(R4P), allocatable, intent(in)           :: rhs(:,:,:,:,:) !< Right hand side of assignement.
+   integer(I4P),           intent(in), optional :: file_unit      !< File unit for verbose output.
    character(*),           intent(in), optional :: msg            !< Message to be printed in verbose mode.
    logical,                intent(in), optional :: verbose        !< Flag to activate verbose mode.
 
@@ -2525,13 +2790,13 @@ contains
                                              lbound(rhs,dim=3),ubound(rhs,dim=3),         &
                                              lbound(rhs,dim=4),ubound(rhs,dim=4),         &
                                              lbound(rhs,dim=5),ubound(rhs,dim=5)],[2,5]), &
-                                msg=msg, verbose=verbose)
+                                file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_R4P_5D
 
-   subroutine assign_allocatable_R4P_6D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_R4P_6D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind R4P, rank 6).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -2545,6 +2810,7 @@ contains
    !=> T <<<
    real(R4P), allocatable, intent(inout)        :: lhs(:,:,:,:,:,:) !< Left hand side of assignement.
    real(R4P), allocatable, intent(in)           :: rhs(:,:,:,:,:,:) !< Right hand side of assignement.
+   integer(I4P),           intent(in), optional :: file_unit        !< File unit for verbose output.
    character(*),           intent(in), optional :: msg              !< Message to be printed in verbose mode.
    logical,                intent(in), optional :: verbose          !< Flag to activate verbose mode.
 
@@ -2558,13 +2824,13 @@ contains
                                              lbound(rhs,dim=4),ubound(rhs,dim=4),         &
                                              lbound(rhs,dim=5),ubound(rhs,dim=5),         &
                                              lbound(rhs,dim=6),ubound(rhs,dim=6)],[2,6]), &
-                                msg=msg, verbose=verbose)
+                                file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_R4P_6D
 
-   subroutine assign_allocatable_R4P_7D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_R4P_7D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind R4P, rank 7).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -2578,6 +2844,7 @@ contains
    !=> T <<<
    real(R4P), allocatable, intent(inout)        :: lhs(:,:,:,:,:,:,:) !< Left hand side of assignement.
    real(R4P), allocatable, intent(in)           :: rhs(:,:,:,:,:,:,:) !< Right hand side of assignement.
+   integer(I4P),           intent(in), optional :: file_unit          !< File unit for verbose output.
    character(*),           intent(in), optional :: msg                !< Message to be printed in verbose mode.
    logical,                intent(in), optional :: verbose            !< Flag to activate verbose mode.
 
@@ -2592,14 +2859,14 @@ contains
                                              lbound(rhs,dim=5),ubound(rhs,dim=5),         &
                                              lbound(rhs,dim=6),ubound(rhs,dim=6),         &
                                              lbound(rhs,dim=7),ubound(rhs,dim=7)],[2,7]), &
-                                msg=msg, verbose=verbose)
+                                file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_R4P_7D
 
    ! I8P
-   subroutine assign_allocatable_I8P_1D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_I8P_1D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind I8P, rank 1).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -2611,21 +2878,22 @@ contains
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   integer(I8P), allocatable, intent(inout)        :: lhs(:)  !< Left hand side of assignement.
-   integer(I8P), allocatable, intent(in)           :: rhs(:)  !< Right hand side of assignement.
-   character(*),              intent(in), optional :: msg     !< Message to be printed in verbose mode.
-   logical,                   intent(in), optional :: verbose !< Flag to activate verbose mode.
+   integer(I8P), allocatable, intent(inout)        :: lhs(:)    !< Left hand side of assignement.
+   integer(I8P), allocatable, intent(in)           :: rhs(:)    !< Right hand side of assignement.
+   integer(I4P),              intent(in), optional :: file_unit !< File unit for verbose output.
+   character(*),              intent(in), optional :: msg       !< Message to be printed in verbose mode.
+   logical,                   intent(in), optional :: verbose   !< Flag to activate verbose mode.
 
    if (allocated(lhs)) deallocate(lhs)
    if (allocated(rhs)) then
       if (size(rhs, dim=1)>0) then
-         call allocate_variable(var=lhs, ulb=[lbound(rhs,dim=1),ubound(rhs,dim=1)], msg=msg, verbose=verbose)
+         call allocate_variable(var=lhs, ulb=[lbound(rhs,dim=1),ubound(rhs,dim=1)], file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_I8P_1D
 
-   subroutine assign_allocatable_I8P_2D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_I8P_2D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind I8P, rank 2).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -2637,10 +2905,11 @@ contains
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   integer(I8P), allocatable, intent(inout)        :: lhs(:,:) !< Left hand side of assignement.
-   integer(I8P), allocatable, intent(in)           :: rhs(:,:) !< Right hand side of assignement.
-   character(*),              intent(in), optional :: msg      !< Message to be printed in verbose mode.
-   logical,                   intent(in), optional :: verbose  !< Flag to activate verbose mode.
+   integer(I8P), allocatable, intent(inout)        :: lhs(:,:)  !< Left hand side of assignement.
+   integer(I8P), allocatable, intent(in)           :: rhs(:,:)  !< Right hand side of assignement.
+   integer(I4P),              intent(in), optional :: file_unit !< File unit for verbose output.
+   character(*),              intent(in), optional :: msg       !< Message to be printed in verbose mode.
+   logical,                   intent(in), optional :: verbose   !< Flag to activate verbose mode.
 
    if (allocated(lhs)) deallocate(lhs)
    if (allocated(rhs)) then
@@ -2648,13 +2917,13 @@ contains
          call allocate_variable(var=lhs,                                                  &
                                 ulb=reshape([lbound(rhs,dim=1),ubound(rhs,dim=1),         &
                                              lbound(rhs,dim=2),ubound(rhs,dim=2)],[2,2]), &
-                                msg=msg, verbose=verbose)
+                                file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_I8P_2D
 
-   subroutine assign_allocatable_I8P_3D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_I8P_3D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind I8P, rank 3).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -2668,6 +2937,7 @@ contains
    !=> T <<<
    integer(I8P), allocatable, intent(inout)        :: lhs(:,:,:) !< Left hand side of assignement.
    integer(I8P), allocatable, intent(in)           :: rhs(:,:,:) !< Right hand side of assignement.
+   integer(I4P),              intent(in), optional :: file_unit  !< File unit for verbose output.
    character(*),              intent(in), optional :: msg        !< Message to be printed in verbose mode.
    logical,                   intent(in), optional :: verbose    !< Flag to activate verbose mode.
 
@@ -2678,13 +2948,13 @@ contains
                                 ulb=reshape([lbound(rhs,dim=1),ubound(rhs,dim=1),         &
                                              lbound(rhs,dim=2),ubound(rhs,dim=2),         &
                                              lbound(rhs,dim=3),ubound(rhs,dim=3)],[2,3]), &
-                                msg=msg, verbose=verbose)
+                                file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_I8P_3D
 
-   subroutine assign_allocatable_I8P_4D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_I8P_4D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind I8P, rank 4).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -2698,6 +2968,7 @@ contains
    !=> T <<<
    integer(I8P), allocatable, intent(inout)        :: lhs(:,:,:,:) !< Left hand side of assignement.
    integer(I8P), allocatable, intent(in)           :: rhs(:,:,:,:) !< Right hand side of assignement.
+   integer(I4P),              intent(in), optional :: file_unit    !< File unit for verbose output.
    character(*),              intent(in), optional :: msg          !< Message to be printed in verbose mode.
    logical,                   intent(in), optional :: verbose      !< Flag to activate verbose mode.
 
@@ -2709,13 +2980,13 @@ contains
                                              lbound(rhs,dim=2),ubound(rhs,dim=2),         &
                                              lbound(rhs,dim=3),ubound(rhs,dim=3),         &
                                              lbound(rhs,dim=4),ubound(rhs,dim=4)],[2,4]), &
-                                msg=msg, verbose=verbose)
+                                file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_I8P_4D
 
-   subroutine assign_allocatable_I8P_5D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_I8P_5D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind I8P, rank 5).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -2729,6 +3000,7 @@ contains
    !=> T <<<
    integer(I8P), allocatable, intent(inout)        :: lhs(:,:,:,:,:) !< Left hand side of assignement.
    integer(I8P), allocatable, intent(in)           :: rhs(:,:,:,:,:) !< Right hand side of assignement.
+   integer(I4P),              intent(in), optional :: file_unit      !< File unit for verbose output.
    character(*),              intent(in), optional :: msg            !< Message to be printed in verbose mode.
    logical,                   intent(in), optional :: verbose        !< Flag to activate verbose mode.
 
@@ -2741,13 +3013,13 @@ contains
                                              lbound(rhs,dim=3),ubound(rhs,dim=3),         &
                                              lbound(rhs,dim=4),ubound(rhs,dim=4),         &
                                              lbound(rhs,dim=5),ubound(rhs,dim=5)],[2,5]), &
-                                msg=msg, verbose=verbose)
+                                file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_I8P_5D
 
-   subroutine assign_allocatable_I8P_6D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_I8P_6D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind I8P, rank 6).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -2761,6 +3033,7 @@ contains
    !=> T <<<
    integer(I8P), allocatable, intent(inout)        :: lhs(:,:,:,:,:,:) !< Left hand side of assignement.
    integer(I8P), allocatable, intent(in)           :: rhs(:,:,:,:,:,:) !< Right hand side of assignement.
+   integer(I4P),              intent(in), optional :: file_unit        !< File unit for verbose output.
    character(*),              intent(in), optional :: msg              !< Message to be printed in verbose mode.
    logical,                   intent(in), optional :: verbose          !< Flag to activate verbose mode.
 
@@ -2774,13 +3047,13 @@ contains
                                              lbound(rhs,dim=4),ubound(rhs,dim=4),         &
                                              lbound(rhs,dim=5),ubound(rhs,dim=5),         &
                                              lbound(rhs,dim=6),ubound(rhs,dim=6)],[2,6]), &
-                                msg=msg, verbose=verbose)
+                                file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_I8P_6D
 
-   subroutine assign_allocatable_I8P_7D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_I8P_7D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind I8P, rank 7).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -2794,6 +3067,7 @@ contains
    !=> T <<<
    integer(I8P), allocatable, intent(inout)        :: lhs(:,:,:,:,:,:,:) !< Left hand side of assignement.
    integer(I8P), allocatable, intent(in)           :: rhs(:,:,:,:,:,:,:) !< Right hand side of assignement.
+   integer(I4P),              intent(in), optional :: file_unit          !< File unit for verbose output.
    character(*),              intent(in), optional :: msg                !< Message to be printed in verbose mode.
    logical,                   intent(in), optional :: verbose            !< Flag to activate verbose mode.
 
@@ -2808,14 +3082,14 @@ contains
                                              lbound(rhs,dim=5),ubound(rhs,dim=5),         &
                                              lbound(rhs,dim=6),ubound(rhs,dim=6),         &
                                              lbound(rhs,dim=7),ubound(rhs,dim=7)],[2,7]), &
-                                msg=msg, verbose=verbose)
+                                file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_I8P_7D
 
    ! I4P
-   subroutine assign_allocatable_I4P_1D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_I4P_1D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind I4P, rank 1).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -2827,21 +3101,22 @@ contains
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   integer(I4P), allocatable, intent(inout)        :: lhs(:)  !< Left hand side of assignement.
-   integer(I4P), allocatable, intent(in)           :: rhs(:)  !< Right hand side of assignement.
-   character(*),              intent(in), optional :: msg     !< Message to be printed in verbose mode.
-   logical,                   intent(in), optional :: verbose !< Flag to activate verbose mode.
+   integer(I4P), allocatable, intent(inout)        :: lhs(:)    !< Left hand side of assignement.
+   integer(I4P), allocatable, intent(in)           :: rhs(:)    !< Right hand side of assignement.
+   integer(I4P),              intent(in), optional :: file_unit !< File unit for verbose output.
+   character(*),              intent(in), optional :: msg       !< Message to be printed in verbose mode.
+   logical,                   intent(in), optional :: verbose   !< Flag to activate verbose mode.
 
    if (allocated(lhs)) deallocate(lhs)
    if (allocated(rhs)) then
       if (size(rhs, dim=1)>0) then
-         call allocate_variable(var=lhs, ulb=[lbound(rhs,dim=1),ubound(rhs,dim=1)], msg=msg, verbose=verbose)
+         call allocate_variable(var=lhs, ulb=[lbound(rhs,dim=1),ubound(rhs,dim=1)], file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_I4P_1D
 
-   subroutine assign_allocatable_I4P_2D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_I4P_2D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind I4P, rank 2).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -2853,10 +3128,11 @@ contains
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   integer(I4P), allocatable, intent(inout)        :: lhs(:,:) !< Left hand side of assignement.
-   integer(I4P), allocatable, intent(in)           :: rhs(:,:) !< Right hand side of assignement.
-   character(*),              intent(in), optional :: msg      !< Message to be printed in verbose mode.
-   logical,                   intent(in), optional :: verbose  !< Flag to activate verbose mode.
+   integer(I4P), allocatable, intent(inout)        :: lhs(:,:)  !< Left hand side of assignement.
+   integer(I4P), allocatable, intent(in)           :: rhs(:,:)  !< Right hand side of assignement.
+   integer(I4P),              intent(in), optional :: file_unit !< File unit for verbose output.
+   character(*),              intent(in), optional :: msg       !< Message to be printed in verbose mode.
+   logical,                   intent(in), optional :: verbose   !< Flag to activate verbose mode.
 
    if (allocated(lhs)) deallocate(lhs)
    if (allocated(rhs)) then
@@ -2864,13 +3140,13 @@ contains
          call allocate_variable(var=lhs,                                                  &
                                 ulb=reshape([lbound(rhs,dim=1),ubound(rhs,dim=1),         &
                                              lbound(rhs,dim=2),ubound(rhs,dim=2)],[2,2]), &
-                                msg=msg, verbose=verbose)
+                                file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_I4P_2D
 
-   subroutine assign_allocatable_I4P_3D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_I4P_3D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind I4P, rank 3).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -2884,6 +3160,7 @@ contains
    !=> T <<<
    integer(I4P), allocatable, intent(inout)        :: lhs(:,:,:) !< Left hand side of assignement.
    integer(I4P), allocatable, intent(in)           :: rhs(:,:,:) !< Right hand side of assignement.
+   integer(I4P),              intent(in), optional :: file_unit  !< File unit for verbose output.
    character(*),              intent(in), optional :: msg        !< Message to be printed in verbose mode.
    logical,                   intent(in), optional :: verbose    !< Flag to activate verbose mode.
 
@@ -2894,13 +3171,13 @@ contains
                                 ulb=reshape([lbound(rhs,dim=1),ubound(rhs,dim=1),         &
                                              lbound(rhs,dim=2),ubound(rhs,dim=2),         &
                                              lbound(rhs,dim=3),ubound(rhs,dim=3)],[2,3]), &
-                                msg=msg, verbose=verbose)
+                                file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_I4P_3D
 
-   subroutine assign_allocatable_I4P_4D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_I4P_4D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind I4P, rank 4).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -2914,6 +3191,7 @@ contains
    !=> T <<<
    integer(I4P), allocatable, intent(inout)        :: lhs(:,:,:,:) !< Left hand side of assignement.
    integer(I4P), allocatable, intent(in)           :: rhs(:,:,:,:) !< Right hand side of assignement.
+   integer(I4P),              intent(in), optional :: file_unit    !< File unit for verbose output.
    character(*),              intent(in), optional :: msg          !< Message to be printed in verbose mode.
    logical,                   intent(in), optional :: verbose      !< Flag to activate verbose mode.
 
@@ -2925,13 +3203,13 @@ contains
                                              lbound(rhs,dim=2),ubound(rhs,dim=2),         &
                                              lbound(rhs,dim=3),ubound(rhs,dim=3),         &
                                              lbound(rhs,dim=4),ubound(rhs,dim=4)],[2,4]), &
-                                msg=msg, verbose=verbose)
+                                file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_I4P_4D
 
-   subroutine assign_allocatable_I4P_5D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_I4P_5D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind I4P, rank 5).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -2945,6 +3223,7 @@ contains
    !=> T <<<
    integer(I4P), allocatable, intent(inout)        :: lhs(:,:,:,:,:) !< Left hand side of assignement.
    integer(I4P), allocatable, intent(in)           :: rhs(:,:,:,:,:) !< Right hand side of assignement.
+   integer(I4P),              intent(in), optional :: file_unit      !< File unit for verbose output.
    character(*),              intent(in), optional :: msg            !< Message to be printed in verbose mode.
    logical,                   intent(in), optional :: verbose        !< Flag to activate verbose mode.
 
@@ -2957,13 +3236,13 @@ contains
                                              lbound(rhs,dim=3),ubound(rhs,dim=3),         &
                                              lbound(rhs,dim=4),ubound(rhs,dim=4),         &
                                              lbound(rhs,dim=5),ubound(rhs,dim=5)],[2,5]), &
-                                msg=msg, verbose=verbose)
+                                file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_I4P_5D
 
-   subroutine assign_allocatable_I4P_6D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_I4P_6D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind I4P, rank 6).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -2977,6 +3256,7 @@ contains
    !=> T <<<
    integer(I4P), allocatable, intent(inout)        :: lhs(:,:,:,:,:,:) !< Left hand side of assignement.
    integer(I4P), allocatable, intent(in)           :: rhs(:,:,:,:,:,:) !< Right hand side of assignement.
+   integer(I4P),              intent(in), optional :: file_unit        !< File unit for verbose output.
    character(*),              intent(in), optional :: msg              !< Message to be printed in verbose mode.
    logical,                   intent(in), optional :: verbose          !< Flag to activate verbose mode.
 
@@ -2990,13 +3270,13 @@ contains
                                              lbound(rhs,dim=4),ubound(rhs,dim=4),         &
                                              lbound(rhs,dim=5),ubound(rhs,dim=5),         &
                                              lbound(rhs,dim=6),ubound(rhs,dim=6)],[2,6]), &
-                                msg=msg, verbose=verbose)
+                                file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_I4P_6D
 
-   subroutine assign_allocatable_I4P_7D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_I4P_7D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind I4P, rank 7).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -3010,6 +3290,7 @@ contains
    !=> T <<<
    integer(I4P), allocatable, intent(inout)        :: lhs(:,:,:,:,:,:,:) !< Left hand side of assignement.
    integer(I4P), allocatable, intent(in)           :: rhs(:,:,:,:,:,:,:) !< Right hand side of assignement.
+   integer(I4P),              intent(in), optional :: file_unit          !< File unit for verbose output.
    character(*),              intent(in), optional :: msg                !< Message to be printed in verbose mode.
    logical,                   intent(in), optional :: verbose            !< Flag to activate verbose mode.
 
@@ -3024,14 +3305,14 @@ contains
                                              lbound(rhs,dim=5),ubound(rhs,dim=5),         &
                                              lbound(rhs,dim=6),ubound(rhs,dim=6),         &
                                              lbound(rhs,dim=7),ubound(rhs,dim=7)],[2,7]), &
-                                msg=msg, verbose=verbose)
+                                file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_I4P_7D
 
    ! I2P
-   subroutine assign_allocatable_I2P_1D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_I2P_1D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind I2P, rank 1).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -3043,21 +3324,22 @@ contains
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   integer(I2P), allocatable, intent(inout)        :: lhs(:)  !< Left hand side of assignement.
-   integer(I2P), allocatable, intent(in)           :: rhs(:)  !< Right hand side of assignement.
-   character(*),              intent(in), optional :: msg     !< Message to be printed in verbose mode.
-   logical,                   intent(in), optional :: verbose !< Flag to activate verbose mode.
+   integer(I2P), allocatable, intent(inout)        :: lhs(:)    !< Left hand side of assignement.
+   integer(I2P), allocatable, intent(in)           :: rhs(:)    !< Right hand side of assignement.
+   integer(I4P),              intent(in), optional :: file_unit !< File unit for verbose output.
+   character(*),              intent(in), optional :: msg       !< Message to be printed in verbose mode.
+   logical,                   intent(in), optional :: verbose   !< Flag to activate verbose mode.
 
    if (allocated(lhs)) deallocate(lhs)
    if (allocated(rhs)) then
       if (size(rhs, dim=1)>0) then
-         call allocate_variable(var=lhs, ulb=[lbound(rhs,dim=1),ubound(rhs,dim=1)], msg=msg, verbose=verbose)
+         call allocate_variable(var=lhs, ulb=[lbound(rhs,dim=1),ubound(rhs,dim=1)], file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_I2P_1D
 
-   subroutine assign_allocatable_I2P_2D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_I2P_2D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind I2P, rank 2).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -3069,10 +3351,11 @@ contains
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   integer(I2P), allocatable, intent(inout)        :: lhs(:,:) !< Left hand side of assignement.
-   integer(I2P), allocatable, intent(in)           :: rhs(:,:) !< Right hand side of assignement.
-   character(*),              intent(in), optional :: msg      !< Message to be printed in verbose mode.
-   logical,                   intent(in), optional :: verbose  !< Flag to activate verbose mode.
+   integer(I2P), allocatable, intent(inout)        :: lhs(:,:)  !< Left hand side of assignement.
+   integer(I2P), allocatable, intent(in)           :: rhs(:,:)  !< Right hand side of assignement.
+   integer(I4P),              intent(in), optional :: file_unit !< File unit for verbose output.
+   character(*),              intent(in), optional :: msg       !< Message to be printed in verbose mode.
+   logical,                   intent(in), optional :: verbose   !< Flag to activate verbose mode.
 
    if (allocated(lhs)) deallocate(lhs)
    if (allocated(rhs)) then
@@ -3080,13 +3363,13 @@ contains
          call allocate_variable(var=lhs,                                                  &
                                 ulb=reshape([lbound(rhs,dim=1),ubound(rhs,dim=1),         &
                                              lbound(rhs,dim=2),ubound(rhs,dim=2)],[2,2]), &
-                                msg=msg, verbose=verbose)
+                                file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_I2P_2D
 
-   subroutine assign_allocatable_I2P_3D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_I2P_3D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind I2P, rank 3).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -3100,6 +3383,7 @@ contains
    !=> T <<<
    integer(I2P), allocatable, intent(inout)        :: lhs(:,:,:) !< Left hand side of assignement.
    integer(I2P), allocatable, intent(in)           :: rhs(:,:,:) !< Right hand side of assignement.
+   integer(I4P),              intent(in), optional :: file_unit  !< File unit for verbose output.
    character(*),              intent(in), optional :: msg        !< Message to be printed in verbose mode.
    logical,                   intent(in), optional :: verbose    !< Flag to activate verbose mode.
 
@@ -3110,13 +3394,13 @@ contains
                                 ulb=reshape([lbound(rhs,dim=1),ubound(rhs,dim=1),         &
                                              lbound(rhs,dim=2),ubound(rhs,dim=2),         &
                                              lbound(rhs,dim=3),ubound(rhs,dim=3)],[2,3]), &
-                                msg=msg, verbose=verbose)
+                                file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_I2P_3D
 
-   subroutine assign_allocatable_I2P_4D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_I2P_4D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind I2P, rank 4).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -3130,6 +3414,7 @@ contains
    !=> T <<<
    integer(I2P), allocatable, intent(inout)        :: lhs(:,:,:,:) !< Left hand side of assignement.
    integer(I2P), allocatable, intent(in)           :: rhs(:,:,:,:) !< Right hand side of assignement.
+   integer(I4P),              intent(in), optional :: file_unit    !< File unit for verbose output.
    character(*),              intent(in), optional :: msg          !< Message to be printed in verbose mode.
    logical,                   intent(in), optional :: verbose      !< Flag to activate verbose mode.
 
@@ -3141,13 +3426,13 @@ contains
                                              lbound(rhs,dim=2),ubound(rhs,dim=2),         &
                                              lbound(rhs,dim=3),ubound(rhs,dim=3),         &
                                              lbound(rhs,dim=4),ubound(rhs,dim=4)],[2,4]), &
-                                msg=msg, verbose=verbose)
+                                file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_I2P_4D
 
-   subroutine assign_allocatable_I2P_5D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_I2P_5D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind I2P, rank 5).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -3161,6 +3446,7 @@ contains
    !=> T <<<
    integer(I2P), allocatable, intent(inout)        :: lhs(:,:,:,:,:) !< Left hand side of assignement.
    integer(I2P), allocatable, intent(in)           :: rhs(:,:,:,:,:) !< Right hand side of assignement.
+   integer(I4P),              intent(in), optional :: file_unit      !< File unit for verbose output.
    character(*),              intent(in), optional :: msg            !< Message to be printed in verbose mode.
    logical,                   intent(in), optional :: verbose        !< Flag to activate verbose mode.
 
@@ -3173,13 +3459,13 @@ contains
                                              lbound(rhs,dim=3),ubound(rhs,dim=3),         &
                                              lbound(rhs,dim=4),ubound(rhs,dim=4),         &
                                              lbound(rhs,dim=5),ubound(rhs,dim=5)],[2,5]), &
-                                msg=msg, verbose=verbose)
+                                file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_I2P_5D
 
-   subroutine assign_allocatable_I2P_6D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_I2P_6D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind I2P, rank 6).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -3193,6 +3479,7 @@ contains
    !=> T <<<
    integer(I2P), allocatable, intent(inout)        :: lhs(:,:,:,:,:,:) !< Left hand side of assignement.
    integer(I2P), allocatable, intent(in)           :: rhs(:,:,:,:,:,:) !< Right hand side of assignement.
+   integer(I4P),              intent(in), optional :: file_unit        !< File unit for verbose output.
    character(*),              intent(in), optional :: msg              !< Message to be printed in verbose mode.
    logical,                   intent(in), optional :: verbose          !< Flag to activate verbose mode.
 
@@ -3206,13 +3493,13 @@ contains
                                              lbound(rhs,dim=4),ubound(rhs,dim=4),         &
                                              lbound(rhs,dim=5),ubound(rhs,dim=5),         &
                                              lbound(rhs,dim=6),ubound(rhs,dim=6)],[2,6]), &
-                                msg=msg, verbose=verbose)
+                                file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_I2P_6D
 
-   subroutine assign_allocatable_I2P_7D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_I2P_7D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind I2P, rank 7).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -3226,6 +3513,7 @@ contains
    !=> T <<<
    integer(I2P), allocatable, intent(inout)        :: lhs(:,:,:,:,:,:,:) !< Left hand side of assignement.
    integer(I2P), allocatable, intent(in)           :: rhs(:,:,:,:,:,:,:) !< Right hand side of assignement.
+   integer(I4P),              intent(in), optional :: file_unit          !< File unit for verbose output.
    character(*),              intent(in), optional :: msg                !< Message to be printed in verbose mode.
    logical,                   intent(in), optional :: verbose            !< Flag to activate verbose mode.
 
@@ -3240,14 +3528,14 @@ contains
                                              lbound(rhs,dim=5),ubound(rhs,dim=5),         &
                                              lbound(rhs,dim=6),ubound(rhs,dim=6),         &
                                              lbound(rhs,dim=7),ubound(rhs,dim=7)],[2,7]), &
-                                msg=msg, verbose=verbose)
+                                file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_I2P_7D
 
    ! I1P
-   subroutine assign_allocatable_I1P_1D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_I1P_1D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind I1P, rank 1).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -3259,21 +3547,22 @@ contains
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   integer(I1P), allocatable, intent(inout)        :: lhs(:)  !< Left hand side of assignement.
-   integer(I1P), allocatable, intent(in)           :: rhs(:)  !< Right hand side of assignement.
-   character(*),              intent(in), optional :: msg     !< Message to be printed in verbose mode.
-   logical,                   intent(in), optional :: verbose !< Flag to activate verbose mode.
+   integer(I1P), allocatable, intent(inout)        :: lhs(:)    !< Left hand side of assignement.
+   integer(I1P), allocatable, intent(in)           :: rhs(:)    !< Right hand side of assignement.
+   integer(I4P),              intent(in), optional :: file_unit !< File unit for verbose output.
+   character(*),              intent(in), optional :: msg       !< Message to be printed in verbose mode.
+   logical,                   intent(in), optional :: verbose   !< Flag to activate verbose mode.
 
    if (allocated(lhs)) deallocate(lhs)
    if (allocated(rhs)) then
       if (size(rhs, dim=1)>0) then
-         call allocate_variable(var=lhs, ulb=[lbound(rhs,dim=1),ubound(rhs,dim=1)], msg=msg, verbose=verbose)
+         call allocate_variable(var=lhs, ulb=[lbound(rhs,dim=1),ubound(rhs,dim=1)], file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_I1P_1D
 
-   subroutine assign_allocatable_I1P_2D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_I1P_2D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind I1P, rank 2).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -3285,10 +3574,11 @@ contains
    !< print*, allocated(a)
    !<```
    !=> T <<<
-   integer(I1P), allocatable, intent(inout)        :: lhs(:,:) !< Left hand side of assignement.
-   integer(I1P), allocatable, intent(in)           :: rhs(:,:) !< Right hand side of assignement.
-   character(*),              intent(in), optional :: msg      !< Message to be printed in verbose mode.
-   logical,                   intent(in), optional :: verbose  !< Flag to activate verbose mode.
+   integer(I1P), allocatable, intent(inout)        :: lhs(:,:)  !< Left hand side of assignement.
+   integer(I1P), allocatable, intent(in)           :: rhs(:,:)  !< Right hand side of assignement.
+   integer(I4P),              intent(in), optional :: file_unit !< File unit for verbose output.
+   character(*),              intent(in), optional :: msg       !< Message to be printed in verbose mode.
+   logical,                   intent(in), optional :: verbose   !< Flag to activate verbose mode.
 
    if (allocated(lhs)) deallocate(lhs)
    if (allocated(rhs)) then
@@ -3296,13 +3586,13 @@ contains
          call allocate_variable(var=lhs,                                                  &
                                 ulb=reshape([lbound(rhs,dim=1),ubound(rhs,dim=1),         &
                                              lbound(rhs,dim=2),ubound(rhs,dim=2)],[2,2]), &
-                                msg=msg, verbose=verbose)
+                                file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_I1P_2D
 
-   subroutine assign_allocatable_I1P_3D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_I1P_3D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind I1P, rank 3).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -3316,6 +3606,7 @@ contains
    !=> T <<<
    integer(I1P), allocatable, intent(inout)        :: lhs(:,:,:) !< Left hand side of assignement.
    integer(I1P), allocatable, intent(in)           :: rhs(:,:,:) !< Right hand side of assignement.
+   integer(I4P),              intent(in), optional :: file_unit  !< File unit for verbose output.
    character(*),              intent(in), optional :: msg        !< Message to be printed in verbose mode.
    logical,                   intent(in), optional :: verbose    !< Flag to activate verbose mode.
 
@@ -3326,13 +3617,13 @@ contains
                                 ulb=reshape([lbound(rhs,dim=1),ubound(rhs,dim=1),         &
                                              lbound(rhs,dim=2),ubound(rhs,dim=2),         &
                                              lbound(rhs,dim=3),ubound(rhs,dim=3)],[2,3]), &
-                                msg=msg, verbose=verbose)
+                                file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_I1P_3D
 
-   subroutine assign_allocatable_I1P_4D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_I1P_4D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind I1P, rank 4).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -3346,6 +3637,7 @@ contains
    !=> T <<<
    integer(I1P), allocatable, intent(inout)        :: lhs(:,:,:,:) !< Left hand side of assignement.
    integer(I1P), allocatable, intent(in)           :: rhs(:,:,:,:) !< Right hand side of assignement.
+   integer(I4P),              intent(in), optional :: file_unit    !< File unit for verbose output.
    character(*),              intent(in), optional :: msg          !< Message to be printed in verbose mode.
    logical,                   intent(in), optional :: verbose      !< Flag to activate verbose mode.
 
@@ -3357,13 +3649,13 @@ contains
                                              lbound(rhs,dim=2),ubound(rhs,dim=2),         &
                                              lbound(rhs,dim=3),ubound(rhs,dim=3),         &
                                              lbound(rhs,dim=4),ubound(rhs,dim=4)],[2,4]), &
-                                msg=msg, verbose=verbose)
+                                file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_I1P_4D
 
-   subroutine assign_allocatable_I1P_5D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_I1P_5D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind I1P, rank 5).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -3377,6 +3669,7 @@ contains
    !=> T <<<
    integer(I1P), allocatable, intent(inout)        :: lhs(:,:,:,:,:) !< Left hand side of assignement.
    integer(I1P), allocatable, intent(in)           :: rhs(:,:,:,:,:) !< Right hand side of assignement.
+   integer(I4P),              intent(in), optional :: file_unit      !< File unit for verbose output.
    character(*),              intent(in), optional :: msg            !< Message to be printed in verbose mode.
    logical,                   intent(in), optional :: verbose        !< Flag to activate verbose mode.
 
@@ -3389,13 +3682,13 @@ contains
                                              lbound(rhs,dim=3),ubound(rhs,dim=3),         &
                                              lbound(rhs,dim=4),ubound(rhs,dim=4),         &
                                              lbound(rhs,dim=5),ubound(rhs,dim=5)],[2,5]), &
-                                msg=msg, verbose=verbose)
+                                file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_I1P_5D
 
-   subroutine assign_allocatable_I1P_6D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_I1P_6D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind I1P, rank 6).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -3409,6 +3702,7 @@ contains
    !=> T <<<
    integer(I1P), allocatable, intent(inout)        :: lhs(:,:,:,:,:,:) !< Left hand side of assignement.
    integer(I1P), allocatable, intent(in)           :: rhs(:,:,:,:,:,:) !< Right hand side of assignement.
+   integer(I4P),              intent(in), optional :: file_unit        !< File unit for verbose output.
    character(*),              intent(in), optional :: msg              !< Message to be printed in verbose mode.
    logical,                   intent(in), optional :: verbose          !< Flag to activate verbose mode.
 
@@ -3422,13 +3716,13 @@ contains
                                              lbound(rhs,dim=4),ubound(rhs,dim=4),         &
                                              lbound(rhs,dim=5),ubound(rhs,dim=5),         &
                                              lbound(rhs,dim=6),ubound(rhs,dim=6)],[2,6]), &
-                                msg=msg, verbose=verbose)
+                                file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
    endsubroutine assign_allocatable_I1P_6D
 
-   subroutine assign_allocatable_I1P_7D(lhs, rhs, msg, verbose)
+   subroutine assign_allocatable_I1P_7D(lhs, rhs, file_unit, msg, verbose)
    !< Assign CPU variable with memory checking (kind I1P, rank 7).
    !< Variable is returned not allocated if right hand side is not allocated.
    !<
@@ -3442,6 +3736,7 @@ contains
    !=> T <<<
    integer(I1P), allocatable, intent(inout)        :: lhs(:,:,:,:,:,:,:) !< Left hand side of assignement.
    integer(I1P), allocatable, intent(in)           :: rhs(:,:,:,:,:,:,:) !< Right hand side of assignement.
+   integer(I4P),              intent(in), optional :: file_unit          !< File unit for verbose output.
    character(*),              intent(in), optional :: msg                !< Message to be printed in verbose mode.
    logical,                   intent(in), optional :: verbose            !< Flag to activate verbose mode.
 
@@ -3456,7 +3751,7 @@ contains
                                              lbound(rhs,dim=5),ubound(rhs,dim=5),         &
                                              lbound(rhs,dim=6),ubound(rhs,dim=6),         &
                                              lbound(rhs,dim=7),ubound(rhs,dim=7)],[2,7]), &
-                                msg=msg, verbose=verbose)
+                                file_unit=file_unit, msg=msg, verbose=verbose)
          lhs = rhs
       endif
    endif
