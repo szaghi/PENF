@@ -7,12 +7,12 @@ DSRC = src
 COMPILER = gnu
 ifeq "$(COMPILER)" "gnu"
   FC    = gfortran
-  OPTSC = -c -frealloc-lhs -std=f2008 -fall-intrinsics -O2 -Dr16p -J $(DMOD)
+  OPTSC = -c -frealloc-lhs -std=f2008 -fall-intrinsics -O2 -DR16P -J $(DMOD)
   OPTSL = -O2 -J $(DMOD)
 endif
 ifeq "$(COMPILER)" "intel"
   FC    = ifort
-  OPTSC = -c -assume realloc_lhs -standard-semantics -std08 -O2 -Dr16p -module $(DMOD)
+  OPTSC = -c -assume realloc_lhs -standard-semantics -std08 -O2 -DR16P -module $(DMOD)
   OPTSL = -O2 -module $(DMOD)
 endif
 
