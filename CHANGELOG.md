@@ -1,4 +1,9 @@
 # Changelog
+## [v1.3.6](https://github.com/szaghi/PENF/tree/v1.3.6) (2026-02-16)
+[Full Changelog](https://github.com/szaghi/PENF/compare/v1.3.5...v1.3.6)
+### Documentation
+- Minor update in documentations ([`a876d9e`](https://github.com/szaghi/PENF/commit/a876d9eda6e93d1049c197589eb17140a1bc3585))
+
 ## [v1.3.5](https://github.com/szaghi/PENF/tree/v1.3.5) (2026-02-16)
 [Full Changelog](https://github.com/szaghi/PENF/compare/v1.3.4...v1.3.5)
 ### CI/CD
