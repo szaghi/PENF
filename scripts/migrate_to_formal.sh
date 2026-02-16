@@ -201,6 +201,34 @@ PYEOF
   fi
 fi
 
+# ── Patch config.mts: set base for GitHub Pages deployment ───────────────────
+# Without base: '/REPO_NAME/', all asset URLs are rooted at '/' which works
+# locally but breaks on GitHub Pages where the site lives at /REPO_NAME/.
+CONFIG="${DOCS_DIR}/.vitepress/config.mts"
+if [[ -f "$CONFIG" ]]; then
+  if $DRY_RUN; then
+    echo "  (dry-run) Would add base: '/${PROJECT_NAME}/' to $CONFIG"
+  else
+    python3 - "$CONFIG" "$PROJECT_NAME" <<'PYEOF'
+import sys, re
+path, name = sys.argv[1], sys.argv[2]
+with open(path) as f:
+    content = f.read()
+if f"base: '/{name}/'" in content:
+    print("  base already set — skipping")
+else:
+    content = content.replace(
+        "export default defineConfig({",
+        f"export default defineConfig({{\n  base: '/{name}/',",
+        1
+    )
+    with open(path, "w") as f:
+        f.write(content)
+    print(f"  set base: '/{name}/' in config.mts")
+PYEOF
+  fi
+fi
+
 # ── Step 2: formal generate ───────────────────────────────────────────────────
 step "Step 2/4 — Generating API documentation with formal generate…"
 

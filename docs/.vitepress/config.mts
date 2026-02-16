@@ -3,6 +3,7 @@ import apiSidebar from '../api/_sidebar.json'
 
 export default defineConfig({
   title: 'PENF Documentation',
+  base: '/PENF/',
   markdown: {
     math: true,
     languages: ['fortran-free-form', 'fortran-fixed-form'],
