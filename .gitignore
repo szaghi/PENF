@@ -24,11 +24,15 @@
 *.log
 
 # special directories and files
-doc/html/
 exe/
 wiki/
 get_automatic_changelog.sh
 /build
+
+# VitePress
+docs/node_modules/
+docs/.vitepress/dist/
+docs/.vitepress/cache/
 
 # mac
 .DS_Store

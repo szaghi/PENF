@@ -29,7 +29,12 @@ jobs:
     - name: Install Graphviz
       uses: ts-graphviz/setup-graphviz@v2
  
-    - name: Install FOBIS-FORD
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Install FOBIS-FORD-FORMAL
       run: |
         pip install --upgrade markdown
         pip install --upgrade markdown-include
@@ -43,6 +48,7 @@ jobs:
         pip install --upgrade importlib-metadata
         pip install --upgrade ford
         pip install --upgrade FoBiS.py
+        pip install --upgrade formal-ford2vitepress
 
     - name: Check system
       run: |
@@ -71,14 +77,15 @@ jobs:
 
     - name: Make doc
       run: |
-        FoBiS.py rule -ex makedoc
+        formal generate --project docs/main_page.md --output docs/api
+        cd docs && npm ci && npm run docs:build
 
     - name: Push doc to GH Pages
       if: ${{ !env.ACT }}
       uses: JamesIves/github-pages-deploy-action@v4
       with:
         branch: gh-pages
-        folder: doc/html
+        folder: docs/.vitepress/dist
 
     - name: Make TAR
       run: |

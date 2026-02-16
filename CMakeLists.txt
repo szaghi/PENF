@@ -24,7 +24,7 @@ set(NAMESPACE "${PROJECT_NAME}::")
 # generate the library and install instructions
 add_subdirectory(src/lib)
 
-add_subdirectory(doc EXCLUDE_FROM_ALL)
+add_subdirectory(docs EXCLUDE_FROM_ALL)
 
 # testing
 if(${PROJECT_SOURCE_DIR} STREQUAL ${CMAKE_SOURCE_DIR})

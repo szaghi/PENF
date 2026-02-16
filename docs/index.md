@@ -1,33 +1,37 @@
-# PENF
-
-**Portability Environment for Fortran Poor People** — a KISS library for portable, parametrized numerical types in modern Fortran (2003+).
-
-- Portable kind parameters for integers and reals (1, 2, 4, 8, 16-byte representations)
-- Comprehensive number ↔ string conversion: `str()`, `strz()`, `cton()`, `bstr()`, `bcton()`
-- Ready-made format strings (`FI*P`, `FR*P`) and min/max representable values
-- Endianness detection and allocatable memory management utilities
-- Fortran 2003+ standard compliant — tested with GNU ≥ 4.9.2 and Intel ≥ 12.x
-
-**[Documentation](https://szaghi.github.io/PENF/)** | **[API Reference](https://szaghi.github.io/PENF/api/)**
-
 ---
+layout: home
 
-## Table of Contents
+hero:
+  name: PENF
+  text: Portability Environment for Fortran Poor People
+  tagline: A KISS library for portable, parametrized numerical types in modern Fortran (2003+)
+  actions:
+    - theme: brand
+      text: API Reference
+      link: /api/
+    - theme: alt
+      text: View on GitHub
+      link: https://github.com/szaghi/PENF
 
-- [What is PENF?](#what-is-penf)
-- [Installation](#installation)
-- [Kind Parameters](#kind-parameters)
-- [Quick Start](#quick-start)
-- [Number → String: `str()`](#number--string-str)
-- [Zero-padded integers: `strz()`](#zero-padded-integers-strz)
-- [String → Number: `cton()`](#string--number-cton)
-- [Binary representation: `bstr()` / `bcton()`](#binary-representation-bstr--bcton)
-- [Bit and byte sizes: `bit_size()` / `byte_size()`](#bit-and-byte-sizes-bit_size--byte_size)
-- [Utilities](#utilities)
-- [Character kinds](#character-kinds-str_ascii--str_ucs4)
-- [Allocatable memory management](#allocatable-memory-management)
-- [Copyrights](#copyrights)
-
+features:
+  - icon: 🔢
+    title: Portable Kind Parameters
+    details: Integer and real kind parameters for 1, 2, 4, 8, and 16-byte representations — guaranteed portable across compilers and architectures.
+  - icon: 🔄
+    title: Number ↔ String Conversion
+    details: Comprehensive str(), strz(), cton(), bstr() and bcton() procedures for casting between numbers and strings, including binary representations.
+  - icon: 📐
+    title: Format Definitions & Limits
+    details: Ready-made format strings (FI*P, FR*P) and min/max representable values for every supported kind parameter.
+  - icon: 🖥️
+    title: Endianness Detection
+    details: Built-in check_endian() procedure to detect big- or little-endian byte ordering at runtime.
+  - icon: 🧩
+    title: Fortran 2003+ Compliant
+    details: Fully standard-compliant library. Tested with GNU (≥ 4.9.2) and Intel (≥ 12.x) compilers.
+  - icon: 🆓
+    title: Free & Open Source
+    details: Multi-licensed — GPLv3 for FOSS projects, BSD 2/3-Clause or MIT for commercial use. Any contributor is welcome.
 ---
 
 ## What is PENF?
@@ -35,39 +39,6 @@
 Fortran is the most popular language for scientific computing, and its programs must be **portable**: the same code must give the same numerical results on every computer architecture. Controlling finite-precision errors requires knowing exactly which precision is associated with each variable.
 
 PENF provides an effective KISS library to achieve this portability. Using the kind-selection functions introduced in Fortran 90/95, PENF lets the programmer accurately control and name numeric precisions in a portable, parametric way — and provides a rich set of utilities to work with those parametrized numbers.
-
----
-
-## Installation
-
-### FPM (recommended)
-
-Add to your `fpm.toml`:
-
-```toml
-[dependencies]
-PENF = { git = "https://github.com/szaghi/PENF" }
-```
-
-### CMake
-
-```bash
-cmake -B build && cmake --build build
-```
-
-### FoBiS
-
-```bash
-FoBiS.py build -mode static-gnu    # static library
-FoBiS.py build -mode shared-gnu    # shared library
-```
-
-### Makefile
-
-```bash
-make              # static library
-make TESTS=yes    # build and run tests
-```
 
 ---
 
@@ -99,16 +70,10 @@ Each kind has a matching format string for `print` / `write` statements:
 | `R16P` | `FR16P = '(E42.33E4)'` | `-0.100000000000000000000000000000000E+0001` |
 | `R8P` | `FR8P = '(E23.15E3)'` | `-0.100000000000000E+001` |
 | `R4P` | `FR4P = '(E13.6E2)'` | `-0.100000E+01` |
-| `I8P` | `FI8P = '(I20)'` | `-1` (right-aligned in 20 chars) |
-| `I4P` | `FI4P = '(I11)'` | `-1` (right-aligned in 11 chars) |
-| `I2P` | `FI2P = '(I6)'` | `-1` (right-aligned in 6 chars) |
-| `I1P` | `FI1P = '(I4)'` | `-1` (right-aligned in 4 chars) |
-
----
-
-## Quick Start
-
-Always call `penf_init` at the start of your program to initialize internal variables:
+| `I8P` | `FI8P = '(I20)'` | `                  -1` |
+| `I4P` | `FI4P = '(I11)'` | `         -1` |
+| `I2P` | `FI2P = '(I6)'` | `    -1` |
+| `I1P` | `FI1P = '(I4)'` | `  -1` |
 
 ```fortran
 use penf
@@ -121,13 +86,26 @@ print FR8P, x   !  -0.100000000000000E+001
 print FI4P, n   !          42
 ```
 
-> **Tip:** `penf_init` is idempotent — safe to call multiple times. Call `penf_print(unit)` to dump a full summary of the PENF environment to any I/O unit.
+---
+
+## Quick Start
+
+### Initialization
+
+Always call `penf_init` at the start of your program to initialize internal variables (byte-size counters, endianness):
+
+```fortran
+use penf
+call penf_init
+```
+
+> **Tip:** `penf_init` is idempotent — safe to call multiple times. Call `penf_print(unit)` to dump a complete summary of the PENF environment to any I/O unit.
 
 ---
 
 ## Number → String: `str()`
 
-`str()` converts any scalar or 1D array to a trimmed string. Kind is inferred automatically.
+`str()` converts any scalar or 1D array to a trimmed string. Kind is inferred automatically from the argument.
 
 ### Scalars
 
@@ -146,7 +124,7 @@ print "(A)", str(n=-1_I1P)     ! -1
 
 ### Explicit format
 
-Pass a format string when you need full fixed-width output:
+Pass a format string directly when you need full-width output:
 
 ```fortran
 use penf
@@ -181,7 +159,7 @@ print "(A)", str(n=[1._R4P, -2._R4P], delimiters=['(', ')'])
 
 ## Zero-padded integers: `strz()`
 
-`strz()` formats an integer with leading zeros — useful for filenames and index strings.
+`strz()` formats an integer with leading zeros, useful for file-name generation and indices.
 
 ```fortran
 use penf
@@ -191,9 +169,9 @@ print "(A)", strz(n=1_I4P)            ! 0000000001           (10 digits)
 print "(A)", strz(n=1_I8P, nz_pad=5)  ! 00001                (custom width)
 ```
 
-> **Tip:** Build zero-padded filenames in loops:
+> **Tip:** Use `strz` to build zero-padded filenames in loops:
 > ```fortran
-> filename = 'output_'//strz(n=step, nz_pad=6)//'.dat'
+> filename = 'output_'//strz(n=step_I4P, nz_pad=6)//'.dat'
 > ! → output_000042.dat
 > ```
 
@@ -201,7 +179,7 @@ print "(A)", strz(n=1_I8P, nz_pad=5)  ! 00001                (custom width)
 
 ## String → Number: `cton()`
 
-`cton()` parses a string into a number of the requested kind, passed as a dummy `knd` argument:
+`cton()` parses a string into a number of the requested kind (passed as a dummy `knd` argument):
 
 ```fortran
 use penf
@@ -215,13 +193,13 @@ print FI4P, cton(str='-1', knd=1_I4P)        !          -1
 print FI2P, cton(str='-1', knd=1_I2P)        !    -1
 ```
 
-> **Tip:** The `knd` argument is only used to select the right overload — its value is irrelevant. Passing `1._R8P` or `0._R8P` are equivalent.
+> **Tip:** The `knd` argument is only used to select the right overload — its value is irrelevant. Use `1._R8P`, `0_I4P`, etc.
 
 ---
 
-## Binary representation: `bstr()` / `bcton()`
+## Binary string representation: `bstr()` / `bcton()`
 
-`bstr()` returns the raw IEEE bit pattern of a number as a `'0'`/`'1'` character string:
+`bstr()` returns the raw IEEE bit pattern of a number as a string of `0`/`1` characters:
 
 ```fortran
 use penf
@@ -250,7 +228,7 @@ print FR8P, x   ! 0.100000000000000E+001
 
 ## Bit and byte sizes: `bit_size()` / `byte_size()`
 
-PENF extends the intrinsic `bit_size()` to work with **reals and characters** in addition to integers:
+PENF extends the intrinsic `bit_size()` to work with **reals and characters** too:
 
 ```fortran
 use penf
@@ -278,6 +256,7 @@ use penf
 
 print FI4P, digit(100_I8P)    !   3
 print FI4P, digit(100_I4P)    !   3
+print FI4P, digit(100_I2P)    !   3
 print FI4P, digit(-999_I4P)   !   3  (sign not counted)
 ```
 
@@ -296,7 +275,7 @@ print *, endian   ! 1 = little endian (x86), 0 = big endian
 
 ## Character kinds: `str_ascii()` / `str_ucs4()`
 
-PENF provides conversion helpers between `ASCII`, `UCS4` (Unicode), and default character kinds:
+PENF provides conversion helpers between the `ASCII`, `UCS4` (Unicode), and default character kinds:
 
 ```fortran
 use penf
@@ -325,7 +304,7 @@ real(R8P), allocatable :: field_2d(:,:)
 real(R8P), allocatable :: field_3d(:,:,:)
 
 integer(I4P) :: bounds_1d(2)   = [1, 100]
-integer(I4P) :: bounds_2d(2,2) = reshape([1,1, 1,200],      [2,2])
+integer(I4P) :: bounds_2d(2,2) = reshape([1,1, 1,200], [2,2])
 integer(I4P) :: bounds_3d(2,3) = reshape([1,1, 1,200, 1,300], [2,3])
 
 call allocate_variable(field_1d, bounds_1d)
@@ -355,7 +334,7 @@ print *, allocated(a)           ! T
 
 ## Copyrights
 
-PENF is an open source project distributed under a multi-licensing system:
+PENF is distributed under a multi-licensing system:
 
 - **FOSS projects**: [GPL v3](http://www.gnu.org/licenses/gpl-3.0.html)
 - **Closed source / commercial**: [BSD 2-Clause](http://opensource.org/licenses/BSD-2-Clause), [BSD 3-Clause](http://opensource.org/licenses/BSD-3-Clause), or [MIT](http://opensource.org/licenses/MIT)
