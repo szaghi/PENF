@@ -1,14 +1,16 @@
 name: CI
 
-on: push
+on:
+  push:
+    branches: ["**"]
+    tags-ignore: ["**"]   # tags are handled by release.yml
+  pull_request:
 
 jobs:
-  test-deploy:
+  test:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     env:
-      GCC_V: 14 # gcc version
+      GCC_V: 14
 
     steps:
 
@@ -16,89 +18,35 @@ jobs:
       uses: actions/checkout@v4
       with:
         submodules: 'true'
- 
+
     - name: Install GCC
       run: |
         sudo add-apt-repository --yes ppa:ubuntu-toolchain-r/test
         sudo apt update
         sudo apt install -y gcc-${GCC_V} gfortran-${GCC_V} g++-${GCC_V}
         sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-${GCC_V} 100 \
-        --slave /usr/bin/gfortran gfortran /usr/bin/gfortran-${GCC_V} \
-        --slave /usr/bin/gcov gcov /usr/bin/gcov-${GCC_V}
+          --slave /usr/bin/gfortran gfortran /usr/bin/gfortran-${GCC_V} \
+          --slave /usr/bin/gcov gcov /usr/bin/gcov-${GCC_V}
 
-    - name: Install Graphviz
-      uses: ts-graphviz/setup-graphviz@v2
- 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
-
-    - name: Install FOBIS-FORD-FORMAL
+    - name: Install Python tools
       run: |
-        pip install --upgrade markdown
-        pip install --upgrade markdown-include
-        pip install --upgrade python-markdown-math
-        pip install --upgrade toposort
-        pip install --upgrade jinja2
-        pip install --upgrade pygments
-        pip install --upgrade beautifulsoup4
-        pip install --upgrade graphviz
-        pip install --upgrade tqdm
-        pip install --upgrade importlib-metadata
-        pip install --upgrade ford
-        pip install --upgrade FoBiS.py
-        pip install --upgrade formal-ford2vitepress
+        pip install \
+          markdown markdown-include python-markdown-math \
+          toposort jinja2 pygments beautifulsoup4 \
+          tqdm importlib-metadata ford FoBiS.py
 
     - name: Check system
       run: |
-        echo 'GFORTRAN'
         gfortran --version
-        echo
-        echo 'GCOV'
         gcov --version
-        echo
-        echo 'PYTHON'
         python --version
-        echo
-        echo 'FOBIS'
         FoBiS.py --version
-        echo
-        echo 'FORD'
         ford --version
 
-    - name: Make Coverage
-      run: |
-        FoBiS.py rule -ex makecoverage
+    - name: Run tests with coverage
+      run: FoBiS.py rule -ex makecoverage
 
-    - name: Upload Coverage to CODECOV
-      run: |
-         bash <(curl -s https://codecov.io/bash) -t ${{ secrets.CODECOV_TOKEN }}
-
-    - name: Make doc
-      run: |
-        formal generate --project docs/main_page.md --output docs/api
-        cd docs && npm ci && npm run docs:build
-
-    - name: Push doc to GH Pages
-      if: ${{ !env.ACT }}
-      uses: JamesIves/github-pages-deploy-action@v4
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v4
       with:
-        branch: gh-pages
-        folder: docs/.vitepress/dist
-
-    - name: Make TAR
-      run: |
-        echo "release version:" ${{ env.RELEASE }}
-        FoBiS.py rule -ex maketar
-        ls *.tar.gz
-
-    - name: Deploy Asset
-      uses: softprops/action-gh-release@v1
-      with:
-        files: |
-          *.tar.gz
-          ./scripts/install.sh
-        tag_name: latest
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.CODECOV_TOKEN }}

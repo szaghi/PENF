@@ -1,0 +1,107 @@
+name: Release
+
+on:
+  push:
+    tags: ["v[0-9]+.[0-9]+.[0-9]+"]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      GCC_V: 14
+
+    steps:
+
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        submodules: 'true'
+
+    - name: Install GCC
+      run: |
+        sudo add-apt-repository --yes ppa:ubuntu-toolchain-r/test
+        sudo apt update
+        sudo apt install -y gcc-${GCC_V} gfortran-${GCC_V} g++-${GCC_V}
+        sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-${GCC_V} 100 \
+          --slave /usr/bin/gfortran gfortran /usr/bin/gfortran-${GCC_V} \
+          --slave /usr/bin/gcov gcov /usr/bin/gcov-${GCC_V}
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Install Python tools
+      run: |
+        pip install \
+          markdown markdown-include python-markdown-math \
+          toposort jinja2 pygments beautifulsoup4 \
+          tqdm importlib-metadata ford FoBiS.py \
+          formal-ford2vitepress
+
+    - name: Check system
+      run: |
+        gfortran --version
+        gcov --version
+        python --version
+        FoBiS.py --version
+        ford --version
+        formal --version
+
+    # ── Tests & coverage ────────────────────────────────────────────────────
+    - name: Run tests with coverage
+      run: FoBiS.py rule -ex makecoverage
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v4
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+
+    # ── Documentation ────────────────────────────────────────────────────────
+    - name: Build documentation
+      run: |
+        formal generate --project docs/main_page.md --output docs/api
+        cd docs && npm ci && npm run docs:build
+
+    - name: Deploy docs to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        branch: gh-pages
+        folder: docs/.vitepress/dist
+
+    # ── Release artefact ─────────────────────────────────────────────────────
+    - name: Build release tarball
+      run: |
+        VERSION="${{ github.ref_name }}"
+        tar --xform="s%^%PENF-${VERSION}/%" -czf "PENF-${VERSION}.tar.gz" \
+          --exclude='.git' \
+          --exclude='docs/node_modules' \
+          --exclude='docs/.vitepress/dist' \
+          --exclude='docs/.vitepress/cache' \
+          --exclude='exe' --exclude='obj' --exclude='mod' \
+          *
+        echo "TARBALL=PENF-${VERSION}.tar.gz" >> $GITHUB_ENV
+
+    # ── Release notes via git-cliff ──────────────────────────────────────────
+    - name: Generate release notes
+      uses: orhun/git-cliff-action@v3
+      with:
+        config: cliff.toml
+        args: --current --strip header
+      env:
+        OUTPUT: release_notes.md
+
+    # ── Publish GitHub release ───────────────────────────────────────────────
+    - name: Publish GitHub release
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: ${{ github.ref_name }}
+        name: ${{ github.ref_name }}
+        body_path: release_notes.md
+        files: |
+          ${{ env.TARBALL }}
+          scripts/install.sh
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
