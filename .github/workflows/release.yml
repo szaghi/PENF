@@ -84,14 +84,18 @@ jobs:
           *
         echo "TARBALL=PENF-${VERSION}.tar.gz" >> $GITHUB_ENV
 
-    # ── Release notes via git-cliff ──────────────────────────────────────────
-    - name: Generate release notes
-      uses: orhun/git-cliff-action@v3
-      with:
-        config: cliff.toml
-        args: --current --strip header
-      env:
-        OUTPUT: release_notes.md
+    # ── Release notes from CHANGELOG.md ─────────────────────────────────────
+    - name: Extract release notes from CHANGELOG.md
+      run: |
+        python3 - "${{ github.ref_name }}" CHANGELOG.md > release_notes.md <<'PYEOF'
+        import sys, re
+        tag, path = sys.argv[1], sys.argv[2]
+        with open(path) as f:
+            content = f.read()
+        pattern = rf'(## \[{re.escape(tag)}\].*?)(?=\n## |\Z)'
+        match = re.search(pattern, content, re.DOTALL)
+        print(match.group(1).strip() if match else f"Release {tag}\n\nSee CHANGELOG.md for details.")
+        PYEOF
 
     # ── Publish GitHub release ───────────────────────────────────────────────
     - name: Publish GitHub release
