@@ -1,4 +1,9 @@
 # Changelog
+## [v1.3.5](https://github.com/szaghi/PENF/tree/v1.3.5) (2026-02-16)
+[Full Changelog](https://github.com/szaghi/PENF/compare/v1.3.4...v1.3.5)
+### CI/CD
+- Refactor GH actions, clean/improve/sanitize ([`0397e4c`](https://github.com/szaghi/PENF/commit/0397e4cd528b042a3e3f6afbe8d2923e9704f2b2))
+
 ## [v1.3.4](https://github.com/szaghi/PENF/tree/v1.3.4) (2026-02-16)
 [Full Changelog](https://github.com/szaghi/PENF/compare/v1.3.3...v1.3.4)
 ### Miscellaneous
