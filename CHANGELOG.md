@@ -1,4 +1,9 @@
 # Changelog
+## [v1.3.2](https://github.com/szaghi/PENF/tree/v1.3.2) (2026-02-16)
+[Full Changelog](https://github.com/szaghi/PENF/compare/v1.3.1...v1.3.2)
+### Miscellaneous
+- Fix but in docs preventing GH action completition ([`ff08e4b`](https://github.com/szaghi/PENF/commit/ff08e4b35787af7260e87e1d843c079ed68fb481))
+
 ## [v1.3.1](https://github.com/szaghi/PENF/tree/v1.3.1) (2026-02-16)
 [Full Changelog](https://github.com/szaghi/PENF/compare/v1.3.0...v1.3.1)
 ### Miscellaneous
