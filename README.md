@@ -26,6 +26,7 @@
 - [Utilities](#utilities)
 - [Character kinds](#character-kinds-str_ascii--str_ucs4)
 - [Allocatable memory management](#allocatable-memory-management)
+- [Contributing & releasing](#contributing--releasing)
 - [Copyrights](#copyrights)
 
 ---
@@ -350,6 +351,62 @@ print *, allocated(a)           ! T
 ```
 
 > **Tip:** Pass `file_unit` and `verbose=.true.` to `allocate_variable()` to log every allocation with size and bounds — handy for tracking memory usage in large simulations.
+
+---
+
+## Contributing & releasing
+
+### Commit style
+
+PENF uses [Conventional Commits](https://www.conventionalcommits.org/) so that `CHANGELOG.md` can be generated automatically:
+
+| Prefix | When to use | Changelog section |
+|--------|-------------|-------------------|
+| `feat:` | New feature or capability | **New features** |
+| `fix:` | Bug fix | **Bug fixes** |
+| `perf:` | Performance improvement | **Performance** |
+| `refactor:` | Code restructuring, no behaviour change | **Refactoring** |
+| `docs:` | Documentation only | **Documentation** |
+| `test:` | Adding or fixing tests | **Testing** |
+| `build:` | Build system changes | **Build system** |
+| `ci:` | CI/CD changes | **CI/CD** |
+| `chore:` | Maintenance, dependency updates | **Miscellaneous** |
+
+Append `!` after the prefix for breaking changes (`feat!:`, `fix!:`). Reference issues with `#123` — they are auto-linked in the changelog.
+
+```
+feat: add R32P kind parameter
+fix: correct byte_size for character arrays (#42)
+docs: improve str() examples in landing page
+feat!: rename check_endian to init_endian
+```
+
+### Creating a release
+
+Releases are fully automated. The only command you need is:
+
+```bash
+# Install git-cliff (once)
+npx git-cliff@latest
+
+# Bump version, regenerate CHANGELOG.md, commit, tag and push
+scripts/bump.sh patch   # v1.2.3 → v1.2.4
+scripts/bump.sh minor   # v1.2.3 → v1.3.0
+scripts/bump.sh major   # v1.2.3 → v2.0.0
+scripts/bump.sh v2.1.0  # explicit version
+```
+
+`bump.sh` will:
+1. Regenerate `CHANGELOG.md` from the git log via [git-cliff](https://git-cliff.org/)
+2. Commit with `chore(release): vX.Y.Z`
+3. Create an annotated tag
+4. Push commit + tag → triggers the GitHub Actions release workflow
+
+The release workflow then automatically:
+- Runs the full test suite and uploads coverage to Codecov
+- Builds the VitePress documentation and deploys it to GitHub Pages
+- Packages a versioned tarball `PENF-vX.Y.Z.tar.gz`
+- Publishes a GitHub release with the changelog section as release notes
 
 ---
 
