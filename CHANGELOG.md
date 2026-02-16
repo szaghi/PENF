@@ -1,4 +1,9 @@
 # Changelog
+## [v1.3.1](https://github.com/szaghi/PENF/tree/v1.3.1) (2026-02-16)
+[Full Changelog](https://github.com/szaghi/PENF/compare/v1.3.0...v1.3.1)
+### Miscellaneous
+- Remove changelog construction on GH action, it is done locally ([`d4c2d80`](https://github.com/szaghi/PENF/commit/d4c2d8040352853e411eeb668594d01b5c13d1cb))
+
 ## [v1.3.0](https://github.com/szaghi/PENF/tree/v1.3.0) (2026-02-16)
 [Full Changelog](https://github.com/szaghi/PENF/compare/v1.2.3...v1.3.0)
 ### Bug fixes
