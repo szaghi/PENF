@@ -51,9 +51,11 @@ function projectdownload () {
     git submodule update --init --recursive
     cd -
   elif [ "$DOWNLOAD" == "wget" ]; then
-    wget $(curl -s https://api.github.com/repos/$USERNAME/$PROJECT/releases/latest | grep 'browser_' | cut -d\" -f4 | grep -i tar.gz)
-    tar xf $PROJECT.tar.gz
-    rm -f $PROJECT.tar.gz
+    local tarball="${PROJECT}-release.tar.gz"
+    wget $(curl -s https://api.github.com/repos/$USERNAME/$PROJECT/releases/latest | jq -r '.assets[] | select(.name | test("tar.gz"; "i")) | .browser_download_url') -O "$tarball"
+    mkdir -p "$PROJECT"
+    tar xf "$tarball" --strip-components=1 -C "$PROJECT"
+    rm -f "$tarball"
   fi
 
   if [ $VERBOSE -eq 1 ]; then

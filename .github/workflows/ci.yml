@@ -9,8 +9,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    env:
-      GCC_V: 14
 
     steps:
 
@@ -19,29 +17,8 @@ jobs:
       with:
         submodules: 'true'
 
-    - name: Install GCC
-      run: |
-        sudo add-apt-repository --yes ppa:ubuntu-toolchain-r/test
-        sudo apt update
-        sudo apt install -y gcc-${GCC_V} gfortran-${GCC_V} g++-${GCC_V}
-        sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-${GCC_V} 100 \
-          --slave /usr/bin/gfortran gfortran /usr/bin/gfortran-${GCC_V} \
-          --slave /usr/bin/gcov gcov /usr/bin/gcov-${GCC_V}
-
-    - name: Install Python tools
-      run: |
-        pip install \
-          markdown markdown-include python-markdown-math \
-          toposort jinja2 pygments beautifulsoup4 \
-          tqdm importlib-metadata ford FoBiS.py
-
-    - name: Check system
-      run: |
-        gfortran --version
-        gcov --version
-        python --version
-        FoBiS.py --version
-        ford --version
+    - name: Setup build environment
+      uses: ./.github/actions/setup-penf
 
     - name: Run tests with coverage
       run: FoBiS.py rule -ex makecoverage
