@@ -1,4 +1,9 @@
 # Changelog
+## [v1.3.3](https://github.com/szaghi/PENF/tree/v1.3.3) (2026-02-16)
+[Full Changelog](https://github.com/szaghi/PENF/compare/v1.3.2...v1.3.3)
+### Miscellaneous
+- Fix bug on vitepress rendering on GH pages ([`bf68302`](https://github.com/szaghi/PENF/commit/bf68302e312e35b0e2850ab7ef21756c911950d3))
+
 ## [v1.3.2](https://github.com/szaghi/PENF/tree/v1.3.2) (2026-02-16)
 [Full Changelog](https://github.com/szaghi/PENF/compare/v1.3.1...v1.3.2)
 ### Miscellaneous
