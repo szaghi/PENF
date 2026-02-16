@@ -1,4 +1,9 @@
 # Changelog
+## [v1.3.4](https://github.com/szaghi/PENF/tree/v1.3.4) (2026-02-16)
+[Full Changelog](https://github.com/szaghi/PENF/compare/v1.3.3...v1.3.4)
+### Miscellaneous
+- Fix minor issues in migrate_to_formal.sh and bump.sh scripts ([`5536a19`](https://github.com/szaghi/PENF/commit/5536a197473fcda0329231f98da5aa0ff640a963))
+
 ## [v1.3.3](https://github.com/szaghi/PENF/tree/v1.3.3) (2026-02-16)
 [Full Changelog](https://github.com/szaghi/PENF/compare/v1.3.2...v1.3.3)
 ### Miscellaneous
