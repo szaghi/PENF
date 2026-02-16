@@ -173,6 +173,34 @@ fi
 
 success "VitePress scaffold created in $DOCS_DIR/"
 
+# ── Patch package.json: pin esbuild to avoid audit vulnerability ──────────────
+# esbuild <=0.24.2 allows dev-server requests from any origin (GHSA-67mh-4wv8-2f99).
+# npm audit fix --force would downgrade VitePress to 0.1.1 — the override is the
+# correct fix until VitePress bumps its own esbuild dependency.
+PKGJSON="${DOCS_DIR}/package.json"
+if [[ -f "$PKGJSON" ]]; then
+  if $DRY_RUN; then
+    echo "  (dry-run) Would add esbuild override to $PKGJSON"
+  else
+    python3 - "$PKGJSON" <<'PYEOF'
+import sys, json
+path = sys.argv[1]
+with open(path) as f:
+    pkg = json.load(f)
+if "overrides" not in pkg:
+    pkg["overrides"] = {}
+if "esbuild" not in pkg["overrides"]:
+    pkg["overrides"]["esbuild"] = ">=0.25.0"
+    with open(path, "w") as f:
+        json.dump(pkg, f, indent=2)
+        f.write("\n")
+    print("  patched esbuild override in package.json")
+else:
+    print("  esbuild override already present — skipping")
+PYEOF
+  fi
+fi
+
 # ── Step 2: formal generate ───────────────────────────────────────────────────
 step "Step 2/4 — Generating API documentation with formal generate…"
 
