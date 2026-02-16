@@ -19,9 +19,22 @@ export default defineConfig({
   themeConfig: {
     nav: [
       { text: 'Home', link: '/' },
+      { text: 'Guide', link: '/guide/' },
       { text: 'API', link: '/api/' },
     ],
     sidebar: {
+      '/guide/': [
+        {
+          text: 'Guide',
+          items: [
+            { text: 'Getting Started', link: '/guide/' },
+            { text: 'String Conversions', link: '/guide/stringify' },
+            { text: 'Utilities', link: '/guide/utilities' },
+            { text: 'Memory Management', link: '/guide/memory' },
+            { text: 'Contributing', link: '/guide/contributing' },
+          ],
+        },
+      ],
       '/api/': [
         {
           text: 'API Reference',

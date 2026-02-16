@@ -12,6 +12,17 @@
 
 ---
 
+## Copyrights
+
+PENF is an open source project distributed under a multi-licensing system:
+
+- **FOSS projects**: [GPL v3](http://www.gnu.org/licenses/gpl-3.0.html)
+- **Closed source / commercial**: [BSD 2-Clause](http://opensource.org/licenses/BSD-2-Clause), [BSD 3-Clause](http://opensource.org/licenses/BSD-3-Clause), or [MIT](http://opensource.org/licenses/MIT)
+
+Anyone interested in using, developing, or contributing to PENF is welcome — pick the license that best fits your needs.
+
+---
+
 ## Table of Contents
 
 - [What is PENF?](#what-is-penf)
@@ -407,14 +418,3 @@ The release workflow then automatically:
 - Builds the VitePress documentation and deploys it to GitHub Pages
 - Packages a versioned tarball `PENF-vX.Y.Z.tar.gz`
 - Publishes a GitHub release with the changelog section as release notes
-
----
-
-## Copyrights
-
-PENF is an open source project distributed under a multi-licensing system:
-
-- **FOSS projects**: [GPL v3](http://www.gnu.org/licenses/gpl-3.0.html)
-- **Closed source / commercial**: [BSD 2-Clause](http://opensource.org/licenses/BSD-2-Clause), [BSD 3-Clause](http://opensource.org/licenses/BSD-3-Clause), or [MIT](http://opensource.org/licenses/MIT)
-
-Anyone interested in using, developing, or contributing to PENF is welcome — pick the license that best fits your needs.
