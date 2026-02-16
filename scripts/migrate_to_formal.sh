@@ -12,8 +12,8 @@
 #   -n, --name NAME          Project name (default: current directory name)
 #   -a, --author AUTHOR      Author name (default: git config user.name)
 #   -f, --ford-file PATH     Existing FORD project file to reuse
-#                            (default: auto-detect docs/main_page.md,
-#                             doc/formal.md, doc/vitepress.md)
+#                            (default: auto-detect doc/formal.md,
+#                             doc/vitepress.md, doc/main_page.md)
 #   -d, --docs-dir DIR       VitePress site output directory (default: docs)
 #   -r, --project-root DIR   Project root directory (default: .)
 #       --no-math            Disable LaTeX math support in VitePress
@@ -131,7 +131,7 @@ fi
 
 # ── Auto-detect FORD project file ────────────────────────────────────────────
 if [[ -z "$FORD_FILE" ]]; then
-  for candidate in docs/main_page.md doc/formal.md doc/vitepress.md; do
+  for candidate in doc/formal.md doc/vitepress.md doc/main_page.md; do
     if [[ -f "$candidate" ]]; then
       FORD_FILE="$candidate"
       info "FORD project file auto-detected: $FORD_FILE"
@@ -163,7 +163,8 @@ fi
 
 # formal init exits non-zero due to a cosmetic bug in the "next steps" print,
 # but the scaffold files are created successfully before the crash.
-run "formal init ${INIT_ARGS[*]} 2>&1 || true"
+# Use printf '%q' to preserve quoting for values with spaces (e.g. author names).
+run "formal init $(printf '%q ' "${INIT_ARGS[@]}") 2>&1 || true"
 
 if $FORD_FILE_EXISTS; then
   run "cp '$FORD_BACKUP' '$FORD_FILE'"
