@@ -56,7 +56,8 @@ if [[ -z "$BUMP" ]]; then
 fi
 
 # ── Resolve current version ───────────────────────────────────────────────────
-CURRENT_TAG="$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")"
+CURRENT_TAG="$(git tag --list 'v[0-9]*.[0-9]*.[0-9]*' | sort -V | tail -1)"
+[[ -z "$CURRENT_TAG" ]] && CURRENT_TAG="v0.0.0"
 CURRENT_VER="${CURRENT_TAG#v}"
 MAJOR="$(echo "$CURRENT_VER" | cut -d. -f1)"
 MINOR="$(echo "$CURRENT_VER" | cut -d. -f2)"
