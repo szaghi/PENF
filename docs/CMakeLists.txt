@@ -2,7 +2,7 @@ find_program(ford_exe NAMES ford)
 
 if(ford_exe)
     set(DOC_DIR "${PROJECT_BINARY_DIR}/doc")
-    set(ford_config "main_page.md")
+    set(ford_config "ford.md")
 
     add_custom_target(doc
         COMMAND ${ford_exe} -o ${DOC_DIR} ${ford_config}
