@@ -1,7 +1,7 @@
-import { defineConfig } from 'vitepress'
+import { withMermaid } from 'vitepress-plugin-mermaid'
 import apiSidebar from '../api/_sidebar.json'
 
-export default defineConfig({
+export default withMermaid({
   title: 'PENF Documentation',
   base: '/PENF/',
   markdown: {
@@ -49,4 +49,5 @@ export default defineConfig({
       provider: 'local',
     },
   },
+  mermaid: {},
 })

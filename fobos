@@ -239,7 +239,7 @@ preproc  = -D_R16P
 
 [rule-makedoc]
 help   = Build documentation with formal + VitePress
-rule_1 = formal generate --project docs/main_page.md --output docs/api
+rule_1 = formal generate --mirror-sources --diagrams --project docs/ford.md --output docs/api
 rule_2 = cd docs && npm ci && npm run docs:build
 
 [rule-deldoc]
