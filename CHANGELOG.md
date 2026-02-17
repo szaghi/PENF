@@ -1,4 +1,9 @@
 # Changelog
+## [v1.3.8](https://github.com/szaghi/PENF/tree/v1.3.8) (2026-02-17)
+[Full Changelog](https://github.com/szaghi/PENF/compare/v1.3.7...v1.3.8)
+### Bug fixes
+- Sync formal generate flags and ford config filename across build files ([`4410ed0`](https://github.com/szaghi/PENF/commit/4410ed01177163c019daffd97f5a9d44f31c78ac))
+
 ## [v1.3.7](https://github.com/szaghi/PENF/tree/v1.3.7) (2026-02-17)
 [Full Changelog](https://github.com/szaghi/PENF/compare/v1.3.6...v1.3.7)
 ### Documentation
