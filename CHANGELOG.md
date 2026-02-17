@@ -1,4 +1,9 @@
 # Changelog
+## [v1.3.7](https://github.com/szaghi/PENF/tree/v1.3.7) (2026-02-17)
+[Full Changelog](https://github.com/szaghi/PENF/compare/v1.3.6...v1.3.7)
+### Documentation
+- Restructure API docs layout and add Mermaid diagram support ([`d75c70d`](https://github.com/szaghi/PENF/commit/d75c70dbd044551c2ab209b7e2f7a8316d5cda4a))
+
 ## [v1.3.6](https://github.com/szaghi/PENF/tree/v1.3.6) (2026-02-16)
 [Full Changelog](https://github.com/szaghi/PENF/compare/v1.3.5...v1.3.6)
 ### Documentation
