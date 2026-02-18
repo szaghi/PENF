@@ -19,19 +19,44 @@ export default withMermaid({
   themeConfig: {
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Guide', link: '/guide/' },
+      {
+        text: 'Guide',
+        items: [
+          { text: 'About', link: '/guide/' },
+          { text: 'Features', link: '/guide/features' },
+          { text: 'Installation', link: '/guide/install' },
+          { text: 'String Conversions', link: '/guide/stringify' },
+          { text: 'Utilities', link: '/guide/utilities' },
+          { text: 'Memory Management', link: '/guide/memory' },
+          { text: 'Contributing', link: '/guide/contributing' },
+          { text: 'Changelog', link: '/guide/changelog' },
+        ],
+      },
       { text: 'API', link: '/api/' },
     ],
     sidebar: {
       '/guide/': [
         {
-          text: 'Guide',
+          text: 'Introduction',
           items: [
-            { text: 'Getting Started', link: '/guide/' },
+            { text: 'About', link: '/guide/' },
+            { text: 'Features', link: '/guide/features' },
+          ],
+        },
+        {
+          text: 'Getting Started',
+          items: [
+            { text: 'Installation', link: '/guide/install' },
             { text: 'String Conversions', link: '/guide/stringify' },
             { text: 'Utilities', link: '/guide/utilities' },
             { text: 'Memory Management', link: '/guide/memory' },
+          ],
+        },
+        {
+          text: 'Project',
+          items: [
             { text: 'Contributing', link: '/guide/contributing' },
+            { text: 'Changelog', link: '/guide/changelog' },
           ],
         },
       ],

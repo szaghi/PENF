@@ -1,3 +1,7 @@
+---
+title: String Conversions
+---
+
 # String Conversions
 
 ## Number → String: `str()`

@@ -1,3 +1,7 @@
+---
+title: Utilities
+---
+
 # Utilities
 
 ## Bit and byte sizes: `bit_size()` / `byte_size()`

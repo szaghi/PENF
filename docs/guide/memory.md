@@ -1,3 +1,7 @@
+---
+title: Memory Management
+---
+
 # Memory Management
 
 ## Allocatable memory management
