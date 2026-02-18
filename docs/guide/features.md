@@ -44,8 +44,8 @@ call penf_init
 real(R8P)    :: x = -1.0_R8P
 integer(I4P) :: n = 42_I4P
 
-print FR8P, x   !  -0.100000000000000E+001
-print FI4P, n   !          42
+print FR8P, x !  -0.100000000000000E+001
+print FI4P, n !          42
 ```
 
 ## Modules
