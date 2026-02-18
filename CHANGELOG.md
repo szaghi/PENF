@@ -1,4 +1,9 @@
 # Changelog
+## [v1.3.13](https://github.com/szaghi/PENF/tree/v1.3.13) (2026-02-18)
+[Full Changelog](https://github.com/szaghi/PENF/compare/v1.3.12...v1.3.13)
+### Documentation
+- Correct contributing.md link ([`d3dd4b6`](https://github.com/szaghi/PENF/commit/d3dd4b62e39cd4e905718e332a9c95c512b4ccbe))
+
 ## [v1.3.12](https://github.com/szaghi/PENF/tree/v1.3.12) (2026-02-18)
 [Full Changelog](https://github.com/szaghi/PENF/compare/v1.3.11...v1.3.12)
 ### Documentation
