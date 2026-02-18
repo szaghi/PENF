@@ -1,4 +1,12 @@
 # Changelog
+## [v1.3.12](https://github.com/szaghi/PENF/tree/v1.3.12) (2026-02-18)
+[Full Changelog](https://github.com/szaghi/PENF/compare/v1.3.11...v1.3.12)
+### Documentation
+- Add quick start section with kind tables and format strings ([`9000c6a`](https://github.com/szaghi/PENF/commit/9000c6ad1b8199c5ddc8f6bd75d1b6963abf4f19))
+
+### Miscellaneous
+- Remove migrate_to_formal.sh migration helper ([`a2d1188`](https://github.com/szaghi/PENF/commit/a2d1188873ef8dba4cf9f5474cca355b8ac209fd))
+
 ## [v1.3.11](https://github.com/szaghi/PENF/tree/v1.3.11) (2026-02-18)
 [Full Changelog](https://github.com/szaghi/PENF/compare/v1.3.10...v1.3.11)
 ### Documentation
