@@ -1,4 +1,9 @@
 # Changelog
+## [v1.3.9](https://github.com/szaghi/PENF/tree/v1.3.9) (2026-02-18)
+[Full Changelog](https://github.com/szaghi/PENF/compare/v1.3.8...v1.3.9)
+### CI/CD
+- Rename setup action to setup-build-env and bump setup-fpm to v9 ([`fe243a7`](https://github.com/szaghi/PENF/commit/fe243a7f1c7c2de83d7731b00770fe4000c7d7d1))
+
 ## [v1.3.8](https://github.com/szaghi/PENF/tree/v1.3.8) (2026-02-17)
 [Full Changelog](https://github.com/szaghi/PENF/compare/v1.3.7...v1.3.8)
 ### Bug fixes
