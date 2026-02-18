@@ -1,4 +1,9 @@
 # Changelog
+## [v1.3.10](https://github.com/szaghi/PENF/tree/v1.3.10) (2026-02-18)
+[Full Changelog](https://github.com/szaghi/PENF/compare/v1.3.9...v1.3.10)
+### CI/CD
+- Derive tarball name from repo name instead of hardcoded PENF ([`0cbb5df`](https://github.com/szaghi/PENF/commit/0cbb5df7f99647569561db26d024f583f0fea80c))
+
 ## [v1.3.9](https://github.com/szaghi/PENF/tree/v1.3.9) (2026-02-18)
 [Full Changelog](https://github.com/szaghi/PENF/compare/v1.3.8...v1.3.9)
 ### CI/CD
