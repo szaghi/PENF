@@ -18,7 +18,7 @@ jobs:
         submodules: 'true'
 
     - name: Setup build environment
-      uses: ./.github/actions/setup-penf
+      uses: ./.github/actions/setup-build-env
       with:
         extra-pip-packages: formal-ford2vitepress
 
