@@ -1,4 +1,10 @@
 # Changelog
+## [v1.3.11](https://github.com/szaghi/PENF/tree/v1.3.11) (2026-02-18)
+[Full Changelog](https://github.com/szaghi/PENF/compare/v1.3.10...v1.3.11)
+### Documentation
+- Expand guide with coding style and PR workflow ([`e3e548b`](https://github.com/szaghi/PENF/commit/e3e548b93a1fd00d897b7137dbb5d9044494001e))
+- Restructure guide with Introduction/Getting Started/Project sections ([`9862bc3`](https://github.com/szaghi/PENF/commit/9862bc34d71ea39f92faade86de5927f5cb4d3ce))
+
 ## [v1.3.10](https://github.com/szaghi/PENF/tree/v1.3.10) (2026-02-18)
 [Full Changelog](https://github.com/szaghi/PENF/compare/v1.3.9...v1.3.10)
 ### CI/CD
