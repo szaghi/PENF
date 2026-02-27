@@ -1,4 +1,12 @@
 # Changelog
+## [v1.3.15](https://github.com/szaghi/PENF/tree/v1.3.15) (2026-02-27)
+[Full Changelog](https://github.com/szaghi/PENF/compare/v1.3.14...v1.3.15)
+### CI/CD
+- Replace codecov with self-contained coverage extraction ([`74057e3`](https://github.com/szaghi/PENF/commit/74057e37a61e46735436edd941e7e05c3450d7c3))
+
+### Documentation
+- Overhaul README and install guide ([`700c5d6`](https://github.com/szaghi/PENF/commit/700c5d635b0aa5ef58cc3deb659dd2063a97b5c0))
+
 ## [v1.3.14](https://github.com/szaghi/PENF/tree/v1.3.14) (2026-02-27)
 [Full Changelog](https://github.com/szaghi/PENF/compare/v1.3.13...v1.3.14)
 ### Miscellaneous
