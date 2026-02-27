@@ -20,6 +20,10 @@ jobs:
     - name: Setup build environment
       uses: ./.github/actions/setup-build-env
 
+    - name: Fetch dependencies
+      if: hashFiles('**/.deps_config.ini') != ''
+      run: FoBiS.py fetch
+
     - name: Run tests with coverage
       id: cov
       uses: ./.github/actions/run-coverage

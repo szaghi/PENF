@@ -14,16 +14,15 @@ jobs:
 
     - name: Checkout repository
       uses: actions/checkout@v4
-      with:
-        submodules: 'true'
 
     - name: Setup build environment
       uses: ./.github/actions/setup-build-env
       with:
         extra-pip-packages: formal-ford2vitepress
 
-    - name: Check formal version
-      run: formal --version
+    - name: Fetch dependencies
+      if: hashFiles('**/.deps_config.ini') != ''
+      run: FoBiS.py fetch
 
     - name: Setup Node.js
       uses: actions/setup-node@v4
