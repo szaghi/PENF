@@ -1,3 +1,11 @@
+[project]
+name       = PENF
+summary    = Portability Environment for Fortran poor people
+repository = https://github.com/szaghi/PENF
+website    = https://szaghi.github.io/PENF
+email      = stefano.zaghi@gmail.it
+authors    = Stefano Zaghi
+
 [modes]
 modes = shared-gnu static-gnu tests-gnu
         shared-gnu-debug static-gnu-debug tests-gnu-debug
