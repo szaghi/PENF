@@ -6,6 +6,7 @@
 [![GitHub tag](https://img.shields.io/github/v/tag/szaghi/PENF)](https://github.com/szaghi/PENF/tags)
 [![GitHub issues](https://img.shields.io/github/issues/szaghi/PENF)](https://github.com/szaghi/PENF/issues)
 [![CI](https://github.com/szaghi/PENF/actions/workflows/ci.yml/badge.svg)](https://github.com/szaghi/PENF/actions/workflows/ci.yml)
+[![coverage](https://img.shields.io/endpoint?url=https://szaghi.github.io/PENF/coverage.json)](https://github.com/szaghi/PENF/actions/workflows/ci.yml)
 
 | 🔢 **Kind Parameters**<br>Integers `I1P`–`I8P` and reals `R4P`/`R8P`/`R16P`, portable across compilers | 🔄 **Number ↔ String**<br>`str()`, `strz()`, `cton()`, `bstr()`, `bcton()` — full round-trips | 📐 **Format Strings & Limits**<br>Ready-made `FI*P` / `FR*P` formats and min/max values for every kind | 📏 **Bit & Byte Sizes**<br>`bit_size()` / `byte_size()` extended to reals, integers, and characters |
 |:---:|:---:|:---:|:---:|
