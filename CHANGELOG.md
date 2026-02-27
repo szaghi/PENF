@@ -1,4 +1,15 @@
 # Changelog
+## [v1.3.17](https://github.com/szaghi/PENF/tree/v1.3.17) (2026-02-27)
+[Full Changelog](https://github.com/szaghi/PENF/compare/v1.3.16...v1.3.17)
+### CI/CD
+- Switch to FoBiS.py fetch for dependency management ([`f62d5e8`](https://github.com/szaghi/PENF/commit/f62d5e82a90254a3a60da5336d405c7152b903d2))
+
+### Miscellaneous
+- Bump rollup from 4.57.1 to 4.59.0 in /docs ([`eee0193`](https://github.com/szaghi/PENF/commit/eee0193c6c2ee42591ef2ccd11cb00c7e91fd086))
+- Merge pull request [#27](https://github.com/szaghi/PENF/issues/27) from szaghi/dependabot/npm_and_yarn/docs/rollup-4.59.0
+
+chore(deps): bump rollup from 4.57.1 to 4.59.0 in /docs ([`1fe7f8f`](https://github.com/szaghi/PENF/commit/1fe7f8f985e57177092c70c29f9ae4e2a7d04d80))
+
 ## [v1.3.16](https://github.com/szaghi/PENF/tree/v1.3.16) (2026-02-27)
 [Full Changelog](https://github.com/szaghi/PENF/compare/v1.3.15...v1.3.16)
 ### CI/CD
