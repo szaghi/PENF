@@ -1,5 +1,6 @@
 [project]
 name       = PENF
+version    = VERSION
 summary    = Portability Environment for Fortran poor people
 repository = https://github.com/szaghi/PENF
 website    = https://szaghi.github.io/PENF
