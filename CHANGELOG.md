@@ -1,4 +1,9 @@
 # Changelog
+## [v1.3.16](https://github.com/szaghi/PENF/tree/v1.3.16) (2026-02-27)
+[Full Changelog](https://github.com/szaghi/PENF/compare/v1.3.15...v1.3.16)
+### CI/CD
+- Extract coverage into a reusable composite action ([`48cd944`](https://github.com/szaghi/PENF/commit/48cd94453ce76dd6a0d0789659c42f76818a054a))
+
 ## [v1.3.15](https://github.com/szaghi/PENF/tree/v1.3.15) (2026-02-27)
 [Full Changelog](https://github.com/szaghi/PENF/compare/v1.3.14...v1.3.15)
 ### CI/CD
