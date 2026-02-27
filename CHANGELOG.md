@@ -1,4 +1,12 @@
 # Changelog
+## [v1.3.14](https://github.com/szaghi/PENF/tree/v1.3.14) (2026-02-27)
+[Full Changelog](https://github.com/szaghi/PENF/compare/v1.3.13...v1.3.14)
+### Miscellaneous
+- Add project metadata section ([`df28b28`](https://github.com/szaghi/PENF/commit/df28b2864234ce356462ae503e626fbb9130beff))
+
+### New features
+- Add VERSION file kept in sync by bump.sh ([`602bcc8`](https://github.com/szaghi/PENF/commit/602bcc8863f45a807440e6dc4bfb4e553f08c84e))
+
 ## [v1.3.13](https://github.com/szaghi/PENF/tree/v1.3.13) (2026-02-18)
 [Full Changelog](https://github.com/szaghi/PENF/compare/v1.3.12...v1.3.13)
 ### Documentation
