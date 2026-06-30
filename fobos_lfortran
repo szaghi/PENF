@@ -1,0 +1,62 @@
+[project]
+name       = PENF
+version    = VERSION
+summary    = Portability Environment for Fortran poor people
+repository = https://github.com/szaghi/PENF
+website    = https://szaghi.github.io/PENF
+email      = stefano.zaghi@gmail.it
+authors    = Stefano Zaghi
+
+# Temporary fobos to build/test PENF with the LFortran compiler (https://docs.lfortran.org).
+#
+# Tested with LFortran 0.63.0 (alpha, LLVM 19). Notes on the flag choices below:
+#   * LFortran is registered as a FoBiS "custom" compiler (FoBiS has no native
+#     lfortran backend), so fc/modsw/cflags/lflags are all spelled out explicitly.
+#   * --cpp must be passed explicitly: unlike gfortran/ifx, LFortran does NOT
+#     auto-preprocess .F90 files; FoBiS just runs the raw compile command.
+#   * modsw = "-J " writes .mod files (FoBiS also appends "-I<mod_dir>" to read them).
+#   * _R16P is intentionally OMITTED: LFortran 0.63 returns kind -1 for
+#     selected_real_kind(33,4931), so quad precision is unsupported (same stance
+#     as the Intel/IBM templates). ASCII + UCS4 char kinds compile fine.
+#   * Linking goes through LFortran's default linker driver (clang), so no
+#     --linker override is needed; clang must be installed and on PATH.
+
+[modes]
+modes = static-lfortran tests-lfortran
+
+[common-variables]
+$CSTATIC_LFORTRAN = -c --cpp
+$OPTIMIZE         = -O3
+$PREPROC_LFORTRAN = -D_ASCII_SUPPORTED -D_UCS4_SUPPORTED
+
+# main modes
+[static-lfortran]
+template  = template-static-lfortran
+target    = src/lib/penf.F90
+build_dir = ./static/
+output    = penf.a
+mklib     = static
+
+[tests-lfortran]
+template  = template-static-lfortran
+build_dir = ./exe/
+
+# templates
+[template-base]
+mod_dir         = ./mod/
+obj_dir         = ./obj/
+src             = ./src/
+colors          = True
+quiet           = False
+log             = True
+jobs            = 4
+cflags_heritage = True
+
+[template-static-lfortran]
+template = template-base
+compiler = custom
+fc       = lfortran
+modsw    = -J
+cflags   = $CSTATIC_LFORTRAN $OPTIMIZE
+lflags   = $OPTIMIZE
+preproc  = $PREPROC_LFORTRAN
