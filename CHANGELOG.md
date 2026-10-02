@@ -4,6 +4,11 @@ All notable changes to this project are documented here.
 Versions follow [Semantic Versioning](https://semver.org/).
 Format follows [Keep a Changelog](https://keepachangelog.com/).
 
+## [2.0.1] — 2026-10-02
+### Fixed
+- **cmake**: Repair find_package config and read version from VERSION
+
+
 ## [2.0.0] — 2026-10-02
 ### Fixed
 - **stringify**: Make real str exact, bstr endian-free, rename _R16P ⚠ BREAKING CHANGE
