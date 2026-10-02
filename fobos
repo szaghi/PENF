@@ -167,84 +167,84 @@ template = template-base
 compiler = gnu
 cflags   = $CSHARED_GNU $OPTIMIZE
 lflags   = $LSHARED $OPTIMIZE
-preproc  = -D_ASCII_SUPPORTED -D_UCS4_SUPPORTED -D_R16P
+preproc  = -D_ASCII_SUPPORTED -D_UCS4_SUPPORTED -DPENF_R16P
 
 [template-static-gnu]
 template = template-base
 compiler = gnu
 cflags   = $CSTATIC_GNU $OPTIMIZE
 lflags   = $OPTIMIZE
-preproc  = -D_ASCII_SUPPORTED -D_UCS4_SUPPORTED -D_R16P
+preproc  = -D_ASCII_SUPPORTED -D_UCS4_SUPPORTED -DPENF_R16P
 
 [template-shared-gnu-debug]
 template = template-base
 compiler = gnu
 cflags   = $CSHARED_GNU $DEBUG_GNU
 lflags   = $LSHARED $DEBUG_GNU
-preproc  = -D_ASCII_SUPPORTED -D_UCS4_SUPPORTED -D_R16P
+preproc  = -D_ASCII_SUPPORTED -D_UCS4_SUPPORTED -DPENF_R16P
 
 [template-static-gnu-debug]
 template = template-base
 compiler = gnu
 cflags   = $CSTATIC_GNU $DEBUG_GNU
 lflags   = $DEBUG_GNU
-preproc  = -D_ASCII_SUPPORTED -D_UCS4_SUPPORTED -D_R16P
+preproc  = -D_ASCII_SUPPORTED -D_UCS4_SUPPORTED -DPENF_R16P
 
 [template-shared-intel]
 template = template-base
 compiler = intel
 cflags   = $CSHARED_INT $OPTIMIZE
 lflags   = $LSHARED $OPTIMIZE
-preproc  = -D_R16P
+preproc  = -DPENF_R16P
 
 [template-static-intel]
 template = template-base
 compiler = intel
 cflags   = $CSTATIC_INT $OPTIMIZE
 lflags   = $OPTIMIZE
-preproc  = -D_R16P
+preproc  = -DPENF_R16P
 
 [template-shared-intel-debug]
 template = template-base
 compiler = intel
 cflags   = $CSHARED_INT $DEBUG_INT
 lflags   = $LSHARED $DEBUG_INT
-preproc  = -D_R16P
+preproc  = -DPENF_R16P
 
 [template-static-intel-debug]
 template = template-base
 compiler = intel
 cflags   = $CSTATIC_INT $DEBUG_INT
 lflags   = $DEBUG_INT
-preproc  = -D_R16P
+preproc  = -DPENF_R16P
 
 [template-shared-ibm]
 template = template-base
 compiler = ibm
 cflags   = $CSHARED_IBM $OPTIMIZE
 lflags   = $LSHARED $OPTIMIZE
-preproc  = -D_R16P
+preproc  = -DPENF_R16P
 
 [template-static-ibm]
 template = template-base
 compiler = ibm
 cflags   = $CSTATIC_IBM $OPTIMIZE
 lflags   = $OPTIMIZE
-preproc  = -D_R16P
+preproc  = -DPENF_R16P
 
 [template-shared-ibm-debug]
 template = template-base
 compiler = ibm
 cflags   = $CSHARED_IBM $DEBUG_IBM
 lflags   = $LSHARED $DEBUG_IBM
-preproc  = -D_R16P
+preproc  = -DPENF_R16P
 
 [template-static-ibm-debug]
 template = template-base
 compiler = ibm
 cflags   = $CSTATIC_IBM $DEBUG_IBM
 lflags   = $DEBUG_IBM
-preproc  = -D_R16P
+preproc  = -DPENF_R16P
 
 [rule-makedoc]
 help   = Build documentation with formal + VitePress

@@ -1,5 +1,5 @@
 program volatile_doctest
 use penf_stringify
  use penf
- print FI2P, bcton('0000000000000001', knd=1_I2P)
+ print FI1P, cton(str='-1', knd=1_I1P)
 endprogram volatile_doctest

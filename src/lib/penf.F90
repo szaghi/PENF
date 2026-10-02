@@ -69,10 +69,12 @@ contains
    !<
    !<```fortran
    !< use penf
+   !< integer(I1P) :: bytes(1:4)
    !< call check_endian
-   !< print *, endian
+   !< bytes = transfer(1_I4P, bytes)
+   !< print "(L1)", (endian==endianL).eqv.(bytes(1)==1_I1P)
    !<```
-   !=> 1 <<<
+   !=> T <<<
    if (is_little_endian()) then
       endian = endianL
    else
@@ -98,6 +100,12 @@ contains
    !< print FI1P, BYR4P
    !<```
    !=> 4 <<<
+   !<
+   !<```fortran
+   !< use penf
+   !< print "(L1)", MaxR16P==huge(MaxR16P).and.MinR16P==-huge(MinR16P).and.smallR16P==tiny(smallR16P)
+   !<```
+   !=> T <<<
 
    call check_endian
    is_initialized = .true.

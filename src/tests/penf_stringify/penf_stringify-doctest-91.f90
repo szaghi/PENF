@@ -1,5 +1,7 @@
 program volatile_doctest
 use penf_stringify
  use penf
- print FI1P, bcton('00000001', knd=1_I1P)
+ character(128) :: b
+ b = bstr(n=1._R16P)
+ print "(A)", b(1:32)
 endprogram volatile_doctest

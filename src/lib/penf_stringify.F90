@@ -38,7 +38,7 @@ endinterface
 interface str
   !< Convert number (real and integer) to string (number to string type casting).
   module procedure                       &
-#if defined _R16P
+#if defined PENF_R16P
                    strf_R16P,str_R16P,   &
 #endif
                    strf_R8P ,str_R8P,    &
@@ -48,7 +48,7 @@ interface str
                    strf_I2P ,str_I2P,    &
                    strf_I1P ,str_I1P,    &
                              str_bol,    &
-#if defined _R16P
+#if defined PENF_R16P
                              str_a_R16P, &
 #endif
                              str_a_R8P,  &
@@ -67,7 +67,7 @@ endinterface
 interface cton
   !< Convert string to number (real and integer, string to number type casting).
   module procedure            &
-#if defined _R16P
+#if defined PENF_R16P
                    ctor_R16P, &
 #endif
                    ctor_R8P,  &
@@ -81,7 +81,7 @@ endinterface
 interface bstr
   !< Convert number (real and integer) to bit-string (number to bit-string type casting).
   module procedure            &
-#if defined _R16P
+#if defined PENF_R16P
                    bstr_R16P, &
 #endif
                    bstr_R8P,  &
@@ -95,7 +95,7 @@ endinterface
 interface bcton
   !< Convert bit-string to number (real and integer, bit-string to number type casting).
   module procedure             &
-#if defined _R16P
+#if defined PENF_R16P
                    bctor_R16P, &
 #endif
                    bctor_R8P,  &
@@ -210,7 +210,7 @@ contains
    !< use penf
    !< print "(A)", str(fm=FR16P, n=1._R16P)
    !<```
-   !=> 0.100000000000000000000000000000000E+0001 <<<
+   !=> 0.100000000000000000000000000000000000E+0001 <<<
    character(*), intent(in) :: fm  !< Format different from the standard for the kind.
    real(R16P),   intent(in) :: n   !< Real to be converted.
    character(DR16P)         :: str !< Returned string containing input number.
@@ -225,7 +225,7 @@ contains
    !< use penf
    !< print "(A)", str(fm=FR8P, n=1._R8P)
    !<```
-   !=> 0.100000000000000E+001 <<<
+   !=> 0.10000000000000000E+001 <<<
    character(*), intent(in) :: fm  !< Format different from the standard for the kind.
    real(R8P),    intent(in) :: n   !< Real to be converted.
    character(DR8P)          :: str !< Returned string containing input number.
@@ -240,7 +240,7 @@ contains
    !< use penf
    !< print "(A)", str(fm=FR4P, n=1._R4P)
    !<```
-   !=> 0.100000E+01 <<<
+   !=> 0.100000000E+01 <<<
    character(*), intent(in) :: fm  !< Format different from the standard for the kind.
    real(R4P),    intent(in) :: n   !< Real to be converted.
    character(DR4P)          :: str !< Returned string containing input number.
@@ -311,99 +311,252 @@ contains
    elemental function str_R16P(n, no_sign, compact) result(str)
    !< Convert real to string.
    !<
+   !< The string returned is read back exactly: by default it has the fixed width format FR16P, that has the significant
+   !< digits always sufficient for an exact read back.
+   !<
+   !< If `compact` is true the string returned is the shortest one that is read back exactly: the significant digits are
+   !< increased until the number read back is equal to the input one. The plain decimal notation is used for decimal
+   !< exponents in [-5, 15], the scientific one otherwise.
+   !<
    !<```fortran
    !< use penf
    !< print "(A)", str(n=-1._R16P)
    !<```
-   !=> -0.100000000000000000000000000000000E+0001 <<<
+   !=> -0.100000000000000000000000000000000000E+0001 <<<
    !<
    !<```fortran
    !< use penf
    !< print "(A)", str(n=-1._R16P, no_sign=.true.)
    !<```
-   !=> 0.100000000000000000000000000000000E+0001 <<<
+   !=> 0.100000000000000000000000000000000000E+0001 <<<
    !<
    !<```fortran
    !< use penf
    !< print "(A)", str(n=-1._R16P, compact=.true.)
    !<```
-   !=> -0.1E+1 <<<
+   !=> -1.0 <<<
+   !<
+   !<```fortran
+   !< use penf
+   !< print "(A)", str(n=0.1_R16P, compact=.true.)
+   !<```
+   !=> +0.1 <<<
+   !<
+   !<```fortran
+   !< use penf
+   !< print "(A)", str(n=-1._R16P, no_sign=.false.)
+   !<```
+   !=> -0.100000000000000000000000000000000000E+0001 <<<
+   !<
+   !<```fortran
+   !< use penf
+   !< real(R16P) :: x(1:5)
+   !< integer :: i
+   !< logical :: exact
+   !< x = [huge(1._R16P), tiny(1._R16P), 0.1_R16P, -1._R16P/3._R16P, 0._R16P]
+   !< exact = .true.
+   !< do i=1, 5
+   !<   exact = exact.and.(cton(str=str(n=x(i)), knd=1._R16P)==x(i))
+   !<   exact = exact.and.(cton(str=str(n=x(i), compact=.true.), knd=1._R16P)==x(i))
+   !< enddo
+   !< print "(L1)", exact
+   !<```
+   !=> T <<<
    real(R16P), intent(in)           :: n       !< Real to be converted.
    logical,    intent(in), optional :: no_sign !< Flag for leaving out the sign.
-   logical,    intent(in), optional :: compact !< Flag for *compacting* string encoding.
+   logical,    intent(in), optional :: compact !< Flag for the shortest exact string.
    character(DR16P)                 :: str     !< Returned string containing input number.
+   integer, parameter               :: MAX_DIGITS = 36 !< Significant digits always sufficient for an exact read back.
+   character(MAX_DIGITS+8)          :: buffer  !< Buffer for the conversions.
+   character(16)                    :: frm     !< Format of the conversion.
+   real(R16P)                       :: check   !< Number read back.
+   integer                          :: d       !< Significant digits counter.
+   integer                          :: ios     !< IO status.
 
-   write(str, FR16P) n               ! Casting of n to string.
-   if (n>0._R16P) str(1:1)='+'       ! Prefixing plus if n>0.
-   if (present(no_sign)) str=str(2:) ! Leaving out the sign.
    if (present(compact)) then
-     if (compact) call compact_real_string(string=str)
+     if (compact) then
+       do d=1, MAX_DIGITS
+         write(frm, '(A,I0,A,I0,A)') '(ES', d+8, '.', d-1, 'E4)'
+         write(buffer, frm) n
+         read(buffer, *, iostat=ios) check
+         if (ios == 0 .and. check == n) exit
+       enddo
+       str = tidy_real_string(source=trim(adjustl(buffer)), no_sign=no_sign)
+       return
+     endif
+   endif
+   write(str, FR16P) n                           ! Casting of n to string.
+   if (str(1:1)==' '.and.n>=real(0, kind=R16P)) str(1:1)='+' ! Prefixing plus if n>=0.
+   if (present(no_sign)) then
+     if (no_sign) str=str(2:)                    ! Leaving out the sign.
    endif
    endfunction str_R16P
 
    elemental function str_R8P(n, no_sign, compact) result(str)
    !< Convert real to string.
    !<
+   !< The string returned is read back exactly: by default it has the fixed width format FR8P, that has the significant
+   !< digits always sufficient for an exact read back.
+   !<
+   !< If `compact` is true the string returned is the shortest one that is read back exactly: the significant digits are
+   !< increased until the number read back is equal to the input one. The plain decimal notation is used for decimal
+   !< exponents in [-5, 15], the scientific one otherwise.
+   !<
    !<```fortran
    !< use penf
    !< print "(A)", str(n=-1._R8P)
    !<```
-   !=> -0.100000000000000E+001 <<<
+   !=> -0.10000000000000000E+001 <<<
    !<
    !<```fortran
    !< use penf
    !< print "(A)", str(n=-1._R8P, no_sign=.true.)
    !<```
-   !=> 0.100000000000000E+001 <<<
+   !=> 0.10000000000000000E+001 <<<
    !<
    !<```fortran
    !< use penf
    !< print "(A)", str(n=-1._R8P, compact=.true.)
    !<```
-   !=> -0.1E+1 <<<
+   !=> -1.0 <<<
+   !<
+   !<```fortran
+   !< use penf
+   !< print "(A)", str(n=0.1_R8P, compact=.true.)
+   !<```
+   !=> +0.1 <<<
+   !<
+   !<```fortran
+   !< use penf
+   !< print "(A)", str(n=-1._R8P, no_sign=.false.)
+   !<```
+   !=> -0.10000000000000000E+001 <<<
+   !<
+   !<```fortran
+   !< use penf
+   !< real(R8P) :: x(1:5)
+   !< integer :: i
+   !< logical :: exact
+   !< x = [huge(1._R8P), tiny(1._R8P), 0.1_R8P, -1._R8P/3._R8P, 0._R8P]
+   !< exact = .true.
+   !< do i=1, 5
+   !<   exact = exact.and.(cton(str=str(n=x(i)), knd=1._R8P)==x(i))
+   !<   exact = exact.and.(cton(str=str(n=x(i), compact=.true.), knd=1._R8P)==x(i))
+   !< enddo
+   !< print "(L1)", exact
+   !<```
+   !=> T <<<
    real(R8P), intent(in)           :: n       !< Real to be converted.
    logical,   intent(in), optional :: no_sign !< Flag for leaving out the sign.
-   logical,   intent(in), optional :: compact !< Flag for *compacting* string encoding.
+   logical,   intent(in), optional :: compact !< Flag for the shortest exact string.
    character(DR8P)                 :: str     !< Returned string containing input number.
+   integer, parameter              :: MAX_DIGITS = 17 !< Significant digits always sufficient for an exact read back.
+   character(MAX_DIGITS+8)         :: buffer  !< Buffer for the conversions.
+   character(16)                   :: frm     !< Format of the conversion.
+   real(R8P)                       :: check   !< Number read back.
+   integer                         :: d       !< Significant digits counter.
+   integer                         :: ios     !< IO status.
 
-   write(str, FR8P) n                ! Casting of n to string.
-   if (n>0._R8P) str(1:1)='+'        ! Prefixing plus if n>0.
-   if (present(no_sign)) str=str(2:) ! Leaving out the sign.
    if (present(compact)) then
-     if (compact) call compact_real_string(string=str)
+     if (compact) then
+       do d=1, MAX_DIGITS
+         write(frm, '(A,I0,A,I0,A)') '(ES', d+8, '.', d-1, 'E4)'
+         write(buffer, frm) n
+         read(buffer, *, iostat=ios) check
+         if (ios == 0 .and. check == n) exit
+       enddo
+       str = tidy_real_string(source=trim(adjustl(buffer)), no_sign=no_sign)
+       return
+     endif
+   endif
+   write(str, FR8P) n                           ! Casting of n to string.
+   if (str(1:1)==' '.and.n>=0._R8P) str(1:1)='+' ! Prefixing plus if n>=0.
+   if (present(no_sign)) then
+     if (no_sign) str=str(2:)                    ! Leaving out the sign.
    endif
    endfunction str_R8P
 
    elemental function str_R4P(n, no_sign, compact) result(str)
    !< Convert real to string.
    !<
+   !< The string returned is read back exactly: by default it has the fixed width format FR4P, that has the significant
+   !< digits always sufficient for an exact read back.
+   !<
+   !< If `compact` is true the string returned is the shortest one that is read back exactly: the significant digits are
+   !< increased until the number read back is equal to the input one. The plain decimal notation is used for decimal
+   !< exponents in [-5, 15], the scientific one otherwise.
+   !<
    !<```fortran
    !< use penf
    !< print "(A)", str(n=-1._R4P)
    !<```
-   !=> -0.100000E+01 <<<
+   !=> -0.100000000E+01 <<<
    !<
    !<```fortran
    !< use penf
    !< print "(A)", str(n=-1._R4P, no_sign=.true.)
    !<```
-   !=> 0.100000E+01 <<<
+   !=> 0.100000000E+01 <<<
    !<
    !<```fortran
    !< use penf
    !< print "(A)", str(n=-1._R4P, compact=.true.)
    !<```
-   !=> -0.1E+1 <<<
+   !=> -1.0 <<<
+   !<
+   !<```fortran
+   !< use penf
+   !< print "(A)", str(n=0.1_R4P, compact=.true.)
+   !<```
+   !=> +0.1 <<<
+   !<
+   !<```fortran
+   !< use penf
+   !< print "(A)", str(n=-1._R4P, no_sign=.false.)
+   !<```
+   !=> -0.100000000E+01 <<<
+   !<
+   !<```fortran
+   !< use penf
+   !< real(R4P) :: x(1:5)
+   !< integer :: i
+   !< logical :: exact
+   !< x = [huge(1._R4P), tiny(1._R4P), 0.1_R4P, -1._R4P/3._R4P, 0._R4P]
+   !< exact = .true.
+   !< do i=1, 5
+   !<   exact = exact.and.(cton(str=str(n=x(i)), knd=1._R4P)==x(i))
+   !<   exact = exact.and.(cton(str=str(n=x(i), compact=.true.), knd=1._R4P)==x(i))
+   !< enddo
+   !< print "(L1)", exact
+   !<```
+   !=> T <<<
    real(R4P), intent(in)           :: n       !< Real to be converted.
    logical,   intent(in), optional :: no_sign !< Flag for leaving out the sign.
-   logical,   intent(in), optional :: compact !< Flag for *compacting* string encoding.
+   logical,   intent(in), optional :: compact !< Flag for the shortest exact string.
    character(DR4P)                 :: str     !< Returned string containing input number.
+   integer, parameter              :: MAX_DIGITS = 9 !< Significant digits always sufficient for an exact read back.
+   character(MAX_DIGITS+8)         :: buffer  !< Buffer for the conversions.
+   character(16)                   :: frm     !< Format of the conversion.
+   real(R4P)                       :: check   !< Number read back.
+   integer                         :: d       !< Significant digits counter.
+   integer                         :: ios     !< IO status.
 
-   write(str, FR4P) n                ! Casting of n to string.
-   if (n>0._R4P) str(1:1)='+'        ! Prefixing plus if n>0.
-   if (present(no_sign)) str=str(2:) ! Leaving out the sign.
    if (present(compact)) then
-     if (compact) call compact_real_string(string=str)
+     if (compact) then
+       do d=1, MAX_DIGITS
+         write(frm, '(A,I0,A,I0,A)') '(ES', d+8, '.', d-1, 'E4)'
+         write(buffer, frm) n
+         read(buffer, *, iostat=ios) check
+         if (ios == 0 .and. check == n) exit
+       enddo
+       str = tidy_real_string(source=trim(adjustl(buffer)), no_sign=no_sign)
+       return
+     endif
+   endif
+   write(str, FR4P) n                           ! Casting of n to string.
+   if (str(1:1)==' '.and.n>=0._R4P) str(1:1)='+' ! Prefixing plus if n>=0.
+   if (present(no_sign)) then
+     if (no_sign) str=str(2:)                    ! Leaving out the sign.
    endif
    endfunction str_R4P
 
@@ -421,6 +574,12 @@ contains
    !< print "(A)", str(n=-1_I8P, no_sign=.true.)
    !<```
    !=> 1 <<<
+   !<
+   !<```fortran
+   !< use penf
+   !< print "(A)", str(n=-1_I8P, no_sign=.false.)
+   !<```
+   !=> -1 <<<
    integer(I8P), intent(in)           :: n       !< Integer to be converted.
    logical,      intent(in), optional :: no_sign !< Flag for leaving out the sign.
    character(DI8P)                    :: str     !< Returned string containing input number plus padding zeros.
@@ -428,7 +587,9 @@ contains
    write(str, FI8P) n                ! Casting of n to string.
    str = adjustl(trim(str))          ! Removing white spaces.
    if (n>=0_I8P) str='+'//trim(str)  ! Prefixing plus if n>0.
-   if (present(no_sign)) str=str(2:) ! Leaving out the sign.
+   if (present(no_sign)) then
+     if (no_sign) str=str(2:)        ! Leaving out the sign.
+   endif
    endfunction str_I8P
 
    elemental function str_I4P(n, no_sign) result(str)
@@ -445,6 +606,12 @@ contains
    !< print "(A)", str(n=-1_I4P, no_sign=.true.)
    !<```
    !=> 1 <<<
+   !<
+   !<```fortran
+   !< use penf
+   !< print "(A)", str(n=-1_I4P, no_sign=.false.)
+   !<```
+   !=> -1 <<<
    integer(I4P), intent(in)           :: n       !< Integer to be converted.
    logical,      intent(in), optional :: no_sign !< Flag for leaving out the sign.
    character(DI4P)                    :: str     !< Returned string containing input number plus padding zeros.
@@ -452,7 +619,9 @@ contains
    write(str, FI4P) n                ! Casting of n to string.
    str = adjustl(trim(str))          ! Removing white spaces.
    if (n>=0_I4P) str='+'//trim(str)  ! Prefixing plus if n>0.
-   if (present(no_sign)) str=str(2:) ! Leaving out the sign.
+   if (present(no_sign)) then
+     if (no_sign) str=str(2:)        ! Leaving out the sign.
+   endif
    endfunction str_I4P
 
    elemental function str_I2P(n, no_sign) result(str)
@@ -469,6 +638,12 @@ contains
    !< print "(A)", str(n=-1_I2P, no_sign=.true.)
    !<```
    !=> 1 <<<
+   !<
+   !<```fortran
+   !< use penf
+   !< print "(A)", str(n=-1_I2P, no_sign=.false.)
+   !<```
+   !=> -1 <<<
    integer(I2P), intent(in)           :: n       !< Integer to be converted.
    logical,      intent(in), optional :: no_sign !< Flag for leaving out the sign.
    character(DI2P)                    :: str     !< Returned string containing input number plus padding zeros.
@@ -476,7 +651,9 @@ contains
    write(str, FI2P) n                ! Casting of n to string.
    str = adjustl(trim(str))          ! Removing white spaces.
    if (n>=0_I2P) str='+'//trim(str)  ! Prefixing plus if n>0.
-   if (present(no_sign)) str=str(2:) ! Leaving out the sign.
+   if (present(no_sign)) then
+     if (no_sign) str=str(2:)        ! Leaving out the sign.
+   endif
    endfunction str_I2P
 
    elemental function str_I1P(n, no_sign) result(str)
@@ -493,6 +670,12 @@ contains
    !< print "(A)", str(n=-1_I1P, no_sign=.true.)
    !<```
    !=> 1 <<<
+   !<
+   !<```fortran
+   !< use penf
+   !< print "(A)", str(n=-1_I1P, no_sign=.false.)
+   !<```
+   !=> -1 <<<
    integer(I1P), intent(in)           :: n       !< Integer to be converted.
    logical,      intent(in), optional :: no_sign !< Flag for leaving out the sign.
    character(DI1P)                    :: str     !< Returned string containing input number plus padding zeros.
@@ -500,7 +683,9 @@ contains
    write(str, FI1P) n                ! Casting of n to string.
    str = adjustl(trim(str))          ! Removing white spaces.
    if (n>=0_I1P) str='+'//trim(str)  ! Prefixing plus if n>0.
-   if (present(no_sign)) str=str(2:) ! Leaving out the sign.
+   if (present(no_sign)) then
+     if (no_sign) str=str(2:)        ! Leaving out the sign.
+   endif
    endfunction str_I1P
 
    elemental function str_bol(n) result(str)
@@ -524,36 +709,36 @@ contains
    !< use penf
    !< print "(A)", str(n=[1._R16P, -2._R16P])
    !<```
-   !=> +0.100000000000000000000000000000000E+0001,-0.200000000000000000000000000000000E+0001 <<<
+   !=> +0.100000000000000000000000000000000000E+0001,-0.200000000000000000000000000000000000E+0001 <<<
    !<
    !<```fortran
    !< use penf
    !< print "(A)", str(n=[1._R16P, 2._R16P], no_sign=.true.)
    !<```
-   !=> 0.100000000000000000000000000000000E+0001,0.200000000000000000000000000000000E+0001 <<<
+   !=> 0.100000000000000000000000000000000000E+0001,0.200000000000000000000000000000000000E+0001 <<<
    !<
    !<```fortran
    !< use penf
    !< print "(A)", str(n=[1._R16P, -2._R16P], separator='|')
    !<```
-   !=> +0.100000000000000000000000000000000E+0001|-0.200000000000000000000000000000000E+0001 <<<
+   !=> +0.100000000000000000000000000000000000E+0001|-0.200000000000000000000000000000000000E+0001 <<<
    !<
    !<```fortran
    !< use penf
    !< print "(A)", str(n=[1._R16P, -3._R16P], delimiters=['(', ')'])
    !<```
-   !=> (+0.100000000000000000000000000000000E+0001,-0.300000000000000000000000000000000E+0001) <<<
+   !=> (+0.100000000000000000000000000000000000E+0001,-0.300000000000000000000000000000000000E+0001) <<<
    !<
    !<```fortran
    !< use penf
    !< print "(A)", str(n=[1._R16P, -2._R16P], compact=.true.)
    !<```
-   !=> +0.1E+1,-0.2E+1 <<<
+   !=> +1.0,-2.0 <<<
    real(R16P),   intent(in)           :: n(:)            !< Real array to be converted.
    logical,      intent(in), optional :: no_sign         !< Flag for leaving out the sign.
    character(1), intent(in), optional :: separator       !< Eventual separator of array values.
    character(*), intent(in), optional :: delimiters(1:2) !< Eventual delimiters of array values.
-   logical,      intent(in), optional :: compact         !< Flag for *compacting* string encoding.
+   logical,      intent(in), optional :: compact         !< Flag for the shortest exact strings.
    character(len=:), allocatable      :: str             !< Returned string containing input number.
    character(DR16P)                   :: strn            !< String containing of element of input array number.
    character(len=1)                   :: sep             !< Array values separator
@@ -577,36 +762,36 @@ contains
    !< use penf
    !< print "(A)", str(n=[1._R8P, -2._R8P])
    !<```
-   !=> +0.100000000000000E+001,-0.200000000000000E+001 <<<
+   !=> +0.10000000000000000E+001,-0.20000000000000000E+001 <<<
    !<
    !<```fortran
    !< use penf
    !< print "(A)", str(n=[1._R8P, 2._R8P], no_sign=.true.)
    !<```
-   !=> 0.100000000000000E+001,0.200000000000000E+001 <<<
+   !=> 0.10000000000000000E+001,0.20000000000000000E+001 <<<
    !<
    !<```fortran
    !< use penf
    !< print "(A)", str(n=[1._R8P, -2._R8P], separator='|')
    !<```
-   !=> +0.100000000000000E+001|-0.200000000000000E+001 <<<
+   !=> +0.10000000000000000E+001|-0.20000000000000000E+001 <<<
    !<
    !<```fortran
    !< use penf
    !< print "(A)", str(n=[1._R8P, -2._R8P], delimiters=['(', ')'])
    !<```
-   !=> (+0.100000000000000E+001,-0.200000000000000E+001) <<<
+   !=> (+0.10000000000000000E+001,-0.20000000000000000E+001) <<<
    !<
    !<```fortran
    !< use penf
    !< print "(A)", str(n=[1._R8P, -2._R8P], compact=.true.)
    !<```
-   !=> +0.1E+1,-0.2E+1 <<<
+   !=> +1.0,-2.0 <<<
    real(R8P),    intent(in)           :: n(:)            !< Real array to be converted.
    logical,      intent(in), optional :: no_sign         !< Flag for leaving out the sign.
    character(1), intent(in), optional :: separator       !< Eventual separator of array values.
    character(*), intent(in), optional :: delimiters(1:2) !< Eventual delimiters of array values.
-   logical,      intent(in), optional :: compact         !< Flag for *compacting* string encoding.
+   logical,      intent(in), optional :: compact         !< Flag for the shortest exact strings.
    character(len=:), allocatable      :: str             !< Returned string containing input number.
    character(DR8P)                    :: strn            !< String containing of element of input array number.
    character(len=1)                   :: sep             !< Array values separator
@@ -630,36 +815,36 @@ contains
    !< use penf
    !< print "(A)", str(n=[1._R4P, -2._R4P])
    !<```
-   !=> +0.100000E+01,-0.200000E+01 <<<
+   !=> +0.100000000E+01,-0.200000000E+01 <<<
    !<
    !<```fortran
    !< use penf
    !< print "(A)", str(n=[1._R4P, 2._R4P], no_sign=.true.)
    !<```
-   !=> 0.100000E+01,0.200000E+01 <<<
+   !=> 0.100000000E+01,0.200000000E+01 <<<
    !<
    !<```fortran
    !< use penf
    !< print "(A)", str(n=[1._R4P, -2._R4P], separator='|')
    !<```
-   !=> +0.100000E+01|-0.200000E+01 <<<
+   !=> +0.100000000E+01|-0.200000000E+01 <<<
    !<
    !<```fortran
    !< use penf
    !< print "(A)", str(n=[1._R4P, -2._R4P], delimiters=['(', ')'])
    !<```
-   !=> (+0.100000E+01,-0.200000E+01) <<<
+   !=> (+0.100000000E+01,-0.200000000E+01) <<<
    !<
    !<```fortran
    !< use penf
    !< print "(A)", str(n=[1._R4P, -2._R4P], compact=.true.)
    !<```
-   !=> +0.1E+1,-0.2E+1 <<<
+   !=> +1.0,-2.0 <<<
    real(R4P),    intent(in)           :: n(:)            !< Real array to be converted.
    logical,      intent(in), optional :: no_sign         !< Flag for leaving out the sign.
    character(1), intent(in), optional :: separator       !< Eventual separator of array values.
    character(*), intent(in), optional :: delimiters(1:2) !< Eventual delimiters of array values.
-   logical,      intent(in), optional :: compact         !< Flag for *compacting* string encoding.
+   logical,      intent(in), optional :: compact         !< Flag for the shortest exact strings.
    character(len=:), allocatable      :: str             !< Returned string containing input number.
    character(DR4P)                    :: strn            !< String containing of element of input array number.
    character(len=1)                   :: sep             !< Array values separator
@@ -888,69 +1073,60 @@ contains
    if (present(delimiters)) str = delimiters(1)//str//delimiters(2)
    endfunction str_a_I1P
 
-   pure subroutine compact_real_string(string)
-   !< author: Izaak Beekman
-   !< date: 02/24/2015
+   pure function tidy_real_string(source, no_sign) result(string)
+   !< Tidy a string representing a real number in scientific notation, e.g. `-3.21E+0001` becomes `-32.1`.
    !<
-   !< Compact a string representing a real number, so that the same value is displayed with fewer characters.
+   !< The plain decimal notation is used for decimal exponents in [-5, 15], the scientific one otherwise, e.g. `+1.0E+20`.
+   !< Not negative numbers are prefixed by the plus sign. Not finite numbers (NaN, Infinity) are left unchanged.
    !<
    !< @note No need to add doctest: this is tested by a lot of doctests of other TBPs.
-   character(len=*),intent(inout) :: string      !< string representation of a real number.
-   character(len=len(string))     :: significand !< Significand characters.
-   character(len=len(string))     :: expnt       !< Exponent characters.
-   character(len=2)               :: separator   !< Separator characters.
-   integer(I4P)                   :: exp_start   !< Start position of exponent.
-   integer(I4P)                   :: decimal_pos !< Decimal positions.
-   integer(I4P)                   :: sig_trim    !< Signature trim.
-   integer(I4P)                   :: exp_trim    !< Exponent trim.
-   integer(I4P)                   :: i           !< counter
+   character(*), intent(in)           :: source  !< String representing the number in scientific notation.
+   logical,      intent(in), optional :: no_sign !< Flag for leaving out the sign.
+   character(len=:), allocatable      :: string  !< Tidy string.
+   character(len=:), allocatable      :: digits  !< Significant digits.
+   character(len=:), allocatable      :: sgn     !< Sign.
+   character(8)                       :: buffer  !< Buffer for the exponent conversion.
+   integer(I4P)                       :: epos    !< Position of the exponent.
+   integer(I4P)                       :: expnt   !< Decimal exponent.
+   integer(I4P)                       :: nd      !< Number of significant digits.
+   integer(I4P)                       :: ios     !< IO status.
 
-   string = adjustl(string)
-   exp_start = scan(string, 'eEdD')
-   if (exp_start == 0) exp_start = scan(string, '-+', back=.true.)
-   decimal_pos = scan(string, '.')
-   if (exp_start /= 0) separator = string(exp_start:exp_start)
-   if ( exp_start < decimal_pos ) then ! possibly signed, exponent-less float
-     significand = string
-     sig_trim = len(trim(significand))
-     do i = len(trim(significand)), decimal_pos+2, -1 ! look from right to left at 0s, but save one after the decimal place
-       if (significand(i:i) == '0') then
-         sig_trim = i-1
-       else
-         exit
-       endif
-     enddo
-     string = trim(significand(1:sig_trim))
-   elseif (exp_start > decimal_pos) then ! float has exponent
-     significand = string(1:exp_start-1)
-     sig_trim = len(trim(significand))
-     do i = len(trim(significand)),decimal_pos+2,-1 ! look from right to left at 0s
-       if (significand(i:i) == '0') then
-         sig_trim = i-1
-       else
-         exit
-       endif
-     enddo
-     expnt = adjustl(string(exp_start+1:))
-     if (expnt(1:1) == '+' .or. expnt(1:1) == '-') then
-       separator = trim(adjustl(separator))//expnt(1:1)
-       exp_start = exp_start + 1
-       expnt     = adjustl(string(exp_start+1:))
-     endif
-     exp_trim = 1
-     do i = 1,(len(trim(expnt))-1) ! look at exponent leading zeros saving last
-       if (expnt(i:i) == '0') then
-         exp_trim = i+1
-       else
-         exit
-       endif
-     enddo
-     string = trim(adjustl(significand(1:sig_trim)))// &
-              trim(adjustl(separator))// &
-              trim(adjustl(expnt(exp_trim:)))
-   !else ! mal-formed real, BUT this code should be unreachable
+   string = source
+   epos = scan(source, 'E')
+   if (epos < 2 .or. verify(source, '+-.0123456789E') /= 0) return ! not a finite number
+   read(source(epos+1:), *, iostat=ios) expnt
+   if (ios /= 0) return
+   sgn = '+' ; if (source(1:1) == '-') sgn = '-'
+   if (present(no_sign)) then
+     if (no_sign) sgn = ''
    endif
-   endsubroutine compact_real_string
+   digits = source(verify(source, '+-'):epos-1)
+   digits = digits(1:1)//digits(3:)              ! remove the decimal point
+   nd = max(1, verify(digits, '0', back=.true.)) ! remove the trailing zeros
+   digits = digits(1:nd)
+   if (expnt >= -5 .and. expnt <= 15) then
+     if (expnt < 0) then
+       string = sgn//'0.'//repeat('0', -expnt-1)//digits
+     elseif (expnt >= nd-1) then
+       string = sgn//digits//repeat('0', expnt-nd+1)//'.0'
+     else
+       string = sgn//digits(1:expnt+1)//'.'//digits(expnt+2:)
+     endif
+   else
+     if (nd == 1) digits = digits//'0'
+     write(buffer, '(SP,I0)') expnt
+     string = sgn//digits(1:1)//'.'//digits(2:)//'E'//trim(buffer)
+   endif
+   endfunction tidy_real_string
+
+   pure function is_little_endian() result(is_little)
+   !< Check if the type of the bit ordering of the running architecture is little endian.
+   logical      :: is_little !< Logical output: true is the running architecture uses little endian ordering, false otherwise.
+   integer(I1P) :: int1(1:4) !< One byte integer array for casting 4 bytes integer.
+
+   int1 = transfer(1_I4P, int1)
+   is_little = (int1(1)==1_I1P)
+   endfunction is_little_endian
 
    elemental function strz_I8P(n, nz_pad) result(str)
    !< Converting integer to string, prefixing with the right number of zeros.
@@ -1051,7 +1227,7 @@ contains
    !< use penf
    !< print FR16P, cton(str='-1.0', knd=1._R16P)
    !<```
-   !=> -0.100000000000000000000000000000000E+0001 <<<
+   !=> -0.100000000000000000000000000000000000E+0001 <<<
    character(*),           intent(in)  :: str   !< String containing input number.
    real(R16P),             intent(in)  :: knd   !< Number kind.
    character(*), optional, intent(in)  :: pref  !< Prefixing string.
@@ -1075,7 +1251,7 @@ contains
    !< use penf
    !< print FR8P, cton(str='-1.0', knd=1._R8P)
    !<```
-   !=> -0.100000000000000E+001 <<<
+   !=> -0.10000000000000000E+001 <<<
    character(*),           intent(in)  :: str   !< String containing input number.
    real(R8P),              intent(in)  :: knd   !< Number kind.
    character(*), optional, intent(in)  :: pref  !< Prefixing string.
@@ -1099,7 +1275,7 @@ contains
    !< use penf
    !< print FR4P, cton(str='-1.0', knd=1._R4P)
    !<```
-   !=> -0.100000E+01 <<<
+   !=> -0.100000000E+01 <<<
    character(*),           intent(in)  :: str   !< String containing input number.
    real(R4P),              intent(in)  :: knd   !< Number kind.
    character(*), optional, intent(in)  :: pref  !< Prefixing string.
@@ -1212,9 +1388,9 @@ contains
    if (present(error)) error = err
    endfunction ctoi_I1P
 
-#if defined _R16P
+#if defined PENF_R16P
    elemental function bstr_R16P(n) result(bstr)
-   !< Convert real to string of bits.
+   !< Convert real to string of bits, most significant bit first on all architectures.
    !<
    !< @note It is assumed that R16P is represented by means of 128 bits, but this is not ensured in all architectures.
    !<
@@ -1222,20 +1398,27 @@ contains
    !< use penf
    !< character(128) :: b
    !< b = bstr(n=1._R16P)
-   !< print "(A)", b(17:)
+   !< print "(A)", b(1:32)
    !<```
-   !=> 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001111111100111111 <<<
-   real(R16P), intent(in) :: n          !< Real to be converted.
-   character(128)         :: bstr       !< Returned bit-string containing input number.
-   integer(I1P)           :: buffer(16) !< Transfer buffer.
+   !=> 00111111111111110000000000000000 <<<
+   !<
+   !<```fortran
+   !< use penf
+   !< print "(L1)", bcton(bstr(n=-1._R16P/3._R16P), knd=1._R16P)==-1._R16P/3._R16P
+   !<```
+   !=> T <<<
+   real(R16P), intent(in) :: n         !< Real to be converted.
+   character(128)         :: bstr      !< Returned bit-string containing input number.
+   integer(I8P)           :: buffer(2) !< Transfer buffer.
 
    buffer = transfer(n, buffer)
-   write(bstr, '(16B8.8)') buffer
+   if (is_little_endian()) buffer = buffer(2:1:-1) ! most significant half first
+   write(bstr, '(2B64.64)') buffer
    endfunction bstr_R16P
 #endif
 
    elemental function bstr_R8P(n) result(bstr)
-   !< Convert real to string of bits.
+   !< Convert real to string of bits, most significant bit first on all architectures.
    !<
    !< @note It is assumed that R8P is represented by means of 64 bits, but this is not ensured in all architectures.
    !<
@@ -1243,17 +1426,21 @@ contains
    !< use penf
    !< print "(A)", bstr(n=1._R8P)
    !<```
-   !=> 0000000000000000000000000000000000000000000000001111000000111111 <<<
-   real(R8P), intent(in) :: n         !< Real to be converted.
-   character(64)         :: bstr      !< Returned bit-string containing input number.
-   integer(I1P)          :: buffer(8) !< Transfer buffer.
+   !=> 0011111111110000000000000000000000000000000000000000000000000000 <<<
+   !<
+   !<```fortran
+   !< use penf
+   !< print "(L1)", bcton(bstr(n=-1._R8P/3._R8P), knd=1._R8P)==-1._R8P/3._R8P
+   !<```
+   !=> T <<<
+   real(R8P), intent(in) :: n    !< Real to be converted.
+   character(64)         :: bstr !< Returned bit-string containing input number.
 
-   buffer = transfer(n, buffer)
-   write(bstr, '(8B8.8)') buffer
+   write(bstr, '(B64.64)') transfer(n, 1_I8P)
    endfunction bstr_R8P
 
    elemental function bstr_R4P(n) result(bstr)
-   !< Convert real to string of bits.
+   !< Convert real to string of bits, most significant bit first on all architectures.
    !<
    !< @note It is assumed that R4P is represented by means of 32 bits, but this is not ensured in all architectures.
    !<
@@ -1261,13 +1448,17 @@ contains
    !< use penf
    !< print "(A)", bstr(n=1._R4P)
    !<```
-   !=> 00000000000000001000000000111111 <<<
-   real(R4P), intent(in) :: n         !< Real to be converted.
-   character(32)         :: bstr      !< Returned bit-string containing input number.
-   integer(I1P)          :: buffer(4) !< Transfer buffer.
+   !=> 00111111100000000000000000000000 <<<
+   !<
+   !<```fortran
+   !< use penf
+   !< print "(L1)", bcton(bstr(n=-1._R4P/3._R4P), knd=1._R4P)==-1._R4P/3._R4P
+   !<```
+   !=> T <<<
+   real(R4P), intent(in) :: n    !< Real to be converted.
+   character(32)         :: bstr !< Returned bit-string containing input number.
 
-   buffer = transfer(n, buffer)
-   write(bstr, '(4B8.8)') buffer
+   write(bstr, '(B32.32)') transfer(n, 1_I4P)
    endfunction bstr_R4P
 
    elemental function bstr_I8P(n) result(bstr)
@@ -1334,57 +1525,57 @@ contains
    write(bstr, '(B8.8)') n
    endfunction bstr_I1P
 
-#if defined _R16P
+#if defined PENF_R16P
    elemental function bctor_R16P(bstr, knd) result(n)
-   !< Convert bit-string to real.
+   !< Convert bit-string (most significant bit first) to real.
    !<
    !<```fortran
    !< use penf
-   !< print FR16P, bcton('00000000000000000000000000000000000000000000000000000000000000000000000000000'//&
-   !<                    '000000000000000000000000000000000001111111100111111', knd=1._R16P)
+   !< print FR16P, bcton('0011111111111111'//repeat('0', 112), knd=1._R16P)
    !<```
-   !=> 0.100000000000000000000000000000000E+0001 <<<
-   character(*), intent(in) :: bstr       !< String containing input number.
-   real(R16P),   intent(in) :: knd        !< Number kind.
-   real(R16P)               :: n          !< Number returned.
-   integer(I1P)             :: buffer(16) !< Transfer buffer.
+   !=> 0.100000000000000000000000000000000000E+0001 <<<
+   character(*), intent(in) :: bstr      !< String containing input number.
+   real(R16P),   intent(in) :: knd       !< Number kind.
+   real(R16P)               :: n         !< Number returned.
+   integer(I8P)             :: buffer(2) !< Transfer buffer.
 
-   read(bstr, '(16B8.8)') buffer
+   read(bstr, '(2B64.64)') buffer
+   if (is_little_endian()) buffer = buffer(2:1:-1) ! least significant half first
    n = transfer(buffer, n)
    endfunction bctor_R16P
 #endif
 
    elemental function bctor_R8P(bstr, knd) result(n)
-   !< Convert bit-string to real.
+   !< Convert bit-string (most significant bit first) to real.
    !<
    !<```fortran
    !< use penf
-   !< print FR8P, bcton('0000000000000000000000000000000000000000000000001111000000111111', knd=1._R8P)
+   !< print FR8P, bcton('0011111111110000000000000000000000000000000000000000000000000000', knd=1._R8P)
    !<```
-   !=> 0.100000000000000E+001 <<<
-   character(*), intent(in) :: bstr      !< String containing input number.
-   real(R8P),    intent(in) :: knd       !< Number kind.
-   real(R8P)                :: n         !< Number returned.
-   integer(I1P)             :: buffer(8) !< Transfer buffer.
+   !=> 0.10000000000000000E+001 <<<
+   character(*), intent(in) :: bstr   !< String containing input number.
+   real(R8P),    intent(in) :: knd    !< Number kind.
+   real(R8P)                :: n      !< Number returned.
+   integer(I8P)             :: buffer !< Transfer buffer.
 
-   read(bstr, '(8B8.8)') buffer
+   read(bstr, '(B64.64)') buffer
    n = transfer(buffer, n)
    endfunction bctor_R8P
 
    elemental function bctor_R4P(bstr, knd) result(n)
-   !< Convert bit-string to real.
+   !< Convert bit-string (most significant bit first) to real.
    !<
    !<```fortran
    !< use penf
-   !< print FR4P, bcton('00000000000000001000000000111111', knd=1._R4P)
+   !< print FR4P, bcton('00111111100000000000000000000000', knd=1._R4P)
    !<```
-   !=> 0.100000E+01 <<<
-   character(*), intent(in) :: bstr      !< String containing input number.
-   real(R4P),    intent(in) :: knd       !< Number kind.
-   real(R4P)                :: n         !< Number returned.
-   integer(I1P)             :: buffer(4) !< Transfer buffer.
+   !=> 0.100000000E+01 <<<
+   character(*), intent(in) :: bstr   !< String containing input number.
+   real(R4P),    intent(in) :: knd    !< Number kind.
+   real(R4P)                :: n      !< Number returned.
+   integer(I4P)             :: buffer !< Transfer buffer.
 
-   read(bstr, '(4B8.8)') buffer
+   read(bstr, '(B32.32)') buffer
    n = transfer(buffer, n)
    endfunction bctor_R4P
 

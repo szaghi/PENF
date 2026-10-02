@@ -1,5 +1,5 @@
 program volatile_doctest
 use penf_stringify
  use penf
- print FR16P, cton(str='-1.0', knd=1._R16P)
+ print "(A)", str(n=[1_I2P, -2_I2P], delimiters=['(', ')'])
 endprogram volatile_doctest

@@ -29,5 +29,10 @@ endfunction()
 file(GLOB_RECURSE penf_doctests *.f90)
 
 foreach(penf_doctest IN LISTS penf_doctests)
+    # the doctests of the quadruple precision real can pass only if this kind is supported
+    file(READ ${penf_doctest} penf_doctest_source)
+    if(penf_doctest_source MATCHES "R16P" AND NOT R16P_SUPPORTED)
+        continue()
+    endif()
     add_penf_doctest(${penf_doctest} PENF)
 endforeach()

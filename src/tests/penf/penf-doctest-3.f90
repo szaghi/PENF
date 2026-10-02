@@ -1,9 +1,5 @@
 program volatile_doctest
 use penf
  use penf
- integer :: u
- open(newunit=u, status='scratch')
- call penf_print(u)
- close(u)
- print "(A)", 'done'
+ print "(L1)", MaxR16P==huge(MaxR16P).and.MinR16P==-huge(MinR16P).and.smallR16P==tiny(smallR16P)
 endprogram volatile_doctest

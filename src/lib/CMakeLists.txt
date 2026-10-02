@@ -24,7 +24,7 @@ target_include_directories(${LIB}
 # set variables used for compile definitions of targets after support check
 include(CheckFortranSourceRuns)
 
-# The R16P kind is a quadruple precision real only if the sources are compiled with _R16P, otherwise it is the
+# The R16P kind is a quadruple precision real only if the sources are compiled with PENF_R16P, otherwise it is the
 # same kind of R8P. The definition is PUBLIC because the libraries using R16P must be compiled accordingly.
 check_fortran_source_runs(
     "program r16p_support;
@@ -36,7 +36,7 @@ check_fortran_source_runs(
 )
 
 if(R16P_SUPPORTED)
-    target_compile_definitions(${LIB} PUBLIC _R16P)
+    target_compile_definitions(${LIB} PUBLIC PENF_R16P)
 endif()
 
 check_fortran_source_runs(

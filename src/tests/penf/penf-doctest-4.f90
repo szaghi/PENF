@@ -1,5 +1,9 @@
 program volatile_doctest
 use penf
  use penf
- print FI4P, digit(100_I8P)
+ integer :: u
+ open(newunit=u, status='scratch')
+ call penf_print(u)
+ close(u)
+ print "(A)", 'done'
 endprogram volatile_doctest

@@ -1,5 +1,5 @@
 program volatile_doctest
 use penf_stringify
  use penf
- print FR8P, bcton('0000000000000000000000000000000000000000000000001111000000111111', knd=1._R8P)
+ print FR4P, cton(str='-1.0', knd=1._R4P)
 endprogram volatile_doctest

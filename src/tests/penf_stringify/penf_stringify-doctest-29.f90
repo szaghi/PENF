@@ -1,5 +1,5 @@
 program volatile_doctest
 use penf_stringify
  use penf
- print "(A)", str(n=-1_I1P)
+ print "(A)", str(n=0.1_R4P, compact=.true.)
 endprogram volatile_doctest

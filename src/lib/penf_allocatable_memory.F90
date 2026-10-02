@@ -19,7 +19,7 @@ public :: save_memory_status
 interface allocate_variable
 !< Allocate CPU variable with memory checking.
 module procedure                   &
-#if defined _R16P
+#if defined PENF_R16P
                  alloc_var_R16P_1D,&
                  alloc_var_R16P_2D,&
                  alloc_var_R16P_3D,&
@@ -75,7 +75,7 @@ endinterface allocate_variable
 interface assign_allocatable
 !< Assign CPU variable with memory checking.
 module procedure                            &
-#if defined _R16P
+#if defined PENF_R16P
                  assign_allocatable_R16P_1D,&
                  assign_allocatable_R16P_2D,&
                  assign_allocatable_R16P_3D,&

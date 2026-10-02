@@ -1,5 +1,5 @@
 program volatile_doctest
 use penf_stringify
  use penf
- print "(A)", strz(n=1_I1P)
+ print "(A)", str(n=[1_I2P, 2_I2P], no_sign=.true.)
 endprogram volatile_doctest

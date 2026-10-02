@@ -15,7 +15,7 @@ authors    = Stefano Zaghi
 #   * --cpp must be passed explicitly: unlike gfortran/ifx, LFortran does NOT
 #     auto-preprocess .F90 files; FoBiS just runs the raw compile command.
 #   * modsw = "-J " writes .mod files (FoBiS also appends "-I<mod_dir>" to read them).
-#   * _R16P is intentionally OMITTED: LFortran 0.63 returns kind -1 for
+#   * PENF_R16P is intentionally OMITTED: LFortran 0.63 returns kind -1 for
 #     selected_real_kind(33,4931), so quad precision is unsupported (same stance
 #     as the Intel/IBM templates). ASCII + UCS4 char kinds compile fine.
 #   * Linking goes through LFortran's default linker driver (clang), so no

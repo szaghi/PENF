@@ -65,7 +65,7 @@ input and output, and `.m` in `Bw.m` is simply ignored on input — clause 13.7.
 The other 13 PENF doctest failures under LFortran are **not** compiler bugs:
 
 - 8 are R16P-width output expectations (`...E+0001`, 33 significant digits).
-  PENF is built without `-D_R16P` because LFortran returns kind `-1` for
+  PENF is built without `-DPENF_R16P` because LFortran returns kind `-1` for
   `selected_real_kind(33,4931)`; the value correctly falls back to R8P width.
 - 4–5 are `bit_size`/`byte_size` of `1._R16P` expecting 128/16 — again a
   consequence of R16P→R8P fallback (64/8 is correct for that build).
