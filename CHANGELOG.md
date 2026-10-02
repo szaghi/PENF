@@ -4,6 +4,11 @@ All notable changes to this project are documented here.
 Versions follow [Semantic Versioning](https://semver.org/).
 Format follows [Keep a Changelog](https://keepachangelog.com/).
 
+## [2.0.0] — 2026-10-02
+### Fixed
+- **stringify**: Make real str exact, bstr endian-free, rename _R16P ⚠ BREAKING CHANGE
+
+
 ## [1.3.18] — 2026-10-02
 ### Fixed
 - **fobos**: Correct gcov invocation in makecoverage rule
