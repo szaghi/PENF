@@ -7,6 +7,9 @@ website    = https://szaghi.github.io/PENF
 email      = stefano.zaghi@gmail.it
 authors    = Stefano Zaghi
 
+[scaffold]
+toolchain_image = ghcr.io/szaghi/fortran-toolchains:gnu-16.2
+
 [modes]
 modes = shared-gnu static-gnu tests-gnu
         shared-gnu-debug static-gnu-debug tests-gnu-debug
