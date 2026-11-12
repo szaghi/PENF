@@ -1,3 +1,10 @@
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/public/logo-dark.svg">
+    <img src="docs/public/logo.svg" alt="PENF" width="180">
+  </picture>
+</p>
+
 # PENF
 
 >#### Portability Environment for Fortran Poor People

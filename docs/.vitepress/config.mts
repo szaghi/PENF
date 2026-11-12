@@ -4,6 +4,13 @@ import apiSidebar from '../api/_sidebar.json'
 export default withMermaid({
   title: 'PENF Documentation',
   base: '/PENF/',
+  head: [
+    ['link', { rel: 'icon', href: '/PENF/favicon.ico', sizes: '32x32' }],
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/PENF/favicon.svg' }],
+    ['link', { rel: 'apple-touch-icon', href: '/PENF/apple-touch-icon.png' }],
+    ['meta', { name: 'theme-color', media: '(prefers-color-scheme: light)', content: '#f3ede1' }],
+    ['meta', { name: 'theme-color', media: '(prefers-color-scheme: dark)', content: '#0e1116' }],
+  ],
   markdown: {
     math: true,
     languages: ['fortran-free-form', 'fortran-fixed-form'],
@@ -17,6 +24,7 @@ export default withMermaid({
     },
   },
   themeConfig: {
+    logo: { light: '/mark.svg', dark: '/mark-dark.svg', alt: 'PENF' },
     nav: [
       { text: 'Home', link: '/' },
       {

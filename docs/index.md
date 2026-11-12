@@ -5,6 +5,10 @@ hero:
   name: PENF
   text: Portability Environment for Fortran Poor People
   tagline: A KISS library for portable, parametrized numerical types in modern Fortran (2003+)
+  image:
+    light: /logo.svg
+    dark: /logo-dark.svg
+    alt: PENF, Tabi — an inrō worn on the road
   actions:
     - theme: brand
       text: Guide
@@ -17,22 +21,22 @@ hero:
       link: https://github.com/szaghi/PENF
 
 features:
-  - icon: 🔢
+  - icon: { light: /icons/integer-kinds.svg, dark: /icons/integer-kinds-dark.svg, width: 48, height: 48 }
     title: Portable Kind Parameters
     details: Integer and real kind parameters for 1, 2, 4, 8, and 16-byte representations — guaranteed portable across compilers and architectures.
-  - icon: 🔄
+  - icon: { light: /icons/number-to-string.svg, dark: /icons/number-to-string-dark.svg, width: 48, height: 48 }
     title: Number ↔ String Conversion
     details: Comprehensive str(), strz(), cton(), bstr() and bcton() procedures for casting between numbers and strings, including binary representations.
-  - icon: 📐
+  - icon: { light: /icons/format-strings.svg, dark: /icons/format-strings-dark.svg, width: 48, height: 48 }
     title: Format Definitions & Limits
     details: Ready-made format strings (FI*P, FR*P) and min/max representable values for every supported kind parameter.
-  - icon: 🖥️
+  - icon: { light: /icons/endianness.svg, dark: /icons/endianness-dark.svg, width: 48, height: 48 }
     title: Endianness Detection
     details: Built-in check_endian() procedure to detect big- or little-endian byte ordering at runtime.
-  - icon: 🧩
+  - icon: { light: /icons/limits.svg, dark: /icons/limits-dark.svg, width: 48, height: 48 }
     title: Fortran 2003+ Compliant
     details: Fully standard-compliant library. Tested with GNU (≥ 4.9.2) and Intel (≥ 12.x) compilers.
-  - icon: 🆓
+  - icon: { light: /icons/multi-licensed.svg, dark: /icons/multi-licensed-dark.svg, width: 48, height: 48 }
     title: Free & Open Source
     details: Multi-licensed — GPLv3 for FOSS projects, BSD 2/3-Clause or MIT for commercial use. Any contributor is welcome.
 ---
