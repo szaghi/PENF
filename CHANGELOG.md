@@ -4,6 +4,21 @@ All notable changes to this project are documented here.
 Versions follow [Semantic Versioning](https://semver.org/).
 Format follows [Keep a Changelog](https://keepachangelog.com/).
 
+## [2.0.2] — 2026-11-13
+### Documentation
+- **brand**: Adopt the Sumi family identity, Tabi in Asagi
+
+
+### Fixed
+- **docs**: Target es2022 for vite build and sync fpm.toml on release
+
+- **scripts**: Verify doctest output in run_tests and harden release recovery
+
+- **ci**: Run install smoke test from the release workflow
+
+- **build**: The makefile defines PENF_R16P, the macro the sources read
+
+
 ## [2.0.1] — 2026-10-02
 ### Fixed
 - **cmake**: Repair find_package config and read version from VERSION
