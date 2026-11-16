@@ -25,7 +25,6 @@
 
 # special directories and files
 exe/
-exe-r4p/
 wiki/
 get_automatic_changelog.sh
 /build

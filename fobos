@@ -58,10 +58,12 @@ mklib     = static
 template  = template-static-gnu
 build_dir = ./exe/
 
-# the tests with R_P = R4P (the default real kind in single precision), the build that once failed (PENF#41)
+# the tests with R_P = R4P (the default real kind in single precision), the build that once failed (PENF#41); -std:
+# without it gfortran only warns about that defect
 [tests-gnu-r4p]
 template  = template-static-gnu
-build_dir = ./exe-r4p/
+build_dir = ./exe/
+cflags    = $CSTATIC_GNU $OPTIMIZE -std=f2008 -fall-intrinsics
 preproc   = -D_ASCII_SUPPORTED -D_UCS4_SUPPORTED -DPENF_R16P -D_R_P_IS_R4P
 
 [shared-gnu-debug]
@@ -290,9 +292,14 @@ help   = Perform coverage analysis
 rule_1 = FoBiS.py doctests -mode tests-gnu-debug -keep_volatile_doctests -coverage -profile
 
 [rule-makecoverage-analysis]
-help   = Perform coverage analysis and saving reports in markdown
+help   = Perform coverage analysis and saving reports in markdown, then the tests with R_P = R4P (what CI runs)
 rule_1 = FoBiS.py rule -ex makecoverage
 rule_2 = gcov -o exe/obj/ src/lib/penf_global_parameters_variables.F90 src/lib/penf_b_size.F90 src/lib/penf_stringify.F90 src/lib/penf_allocatable_memory.F90 src/lib/penf.F90
 rule_3 = FoBiS.py rule --gcov-analyzer docs/guide/ --gcov-analyzer coverage-analysis
 rule_4 = rm -f *.gcov
 rule_5 = bash scripts/compute-coverage.sh
+# the tests again with R_P = R4P (PENF#41: a kind-dependent defect the R8P build cannot see); after the coverage,
+# whose objects in exe/ the rebuild replaces
+rule_6 = rm -rf exe
+rule_7 = fobis build --mode tests-gnu-r4p
+rule_8 = bash scripts/run_tests.sh
