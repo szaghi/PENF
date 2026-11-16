@@ -131,13 +131,19 @@ integer,      parameter :: REAL_KINDS_LIST(1:4)      = [R16P, R8P, R4P, R_P]    
 #else
 integer,      parameter :: REAL_KINDS_LIST(1:3)      = [R8P, R4P, R_P]                    !< List of real kinds.
 #endif
+! the format lists are typed constructors, each element padded to the longest format (the formats differ in length:
+! an untyped constructor of them is not standard and gfortran refuses it, PENF#41); the lengths are named constants,
+! because len() inside the constructor's type-spec crashes nvfortran 26.9
 #if defined PENF_R16P
-character(*), parameter :: REAL_FORMATS_LIST(1:4)    = [FR16P, FR8P, FR4P//' ', FR_P]           !< List of real formats.
+integer,      parameter, private :: LEN_FR = max(len(FR16P), len(FR8P), len(FR4P), len(FR_P)) !< Longest real format.
+character(*), parameter :: REAL_FORMATS_LIST(1:4)    = [character(LEN_FR) :: FR16P, FR8P, FR4P, FR_P] !< List of real formats.
 #else
-character(*), parameter :: REAL_FORMATS_LIST(1:3)    = [FR8P, FR4P//' ', FR_P]           !< List of real formats.
+integer,      parameter, private :: LEN_FR = max(len(FR8P), len(FR4P), len(FR_P)) !< Longest real format.
+character(*), parameter :: REAL_FORMATS_LIST(1:3)    = [character(LEN_FR) :: FR8P, FR4P, FR_P] !< List of real formats.
 #endif
 integer,      parameter :: INTEGER_KINDS_LIST(1:5)   = [I8P, I4P, I2P, I1P,I_P]                 !< List of integer kinds.
-character(*), parameter :: INTEGER_FORMATS_LIST(1:5) = [FI8P, FI4P, FI2P//' ', FI1P//' ', FI_P] !< List of integer formats.
+integer,      parameter, private :: LEN_FI = max(len(FI8P), len(FI4P), len(FI2P), len(FI1P), len(FI_P)) !< Longest int. format.
+character(*), parameter :: INTEGER_FORMATS_LIST(1:5) = [character(LEN_FI) :: FI8P, FI4P, FI2P, FI1P, FI_P] !< Integer formats.
 
 ! minimum and maximum (representable) values
 ! the R16P literal constants, e.g. 1._R16P, are avoided: if the legacy macro _R16P is defined by the including project the

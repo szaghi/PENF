@@ -18,7 +18,7 @@ make_lib    = lib
 make_mod    = lib/mod
 
 [modes]
-modes = shared-gnu static-gnu tests-gnu
+modes = shared-gnu static-gnu tests-gnu tests-gnu-r4p
         shared-gnu-debug static-gnu-debug tests-gnu-debug
         shared-intel static-intel tests-intel
         shared-intel-debug static-intel-debug tests-intel-debug
@@ -57,6 +57,12 @@ mklib     = static
 [tests-gnu]
 template  = template-static-gnu
 build_dir = ./exe/
+
+# the tests with R_P = R4P (the default real kind in single precision), the build that once failed (PENF#41)
+[tests-gnu-r4p]
+template  = template-static-gnu
+build_dir = ./exe-r4p/
+preproc   = -D_ASCII_SUPPORTED -D_UCS4_SUPPORTED -DPENF_R16P -D_R_P_IS_R4P
 
 [shared-gnu-debug]
 template  = template-shared-gnu-debug
