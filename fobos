@@ -10,6 +10,13 @@ authors    = Stefano Zaghi
 [scaffold]
 toolchain = linux-gnu
 
+# the one-line installer, scripts/install.sh (FoBiS#217): the modes and the makefile's outputs that differ from its
+# defaults (static-gnu and static-intel are the defaults)
+[installer]
+mode_nvidia = static-pgi
+make_lib    = lib
+make_mod    = lib/mod
+
 [modes]
 modes = shared-gnu static-gnu tests-gnu
         shared-gnu-debug static-gnu-debug tests-gnu-debug

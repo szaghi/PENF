@@ -86,6 +86,15 @@ Each kind has a matching format string for `print` / `write` statements:
 
 ## Install
 
+**One line**, with the build system you choose among those PENF ships (fobis, fpm, cmake, make), into `~/.local`,
+usable through pkg-config (`pkg-config --cflags --libs penf`):
+
+```bash
+curl -fsSL https://github.com/szaghi/PENF/releases/latest/download/install.sh | bash
+```
+
+`... | bash -s -- --help` lists the options ([Installation](https://szaghi.github.io/PENF/guide/install)).
+
 ### FoBiS.py
 
 **Standalone** — clone, build, and install in one command:

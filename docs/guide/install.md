@@ -10,6 +10,27 @@ A modern Fortran compiler with Fortran 2003+ support.
 
 Tested with GNU (gfortran), Intel (ifort/ifx), IBM XL, and PGI compilers.
 
+## One-line install
+
+```bash
+curl -fsSL https://github.com/szaghi/PENF/releases/latest/download/install.sh | bash
+```
+
+It installs the latest release into `~/.local` with the build system you choose among those PENF ships
+(`--build fobis|fpm|cmake|make`: a menu asks when you do not say), the compiler you name (`--fc`, `--gnu`, `--intel`,
+`--nvidia`), one install per compiler (`lib/penf/<compiler>-<version>/`, `include/penf/<compiler>-<version>/`), and
+makes it usable through pkg-config:
+
+```bash
+export PKG_CONFIG_PATH=$HOME/.local/lib/pkgconfig
+gfortran my_program.f90 $(pkg-config --cflags --libs penf) -o my_program
+```
+
+Only a Fortran compiler and the chosen build system are needed (FoBiS, when chosen, is installed for you). Pass options
+after `bash -s --`, e.g. `... | bash -s -- --build cmake --intel --prefix /opt/penf`; `--help` lists them all,
+`--uninstall` removes the install. The installer is FoBiS's
+([One-line installer](https://szaghi.github.io/FoBiS/cookbook/installer)).
+
 ## Option 1 — FoBiS.py
 
 [FoBiS.py](https://github.com/szaghi/FoBiS) is a Fortran build system that reads a
