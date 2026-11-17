@@ -8,6 +8,9 @@ module penf_global_parameters_variables
 #if defined _R16P && !defined PENF_R16P
 #error "PENF: the macro _R16P has been renamed PENF_R16P, define PENF_R16P to enable the quadruple precision real kind"
 #endif
+#if defined _R_P_IS_R16P && !defined PENF_R16P
+#error "PENF: _R_P_IS_R16P makes R16P the default real kind, define PENF_R16P too to enable the quadruple precision"
+#endif
 
 implicit none
 public
@@ -44,12 +47,10 @@ integer, parameter :: R16P = selected_real_kind(15,307)  !< 15 digits, range \([
 #endif
 integer, parameter :: R8P  = selected_real_kind(15,307)  !< 15 digits, range \([10^{-307} , 10^{+307}  - 1]\); 64 bits.
 integer, parameter :: R4P  = selected_real_kind(6,37)    !< 6  digits, range \([10^{-37}  , 10^{+37}   - 1]\); 32 bits.
-#if defined PENF_R16P
+! one chain per selector: R_P is declared once whatever the macros (R16P needs PENF_R16P, checked above)
 #if defined _R_P_IS_R16P
 integer, parameter :: R_P  = R16P                        !< Default real precision.
-#endif
-#endif
-#if defined _R_P_IS_R8P
+#elif defined _R_P_IS_R8P
 integer, parameter :: R_P  = R8P                         !< Default real precision.
 #elif defined _R_P_IS_R4P
 integer, parameter :: R_P  = R4P                         !< Default real precision.
@@ -71,12 +72,9 @@ character(*), parameter :: FR16P = '(E25.17E3)' !< Output format for kind=R8P re
 #endif
 character(*), parameter :: FR8P  = '(E25.17E3)' !< Output format for kind=R8P real, exact when read back.
 character(*), parameter :: FR4P  = '(E16.9E2)'  !< Output format for kind=R4P real, exact when read back.
-#if defined PENF_R16P
 #if defined _R_P_IS_R16P
 character(*), parameter :: FR_P  = FR16P        !< Output format for kind=R_P real.
-#endif
-#endif
-#if defined _R_P_IS_R8P
+#elif defined _R_P_IS_R8P
 character(*), parameter :: FR_P  = FR8P         !< Output format for kind=R_P real.
 #elif defined _R_P_IS_R4P
 character(*), parameter :: FR_P  = FR4P         !< Output format for kind=R_P real.
@@ -105,12 +103,9 @@ integer, parameter :: DR16P = 25    !< Number of digits of output format FR8P.
 #endif
 integer, parameter :: DR8P  = 25    !< Number of digits of output format FR8P.
 integer, parameter :: DR4P  = 19    !< Number of characters of the strings of kind=R4P real, not less than the width of FR4P.
-#if defined PENF_R16P
 #if defined _R_P_IS_R16P
 integer, parameter :: DR_P  = DR16P !< Number of digits of output format FR_P.
-#endif
-#endif
-#if defined _R_P_IS_R8P
+#elif defined _R_P_IS_R8P
 integer, parameter :: DR_P  = DR8P  !< Number of digits of output format FR_P.
 #elif defined _R_P_IS_R4P
 integer, parameter :: DR_P  = DR4P  !< Number of digits of output format FR_P.
@@ -206,7 +201,11 @@ integer(I1P), parameter :: BIR16P = storage_size(MaxR8P)       !< Number of bits
 #endif
 integer(I1P), parameter :: BIR8P  = storage_size(MaxR8P)       !< Number of bits of kind=R8P real.
 integer(I1P), parameter :: BIR4P  = storage_size(MaxR4P)       !< Number of bits of kind=R4P real.
+#if defined _R_P_IS_R16P
+integer(I2P), parameter :: BIR_P  = storage_size(MaxR_P)       !< Number of bits of kind=R_P real (128: not an I1P).
+#else
 integer(I1P), parameter :: BIR_P  = storage_size(MaxR_P)       !< Number of bits of kind=R_P real.
+#endif
 #if defined PENF_R16P
 integer(I2P), parameter :: BYR16P = BIR16P/8_I2P               !< Number of bytes of kind=R16P real.
 #else
@@ -214,7 +213,11 @@ integer(I1P), parameter :: BYR16P = BIR8P/8_I1P                !< Number of byte
 #endif
 integer(I1P), parameter :: BYR8P  = BIR8P/8_I1P                !< Number of bytes of kind=R8P real.
 integer(I1P), parameter :: BYR4P  = BIR4P/8_I1P                !< Number of bytes of kind=R4P real.
+#if defined _R_P_IS_R16P
+integer(I2P), parameter :: BYR_P  = BIR_P/8_I2P                !< Number of bytes of kind=R_P real.
+#else
 integer(I1P), parameter :: BYR_P  = BIR_P/8_I1P                !< Number of bytes of kind=R_P real.
+#endif
 integer(I8P), parameter :: BII8P  = storage_size(MaxI8P)       !< Number of bits of kind=I8P integer.
 integer(I4P), parameter :: BII4P  = storage_size(MaxI4P)       !< Number of bits of kind=I4P integer.
 integer(I2P), parameter :: BII2P  = storage_size(MaxI2P)       !< Number of bits of kind=I2P integer.

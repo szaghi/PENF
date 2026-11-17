@@ -18,7 +18,7 @@ make_lib    = lib
 make_mod    = lib/mod
 
 [modes]
-modes = shared-gnu static-gnu tests-gnu tests-gnu-r4p
+modes = shared-gnu static-gnu tests-gnu tests-gnu-r4p tests-gnu-r16p
         shared-gnu-debug static-gnu-debug tests-gnu-debug
         shared-intel static-intel tests-intel
         shared-intel-debug static-intel-debug tests-intel-debug
@@ -65,6 +65,14 @@ template  = template-static-gnu
 build_dir = ./exe/
 cflags    = $CSTATIC_GNU $OPTIMIZE -std=f2008 -fall-intrinsics
 preproc   = -D_ASCII_SUPPORTED -D_UCS4_SUPPORTED -DPENF_R16P -D_R_P_IS_R4P
+
+# the tests with R_P = R16P (the default real kind in quadruple precision), the build that did not compile while R_P was
+# declared twice (the R8P fallback of the R_P selector was taken too)
+[tests-gnu-r16p]
+template  = template-static-gnu
+build_dir = ./exe/
+cflags    = $CSTATIC_GNU $OPTIMIZE -std=f2008 -fall-intrinsics
+preproc   = -D_ASCII_SUPPORTED -D_UCS4_SUPPORTED -DPENF_R16P -D_R_P_IS_R16P
 
 [shared-gnu-debug]
 template  = template-shared-gnu-debug
@@ -292,7 +300,7 @@ help   = Perform coverage analysis
 rule_1 = FoBiS.py doctests -mode tests-gnu-debug -keep_volatile_doctests -coverage -profile
 
 [rule-makecoverage-analysis]
-help   = Perform coverage analysis and saving reports in markdown, then the tests with R_P = R4P (what CI runs)
+help   = Perform coverage analysis and saving reports in markdown, then the tests with R_P = R4P and R16P (what CI runs)
 rule_1 = FoBiS.py rule -ex makecoverage
 rule_2 = gcov -o exe/obj/ src/lib/penf_global_parameters_variables.F90 src/lib/penf_b_size.F90 src/lib/penf_stringify.F90 src/lib/penf_allocatable_memory.F90 src/lib/penf.F90
 rule_3 = FoBiS.py rule --gcov-analyzer docs/guide/ --gcov-analyzer coverage-analysis
@@ -303,3 +311,7 @@ rule_5 = bash scripts/compute-coverage.sh
 rule_6 = rm -rf exe
 rule_7 = fobis build --mode tests-gnu-r4p
 rule_8 = bash scripts/run_tests.sh
+# and with R_P = R16P (PENF_R16P and _R_P_IS_R16P: R_P was declared twice, the build did not compile)
+rule_9  = rm -rf exe
+rule_10 = fobis build --mode tests-gnu-r16p
+rule_11 = bash scripts/run_tests.sh
